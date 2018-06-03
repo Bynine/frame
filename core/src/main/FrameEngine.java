@@ -1,4 +1,4 @@
-package com.frame;
+package main;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -29,16 +29,6 @@ public class FrameEngine extends ApplicationAdapter {
 		
 		active_battle = new Battle();
 	}
-	
-	private static void setup_input_handler(){
-		ControllerInputHandler cih = new ControllerInputHandler();
-		if (cih.setupController()){
-			input_handler = cih;
-		}
-		else{
-			input_handler = new KeyboardInputHandler();
-		}
-	}
 
 	@Override
 	public void render() {
@@ -51,22 +41,28 @@ public class FrameEngine extends ApplicationAdapter {
 			update_overworld();
 		} break;
 		case BATTLE:{
-			update_battle();
+			if (active_battle != null) update_battle();
 		} break;
 		}
 
+		input_handler.update();
 		if (do_log) logger.log();
+	}
+	
+	private static void setup_input_handler(){
+		input_handler = new KeyboardMouseInputHandler();
+		input_handler.initialize();
 	}
 
 	private void update_overworld(){
 		// TODO: update all overworld entities
 		player.update();
-		GraphicsHandler.update(player);
+		GraphicsHandler.draw_overworld(player);
 	}
 	
 	private void update_battle(){
-		if (active_battle == null) return;
 		active_battle.update();
+		GraphicsHandler.draw_battle(active_battle);
 	}
 	
 	public static InputHandler get_input_handler(){

@@ -1,6 +1,6 @@
 package overworld;
 
-import com.frame.FrameEngine;
+import main.FrameEngine;
 
 public class Player extends Entity{
 

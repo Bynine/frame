@@ -8,7 +8,7 @@ public class Action_Hit extends Action {
 				/ (2.0 + (target.curr_stats[Monster.DEF] * 2.0))
 				* ((tech.user.level + 19.0) / 20.0))
 				;
-		target.curr_stats[Monster.VIT] -= damage;
+		target.take_damage(damage);
 		System.out.println(tech.user.nickname + " does " + damage + " damage to " + target.nickname);
 	}
 }

@@ -1,4 +1,4 @@
-package com.frame;
+package main;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;

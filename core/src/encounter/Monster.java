@@ -22,6 +22,7 @@ public class Monster {
 	int level;
 	long experience;
 	float wildness;
+	boolean commanded = false;
 
 	/**
 	 * Load a new monster based on its species.
@@ -44,10 +45,10 @@ public class Monster {
 	/**
 	 * Assigning techs or traits per level.
 	 */
-	private void assign_by_levelup(HashMap<Integer, String> levelup, ArrayList<String> list){
+	private void assign_by_levelup(HashMap<Integer, ArrayList<String>> levelup, ArrayList<String> list){
 		for (int ii = 0; ii < level; ++ii){
 			if (levelup.containsKey(ii)){
-				list.add(levelup.get(ii));
+				list.addAll(levelup.get(ii));
 			}
 		}
 	}
@@ -112,6 +113,10 @@ public class Monster {
 			curr_stats[ii] = real_stats[ii];
 		}
 	}
+	
+	public boolean alive(){
+		return curr_stats[Monster.VIT] > 0;
+	}
 
 	public Color getPalette() {
 		return palette;
@@ -131,11 +136,20 @@ public class Monster {
 		for (String trait: traits){
 			traits_str = traits_str.concat(trait + " ");
 		}
-		return species.name
-				+ "\n " + stats_str
-				+ "\n " + techs_str
-				+ "\n " + traits_str
+		return nickname + " the " + species.name + " " + stats_str
+				+ "\n " + techs_str + " " + traits_str
 				;
+	}
+
+	public Species get_species() {
+		return species;
+	}
+
+	public void take_damage(int damage) {
+		curr_stats[Monster.VIT] -= damage;
+		if (curr_stats[Monster.VIT] < 0){
+			curr_stats[Monster.VIT] = 0;
+		}
 	}
 
 }

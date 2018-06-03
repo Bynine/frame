@@ -1,4 +1,4 @@
-package com.frame;
+package main;
 
 public class Clock {
 	

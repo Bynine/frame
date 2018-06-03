@@ -3,7 +3,7 @@ package encounter;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import com.frame.CSVReader;
+import main.CSVReader;
 
 class Tech {
 
@@ -36,7 +36,7 @@ class Tech {
 	}
 
 	public static enum Target{
-		NONE, SINGLE, ALL, ENEMY, TEAM, SELF, PARTNER
+		SINGLE, ALL, ENEMY, TEAM, SELF, PARTNERS
 	}
 
 	static class TechComparator implements Comparator<Tech>{

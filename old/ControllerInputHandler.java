@@ -1,4 +1,4 @@
-package com.frame;
+package main;
 
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerListener;

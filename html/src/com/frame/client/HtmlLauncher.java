@@ -3,7 +3,8 @@ package com.frame.client;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import com.frame.FrameEngine;
+
+import main.FrameEngine;
 
 public class HtmlLauncher extends GwtApplication {
 

@@ -1,10 +1,28 @@
-package com.frame;
+package main;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 
-public class KeyboardInputHandler implements InputHandler, InputProcessor {
+public class KeyboardMouseInputHandler implements InputHandler, InputProcessor {
+	
+	MousePress active_mouse_press = new MousePress(false, -1, -1, -1, -1);
+	
+
+	@Override
+	public void initialize() {
+		Gdx.input.setInputProcessor(this);
+	}
+	
+	@Override
+	public void update(){
+		 if(Gdx.input.justTouched()){
+			 active_mouse_press = new MousePress(true, Gdx.input.getX(), Gdx.input.getY(), 0, 0);
+		 }
+		 else{
+			 active_mouse_press = new MousePress(false, -1, -1, -1, -1);
+		 }
+	}
 	
 	@Override
 	public float getXInput() {
@@ -27,6 +45,11 @@ public class KeyboardInputHandler implements InputHandler, InputProcessor {
 		return Gdx.input.isKeyPressed(Keys.SPACE);
 	}
 
+	@Override
+	public MousePress getMousePress() {
+		return active_mouse_press;
+	}
+
 	// USELESS
 	
 	@Override
@@ -43,7 +66,7 @@ public class KeyboardInputHandler implements InputHandler, InputProcessor {
 	public boolean keyTyped(char character) {
 		return false;
 	}
-
+	
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		return false;
