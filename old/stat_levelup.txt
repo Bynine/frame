@@ -1,0 +1,21 @@
+
+	/**
+	 * UNUSED Finds the highest-weighted stat and adds one to it.
+	 */
+	private void add_to_stat(){
+		HashMap<Integer, Float> rankings = new HashMap<Integer, Float>();
+		for(int ii = 0; ii < NUM_STATS; ++ii){
+			int stat_diff = species.base_stats[ii] - real_stats[ii];
+			rankings.put(ii, stat_diff * stat_weights[ii]);
+		}
+		int highest_rank_num = -1;
+		float highest_rank = -1;
+		for(int ii = 0; ii < NUM_STATS; ++ii){
+			if (rankings.get(ii) > highest_rank){
+				highest_rank = rankings.get(ii);
+				highest_rank_num = ii;
+			}
+		}
+		// TODO: Add stat cap?
+		real_stats[highest_rank_num] += 1;
+	}

@@ -1,72 +1,86 @@
 package main;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Rectangle;
-
-import encounter.Battle;
-import encounter.Monster;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import overworld.Entity;
+import overworld.Player;
 
+/**
+ * Handles drawing overworld.
+ */
 public class GraphicsHandler {
 	private static SpriteBatch batch;
-	private static ShapeRenderer debug_shaper;
+	private static final OrthographicCamera ow_cam = new OrthographicCamera();
+	private static OrthogonalTiledMapRenderer renderer;
+	protected static BitmapFont font;
+	protected static final Color default_color = new Color(1, 1, 1, 1);
 
+	/**
+	 * Called once before the game begins.
+	 */
 	static void initialize(){
 		batch = new SpriteBatch();
-		debug_shaper = new ShapeRenderer();
-		debug_shaper.setAutoShapeType(true);
+		ow_cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		font = new BitmapFont();
+		init_overworld();
 	}
 
-	static void draw_overworld(Entity en){
+	/**
+	 * Sets the renderer to draw the current map.
+	 */
+	static void init_overworld(){
+		renderer = new OrthogonalTiledMapRenderer(FrameEngine.getCurrentArea().getMap());
+	}
+
+	/**
+	 * Draws overworld map and entities.
+	 */
+	static void draw_overworld(){
 		draw();
+		update_overworld_cam();
+		renderer.setView(ow_cam);
+		renderer.render();
+
+		batch.setProjectionMatrix(ow_cam.combined);
 		batch.begin();
-		batch.draw(en.getImage(), en.getPosition().x, en.getPosition().y);
+		for (Entity en: EntityHandler.getEntities()){
+			if (en instanceof Player && ((Player)en).isInvincible()){
+				batch.setColor(1, 1, 1, 0.5f);
+			}
+			batch.draw(en.getImage(), en.getPosition().x, en.getPosition().y);
+			batch.setColor(default_color);
+		}
 		batch.end();
 	}
 
-	static void draw_battle(Battle battle){
-		draw();
-		ArrayList<Monster> enemies = battle.get_enemies();
-		for(int ii = 0; ii < enemies.size(); ++ii){
-			Monster mon = enemies.get(ii);
-			draw_monster(mon, ii, true);
-		}
-		ArrayList<Monster> heroes = battle.get_heroes();
-		for(int ii = 0; ii < heroes.size(); ++ii){
-			Monster mon = heroes.get(ii);
-			draw_monster(mon, ii, false);
-		}
-
+	/**
+	 * Updates the camera in the overworld to follow the player.
+	 */
+	private static void update_overworld_cam(){
+		ow_cam.position.set(FrameEngine.getPlayer().getPosition(), 0);
+		ow_cam.position.x = MathUtils.clamp(
+				ow_cam.position.x, 
+				Gdx.graphics.getWidth()/2, 
+				FrameEngine.getCurrentArea().getWidth() - Gdx.graphics.getWidth()/2
+				);
+		ow_cam.position.y = MathUtils.clamp(
+				ow_cam.position.y, 
+				Gdx.graphics.getHeight()/2, 
+				FrameEngine.getCurrentArea().getHeight() - Gdx.graphics.getHeight()/2
+				);
+		ow_cam.update();
 	}
 
-	private static void draw_monster(Monster mon, int ii, boolean enemy){
-		batch.setColor(mon.getPalette());
-		Rectangle zone;
-		batch.begin();
-		if (enemy){
-			zone = Battle.ENEMY_ZONES.get(ii);
-			batch.draw(mon.get_species().front, zone.x, zone.y);
-			debug_shaper.setColor(1, 0, 0, 0.5f);
-		}
-		else{
-			zone = Battle.HERO_ZONES.get(ii);
-			batch.draw(mon.get_species().back, zone.x, zone.y);
-			debug_shaper.setColor(0, 1, 0, 0.5f);
-		}
-		batch.end();
-		if (mon.alive()){
-			debug_shaper.begin();
-			debug_shaper.rect(zone.x, zone.y, zone.width, zone.height);
-			debug_shaper.end();
-		}
-	}
-
-	private static void draw(){
+	/**
+	 * Underlying drawing. Cleans screen.
+	 */
+	protected static void draw(){
 		Gdx.gl.glClearColor(0.35f, 0.48f, 0.47f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}

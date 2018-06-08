@@ -1,4 +1,4 @@
-package encounter;
+package battle;
 
 public class Trait {
 

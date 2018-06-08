@@ -1,8 +1,9 @@
-package encounter;
+package battle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.logging.Level;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,8 +11,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
 
 import main.CSVReader;
+import main.FrameEngine;
 
 public class Species {
+	
+	public static final String random = "!RANDOM";
 
 	public final String name;
 	public final String base_technique;
@@ -25,7 +29,13 @@ public class Species {
 	 * Contains fields for unchanging, species-specific characteristics.
 	 */
 	public Species(String id) {
-		String[] data = new CSVReader().load_species_data(id);
+		String[] data;
+		if (id == random){
+			data = new CSVReader().load_random_species();
+		}
+		else{
+			data = new CSVReader().load_species_data(id);
+		}
 		name = data[0];
 		base_stats[Monster.VIT] = Integer.parseInt(data[2]);
 		base_stats[Monster.POW] = Integer.parseInt(data[3]);
@@ -56,6 +66,11 @@ public class Species {
 	 * Used to set the levelup pools for techs and traits.
 	 */
 	private void add_to_levelup(HashMap<Integer, ArrayList<String>> levelup, String[] data){
+		if (data.length < 2) {
+			FrameEngine.logger.log(Level.WARNING, 
+					"Tech/trait data " + data.toString() + " incorrectly configured.");
+			return;
+		}
 		int level = Integer.parseInt(data[1]);
 		if (levelup.containsKey(level)){
 			levelup.get(level).add(data[0]);

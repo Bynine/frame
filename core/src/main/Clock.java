@@ -1,12 +1,12 @@
 package main;
 
+/**
+ * An object for determining elapsed time. For debugging purposes.
+ */
 public class Clock {
 	
 	private final long start_time;
 
-	/**
-	 * An object for determining elapsed time. For debugging purposes.
-	 */
 	public Clock(){
 		start_time = System.nanoTime();
 	}

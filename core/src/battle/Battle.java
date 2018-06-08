@@ -1,8 +1,9 @@
-package encounter;
+package battle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.logging.Level;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
@@ -12,13 +13,8 @@ import main.MousePress;
 
 public class Battle {
 
-	private final ArrayList<Monster> heroes = new ArrayList<Monster>(Arrays.asList(
-			new Monster("DUMPLING", 20)
-			));
-	private final ArrayList<Monster> enemies = new ArrayList<Monster>(Arrays.asList(
-			new Monster("DUMPLING", 10),
-			new Monster("OFF", 10)
-			));
+	private final ArrayList<Monster> party = new ArrayList<Monster>();
+	private final ArrayList<Monster> enemies = new ArrayList<Monster>();
 	private final ArrayList<Monster> all = new ArrayList<Monster>();
 	private final ArrayList<Tech> techs = new ArrayList<Tech>();
 	private final HashMap<Tech, Monster> specific_targets = new HashMap<Tech, Monster>();
@@ -28,38 +24,48 @@ public class Battle {
 	private boolean commands_issued = false;
 	private boolean turn_started = false;
 	private Tech tech_waiting_for_target = null;
+	private Monster curr_mon = null;
+	private State state = State.CHOOSE_TECH;
 
-	private static final int hero_dim = 240;
-	private static final int hero_height = 0;
+	private static final int hero_width = 240;
+	private static final int hero_height = 120;
+	private static final int hero_y = 120;
 	public static final ArrayList<Rectangle> HERO_ZONES = new ArrayList<Rectangle>(Arrays.asList(
-			new Rectangle(Gdx.graphics.getWidth()/5, hero_height, hero_dim, hero_dim),
-			new Rectangle(2*Gdx.graphics.getWidth()/5, hero_height, hero_dim, hero_dim),
-			new Rectangle(3*Gdx.graphics.getWidth()/5, hero_height, hero_dim, hero_dim)
+			new Rectangle(1*Gdx.graphics.getWidth()/5, hero_y, hero_width, hero_height),
+			new Rectangle(2*Gdx.graphics.getWidth()/5, hero_y, hero_width, hero_height),
+			new Rectangle(3*Gdx.graphics.getWidth()/5, hero_y, hero_width, hero_height)
 			));
 	private static final int enemy_dim = 240;
-	private static final int enemy_height = Gdx.graphics.getHeight()/2;
+	private static final int enemy_y = 240;
 	public static final ArrayList<Rectangle> ENEMY_ZONES = new ArrayList<Rectangle>(Arrays.asList(
-			new Rectangle(Gdx.graphics.getWidth()/5, enemy_height, enemy_dim, enemy_dim),
-			new Rectangle(2*Gdx.graphics.getWidth()/5, enemy_height, enemy_dim, enemy_dim),
-			new Rectangle(3*Gdx.graphics.getWidth()/5, enemy_height, enemy_dim, enemy_dim)
+			new Rectangle(1*Gdx.graphics.getWidth()/5, enemy_y, enemy_dim, enemy_dim),
+			new Rectangle(2*Gdx.graphics.getWidth()/5, enemy_y, enemy_dim, enemy_dim),
+			new Rectangle(3*Gdx.graphics.getWidth()/5, enemy_y, enemy_dim, enemy_dim)
+			));
+	private static final int move_w = 240;
+	private static final int move_h = 120;
+	private static final int move_y = 0;
+	public static final ArrayList<Rectangle> TECH_ZONES = new ArrayList<Rectangle>(Arrays.asList(
+			new Rectangle(0*Gdx.graphics.getWidth()/4, move_y, move_w, move_h),
+			new Rectangle(1*Gdx.graphics.getWidth()/4, move_y, move_w, move_h),
+			new Rectangle(2*Gdx.graphics.getWidth()/4, move_y, move_w, move_h),
+			new Rectangle(3*Gdx.graphics.getWidth()/4, move_y, move_w, move_h)
 			));
 
 
 	/**
 	 * Start a new battle, given some monsters to function as enemies.
 	 */
-	public Battle(Monster... enemy){
-		heroes.get(0).nickname = "Hero!"; // LATER: remove
-		for (Monster mon: enemy){
-			this.enemies.add(mon);
-		}
-		all.addAll(heroes);
+	public Battle(ArrayList<Monster> enemy){
+		this.party.addAll(FrameEngine.getParty());
+		this.enemies.addAll(enemy);
+		all.addAll(party);
 		all.addAll(enemies);
 		for (Monster mon: all){
 			mon.initialize_for_battle();
 		}
-		for (int ii = 0; ii < heroes.size(); ++ii){
-			zone_to_monster.put(HERO_ZONES.get(ii), heroes.get(ii));
+		for (int ii = 0; ii < party.size(); ++ii){
+			zone_to_monster.put(HERO_ZONES.get(ii), party.get(ii));
 		}
 		for (int ii = 0; ii < enemies.size(); ++ii){
 			zone_to_monster.put(ENEMY_ZONES.get(ii), enemies.get(ii));
@@ -71,7 +77,7 @@ public class Battle {
 	 */
 	public void update(){
 		if (battle_ended){
-			// TODO: Battle end loop
+			end_execute();
 		}
 		else if (!commands_issued){
 			command_loop();
@@ -85,20 +91,30 @@ public class Battle {
 	 * Handles the battle once all commands have been issued.
 	 */
 	private void battle_execute(){	
+		state = State.BATTLE;
 		techs.sort(new Tech.TechComparator());
 		for (Tech tech: techs){
-			if (!battle_ended && tech.user.alive()){
+			if (!battle_ended && tech.user.can_act()){
 				print_battle_state();
 				execute_tech(tech);
 				battle_ended = check_end();
 			}
 		}
+		end_turn();
+	}
+
+	/**
+	 * Cleans up references at the end of a turn.
+	 */
+	private void end_turn(){
+		state = State.CHOOSE_TECH;
 		commands_issued = false;
 		turn_started = false;
 		specific_targets.clear();
-		for (Monster mon: heroes){
+		for (Monster mon: party){
 			mon.commanded = false;
 		}
+		curr_mon = null;
 	}
 
 	/**
@@ -106,8 +122,8 @@ public class Battle {
 	 */
 	private void execute_tech(Tech tech){
 		ArrayList<Monster> targets = get_targets(tech);
-		for (Monster target: targets){
-			for (String action: tech.actions){
+		for (String action: tech.actions){
+			for (Monster target: targets){
 				load_action(action, target, tech);
 			}
 		}
@@ -119,13 +135,16 @@ public class Battle {
 	private ArrayList<Monster> get_targets(Tech tech){
 		ArrayList<Monster> targets = new ArrayList<Monster>();
 		ArrayList<Monster> opposing_team = new ArrayList<Monster>();
-		if (heroes.contains(tech.user)){
+		if (party.contains(tech.user)){
 			opposing_team.addAll(enemies);
 		}
 		else if (enemies.contains(tech.user)){
-			opposing_team.addAll(heroes);
+			opposing_team.addAll(party);
 		}
 		switch(tech.target){
+		case NONE:{
+			// don't add any targets
+		}
 		case SINGLE: {
 			targets.add(specific_targets.get(tech));
 		} break;
@@ -156,62 +175,86 @@ public class Battle {
 	 * Loop that waits on the player to issue commands.
 	 */
 	private void command_loop(){
+		if(tech_waiting_for_target != null){
+			state = State.CHOOSE_TARGET;
+		}
+		else{
+			state = State.CHOOSE_TECH;
+		}
 		commands_issued = true;
-		for (Monster mon: heroes){
-			if (!mon.commanded) commands_issued = false;
+		for (Monster mon: party){
+			if (!mon.commanded && mon.can_act()) commands_issued = false;
 		}
 		if (!turn_started){
 			turn_start();
 		}
+		for(Monster mon: party){ // choose the first active party member who hasn't been commanded yet
+			// TODO: organize by speed instead of team order
+			if (curr_mon == null && mon.can_act() && !mon.commanded) {
+				curr_mon = mon;
+			}
+		}
 		Rectangle selected_zone = evaluate_zone();
 		if (selected_zone != null) {
-			Monster curr_mon = null;
-			for(Monster mon: heroes){ // choose the first active party member who hasn't been commanded yet
-				if (curr_mon == null && mon.alive() && !mon.commanded) {
-					curr_mon = mon;
-				}
-			}
 			if(tech_waiting_for_target != null){
-				System.out.println("Chose target for tech.");
+				System.out.println(curr_mon.nickname + " chose target for tech.");
 				hero_target_choice(curr_mon, selected_zone);
 			}
 			else{
-				System.out.println("Chose tech.");
-				hero_tech_choice(curr_mon); // TODO: Allow tech selection. Defaults to first right now.
+				System.out.println(curr_mon.nickname + " chose tech.");
+				hero_tech_choice(curr_mon, selected_zone);
 			}
 		}
 	}
-	
+
 	/**
-	 * Checks if mouse was clicked and if the position it was clicked in corresponds to something valid
+	 * Checks if mouse was clicked and if the position it was clicked in corresponds to something valid.
 	 */
 	private Rectangle evaluate_zone(){
-		MousePress mouse_press = FrameEngine.get_input_handler().getMousePress();
-		if (!mouse_press.active) {
+		MousePress mouse_press = FrameEngine.getInputHandler().getMousePress();
+		if (!mouse_press.this_frame) {
 			return null;
 		}
-		for (Rectangle zone: HERO_ZONES){
-			if (mouse_press.in_zone(zone) && valid_target(zone)) {
-				return zone;
+		if (tech_waiting_for_target != null){
+			for (Rectangle zone: HERO_ZONES){
+				if (mouse_press.in_zone(zone) && valid_monster_target(zone)) {
+					return zone;
+				}
+			}
+			for (Rectangle zone: ENEMY_ZONES){
+				if (mouse_press.in_zone(zone) && valid_monster_target(zone)) {
+					return zone;
+				}
+			}
+			System.out.println("Invalid target.");
+		}
+		else{ // choosing tech
+			for (Rectangle zone: TECH_ZONES){
+				if (mouse_press.in_zone(zone) && valid_move_target(zone)) {
+					return zone;
+				}
 			}
 		}
-		for (Rectangle zone: ENEMY_ZONES){
-			if (mouse_press.in_zone(zone) && valid_target(zone)) {
-				return zone;
-			}
-		}
-		System.out.println("Invalid target.");
 		return null;
 	}
-	
+
 	/**
-	 * Checks to see if target in zone is valid.
+	 * Checks to see if targeted monster in zone is valid.
 	 */
-	private boolean valid_target(Rectangle zone){
+	private boolean valid_monster_target(Rectangle zone){
 		Monster mon = zone_to_monster.get(zone);
+		//if (mon == curr_mon) return false;
 		if (null == mon) return false;
-		if (!mon.alive()) return false;
-		// TODO: other checks, like if it's the user
+		if (!mon.can_target()) return false;
+		return true;
+	}
+
+	/**
+	 * 
+	 */
+	private boolean valid_move_target(Rectangle zone){
+		if (TECH_ZONES.indexOf(zone) 
+				>= curr_mon.techs.size()) return false; // can't choose moves that don't exist
 		return true;
 	}
 
@@ -220,14 +263,15 @@ public class Battle {
 	 */
 	private void turn_start(){
 		System.out.println("\n-- NEW TURN -- \n");
+		print_battle_state();
 		techs.clear();
 		for (Monster enemy: enemies){
-			if (enemy.alive()){
+			if (enemy.can_act()){
 				Tech tech = new Tech(enemy, choose_command(enemy));
 				techs.add(tech);
 				if (tech.target == Tech.Target.SINGLE){
-					for (int ii = 0; ii < heroes.size(); ++ii){ // TODO: choose hero to hit
-						if (heroes.get(ii).alive()) specific_targets.put(tech, heroes.get(ii));
+					for (int ii = 0; ii < party.size(); ++ii){ // TODO: choose hero to hit
+						if (party.get(ii).can_target()) specific_targets.put(tech, party.get(ii));
 					}
 				}
 			}
@@ -239,26 +283,36 @@ public class Battle {
 	 * Decides target for a single-target tech.
 	 */
 	private void hero_target_choice(Monster hero, Rectangle selected_zone){
-		for (int ii = 0; ii < enemies.size(); ++ii){ // TODO: choose enemy to hit
-			if (enemies.get(ii).alive()) specific_targets.put(tech_waiting_for_target, zone_to_monster.get(selected_zone));
+		for (int ii = 0; ii < enemies.size(); ++ii){
+			if (enemies.get(ii).can_target()) {
+				specific_targets.put(tech_waiting_for_target, zone_to_monster.get(selected_zone));
+			}
 		}
-		hero.commanded = true;
+		commanded_hero(hero);
 		tech_waiting_for_target = null;
 	}
 
 	/**
 	 * Decides what tech a monster should use.
 	 */
-	private void hero_tech_choice(Monster hero){
-		Tech tech = new Tech(hero, hero.techs.get(0));
+	private void hero_tech_choice(Monster hero, Rectangle zone){
+		Tech tech = new Tech(hero, hero.techs.get(TECH_ZONES.indexOf(zone)));
 		techs.add(tech);
 		if (tech.target == Tech.Target.SINGLE){
 			specific_targets.put(tech, null);
 			tech_waiting_for_target = tech;
 		}
 		else{
-			hero.commanded = true;
+			commanded_hero(hero);
 		}
+	}
+
+	/**
+	 * This monster is now done being commanded.
+	 */
+	private void commanded_hero(Monster hero){
+		hero.commanded = true;
+		curr_mon = null;
 	}
 
 
@@ -271,10 +325,10 @@ public class Battle {
 			return new Action_Hit(tech, target);
 		case "HEAL":
 			return new Action_Heal(tech, target);
-		case "EXPLODE":
-			return new Action_Explode(tech);
+		case "DIE":
+			return new Action_Die(tech);
 		}
-		System.out.println("ERROR: Unsure of what action " + action + " is.");
+		FrameEngine.logger.log(Level.WARNING, "Unsure what action " + action + " is.");
 		return null;
 	}
 
@@ -290,7 +344,7 @@ public class Battle {
 	 * Checks whether the battle has ended.
 	 */
 	private boolean check_end(){
-		if (has_lost(heroes)){
+		if (has_lost(party)){
 			System.out.println("Defeat...");
 			return true;
 		}
@@ -312,6 +366,26 @@ public class Battle {
 	}
 
 	/**
+	 * Called once the battle is finished.
+	 */
+	private void end_execute(){
+		// TODO: Check if it was a victory or failure
+		for (Monster mon: party){
+			for(Monster enemy: enemies){
+				mon.add_experience(enemy.level);
+			}
+		}
+		FrameEngine.end_battle();
+	}
+
+	public ArrayList<String> getTechs() {
+		if (null == curr_mon){
+			return new ArrayList<String>();
+		}
+		return curr_mon.techs;
+	}
+
+	/**
 	 * For debugging purposes.
 	 */
 	private void print_battle_state(){
@@ -322,11 +396,15 @@ public class Battle {
 		System.out.println(" --- \n");
 	}
 
-	public ArrayList<Monster> get_heroes(){
-		return heroes;
-	}
-	public ArrayList<Monster> get_enemies(){
+	public ArrayList<Monster> getEnemies(){
 		return enemies;
+	}
+	public State getState(){
+		return state;
+	}
+
+	public enum State{
+		CHOOSE_TECH, CHOOSE_TARGET, BATTLE
 	}
 
 }

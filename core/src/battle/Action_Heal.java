@@ -1,4 +1,4 @@
-package encounter;
+package battle;
 
 public class Action_Heal extends Action {
 	
@@ -8,7 +8,7 @@ public class Action_Heal extends Action {
 				/ 10.0 
 				* ((tech.user.level + 19.0) / 20.0))
 				;
-		target.curr_stats[Monster.VIT] += heal;
-		System.out.println(tech.user.nickname + " does " + heal + " healing to " + target.nickname);
+		target.heal(heal);
+		System.out.println(tech.user.nickname + " restores " + heal + " health of " + target.nickname);
 	}
 }

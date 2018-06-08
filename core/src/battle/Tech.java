@@ -1,4 +1,4 @@
-package encounter;
+package battle;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -32,11 +32,11 @@ class Tech {
 	}
 
 	public static enum Attribute{
-		NULL, HOT, COLD, BLOW, SLASH, JOKE
+		NULL, HOT, COLD, BLOW, SLASH, HEAL, JOKE
 	}
 
 	public static enum Target{
-		SINGLE, ALL, ENEMY, TEAM, SELF, PARTNERS
+		NONE, SINGLE, ALL, ENEMY, TEAM, SELF, PARTNERS
 	}
 
 	static class TechComparator implements Comparator<Tech>{
