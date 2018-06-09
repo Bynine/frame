@@ -64,11 +64,11 @@ public class Monster {
 	 */
 	private void determine_real_stats(){
 		//vitality
-		real_stats[Monster.VIT] = 
-				(int) (2 + (0.50 * species.base_stats[Monster.VIT] * level));
+		getRealStats()[Monster.VIT] = 
+				(int) (2 + (0.45 * species.base_stats[Monster.VIT] * level));
 		//all other stats
 		for(int ii = 1; ii < NUM_STATS; ++ii){
-			real_stats[ii] = (int) (1 + (0.35 * species.base_stats[ii] * level));
+			getRealStats()[ii] = (int) (1 + (0.32 * species.base_stats[ii] * level));
 		}
 	}
 
@@ -96,7 +96,7 @@ public class Monster {
 	 */
 	public void initialize_for_battle(){
 		for (int ii = 0; ii < NUM_STATS; ++ii){
-			curr_stats[ii] = real_stats[ii];
+			curr_stats[ii] = getRealStats()[ii];
 		}
 	}
 
@@ -130,20 +130,30 @@ public class Monster {
 
 	public void heal(int heal) {
 		curr_stats[Monster.VIT] += heal;
-		if (curr_stats[Monster.VIT] > real_stats[Monster.VIT]){ // no overheal
-			curr_stats[Monster.VIT] = real_stats[Monster.VIT];
+		if (curr_stats[Monster.VIT] > getRealStats()[Monster.VIT]){ // no overheal
+			curr_stats[Monster.VIT] = getRealStats()[Monster.VIT];
 		}
 	}
 	
 	public void add_experience(int exp) {
 		experience += exp;
-		while (experience > determine_exp_for_level(level + 1)){
+		System.out.println("EXP: " + experience + "/" + determine_exp_for_level(level + 1));
+		while (experience >= determine_exp_for_level(level + 1)){
 			level_up();
 		}
 	}
 	
 	private int determine_exp_for_level(int level){
-		return (int)Math.pow(level, 1.5);
+		return (int)(1 + Math.pow(level, 2));
+	}
+	
+	public int determine_exp_gain(){
+		return (int) Math.pow(level, 1.5);
+	}
+	
+	public void change_stat(int change, int stat_pos) {
+		curr_stats[stat_pos] += change;
+		if (curr_stats[stat_pos] < 1) curr_stats[stat_pos] = 1;
 	}
 	
 	private void level_up(){
@@ -176,7 +186,7 @@ public class Monster {
 	public String toString(){
 		String stats_str = "STATS: ";
 		for (int ii = 0; ii < NUM_STATS; ++ii){
-			stats_str = stats_str.concat(curr_stats[ii] + "/" + real_stats[ii] + " ");
+			stats_str = stats_str.concat(curr_stats[ii] + "/" + getRealStats()[ii] + " ");
 		}
 		String techs_str = "TECHS: ";
 		for (String tech: techs){
@@ -189,6 +199,14 @@ public class Monster {
 		return nickname + " the " + species.name + " " + stats_str
 				+ "\n " + techs_str + " " + traits_str
 				;
+	}
+	
+	public int[] getCurrStats(){
+		return curr_stats;
+	}
+
+	public int[] getRealStats() {
+		return real_stats;
 	}
 
 }

@@ -1,100 +1,100 @@
 Array Index: 0,1,2,3,4,5,6,7,8,9
-Name,ID,Attribute,TG,Priority,Target,Power,Effects,Description,OID
-Whack,ATTACK,BLOW,0,0,SINGLE,5,HIT,Bog-standard attack you could find just about anywhere.,0
-Divebomb,RECOIL,BLOW,0,0,SINGLE,7,HIT RECOIL,Hits target with such little self-preservation that it damages itself.,1
-Remedy,HEAL,HEAL,2,0,SINGLE,5,HEAL,Uses a special liquid to heal the target.,2
-Kaboom!,BOMB,BLOW,3,0,ALL,10,HIT DIE,Says farewell in a violent and powerful explosion.,3
-Bonk,WEAK,BLOW,0,0,SINGLE,3,HIT,Does more emotional than physical damage with a weak smack.,4
-Dodge,DODGE,NULL,0,0,SELF,-1,DODGE,Nimbly evades the next attack that would hit it.,5
-Defend,DEFEND,NULL,0,1,SELF,-1,DEFEND,"Prepares itself to take on any attack, boosting defense.",6
-Swipe,SLASH,SLASH,0,0,SINGLE,5,HIT,Slashes just once at the foe by using a sharp body part.,7
-Hot Breath,HOTBREATH,HOT,3,0,ENEMY,5,HIT,"Exhales ghastly, superhot breath.",8
-Cold Breath,COLDBREATH,COLD,3,0,ENEMY,5,HIT,"Exhales minty-fresh, ice cold breath.",9
-Focus,FOCUS,NULL,0,0,SELF,-1,FOCUS,Concentrates really hard in order to do more damage next turn.,10
-Cutting Wind,SLASHWIND,SLASH,3,0,ENEMY,5,HIT,Creates a gale of razor-sharp winds that can slice through most things.,11
-Mub,JOKE,JOKE,0,0,SINGLE,5,HIT,Mub,12
-Paralyze,PARALYZE,NULL,4,0,SINGLE,-1,PARALYZE,Uses the target's worst fears against them to stop them from acting this turn.,13
-Cheer On,HELP,NULL,1,0,SINGLE,-1,HELP,Motivates the target with some genuine words of kindness.,14
-Chance!,CHANCE,NULL,0,0,SINGLE,-1,CHANCE,Who knows?,15
-Soothing Air,HEALALL,HEAL,4,0,TEAM,4,HEAL,Heals itself and its allies in a kind and loving manner.,16
-Heatblast,HOTALL,HOT,4,0,ALL,7,HIT,,17
-Coldsurge,COLDALL,COLD,4,0,ALL,7,HIT,,18
-Assassinate,KILL,NULL,8,0,SINGLE,-1,KILL,,19
-Fireball,HOT,HOT,0,0,SINGLE,5,HIT,,20
-Icicle,COLD,COLD,0,0,SINGLE,5,HIT,,21
-Snaring Web,WEB,NULL,1,-1,ENEMY,-1,GOLAST,Prepares a web to make enemies go last,22
-Dam Up,DAM,NULL,2,-1,TEAM,-1,DOUBLEDEF,Prepares a dam that will double defenses,23
-Guard Team,GUARD,NULL,3,1,TEAM,-1,GUARD,Takes all attacks meant for team-mates this turn,24
-Guard,GUARDONE,NULL,1,1,SINGLE,-1,GUARD,Takes attacks meant for target this turn ,25
-Hatch,HATCH,NULL,0,0,SELF,-1,HATCH,Something's coming...,26
-Boiling Point,HOTWEATHER,HOT,2,0,NONE,-1,HOTWEATHER,,27
-Below Zero,COLDWEATHER,COLD,2,0,NONE,-1,COLDWEATHER,,28
-Brittle Wind,BLOWWEAKEN,COLD,0,-1,ENEMY,-1,BLOWWEAKEN,"Prepares a chilling wind that will freeze enemies up, making them weak to BLOW.",29
-Melting Air,SLASHWEAKEN,HOT,0,-1,ENEMY,-1,SLASHWEAKEN,"Prepares some sweltering air that will melt enemies down, making them weak to SLASH.",30
-Hope,PRAY,NULL,0,0,NONE,-1,PRAY,Maybe something good will happen?,31
-War Cry,RAISEPOWALL,NULL,3,0,TEAM,4,RAISEPOW,,32
-Group Up,RAISEDEFALL,NULL,3,0,TEAM,4,RAISEDEF,,33
-Power Buff,RAISEPOW,NULL,2,0,SINGLE,5,RAISEPOW,,34
-Armor Buff,RAISEDEF,NULL,2,0,SINGLE,5,RAISEDEF,,35
-?,BLOWSTRONG,BLOW,1,0,SINGLE,8,HIT,,36
-?,SLASHSTRONG,SLASH,1,0,SINGLE,8,HIT,,37
-?,HOTSTRONG,HOT,1,0,SINGLE,8,HIT,,38
-?,COLDSTRONG,COLD,1,0,SINGLE,8,HIT,,39
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,40
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,41
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,42
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,43
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,44
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,45
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,46
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,47
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,48
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,49
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,50
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,51
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,52
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,53
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,54
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,55
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,56
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,57
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,58
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,59
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,60
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,61
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,62
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,63
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,64
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,65
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,66
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,67
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,68
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,69
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,70
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,71
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,72
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,73
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,74
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,75
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,76
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,77
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,78
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,79
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,80
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,81
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,82
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,83
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,84
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,85
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,86
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,87
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,88
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,89
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,90
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,91
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,92
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,93
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,94
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,95
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,96
-?,n/a,NULL,0,0,NONE,-1,NOTHING,,97
+ID,Name,Attribute,TG,Priority,Target,Power,Effects,Description,OID
+ATTACK,Whack,BLOW,0,0,SINGLE,4,HIT,Bog-standard attack you could find just about anywhere.,0
+RECOIL,Divebomb,BLOW,0,0,SINGLE,7,HIT RECOIL,Hits target with such little self-preservation that it damages itself.,1
+HEAL,Remedy,HEAL,2,0,SINGLE,5,HEAL,Uses a special liquid to heal the target.,2
+BOMB,Kaboom!,BLOW,3,0,ALL,10,HIT DIE,Says farewell in a violent and powerful explosion.,3
+WEAK,Bonk,BLOW,0,0,SINGLE,3,HIT,Does more emotional than physical damage with a weak smack.,4
+DODGE,Dodge,NULL,0,0,SELF,-1,DODGE,Nimbly evades the next attack that would hit it.,5
+DEFEND,Defend,NULL,0,1,SELF,-1,DEFEND,"Prepares itself to take on any attack, boosting defense.",6
+SLASH,Swipe,SLASH,0,0,SINGLE,4,HIT,Slashes just once at the foe by using a sharp body part.,7
+HOTBREATH,Hot Breath,HOT,3,0,ENEMY,5,HIT,"Exhales ghastly, superhot breath.",8
+COLDBREATH,Cold Breath,COLD,3,0,ENEMY,5,HIT,"Exhales minty-fresh, ice cold breath.",9
+FOCUS,Focus,NULL,0,0,SELF,-1,FOCUS,Concentrates really hard in order to do more damage next turn.,10
+SLASHWIND,Cutting Wind,SLASH,3,0,ENEMY,5,HIT,Creates a gale of razor-sharp winds that can slice through most things.,11
+JOKE,Mub,JOKE,0,0,SINGLE,5,HIT,Mub,12
+PARALYZE,Paralyze,NULL,4,0,SINGLE,-1,PARALYZE,Uses the target's worst fears against them to stop them from acting this turn.,13
+HELP,Cheer On,NULL,1,0,SINGLE,-1,HELP,Motivates the target with some genuine words of kindness.,14
+CHANCE,Chance!,NULL,0,0,SINGLE,-1,CHANCE,Who knows?,15
+HEALALL,Soothing Air,HEAL,4,0,TEAM,4,HEAL,Heals itself and its allies in a kind and loving manner.,16
+HOTALL,Heatblast,HOT,4,0,ALL,7,HIT,,17
+COLDALL,Coldsurge,COLD,4,0,ALL,7,HIT,,18
+KILL,Assassinate,NULL,8,0,SINGLE,-1,KILL,,19
+HOT,Fireball,HOT,1,0,SINGLE,6,HIT,,20
+COLD,Icicle,COLD,1,0,SINGLE,6,HIT,,21
+WEB,Snaring Web,NULL,1,-1,ENEMY,-1,GOLAST,Prepares a web to make enemies go last,22
+DAM,Dam Up,NULL,2,-1,TEAM,-1,DOUBLEDEF,Prepares a dam that will double defenses,23
+GUARD,Guard Team,NULL,3,1,TEAM,-1,GUARD,Takes all attacks meant for team-mates this turn,24
+GUARDONE,Guard,NULL,1,1,SINGLE,-1,GUARD,Takes attacks meant for target this turn ,25
+HATCH,Hatch,NULL,0,0,SELF,-1,HATCH,Something's coming...,26
+HOTWEATHER,Sweltering Heat,HOT,2,0,NONE,-1,HOTWEATHER,,27
+COLDWEATHER,Chilling Mist,COLD,2,0,NONE,-1,COLDWEATHER,,28
+BLOWWEAKEN,Brittle Wind,COLD,1,-1,ENEMY,-1,BLOWWEAKEN,"Prepares a chilling wind that will freeze enemies up, making them weak to BLOW.",29
+SLASHWEAKEN,Melting Air,HOT,1,-1,ENEMY,-1,SLASHWEAKEN,"Prepares some sweltering air that will melt enemies down, making them weak to SLASH.",30
+PRAY,Hope,NULL,0,0,NONE,-1,PRAY,Maybe something good will happen?,31
+RAISEPOWALL,War Cry,NULL,3,0,TEAM,3,RAISEPOW,,32
+RAISEDEFALL,Group Up,NULL,3,0,TEAM,3,RAISEDEF,,33
+RAISEPOW,Power Buff,NULL,2,0,SINGLE,5,RAISEPOW,,34
+RAISEDEF,Armor Buff,NULL,2,0,SINGLE,5,RAISEDEF,,35
+BLOWSTRONG,?,BLOW,1,0,SINGLE,7,HIT,,36
+SLASHSTRONG,?,SLASH,1,0,SINGLE,7,HIT,,37
+HOTSTRONG,?,HOT,2,0,SINGLE,9,HIT,,38
+COLDSTRONG,?,COLD,2,0,SINGLE,9,HIT,,39
+BITE,?,SLASH,0,0,SINGLE,4,HIT,,40
+HITLOWERPOW,?,NULL,0,0,SINGLE,3,HIT LOWERPOW,,41
+HITLOWERDEF,?,NULL,0,0,SINGLE,3,HIT LOWERDEF,,42
+POISON,?,NULL,0,0,SINGLE,-1,POISON,,43
+POISONALL,?,NULL,2,0,ENEMY,-1,POISON,,44
+LOWERPOW,Power Drain,NULL,1,0,SINGLE,6,LOWERPOW,,46
+LOWERDEF,Armor Drain,NULL,1,0,SINGLE,6,LOWERDEF,,45
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,47
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,48
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,49
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,50
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,51
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,52
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,53
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,54
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,55
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,56
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,57
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,58
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,59
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,60
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,61
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,62
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,63
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,64
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,65
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,66
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,67
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,68
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,69
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,70
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,71
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,72
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,73
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,74
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,75
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,76
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,77
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,78
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,79
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,80
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,81
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,82
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,83
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,84
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,85
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,86
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,87
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,88
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,89
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,90
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,91
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,92
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,93
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,94
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,95
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,96
+n/a,?,NULL,0,0,NONE,-1,NOTHING,,97

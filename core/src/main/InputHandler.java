@@ -10,7 +10,7 @@ public interface InputHandler {
 
 	abstract float getYInput();
 	
-	abstract MousePress getMousePress();
+	abstract Pointer getPointer();
 	
 	/**
 	 * If debug mode is on, increases game's update rate.

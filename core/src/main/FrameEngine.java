@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import battle.Battle;
 import battle.Monster;
+import battle.Species;
 import overworld.Player;
 import overworld.Area;
 
@@ -21,10 +22,10 @@ public class FrameEngine extends ApplicationAdapter {
 	private static boolean debug = true;
 	private static Battle active_battle;
 	private static InputHandler input_handler;
-	private static Area curr_area;
+	private static Area curr_area, new_area = null;
 	private static ArrayList<Monster> party = new ArrayList<Monster>();
 	public static final int TILE = 32;
-	public static final Logger logger = Logger.getLogger("logger");
+	public static final Logger logger = Logger.getLogger("ERROR_LOG");
 
 	public static final Vector2 resolution = new Vector2(1280, 640);
 	public static float elapsed_time = 0;
@@ -32,7 +33,7 @@ public class FrameEngine extends ApplicationAdapter {
 	@Override
 	public void create() {
 		player = new Player(TILE * 6, TILE * 12);
-		party.add(new Monster("DUMPLING", 2));
+		party.add(new Monster(Species.random, 2));
 		curr_area = new Area("START");
 		fps_logger = new FPSLogger();
 
@@ -68,6 +69,7 @@ public class FrameEngine extends ApplicationAdapter {
 	 * Loop for OVERWORLD state.
 	 */
 	private void update_overworld(){
+		if (new_area != null) change_area();
 		EntityHandler.update();
 		GraphicsHandler.draw_overworld();
 	}
@@ -100,6 +102,37 @@ public class FrameEngine extends ApplicationAdapter {
 	public static void end_battle() {
 		game_state = GameState.OVERWORLD;
 	}
+	
+
+	public static void initiate_area_change(String area_id) {
+		new_area = new Area(area_id);
+	}
+	
+	private static void change_area(){
+		curr_area = new_area;
+		new_area = null;
+		EntityHandler.dispose();
+		EntityHandler.init_area_entities(curr_area);
+		GraphicsHandler.init_overworld();
+	}
+	
+	public static void add_party_member(Monster mon) {
+		if (party.size() >= 3){ // TODO: Allow player to choose what monster to remove
+			getParty().remove(getParty().size()-1);
+		}
+		getParty().add(mon);
+	}
+	
+	// UTILITY
+	
+	/**
+	 * Gets a number between or at a and b.
+	 */
+	public static int get_rand_num_in_range(int a, int b){
+		return a + (int)(Math.random() * (b + 1 - a));
+	}
+	
+	// GET
 
 	public static InputHandler getInputHandler(){
 		return input_handler;

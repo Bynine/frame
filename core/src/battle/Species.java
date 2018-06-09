@@ -36,7 +36,7 @@ public class Species {
 		else{
 			data = new CSVReader().load_species_data(id);
 		}
-		name = data[0];
+		name = data[1];
 		base_stats[Monster.VIT] = Integer.parseInt(data[2]);
 		base_stats[Monster.POW] = Integer.parseInt(data[3]);
 		base_stats[Monster.DEF] = Integer.parseInt(data[4]);
@@ -54,7 +54,7 @@ public class Species {
 		}
 		base_technique = tech_levelup.get(1).get(0);
 		
-		String debug_image_id = "DUMMY"; // TODO: replace with id
+		String debug_image_id = data[0];
 		front = new TextureRegion(new Texture(Gdx.files.internal("sprites/battle/" + debug_image_id + "_FRONT.png")));
 		back = new TextureRegion(new Texture(Gdx.files.internal("sprites/battle/" + debug_image_id + "_BACK.png")));
 		palette_range.x = ((float)(Integer.parseInt(data[10])))/255.0f; //R variance

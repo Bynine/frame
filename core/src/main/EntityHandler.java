@@ -28,13 +28,18 @@ public class EntityHandler {
 	}
 	
 	public static void init_area_entities(Area area){
-		entities.add(FrameEngine.getPlayer());
-		entities.addAll(area.getEntities());
+		if (!entities.contains(FrameEngine.getPlayer())){
+			entities.add(FrameEngine.getPlayer());
+		}
+		entities.addAll(area.create_entities());
 	}
 
 	public static void dispose(){
 		for (Entity en: entities){
-			if (!en.equals(FrameEngine.getPlayer())) en.dispose();
+			if (!en.equals(FrameEngine.getPlayer())) {
+				en.mark_delete();
+				en.dispose();
+			}
 		}
 	}
 	

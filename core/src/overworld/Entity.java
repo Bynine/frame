@@ -60,6 +60,10 @@ public abstract class Entity {
 				(FrameEngine.elapsed_time) * velocity.y);
 		hitbox.setPosition(position);
 	}
+	
+	protected boolean touching_player(){
+		return hitbox.overlaps(FrameEngine.getPlayer().hitbox);
+	}
 
 	public Vector2 getPosition(){
 		return position;

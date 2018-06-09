@@ -18,7 +18,7 @@ public abstract class Enemy extends Entity {
 	@Override
 	public void update(){
 		super.update();
-		if (hitbox.overlaps(FrameEngine.getPlayer().hitbox) && !FrameEngine.getPlayer().isInvincible()){
+		if (touching_player() && !FrameEngine.getPlayer().isInvincible()){
 			if (FrameEngine.attempt_start_battle()){ // Only remove this enemy if the battle started!
 				mark_delete();
 				FrameEngine.getPlayer().reset_invincibility();
