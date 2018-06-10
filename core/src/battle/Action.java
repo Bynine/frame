@@ -19,6 +19,8 @@ public abstract class Action {
 			return new Action_Die(tech);
 		case "RECOIL":
 			return new Action_Recoil(tech);
+		case "GUARD":
+			return new Action_Guard(tech, target);
 		case "LOWERPOW":
 			return new Action_LowerStat(tech, target, Monster.POW);
 		case "LOWERDEF":

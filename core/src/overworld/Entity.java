@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import main.FrameEngine;
+import main.Timer;
 
 public abstract class Entity {
 
@@ -19,7 +20,7 @@ public abstract class Entity {
 	protected boolean delete = false;
 	protected final ArrayList<Timer> timer_list = new ArrayList<Timer>();
 
-	public Entity(int x, int y){
+	public Entity(float x, float y){
 		position.set(x, y);
 	}
 

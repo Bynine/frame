@@ -9,7 +9,7 @@ import main.FrameEngine;
  */
 public class Chaser extends Enemy {
 	
-	public Chaser(int x, int y) {
+	public Chaser(float x, float y) {
 		super(x, y);
 	}
 

@@ -28,6 +28,14 @@ public class KeyboardMouseInputHandler implements InputHandler, InputProcessor {
 		return getInput(Gdx.input.isKeyPressed(Keys.W), Gdx.input.isKeyPressed(Keys.S));
 	}
 	
+	@Override
+	public boolean getPauseJustPressed(){
+		return Gdx.input.isKeyJustPressed(Keys.ENTER);
+	}
+	
+	/**
+	 * Helper for WASD input.
+	 */
 	private float getInput(boolean input_A, boolean input_B){
 		if (input_A) return 1;
 		else if (input_B) return -1;

@@ -115,6 +115,9 @@ public class Area {
 			case "enemy": {
 				entities.add(new Chaser(x, y));
 			} break;
+			case "boss": {
+				entities.add(new Boss(x, y));
+			} break;
 			case "portal": {
 				String id = properties.get("DEST", String.class);
 				entities.add(new Portal(x, y, id));

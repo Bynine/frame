@@ -7,7 +7,6 @@ import java.util.HashMap;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 
-import battle.Battle.State;
 import main.FrameEngine;
 import main.Pointer;
 
@@ -20,13 +19,13 @@ public class BattleGUI {
 	
 	BattleGUI(Team party_team, Team enemy_team){
 		for (int ii = 0; ii < party_team.getMembers().size(); ++ii){
-			zone_to_monster.put(HERO_ZONES.get(ii), party_team.getMembers().get(ii));
+			zone_to_monster.put(PARTY_ZONES.get(ii), party_team.getMembers().get(ii));
 		}
 		for (int ii = 0; ii < enemy_team.getMembers().size(); ++ii){
 			zone_to_monster.put(ENEMY_ZONES.get(ii), enemy_team.getMembers().get(ii));
 		}
 		if (MONSTER_ZONES.isEmpty()){
-			MONSTER_ZONES.addAll(HERO_ZONES);
+			MONSTER_ZONES.addAll(PARTY_ZONES);
 			MONSTER_ZONES.addAll(ENEMY_ZONES);
 		}	
 	}
@@ -39,17 +38,13 @@ public class BattleGUI {
 		if (!pointer.this_frame) {
 			return null;
 		}
-		if (state == State.CHOOSE_TARGET){
-			return check_mouse_in_zones(MONSTER_ZONES);
-		}
-		else if (state == State.CHOOSE_TECH){
-			return check_mouse_in_zones(TECH_ZONES);
-		}
-		else if (state == State.TAME){
-			return check_mouse_in_zones(ENEMY_ZONES);
-		}
-		else if (state == State.DECIDE){
-			return check_mouse_in_zones(DECISION_ZONES);
+		switch(state){
+		case CHOOSE_TARGET: return check_mouse_in_zones(MONSTER_ZONES);
+		case CHOOSE_TECH: return check_mouse_in_zones(TECH_ZONES);
+		case TAME: return check_mouse_in_zones(ENEMY_ZONES);
+		case DECIDE: return check_mouse_in_zones(DECISION_ZONES);
+		case RELEASE: return check_mouse_in_zones(PARTY_ZONES);
+		case BATTLE: return null;
 		}
 		return null;
 	}
@@ -72,15 +67,26 @@ public class BattleGUI {
 	/**
 	 * Returns the monster assigned to the requested zone.
 	 */
-	Monster getMonsterFromZone(Rectangle zone){
+	public Monster getMonsterFromZone(Rectangle zone){
 		return zone_to_monster.get(zone);
+	}
+	
+	/**
+	 * Returns the zone assigned to the requested monster.
+	 */
+	public Rectangle getZoneFromMonster(Monster mon){
+		HashMap<Monster, Rectangle> monster_to_zone = new HashMap<>();
+		for(HashMap.Entry<Rectangle, Monster> entry : zone_to_monster.entrySet()){
+		    monster_to_zone.put(entry.getValue(), entry.getKey());
+		}
+		return monster_to_zone.get(mon);
 	}
 	
 	// The various input zones.
 	private static final int hero_width = 480;
 	private static final int hero_height = 180;
 	private static final int hero_y = 0;
-	public static final ArrayList<Rectangle> HERO_ZONES = new ArrayList<Rectangle>(Arrays.asList(
+	public static final ArrayList<Rectangle> PARTY_ZONES = new ArrayList<Rectangle>(Arrays.asList(
 			new Rectangle(0.0f*Gdx.graphics.getWidth()/9, hero_y, hero_width, hero_height),
 			new Rectangle(3.0f*Gdx.graphics.getWidth()/9, hero_y, hero_width, hero_height),
 			new Rectangle(6.0f*Gdx.graphics.getWidth()/9, hero_y, hero_width, hero_height)
@@ -88,11 +94,11 @@ public class BattleGUI {
 	private static final int enemy_dim = 240;
 	private static final int enemy_y = 200;
 	public static final ArrayList<Rectangle> ENEMY_ZONES = new ArrayList<Rectangle>(Arrays.asList(
-			new Rectangle(1.0f*Gdx.graphics.getWidth()/7, enemy_y, enemy_dim, enemy_dim),
-			new Rectangle(3.0f*Gdx.graphics.getWidth()/7, enemy_y, enemy_dim, enemy_dim),
-			new Rectangle(5.0f*Gdx.graphics.getWidth()/7, enemy_y, enemy_dim, enemy_dim)
+			new Rectangle(1.2f*Gdx.graphics.getWidth()/7, enemy_y, enemy_dim, enemy_dim),
+			new Rectangle(2.7f*Gdx.graphics.getWidth()/7, enemy_y, enemy_dim, enemy_dim),
+			new Rectangle(4.2f*Gdx.graphics.getWidth()/7, enemy_y, enemy_dim, enemy_dim)
 			));
-	private static final int tech_w = 240;
+	private static final int tech_w = Gdx.graphics.getWidth()/4;
 	private static final int tech_h = 120;
 	private static final int tech_y = Gdx.graphics.getHeight() - tech_h;
 	public static final ArrayList<Rectangle> TECH_ZONES = new ArrayList<Rectangle>(Arrays.asList(

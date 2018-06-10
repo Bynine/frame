@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 import com.badlogic.gdx.graphics.Color;
 
+import main.FrameEngine;
+
 public class Monster {
 
 	public static final int NUM_STATS = 5;
@@ -18,21 +20,21 @@ public class Monster {
 	final float size;
 
 	// Modal aspects
-	ArrayList<String> techs = new ArrayList<String>();
+	ArrayList<String> tech_ids = new ArrayList<String>();
 	ArrayList<String> traits = new ArrayList<String>();
-	int[] curr_stats = new int[NUM_STATS]; // Temporary stats that can change in a battle.
 	private int[] real_stats = new int[NUM_STATS]; // Monster's real stats.
 	String nickname = "NO_NICKNAME";
 	int level = 1;
 	long experience = 0;
 	float wildness = 10;
+	private Status status;
 
 	/**
 	 * Load a new monster based on its species.
 	 */
 	public Monster(String id, int level){
 		this.species = new Species(id);
-		this.nickname = species.name;
+		this.nickname = species.name + "_" + (char)((25 * Math.random()) + 65);
 		this.level = level;
 		this.experience = determine_exp_for_level(level);
 		this.palette = new Color(
@@ -41,10 +43,11 @@ public class Monster {
 				1 - ((float)Math.random() * species.palette_range.z),
 				1);
 		this.size = (float) ( (1.0 - (1.0/size_variance)) + (Math.random()/size_variance));
-		assign_by_levelup(1, species.tech_levelup, techs);
+		assign_by_levelup(1, species.tech_levelup, tech_ids);
 		assign_by_levelup(1, species.trait_levelup, traits);
 		assign_stat_weights();
 		determine_real_stats();
+		status = new Status(this);
 	}
 
 	/**
@@ -65,10 +68,10 @@ public class Monster {
 	private void determine_real_stats(){
 		//vitality
 		getRealStats()[Monster.VIT] = 
-				(int) (2 + (0.45 * species.base_stats[Monster.VIT] * level));
+				(int) (5 + (0.25 * species.base_stats[Monster.VIT] * level));
 		//all other stats
 		for(int ii = 1; ii < NUM_STATS; ++ii){
-			getRealStats()[ii] = (int) (1 + (0.32 * species.base_stats[ii] * level));
+			getRealStats()[ii] = (int) (3 + (0.15 * species.base_stats[ii] * level));
 		}
 	}
 
@@ -88,51 +91,12 @@ public class Monster {
 	}
 	
 	// BATTLE CONSEQUENCES
-	
-	boolean commanded = false;
 
 	/**
-	 * Sets up the monster before battle begins.
+	 * Resets the monster's status.
 	 */
-	public void initialize_for_battle(){
-		for (int ii = 0; ii < NUM_STATS; ++ii){
-			curr_stats[ii] = getRealStats()[ii];
-		}
-	}
-
-	/**
-	 * Whether this monster can currently act.
-	 */
-	public boolean can_act(){
-		return alive();
-	}
-
-	/**
-	 * Whether this monster can currently be targeted.
-	 */
-	public boolean can_target(){
-		return alive();
-	}
-
-	/**
-	 * Whether or not the monster is still in the battle.
-	 */
-	public boolean alive(){
-		return curr_stats[Monster.VIT] > 0;
-	}
-
-	public void take_damage(int damage) {
-		curr_stats[Monster.VIT] -= damage;
-		if (curr_stats[Monster.VIT] < 0){ // 0 is as low as it goes
-			curr_stats[Monster.VIT] = 0;
-		}
-	}
-
-	public void heal(int heal) {
-		curr_stats[Monster.VIT] += heal;
-		if (curr_stats[Monster.VIT] > getRealStats()[Monster.VIT]){ // no overheal
-			curr_stats[Monster.VIT] = getRealStats()[Monster.VIT];
-		}
+	public void refresh(){
+		status = new Status(this);
 	}
 	
 	public void add_experience(int exp) {
@@ -143,25 +107,26 @@ public class Monster {
 		}
 	}
 	
+	/**
+	 * How much EXP is required to level up, based on the given level.
+	 */
 	private int determine_exp_for_level(int level){
-		return (int)(1 + Math.pow(level, 2));
+		return (int)(1 + Math.pow(level, 3.0f));
 	}
 	
+	/**
+	 * How much exp this monster gives on being defeated.
+	 */
 	public int determine_exp_gain(){
-		return (int) Math.pow(level, 1.5);
-	}
-	
-	public void change_stat(int change, int stat_pos) {
-		curr_stats[stat_pos] += change;
-		if (curr_stats[stat_pos] < 1) curr_stats[stat_pos] = 1;
+		return (int) Math.pow(level, 2.75f);
 	}
 	
 	private void level_up(){
 		level += 1;
 		determine_real_stats();
-		assign_by_levelup(level, species.tech_levelup, techs);
+		assign_by_levelup(level, species.tech_levelup, tech_ids);
 		assign_by_levelup(level, species.trait_levelup, traits);
-		System.out.println(nickname + " has leveled up to level " + level + "!");
+		FrameEngine.getCurrentBattle().add_textbox(nickname + " has leveled up to level " + level + "!");
 	}
 	
 	// GETTERS
@@ -186,10 +151,10 @@ public class Monster {
 	public String toString(){
 		String stats_str = "STATS: ";
 		for (int ii = 0; ii < NUM_STATS; ++ii){
-			stats_str = stats_str.concat(curr_stats[ii] + "/" + getRealStats()[ii] + " ");
+			stats_str = stats_str.concat(status.getCurrStats()[ii] + "/" + getRealStats()[ii] + " ");
 		}
 		String techs_str = "TECHS: ";
-		for (String tech: techs){
+		for (String tech: tech_ids){
 			techs_str = techs_str.concat(tech + " ");
 		}
 		String traits_str = "TRAIT: ";
@@ -201,12 +166,37 @@ public class Monster {
 				;
 	}
 	
+	public String toMenuString() {
+		String stats_str = "";
+		stats_str = stats_str.concat("VIT: " + getRealStats()[Monster.VIT] + "\n");
+		stats_str = stats_str.concat("POW: " + getRealStats()[Monster.POW] + "\n");
+		stats_str = stats_str.concat("DEF: " + getRealStats()[Monster.DEF] + "\n");
+		stats_str = stats_str.concat("EMP: " + getRealStats()[Monster.EMP] + "\n");
+		stats_str = stats_str.concat("AGI: " + getRealStats()[Monster.AGI] + "\n");
+		String exp_str = "EXP: " + experience + "/" + determine_exp_for_level(level + 1);
+		String techs_str = "TECHS: \n";
+		for (Tech tech: status.techs){
+			techs_str = techs_str.concat(tech.name + "\n");
+		}
+		return species.name + " LV:" + level
+				+ "\n" + exp_str
+				+ "\n" + stats_str
+				+ "\n" + techs_str 
+				;
+	}
+	
 	public int[] getCurrStats(){
-		return curr_stats;
+		return status.getCurrStats();
 	}
 
 	public int[] getRealStats() {
 		return real_stats;
+	}
+	public Status getStatus(){
+		return status;
+	}
+	public ArrayList<String> getTechIDs(){
+		return tech_ids;
 	}
 
 }

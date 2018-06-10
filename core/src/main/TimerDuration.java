@@ -1,4 +1,4 @@
-package overworld;
+package main;
 
 public class TimerDuration extends Timer {
 

@@ -1,13 +1,14 @@
 package overworld;
 
 import main.FrameEngine;
+import main.Timer;
 
 public class Player extends Entity{
 	
 	private final float speed = 5.0f;
 	private final Timer invincibility = new Timer(60);
 
-	public Player(int x, int y) {
+	public Player(float x, float y) {
 		super(x, y);
 		timer_list.add(invincibility);
 	}

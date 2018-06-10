@@ -10,6 +10,8 @@ public interface InputHandler {
 
 	abstract float getYInput();
 	
+	abstract boolean getPauseJustPressed();
+	
 	abstract Pointer getPointer();
 	
 	/**
