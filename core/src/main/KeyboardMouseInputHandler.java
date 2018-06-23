@@ -7,6 +7,11 @@ import com.badlogic.gdx.InputProcessor;
 public class KeyboardMouseInputHandler implements InputHandler, InputProcessor {
 	
 	Pointer active_pointer = new Pointer(false, -1, -1, -1, -1);
+	private static final int
+	KEY_LEFT = Keys.A,
+	KEY_RIGHT = Keys.D,
+	KEY_UP = Keys.W,
+	KEY_DOWN = Keys.S;
 
 	@Override
 	public void initialize() {
@@ -20,17 +25,42 @@ public class KeyboardMouseInputHandler implements InputHandler, InputProcessor {
 	
 	@Override
 	public float getXInput() {
-		return getInput(Gdx.input.isKeyPressed(Keys.D), Gdx.input.isKeyPressed(Keys.A));
+		return getInput(Gdx.input.isKeyPressed(KEY_RIGHT), Gdx.input.isKeyPressed(KEY_LEFT));
 	}
 
 	@Override
 	public float getYInput() {
-		return getInput(Gdx.input.isKeyPressed(Keys.W), Gdx.input.isKeyPressed(Keys.S));
+		return getInput(Gdx.input.isKeyPressed(KEY_UP), Gdx.input.isKeyPressed(KEY_DOWN));
 	}
 	
 	@Override
 	public boolean getPauseJustPressed(){
 		return Gdx.input.isKeyJustPressed(Keys.ENTER);
+	}
+	
+	@Override
+	public boolean getActionJustPressed(){
+		return Gdx.input.isKeyJustPressed(Keys.SPACE);
+	}
+	
+	@Override
+	public boolean getLeftJustPressed() {
+		return Gdx.input.isKeyJustPressed(KEY_LEFT);
+	}
+
+	@Override
+	public boolean getRightJustPressed() {
+		return Gdx.input.isKeyJustPressed(KEY_RIGHT);
+	}
+
+	@Override
+	public boolean getUpJustPressed() {
+		return Gdx.input.isKeyJustPressed(KEY_UP);
+	}
+
+	@Override
+	public boolean getDownJustPressed() {
+		return Gdx.input.isKeyJustPressed(KEY_DOWN);
 	}
 	
 	/**
@@ -44,7 +74,7 @@ public class KeyboardMouseInputHandler implements InputHandler, InputProcessor {
 
 	@Override
 	public boolean debug_speed_up_held() {
-		return Gdx.input.isKeyPressed(Keys.SPACE);
+		return Gdx.input.isKeyPressed(Keys.SHIFT_LEFT);
 	}
 
 	@Override

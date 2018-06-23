@@ -3,7 +3,9 @@ package main;
 import java.util.ArrayList;
 
 import overworld.Entity;
+import overworld.EntityLoader;
 import overworld.Area;
+import overworld.AudioSource;
 
 /**
  * Controls and updates overworld entities.
@@ -31,13 +33,20 @@ public class EntityHandler {
 		if (!entities.contains(FrameEngine.getPlayer())){
 			entities.add(FrameEngine.getPlayer());
 		}
-		entities.addAll(area.create_entities());
+		entities.addAll(new EntityLoader().create_entities(area.getMap()));
+		ArrayList<AudioSource> audioSources = new ArrayList<>();
+		for (Entity en: entities){
+			if (en instanceof AudioSource){
+				audioSources.add((AudioSource)en);
+			}
+		}
+		AudioHandler.addAudioSources(audioSources);
 	}
 
 	public static void dispose(){
 		for (Entity en: entities){
 			if (!en.equals(FrameEngine.getPlayer())) {
-				en.mark_delete();
+				en.setDelete();
 				en.dispose();
 			}
 		}

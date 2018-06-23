@@ -18,12 +18,14 @@ public abstract class Enemy extends Entity {
 	@Override
 	public void update(){
 		super.update();
-		if (touching_player() && !FrameEngine.getPlayer().isInvincible()) attempt_start_battle();
+		if (touching_player(hitbox) && !FrameEngine.getPlayer().isInvincible()) {
+			attempt_start_battle();
+		}
 	}
 	
 	protected void attempt_start_battle(){
 		if (FrameEngine.attempt_start_battle()){ // Only remove this enemy if the battle started!
-			mark_delete();
+			setDelete();
 			FrameEngine.getPlayer().reset_invincibility();
 		}
 	}

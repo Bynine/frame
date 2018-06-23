@@ -14,7 +14,7 @@ public class CSVReader {
 	public static final String short_split = "&";
 	public static final int valid_species = 4;
 	
-	private String species_url = "data/species_green - Sheet1.csv";
+	private String species_url = "data/species - Sheet1.csv";
 	private String tech_url = "data/techniques - Sheet1.csv";
 	private String maps_url = "data/maps - Sheet1.csv";
 

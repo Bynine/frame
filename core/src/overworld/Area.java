@@ -4,30 +4,30 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 
-import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
-import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-import battle.Monster;
+import encounter.Monster;
 import main.CSVReader;
+import main.EntityHandler;
 import main.FrameEngine;
+import main.AudioHandler;
 
 /**
  * Contains all info about a particular overworld area.
  */
 public class Area {
-
 	private final TmxMapLoader tmx_map_loader = new TmxMapLoader();
 	private final TiledMap map;
 	private final ArrayList<Rectangle> collision = new ArrayList<>();
 	private final int map_width;
 	private final int map_height;
 	private final String id;
+	private final boolean cameraFixed = false; // TODO: Load from maps.csv.
 
 	public Area(String id){
 		this.id = id;
@@ -39,6 +39,7 @@ public class Area {
 			RectangleMapObject rectangle_map_object = (RectangleMapObject) map_objects.get(ii);
 			collision.add(new Rectangle(rectangle_map_object.getRectangle()));
 		}
+		AudioHandler.start_new_audio("music/forest.mp3");
 	}
 
 	/**
@@ -63,7 +64,7 @@ public class Area {
 		}
 		return encounter;
 	}
-	
+
 	/**
 	 * Creates a hashmap detailing the odds of finding each particular species in an area.
 	 */
@@ -81,7 +82,7 @@ public class Area {
 		}
 		return monster_pos_odds;
 	}
-	
+
 	/**
 	 * Picks out a position representing a species at random from a 
 	 * hashmap of vector2s representing probability ranges.
@@ -100,42 +101,23 @@ public class Area {
 		return chosen_monster_pos;
 	}
 
-	/**
-	 * Looks at the map data to generate entities for EntityHandler to use.
-	 */
-	public ArrayList<Entity> create_entities(){
-		ArrayList<Entity> entities = new ArrayList<Entity>();
-		MapObjects map_entities = map.getLayers().get("ENTITIES").getObjects();
-		for (int ii = 0; ii < map_entities.getCount(); ++ii){
-			MapObject entity = map_entities.get(ii);
-			MapProperties properties = entity.getProperties();
-			int x = Math.round(properties.get("x", Float.class));
-			int y = Math.round(properties.get("y", Float.class));
-			switch(entity.getName().toLowerCase()){
-			case "enemy": {
-				entities.add(new Chaser(x, y));
-			} break;
-			case "boss": {
-				entities.add(new Boss(x, y));
-			} break;
-			case "portal": {
-				String id = properties.get("DEST", String.class);
-				entities.add(new Portal(x, y, id));
-			} break;
-			default: {
-				FrameEngine.logger.log(Level.WARNING, "Unsure what " + entity.getName() + " is.");
-			}break;
-			}
-		}
-		return entities;
-	}
-
 	public TiledMap getMap() {
 		return map;
 	}
 
+	/**
+	 * Gets collision from map rectangles and NPCs.
+	 * TODO: Refactor to be less wasteful. Should only need to calculate this once per map load.
+	 */
 	public ArrayList<Rectangle> getCollision(){
-		return collision;
+		ArrayList<Rectangle> allCollision = new ArrayList<>();
+		for (Entity en: EntityHandler.getEntities()){
+			if (en instanceof InteractableEntity){
+				allCollision.add(en.getHitbox());
+			}
+		}
+		allCollision.addAll(collision);
+		return allCollision;
 	}
 
 	public int getWidth(){
@@ -144,6 +126,10 @@ public class Area {
 
 	public int getHeight(){
 		return map_height;
+	}
+	
+	public boolean isCameraFixed(){
+		return cameraFixed;
 	}
 
 }

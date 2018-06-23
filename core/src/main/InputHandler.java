@@ -12,6 +12,16 @@ public interface InputHandler {
 	
 	abstract boolean getPauseJustPressed();
 	
+	abstract boolean getActionJustPressed();
+	
+	abstract boolean getLeftJustPressed();
+
+	abstract boolean getRightJustPressed();
+
+	abstract boolean getUpJustPressed();
+
+	abstract boolean getDownJustPressed();
+	
 	abstract Pointer getPointer();
 	
 	/**

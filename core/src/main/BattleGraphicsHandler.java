@@ -14,10 +14,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-import battle.Battle;
-import battle.BattleGUI;
-import battle.Monster;
-import battle.Team;
+import encounter.Battle;
+import encounter.BattleGUI;
+import encounter.Monster;
+import encounter.Team;
 
 /**
  * Handles drawing for battles. Subclass of GraphicsHandler.
@@ -55,7 +55,7 @@ public class BattleGraphicsHandler extends GraphicsHandler{
 		draw_state(battle, battle_state);
 		batch.end();
 		shape_renderer.end();
-		batch.setColor(default_color);
+		batch.setColor(DEFAULT_COLOR);
 		if (null != battle.getCurrentTextbox()){
 			shape_renderer.begin();
 			draw_text_underlay();
