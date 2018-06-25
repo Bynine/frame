@@ -35,11 +35,14 @@ public class EntityLoader {
 				String[] destination = properties.get("DEST", String.class).split(",");
 				double x_dest = Double.parseDouble(destination[1]);
 				double y_dest = Double.parseDouble(destination[2]);
-				entities.add(new Portal(x, y, 24, 24, destination[0], x_dest, y_dest));
+				float width = 24;
+				float height = 24;
+				entities.add(new Portal(x, y, width, height, destination[0], x_dest, y_dest));
 			} break;
 			case "npc": {
 				String text = properties.get("TEXT", String.class);
-				entities.add(new NPC(x, y, text));
+				String id = properties.get("ID", String.class);
+				entities.add(new NPC(x, y, id, text));
 			} break;
 			case "item": {
 				String id = properties.get("ID", String.class);

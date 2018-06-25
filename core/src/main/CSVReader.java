@@ -13,10 +13,12 @@ public class CSVReader {
 	public static final String long_split = " ";
 	public static final String short_split = "&";
 	public static final int valid_species = 4;
-	
-	private String species_url = "data/species - Sheet1.csv";
-	private String tech_url = "data/techniques - Sheet1.csv";
-	private String maps_url = "data/maps - Sheet1.csv";
+
+	private static final String 
+	species_url = "data/species - Sheet1.csv",
+	tech_url = "data/techniques - Sheet1.csv",
+	maps_url = "data/maps - Sheet1.csv",
+	items_url = "data/items - Sheet1.csv";
 
 	String data = null;
 
@@ -41,6 +43,14 @@ public class CSVReader {
 	 */
 	public String[] load_map_data(String id){
 		String[] results = get_by_id(id, maps_url);
+		return results;
+	}
+
+	/**
+	 * Finds the map id from the csv list and returns the relevant data.
+	 */
+	public String[] load_item_data(String id){
+		String[] results = get_by_id(id, items_url);
 		return results;
 	}
 

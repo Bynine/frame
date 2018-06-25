@@ -47,4 +47,8 @@ public class Timer {
 		counter = endTime + 2; 
 	}
 
+	public void change(int i) {
+		counter += i;
+	}
+
 }

@@ -19,9 +19,10 @@ public abstract class Entity {
 	protected final TextureRegion sample = new TextureRegion(new Texture("sprites/overworld/dummy.png"));
 	protected final Rectangle hitbox = new Rectangle(0, 0, 30, 20);
 	protected final ArrayList<Timer> timer_list = new ArrayList<Timer>();
-	protected float acceleration = 1.3f;
-	protected float friction = 0.65f;
-	protected float contact_friction = 0.85f;
+	protected float acceleration = 0.85f;
+	protected float corner_acceleration = 0.5f;
+	protected float friction = 0.74f;
+	protected float contact_friction = 0.88f;
 
 	/**
 	 * Directions.
@@ -33,6 +34,7 @@ public abstract class Entity {
 
 	protected boolean flipped = false;
 	protected boolean delete = false;
+	protected boolean onSlope = false;
 	protected int direction = DOWN;
 
 	public Entity(float x, float y){
@@ -41,6 +43,7 @@ public abstract class Entity {
 
 	public void update(){
 		update_timer_list();
+		check_slopes();
 		update_velocity();
 		setDirection();
 		limit_velocity();
@@ -56,16 +59,31 @@ public abstract class Entity {
 	}
 
 	/**
+	 * Checks whether or not this entity is on a slope.
+	 */
+	protected void check_slopes(){
+		onSlope = false;
+		for(Rectangle slope: FrameEngine.getCurrentArea().getSlopes()){
+			if (slope.overlaps(hitbox)){
+				onSlope = true;
+			}
+		}
+	}
+
+	/**
 	 * Any changes to the entity's velocity.
 	 */
 	protected void update_velocity(){
-		/**/
+		if (onSlope && (velocity.y > 0 || velocity.y < -2.2f)){
+			velocity.y -= (0.4f * FrameEngine.elapsed_time);
+		}
 	}
 
 	/**
 	 * Effects that limit or affect velocity, such as friction.
 	 */
 	protected void limit_velocity(){
+		// TODO: incorporate elapsed time. (float) Math.pow(friction, FrameEngine.elapsed_time)
 		velocity.scl(friction);
 	}
 
@@ -101,13 +119,13 @@ public abstract class Entity {
 			}
 		}
 	}
-	
+
 	/**
 	 * Checks a corner. If the player is close enough to it, moves toward it.
 	 */
 	private void corner_checker(int dir, boolean is_x, Rectangle temp, Rectangle collider){
 		final int distance_check = 16;
-		final float speed = dir * 0.5f; // Doesn't check for elapsed time on purpose.
+		final float speed = dir * corner_acceleration; // Doesn't check for elapsed time on purpose.
 		Rectangle temp2 = new Rectangle(temp);
 		if (is_x) temp2.x += dir * distance_check;
 		else temp2.y += dir * distance_check;

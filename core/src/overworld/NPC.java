@@ -5,10 +5,16 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class NPC extends InteractableEntity{
 	
-	private final TextureRegion texture = new TextureRegion(new Texture("sprites/overworld/enemy.png"));
+	private final TextureRegion texture;
 
-	public NPC(float x, float y, String text) {
+	public NPC(float x, float y, String id, String text) {
 		super(x, y, text);
+		if (id.equals("DESC")){
+			texture = null;
+		}
+		else{
+			texture = new TextureRegion(new Texture("sprites/overworld/" + id + ".png"));
+		}
 	}
 
 	@Override
@@ -18,7 +24,9 @@ public class NPC extends InteractableEntity{
 
 	@Override
 	public void dispose(){
-		texture.getTexture().dispose();
+		if (texture != null){
+			texture.getTexture().dispose();
+		}
 	}
 
 }

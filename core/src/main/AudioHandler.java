@@ -74,6 +74,7 @@ public class AudioHandler {
 		}
 		curr_audio = Gdx.audio.newMusic(Gdx.files.internal(path));
 		curr_audio.setVolume(VOLUME);
+		curr_audio.setLooping(true);
 		curr_audio.play();
 	}
 	
@@ -91,7 +92,9 @@ public class AudioHandler {
 	 * Plays a preloaded sound. The calling class needs to dispose the sound of its own accord.
 	 */
 	public static void play_sfx(Sound sound){
-		sound.play(VOLUME, 1.25f, 0);
+		final float pitchDisparity = 10.0f;
+		float pitch = (1.0f - 2.0f/pitchDisparity) + (float) (Math.random()/pitchDisparity);
+		sound.play(VOLUME, pitch, 0);
 	}
 	
 }

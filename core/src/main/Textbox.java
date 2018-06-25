@@ -34,21 +34,21 @@ public class Textbox {
 			}
 		}
 	}
-	
+
 	/**
 	 * The entire string will now be drawn.
 	 */
 	void complete(){
 		text_pos = text_end;
 	}
-	
+
 	/**
 	 * Whether this textbox is displaying all of its text.
 	 */
 	boolean isFinished(){
 		return text_pos == text_end;
 	}
-	
+
 	/**
 	 * Eliminates this textbox.
 	 */

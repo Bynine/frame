@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import overworld.Entity;
 import overworld.EntityLoader;
+import overworld.InteractableEntity;
 import overworld.Area;
 import overworld.AudioSource;
 
@@ -25,6 +26,7 @@ public class EntityHandler {
 			}
 		}
 		for (Entity en: entities_to_remove){
+			FrameEngine.getCurrentArea().removeFromCollision(en);
 			entities.remove(en);
 		}
 	}
@@ -38,6 +40,10 @@ public class EntityHandler {
 		for (Entity en: entities){
 			if (en instanceof AudioSource){
 				audioSources.add((AudioSource)en);
+			}
+			if (en instanceof InteractableEntity){
+				en.update();
+				area.addToCollision(en);
 			}
 		}
 		AudioHandler.addAudioSources(audioSources);

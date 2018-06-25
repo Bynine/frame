@@ -16,9 +16,9 @@ import overworld.Area;
 import overworld.InteractableEntity;
 
 public class FrameEngine extends ApplicationAdapter {
-	public static final boolean debug = true;
-	public static final boolean mute = true;
-	public static final boolean do_log = true;
+	public static final boolean debug	= true;
+	public static final boolean mute	= false;
+	public static final boolean do_log	= true;
 
 	private static Player player;
 	private static FPSLogger fps_logger;
@@ -37,7 +37,7 @@ public class FrameEngine extends ApplicationAdapter {
 	public static final Logger logger = Logger.getLogger("ERROR_LOG");
 	public static GraphicsHandler graphics_handler;
 	public static BattleGraphicsHandler battle_graphics_handler;
-	private static final Vector2 start_position = new Vector2(TILE * 9, TILE * 9);
+	private static final Vector2 start_position = new Vector2(TILE * 30, TILE * 12);
 
 	public static final Vector2 resolution = new Vector2(TILE * 40, TILE * 20);
 	public static float elapsed_time = 0;
@@ -48,7 +48,7 @@ public class FrameEngine extends ApplicationAdapter {
 		party.add(new Monster(Species.random, 2));
 		party.get(0).refresh();
 		AudioHandler.initialize();
-		curr_area = new Area("TEST");
+		curr_area = new Area("FOREST");
 		fps_logger = new FPSLogger();
 
 		graphics_handler = new GraphicsHandler();
@@ -186,7 +186,8 @@ public class FrameEngine extends ApplicationAdapter {
 	private static void change_area(){
 		curr_area = new_area;
 		new_area = null;
-		player.getPosition().set(new_position.x, (curr_area.getHeight()) - (new_position.y));
+		player.getPosition().set(new_position.x, (curr_area.map_height) - (new_position.y));
+		player.getVelocity().setZero();
 		AudioHandler.clearAudioSources();
 		EntityHandler.dispose();
 		EntityHandler.init_area_entities(curr_area);
