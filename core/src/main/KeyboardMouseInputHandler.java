@@ -6,7 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 
 public class KeyboardMouseInputHandler implements InputHandler, InputProcessor {
 	
-	Pointer active_pointer = new Pointer(false, -1, -1, -1, -1);
+	Pointer active_pointer = new Pointer(false, -1, -1);
 	private static final int
 	KEY_LEFT = Keys.A,
 	KEY_RIGHT = Keys.D,
@@ -20,7 +20,7 @@ public class KeyboardMouseInputHandler implements InputHandler, InputProcessor {
 	
 	@Override
 	public void update(){
-		active_pointer = new Pointer(Gdx.input.justTouched(), Gdx.input.getX(), Gdx.input.getY(), 0, 0);
+		active_pointer = new Pointer(Gdx.input.justTouched(), Gdx.input.getX(), Gdx.input.getY());
 	}
 	
 	@Override
@@ -61,6 +61,11 @@ public class KeyboardMouseInputHandler implements InputHandler, InputProcessor {
 	@Override
 	public boolean getDownJustPressed() {
 		return Gdx.input.isKeyJustPressed(KEY_DOWN);
+	}
+	
+	@Override
+	public boolean getDebugJustPressed(){
+		return Gdx.input.isKeyJustPressed(Keys.Q);
 	}
 	
 	/**

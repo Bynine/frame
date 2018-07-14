@@ -18,7 +18,7 @@ public class EntityLoader {
 	/**
 	 * Looks at the map data to generate entities for EntityHandler to use.
 	 */
-	public ArrayList<Entity> create_entities(TiledMap map){
+	public ArrayList<Entity> createEntities(TiledMap map){
 		ArrayList<Entity> entities = new ArrayList<Entity>();
 		MapObjects map_entities = map.getLayers().get("ENTITIES").getObjects();
 		for (int ii = 0; ii < map_entities.getCount(); ++ii){
@@ -26,23 +26,37 @@ public class EntityLoader {
 			MapProperties properties = entity.getProperties();
 			int x = Math.round(properties.get("x", Float.class));
 			int y = Math.round(properties.get("y", Float.class));
+			int width = Math.round(properties.get("width", Float.class));
+			int height = Math.round(properties.get("height", Float.class));
 			String type = (String)properties.get("TYPE");
 			switch(type.toLowerCase()){
-			case "enemy": {
-				entities.add(new Chaser(x, y));
+			case "encounter": {
+				String id = properties.get("ID", String.class);
+				entities.add(new Chaser(x, y, id));
 			} break;
 			case "portal": {
 				String[] destination = properties.get("DEST", String.class).split(",");
 				double x_dest = Double.parseDouble(destination[1]);
 				double y_dest = Double.parseDouble(destination[2]);
-				float width = 24;
-				float height = 24;
 				entities.add(new Portal(x, y, width, height, destination[0], x_dest, y_dest));
 			} break;
 			case "npc": {
 				String text = properties.get("TEXT", String.class);
 				String id = properties.get("ID", String.class);
-				entities.add(new NPC(x, y, id, text));
+				String image = null;
+				int interactYDisp = 0;
+				if (properties.containsKey("INTERACTYDISP")) {
+					interactYDisp = Integer.parseInt(properties.get("INTERACTYDISP", String.class));
+				}
+				if (properties.containsKey("IMAGE")) {
+					image = properties.get("IMAGE", String.class);
+				}
+				
+				entities.add(new NPC(
+						x, y, 
+						interactYDisp,
+						width, height,
+						id, image, text));
 			} break;
 			case "item": {
 				String id = properties.get("ID", String.class);
@@ -50,7 +64,14 @@ public class EntityLoader {
 			} break;
 			case "audio": {
 				String audio = properties.get("AUDIO", String.class);
-				entities.add(new AudioSource(x, y, audio));
+				String id = properties.get("ID", String.class);
+				entities.add(new AudioLocation(x, y, audio, id));
+			} break;
+			case "emitter":{
+				String graphic = properties.get("GRAPHIC", String.class);
+				int interval = Integer.parseInt(properties.get("INTERVAL", String.class));
+				int duration = Integer.parseInt(properties.get("DURATION", String.class));
+				entities.add(new Emitter(x, y, interval, duration, graphic));
 			} break;
 			default: {
 				FrameEngine.logger.log( Level.WARNING, 

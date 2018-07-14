@@ -3,11 +3,14 @@ package overworld;
 import com.badlogic.gdx.math.Rectangle;
 
 import main.FrameEngine;
+import main.Textbox;
 
 public abstract class InteractableEntity extends ImmobileEntity {
 	
 	protected final String text;
-	protected final Rectangle interact_hitbox = new Rectangle(0, 0, 32, 32);
+	protected final Rectangle interactHitbox = new Rectangle(0, 0, 32, 32);
+	protected String voiceUrl;
+	protected int interactYDisp;
 
 	public InteractableEntity(float x, float y, String text) {
 		super(x, y);
@@ -15,7 +18,7 @@ public abstract class InteractableEntity extends ImmobileEntity {
 	}
 
 	public void interact() {
-		FrameEngine.setTextbox(getText());
+		FrameEngine.setTextbox(new Textbox(this));
 	}
 	
 	@Override
@@ -31,20 +34,28 @@ public abstract class InteractableEntity extends ImmobileEntity {
 	 */
 	private boolean canInteractWithPlayer(){
 		Player player = FrameEngine.getPlayer();
-		return interact_hitbox.overlaps(player.getInteractionBox());
+		return interactHitbox.overlaps(player.getInteractionBox());
 	}
 	
 	@Override
 	protected void update_position(){
 		super.update_position();
-		interact_hitbox.setPosition(
-				getPosition().x + (hitbox.width - interact_hitbox.width)/2,
-				getPosition().y + (hitbox.height - interact_hitbox.height)/2
+		interactHitbox.setPosition(
+				getPosition().x,
+				getPosition().y + interactYDisp
 				);
 	}
 	
 	public String getText(){
 		return text;
+	}
+	
+	public String getVoiceUrl(){
+		return voiceUrl;
+	}
+	
+	public Rectangle getInteractHitbox(){
+		return interactHitbox;
 	}
 
 }

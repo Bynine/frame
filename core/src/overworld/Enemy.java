@@ -10,21 +10,23 @@ import main.FrameEngine;
 public abstract class Enemy extends Entity {
 
 	private final TextureRegion texture = new TextureRegion(new Texture("sprites/overworld/enemy.png"));
+	private final String id;
 
-	public Enemy(float x, float y) {
+	public Enemy(float x, float y, String id) {
 		super(x, y);
+		this.id = id;
 	}
 
 	@Override
 	public void update(){
 		super.update();
 		if (touching_player(hitbox) && !FrameEngine.getPlayer().isInvincible()) {
-			attempt_start_battle();
+			attemptStartBattle();
 		}
 	}
 	
-	protected void attempt_start_battle(){
-		if (FrameEngine.attempt_start_battle()){ // Only remove this enemy if the battle started!
+	protected void attemptStartBattle(){
+		if (FrameEngine.attemptStartEncounter(id)){ // Only remove this enemy if the battle started!
 			setDelete();
 			FrameEngine.getPlayer().reset_invincibility();
 		}

@@ -9,8 +9,8 @@ import main.FrameEngine;
  */
 public class Chaser extends Enemy {
 	
-	public Chaser(float x, float y) {
-		super(x, y);
+	public Chaser(float x, float y, String id) {
+		super(x, y, id);
 	}
 
 	protected final float speed = 3.2f;

@@ -6,7 +6,7 @@ import overworld.Entity;
 import overworld.EntityLoader;
 import overworld.InteractableEntity;
 import overworld.Area;
-import overworld.AudioSource;
+import overworld.AudioLocation;
 
 /**
  * Controls and updates overworld entities.
@@ -31,15 +31,15 @@ public class EntityHandler {
 		}
 	}
 	
-	public static void init_area_entities(Area area){
+	public static void initializeAreaEntities(Area area){
 		if (!entities.contains(FrameEngine.getPlayer())){
 			entities.add(FrameEngine.getPlayer());
 		}
-		entities.addAll(new EntityLoader().create_entities(area.getMap()));
-		ArrayList<AudioSource> audioSources = new ArrayList<>();
+		entities.addAll(new EntityLoader().createEntities(area.getMap()));
+		ArrayList<AudioLocation> audioSources = new ArrayList<>();
 		for (Entity en: entities){
-			if (en instanceof AudioSource){
-				audioSources.add((AudioSource)en);
+			if (en instanceof AudioLocation){
+				audioSources.add((AudioLocation)en);
 			}
 			if (en instanceof InteractableEntity){
 				en.update();

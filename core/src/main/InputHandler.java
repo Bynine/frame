@@ -10,6 +10,8 @@ public interface InputHandler {
 
 	abstract float getYInput();
 	
+	abstract boolean getDebugJustPressed();
+	
 	abstract boolean getPauseJustPressed();
 	
 	abstract boolean getActionJustPressed();

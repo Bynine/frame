@@ -18,11 +18,11 @@ public abstract class Entity {
 	protected final Vector2 velocity = new Vector2();
 	protected final TextureRegion sample = new TextureRegion(new Texture("sprites/overworld/dummy.png"));
 	protected final Rectangle hitbox = new Rectangle(0, 0, 30, 20);
-	protected final ArrayList<Timer> timer_list = new ArrayList<Timer>();
-	protected float acceleration = 0.85f;
+	protected final ArrayList<Timer> timerList = new ArrayList<Timer>();
+	protected float acceleration = 0.8f;
 	protected float corner_acceleration = 0.5f;
 	protected float friction = 0.74f;
-	protected float contact_friction = 0.88f;
+	protected float contact_friction = 0.92f;
 
 	/**
 	 * Directions.
@@ -55,7 +55,7 @@ public abstract class Entity {
 	 * Counts up each timer in the entity's timer list.
 	 */
 	protected void update_timer_list(){
-		for (Timer timer: timer_list) timer.countUp();
+		for (Timer timer: timerList) timer.countUp();
 	}
 
 	/**
@@ -74,8 +74,8 @@ public abstract class Entity {
 	 * Any changes to the entity's velocity.
 	 */
 	protected void update_velocity(){
-		if (onSlope && (velocity.y > 0 || velocity.y < -2.2f)){
-			velocity.y -= (0.4f * FrameEngine.elapsed_time);
+		if (onSlope && (velocity.y > 0 || velocity.y < -1.8f)){
+			velocity.y -= getFrameFriction(0.35f);
 		}
 	}
 
@@ -83,8 +83,26 @@ public abstract class Entity {
 	 * Effects that limit or affect velocity, such as friction.
 	 */
 	protected void limit_velocity(){
-		// TODO: incorporate elapsed time. (float) Math.pow(friction, FrameEngine.elapsed_time)
-		velocity.scl(friction);
+		final float limit = 0.5f;
+		velocity.scl(getFrameFriction(friction));
+		if (Math.abs(velocity.x) > limit && Math.abs(velocity.y) > limit) {
+			final float diagonalFriction = 0.92f;
+			velocity.scl(getFrameFriction(diagonalFriction));
+		}
+	}
+	
+	/**
+	 * Gets friction relative to player's FPS.
+	 */
+	private float getFrameFriction(float friction){
+		float frameLimit = 8.0f;
+		return 
+				((frameLimit - 1) * friction + 
+				(float) Math.pow(
+						friction, 
+						FrameEngine.elapsedTime))
+				/frameLimit
+				;
 	}
 
 	/**
@@ -102,8 +120,8 @@ public abstract class Entity {
 	 */
 	private void handle_collision_helper(boolean check_x, boolean check_y){
 		Rectangle temp = new Rectangle(hitbox);
-		if (check_x) temp.x += (FrameEngine.elapsed_time) * velocity.x;
-		if (check_y) temp.y += (FrameEngine.elapsed_time) * velocity.y;
+		if (check_x) temp.x += (FrameEngine.elapsedTime) * velocity.x;
+		if (check_y) temp.y += (FrameEngine.elapsedTime) * velocity.y;
 		for(Rectangle collider: FrameEngine.getCurrentArea().getCollision()){
 			if (temp.overlaps(collider)){ // Contact, he shouts
 				velocity.x *= check_x ? 0 : contact_friction;
@@ -140,8 +158,8 @@ public abstract class Entity {
 	 */
 	protected void update_position(){
 		position.add(
-				(FrameEngine.elapsed_time) * velocity.x, 
-				(FrameEngine.elapsed_time) * velocity.y
+				(FrameEngine.elapsedTime) * velocity.x, 
+				(FrameEngine.elapsedTime) * velocity.y
 				);
 		hitbox.setPosition(position);
 	}
@@ -198,7 +216,6 @@ public abstract class Entity {
 
 	/**
 	 * Gets the direction this entity is facing as an int.
-	 * TODO: Refactor to be nicer
 	 */
 	protected void setDirection(){
 		if (Math.abs(velocity.x) > Math.abs(velocity.y)){

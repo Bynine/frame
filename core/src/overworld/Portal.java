@@ -25,7 +25,7 @@ public class Portal extends ImmobileEntity {
 	public void update(){
 		super.update();
 		if (touching_player(hitbox)){
-			FrameEngine.initiate_area_change(destArea, destLocation);
+			FrameEngine.initiateAreaChange(destArea, destLocation);
 		}
 	}
 

@@ -1,0 +1,9 @@
+0	1	2
+ID	TEXT	EFFECTS
+A_WAIT	You decide to wait and see what happens.	E_NONE
+A_FEED	You try giving the <ITEM> to <NAME> to eat.	E_NONE
+		
+		
+A_NOTHANKS	<NAME> doesn't seem interested.	E_NONE
+A_HUNGRYGRUMBLE	<NAME> whines and its stomach growls.	E_NONE
+A_HUNGRYTHANKS	<NAME> eats the <ITEM> you give it happily! It barks, then runs into the woods. <C_THANKS><C_LEAVE><C_END>	E_NONE
