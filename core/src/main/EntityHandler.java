@@ -2,11 +2,11 @@ package main;
 
 import java.util.ArrayList;
 
-import overworld.Entity;
-import overworld.EntityLoader;
-import overworld.InteractableEntity;
-import overworld.Area;
-import overworld.AudioLocation;
+import area.Area;
+import area.EntityLoader;
+import entity.AudioLocation;
+import entity.Entity;
+import entity.InteractableEntity;
 
 /**
  * Controls and updates overworld entities.
@@ -18,7 +18,7 @@ public class EntityHandler {
 	public static void update() {
 		ArrayList<Entity> entities_to_remove = new ArrayList<Entity>();
 		for (Entity en: entities){
-			if (en.should_delete()){
+			if (en.shouldDelete()){
 				entities_to_remove.add(en);
 			}
 			else{
@@ -26,12 +26,22 @@ public class EntityHandler {
 			}
 		}
 		for (Entity en: entities_to_remove){
-			FrameEngine.getCurrentArea().removeFromCollision(en);
+			FrameEngine.getArea().removeFromCollision(en);
 			entities.remove(en);
 		}
 	}
 	
+	/**
+	 * Only updates entity images, for dialogue and such.
+	 */
+	public static void updateImages() {
+		for (Entity en: entities){
+			en.updateImage();
+		}
+	}
+	
 	public static void initializeAreaEntities(Area area){
+		entities.clear();
 		if (!entities.contains(FrameEngine.getPlayer())){
 			entities.add(FrameEngine.getPlayer());
 		}

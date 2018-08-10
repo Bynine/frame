@@ -1,0 +1,6 @@
+*TALK_BEETLE3
+You know, there are hidden paths all through this forest.
+Sometimes, following the trail isn't enough! Be adventurous, my little friend!
+&TALK_BEETLE3
+Have you been looking for hidden paths, my little friend?
+I definitely saw one somewhere in the northwestern part of the woods...

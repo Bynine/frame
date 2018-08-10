@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" nextobjectid="264">
+ <tileset firstgid="1" source="tilesets/objects.tsx"/>
+ <tileset firstgid="9" source="tilesets/shop.tsx"/>
+ <tileset firstgid="265" source="tilesets/bookstore.tsx"/>
+ <layer name="FLOOR" width="25" height="16">
+  <data encoding="csv">
+27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,0,0,0,0,0,0,0,0,0,0,0,0,0,27,27,27,27,27,0,
+27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,27,27,14,14,14,14,14,14,14,27,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,13,14,15,30,30,30,30,30,30,30,13,14,15,27,27,27,27,27,0,
+27,27,27,27,27,27,29,30,31,10,11,11,11,11,11,12,29,30,31,27,27,27,27,27,0,
+27,27,27,27,27,27,10,11,11,27,27,27,27,27,59,27,11,11,12,27,27,27,27,27,0,
+27,27,27,27,27,27,26,27,27,27,27,27,27,27,27,27,27,27,28,27,27,27,27,27,0,
+27,27,27,27,27,27,26,27,27,27,27,27,27,27,27,59,27,27,28,27,27,27,27,27,0,
+27,27,27,27,27,27,26,27,27,27,27,27,27,59,27,27,27,43,44,27,27,27,27,27,0,
+27,27,27,27,27,27,27,26,27,27,27,27,27,27,27,27,28,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,26,27,27,27,27,27,27,27,27,28,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0
+</data>
+ </layer>
+ <layer name="MIDDLE" width="25" height="16">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,266,267,268,0,266,267,268,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,266,267,268,274,275,276,0,274,275,276,73,74,0,0,0,0,0,0,0,
+0,0,0,0,0,0,274,275,276,282,283,284,0,282,283,284,89,90,0,0,0,0,0,0,0,
+0,0,0,0,0,0,282,283,284,0,0,291,0,0,0,0,297,298,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,299,300,301,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,58,27,27,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,58,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer name="ABOVE" width="25" height="16">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,289,290,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,291,292,293,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer name="OVERHEAD" width="25" height="16">
+  <data encoding="csv">
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,
+9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,
+9,9,9,9,9,9,0,0,0,0,0,0,0,294,0,0,0,0,0,9,9,9,9,9,9,
+9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,
+9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,
+9,9,9,9,9,9,140,140,139,0,137,140,139,0,0,137,138,140,0,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+</data>
+ </layer>
+ <objectgroup name="SLOPES" visible="0"/>
+ <objectgroup color="#32e3c6" name="TERRAIN" visible="0">
+  <object id="224" name="wood" x="0" y="0" width="800" height="512"/>
+ </objectgroup>
+ <objectgroup color="#50734a" name="COLLISION" opacity="0.5">
+  <object id="239" x="424" y="192" width="88" height="24"/>
+  <object id="241" x="192" y="0" width="96" height="224"/>
+  <object id="242" x="288" y="0" width="224" height="192"/>
+  <object id="243" x="512" y="0" width="96" height="224"/>
+  <object id="245" x="0" y="0" width="192" height="512"/>
+  <object id="246" x="192" y="352" width="96" height="160"/>
+  <object id="250" x="608" y="0" width="192" height="512"/>
+  <object id="251" x="320" y="352" width="288" height="160"/>
+  <object id="252" x="288" y="384" width="32" height="128"/>
+  <object id="253" x="512" y="224" width="64" height="32"/>
+  <object id="257" x="192" y="224" width="88" height="24"/>
+  <object id="258" x="288" y="192" width="88" height="24"/>
+  <object id="259" x="352" y="256" width="96" height="24"/>
+  <object id="260" x="192" y="344" width="96" height="8"/>
+  <object id="261" x="320" y="344" width="96" height="8"/>
+  <object id="262" x="480" y="344" width="96" height="8"/>
+ </objectgroup>
+ <objectgroup name="ENTITIES" opacity="0.64">
+  <object id="172" name="portal" gid="4" x="288" y="384" width="32" height="32">
+   <properties>
+    <property name="DEST" value="FOREST,75,19"/>
+    <property name="TYPE" value="PORTAL"/>
+   </properties>
+  </object>
+  <object id="190" name="text" gid="1" x="304" y="216" width="64" height="32">
+   <properties>
+    <property name="TEXT">You open an old-looking tome and take a look inside.
+*SHRINE_BOOK
+&quot;In this land of Wabika, there exists a legendary item that represents Hope.
+It has the power to bring civilizations back from despair.
+However, only those who both truly understand this land and truly need it will be able to obtain it.
+It lies dormant within the Shrine, waiting for the worthy one who would claim it for their own.&quot;</property>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="226" name="text" gid="1" x="208" y="248" width="64" height="32">
+   <properties>
+    <property name="TEXT">You open up a flour-stained book and take a look inside.
+It's a recipe for Apple Cookies! They look soft, and moist, and sweet, and...
+You feel your stomach growl.</property>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="227" name="text" gid="1" x="432" y="216" width="64" height="32">
+   <properties>
+    <property name="TEXT">You open a fancy looking book and take a look inside.
+&quot;Wabika is ruled over by a guardian deity.
+They are swift to remove dark-hearted intruders into our land...
+but just as swift to welcome travellers whose intentions are pure.
+Take note, those who enter - your actions are being judged.&quot;</property>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="233" name="text" gid="1" x="520" y="256" width="48" height="40">
+   <properties>
+    <property name="TEXT" value="The seat is too high for you to get up on. Darn!"/>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="237" name="librarian" gid="1" x="208" y="272" width="32" height="24">
+   <properties>
+    <property name="DIALOGUE" value="librarian"/>
+    <property name="ID" value="LIBRARIAN"/>
+    <property name="IMAGE" value="librarian"/>
+    <property name="INTERACTXDISP" value="32"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="263" name="statuette" gid="1" x="424" y="272" width="24" height="24">
+   <properties>
+    <property name="DIALOGUE" value="statuette1"/>
+    <property name="TYPE" value="DIALOGUEDESC"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

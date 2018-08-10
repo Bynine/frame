@@ -24,11 +24,9 @@ public interface InputHandler {
 
 	abstract boolean getDownJustPressed();
 	
-	abstract Pointer getPointer();
-	
 	/**
 	 * If debug mode is on, increases game's update rate.
 	 */
-	abstract boolean debug_speed_up_held();
+	abstract boolean getDebugSpeedUpHeld();
 
 }

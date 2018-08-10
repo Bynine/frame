@@ -1,0 +1,7 @@
+*TALK_BEETLE1
+Oh, hello there. I'm a talking beetle, as you can hear.
+Did you know? There can be cool stuff hidden inside tree trunks.
+Keep your eyes open... That's what my father always said.
+&TALK_BEETLE1
+Always check those tree trunks. Yup, just like my father used to tell me...
+Ohh, pops... I miss you.

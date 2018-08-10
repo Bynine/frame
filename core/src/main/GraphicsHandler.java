@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 
 import com.badlogic.gdx.Gdx;
@@ -20,11 +21,17 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import overworld.Emitter;
-import overworld.Emitter.Graphic;
-import overworld.Entity;
-import overworld.InteractableEntity;
-import overworld.Player;
+
+import entity.Critter;
+import entity.Emitter;
+import entity.Entity;
+import entity.InteractableEntity;
+import entity.NPC;
+import entity.Player;
+import entity.Emitter.Graphic;
+import text.Button;
+import text.ButtonContainer;
+import text.Textbox;
 
 /**
  * Handles drawing overworld.
@@ -43,25 +50,29 @@ public class GraphicsHandler {
 	protected Color wipeColor = new Color(0.05f, 0.07f, 0.12f, 1);
 
 	private boolean shaderOn = false;
-	private static ShaderProgram shader;
+	private static ShaderProgram shader, rippleShader;
 
 	private static final TextureRegion 
-	interact_bubble = new TextureRegion(new Texture("sprites/overworld/player/interact.png")),
-	shadow = new TextureRegion(new Texture("sprites/overworld/player/shadow.png")),
-	textbox_corner = new TextureRegion(new Texture("sprites/gui/textbox_corner.png")),
-	textbox_top = new TextureRegion(new Texture("sprites/gui/textbox_top.png")),
-	textbox_side = new TextureRegion(new Texture("sprites/gui/textbox_side.png")),
-	textbox_center = new TextureRegion(new Texture("sprites/gui/textbox_center.png"));
+	interactBubble = new TextureRegion(new Texture("sprites/player/interact.png")),
+	textboxOverlay = new TextureRegion(new Texture("sprites/gui/textbox_overlay.png")),
+	textboxCorner = new TextureRegion(new Texture("sprites/gui/textbox_corner.png")),
+	textboxTop = new TextureRegion(new Texture("sprites/gui/textbox_top.png")),
+	textboxSide = new TextureRegion(new Texture("sprites/gui/textbox_side.png")),
+	textboxCenter = new TextureRegion(new Texture("sprites/gui/textbox_center.png"));
 
 	private static TextureRegion overlay = new TextureRegion(new Texture("sprites/gui/watercolor_dim.png"));
-	private static TextureRegion water = new TextureRegion(new Texture("sprites/overworld/graphics/water.png"));
+	private static TextureRegion water = new TextureRegion(new Texture("sprites/graphics/water.png"));
 
 	GraphicsHandler(){
 		shader = new ShaderProgram(
 				Gdx.files.internal("shaders/vert.glsl"),
 				Gdx.files.internal("shaders/frag.glsl")
 				);
-		if (!shader.isCompiled()) throw new GdxRuntimeException("Couldn't compile shader: " + shader.getLog());
+		rippleShader = new ShaderProgram(
+				Gdx.files.internal("shaders/vert.glsl"), 
+				Gdx.files.internal("shaders/wavy.glsl")
+				);
+		if (!rippleShader.isCompiled()) throw new GdxRuntimeException("Couldn't compile shader: " + shader.getLog());
 		batch = new SpriteBatch();
 		if (shaderOn) batch.setShader(shader);
 		ow_cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -70,7 +81,7 @@ public class GraphicsHandler {
 		center_cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/lato.ttf"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-		parameter.size = 16;
+		parameter.size = 20;
 		parameter.spaceY = 2;
 		parameter.color = new Color(
 				26.0f/255.0f, 
@@ -84,17 +95,16 @@ public class GraphicsHandler {
 		generator.dispose();
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setAutoShapeType(true);
-		startArea();
 	}
 
 	/**
 	 * Sets the renderer to draw the current map.
 	 */
 	void startArea(){
-		renderer = new OrthogonalTiledMapRenderer(FrameEngine.getCurrentArea().getMap());
+		renderer = new OrthogonalTiledMapRenderer(FrameEngine.getArea().getMap());
 		if (shaderOn) renderer.getBatch().setShader(shader);
 		overlay = new TextureRegion(new Texture(
-				"sprites/gui/watercolor_" + FrameEngine.getCurrentArea().overlayString + ".png"));
+				"sprites/gui/watercolor_" + FrameEngine.getArea().overlayString + ".png"));
 	}
 
 	/**
@@ -102,7 +112,13 @@ public class GraphicsHandler {
 	 */
 	void drawOverworld(){
 		wipeScreen();
-		if (FrameEngine.getCurrentArea().cameraFixed){
+		ArrayList<Entity> normalEntities = new ArrayList<Entity>();
+		ArrayList<Entity> frontEntities = new ArrayList<Entity>();
+		for (Entity entity: EntityHandler.getEntities()){
+			if (entity.getLayer() == Entity.Layer.NORMAL) normalEntities.add(entity);
+			if (entity.getLayer() == Entity.Layer.FRONT) frontEntities.add(entity);
+		}
+		if (FrameEngine.getArea().cameraFixed){
 			updateCameraFixed();
 		}
 		else{
@@ -112,19 +128,26 @@ public class GraphicsHandler {
 		batch.setProjectionMatrix(ow_cam.combined);
 
 		batch.setColor(DEFAULT_COLOR);
-		drawByTiles(water, true);
+		drawWater();
 		renderer.render(new int[]{0, 1});	// Render background tiles.
-		
-		renderEntities();
-		renderer.render(new int[]{2, 3}); 		// Render foreground tiles.
+
+		drawShadows(EntityHandler.getEntities());
+		drawEntities(normalEntities);
+		renderer.render(new int[]{2, 3}); 	// Render foreground tiles.
+		drawEntities(frontEntities);
 		handleEmitters();
-		
-		
 
-		if (FrameEngine.canUpdateEntities() && FrameEngine.canInteract()) drawInteractBubble();
-
+		if (FrameEngine.canUpdateEntities() && FrameEngine.canInteract()) {
+			drawInteractBubble();
+		}
+		
+		drawOverlay();
+		
 		if (null != FrameEngine.getCurrentTextbox()) {
 			drawDefaultTextbox(FrameEngine.getCurrentTextbox());
+		}
+		if (null != FrameEngine.getButtonContainer()){
+			drawButtons(FrameEngine.getButtonContainer());
 		}
 
 		if (FrameEngine.DRAW){
@@ -136,8 +159,6 @@ public class GraphicsHandler {
 					);
 			shapeRenderer.end();
 		}
-
-		drawOverlay();
 	}
 
 	/**
@@ -148,12 +169,21 @@ public class GraphicsHandler {
 		drawOverlay();
 	}
 
+	private void drawWater(){
+		batch.begin();
+		rippleShader.setUniformf("time", FrameEngine.getTime()/100.0f);
+		rippleShader.setUniformf("resolutionx", Gdx.graphics.getWidth());
+		rippleShader.setUniformf("resolutiony", Gdx.graphics.getHeight());
+		drawByTiles(water, true);
+		batch.end();
+	}
+
 	/**
 	 * Draws the bubble above the player's head that shows they can interact with something.
 	 */
 	private void drawInteractBubble(){
 		batch.begin();
-		batch.draw(interact_bubble,
+		batch.draw(interactBubble,
 				FrameEngine.getPlayer().getPosition().x,
 				FrameEngine.getPlayer().getPosition().y
 				);
@@ -161,33 +191,65 @@ public class GraphicsHandler {
 	}
 
 	/**
-	 * Draws all entities.
+	 * Draws all given entities.
 	 */
-	private void renderEntities(){
+	private void drawEntities(ArrayList<Entity> entities){
 		batch.begin();
 		shapeRenderer.begin();
-		EntityHandler.getEntities().sort(sorter);
-		for (Entity en: EntityHandler.getEntities()){
-			if (null != en.getImage() && !en.should_delete()){
-				if (en instanceof Player) {
-					batch.setColor(DEFAULT_COLOR);
-					batch.draw(shadow, en.getPosition().x, en.getPosition().y);
-				}
-				batch.setColor(en.getColor());
-				if (en.isFlipped() ^ en.getImage().isFlipX()) en.getImage().flip(true, false);
-				batch.draw(en.getImage(), en.getPosition().x, en.getPosition().y);
-				batch.setColor(DEFAULT_COLOR);
-			}
-			if (FrameEngine.DRAW && en instanceof InteractableEntity){
-				InteractableEntity iEn = (InteractableEntity)en;
-				Rectangle interactionBox = iEn.getInteractHitbox();
-				shapeRenderer.rect(
-						interactionBox.x, interactionBox.y, interactionBox.width, interactionBox.height
-						);
-			}
+		entities.sort(sorter);
+		for (Entity en: entities){
+			drawEntity(en);
 		}
 		batch.end();
 		shapeRenderer.end();
+	}
+
+	/**
+	 * Draws a single entity.
+	 */
+	private void drawEntity(Entity en){
+		if (null != en.getImage() && !en.shouldDelete()){
+			batch.setColor(en.getColor());
+			if (en.isFlipped() ^ en.getImage().isFlipX()) en.getImage().flip(true, false);
+			batch.draw(
+					en.getImage(), 
+					en.getPosition().x, 
+					en.getPosition().y + en.getZPosition()
+					);
+			batch.setColor(DEFAULT_COLOR);
+		}
+		if (FrameEngine.DRAW && en instanceof InteractableEntity){
+			InteractableEntity iEn = (InteractableEntity)en;
+			Rectangle interactionBox = iEn.getInteractHitbox();
+			shapeRenderer.rect(
+					interactionBox.x, interactionBox.y, interactionBox.width, interactionBox.height
+					);
+		}
+	}
+
+	/**
+	 * Draws all entity shadows.
+	 */
+	private void drawShadows(ArrayList<Entity> entities){
+		final float maxHeight = 320.0f;
+		batch.begin();
+		for(Entity en: entities){
+			if (null != en.getImage() && !en.shouldDelete()){
+				if (		en instanceof Player
+						||	en instanceof Critter
+						||	en instanceof NPC
+						) {
+					float shadowOpacity = en.getZPosition() < maxHeight ? (1 - en.getZPosition()/maxHeight) : 0;
+					batch.setColor(1, 1, 1, shadowOpacity);
+					batch.draw(
+							en.getShadow(), 
+							en.getPosition().x + (en.getImage().getRegionWidth() - en.getShadow().getRegionWidth())/2, 
+							en.getPosition().y
+							);
+				}
+			}
+		}
+		batch.end();
 	}
 
 	/**
@@ -225,45 +287,49 @@ public class GraphicsHandler {
 	 * Draws watercolor overlay on top of map.
 	 */
 	protected void drawOverlay(){
-		if (shaderOn) batch.setBlendFunction(GL20.GL_SRC_COLOR, GL20.GL_ONE);
-		else batch.setBlendFunction(GL20.GL_DST_COLOR, GL20.GL_SRC_ALPHA);
+		beginOverlay();
 		batch.setProjectionMatrix(ow_cam.combined);
-		batch.setColor(1, 1, 1, 0.5f);
 		drawByTiles(overlay, false);
-		batch.setBlendFunction(770, 771); // Changes blend function back to normal.
+		endOverlay();
 	}
 
+	/**
+	 * Draws a texture over the entire map.
+	 */
 	private void drawByTiles(TextureRegion texture, boolean scrolls){
-		batch.begin();
-		int x_tiles = 2 + (int) (FrameEngine.getCurrentArea().map_width / texture.getRegionWidth());
-		int y_tiles = 2 + (int) (FrameEngine.getCurrentArea().map_height / texture.getRegionHeight());
+		int x_tiles = 2 + (int) (FrameEngine.getArea().map_width / texture.getRegionWidth());
+		int y_tiles = 2 + (int) (FrameEngine.getArea().map_height / texture.getRegionHeight());
 		for (int xx = 0; xx < x_tiles; ++xx){
 			for (int yy = 0; yy < y_tiles; ++yy){
 				final float speed = 0.5f;
-				float x_disp = 
-						scrolls ? FrameEngine.getTime() * speed % texture.getRegionWidth() : 0;
-						float y_disp = 
-								scrolls ? FrameEngine.getTime() * speed/2.0f % texture.getRegionHeight() : 0;
-								batch.draw(texture, 
-										xx * texture.getRegionWidth() - x_disp, 
-										yy * texture.getRegionHeight() - y_disp
-										);
+				float x_disp = scrolls ? FrameEngine.getTime() * speed % texture.getRegionWidth() : 0;
+				float y_disp = scrolls ? FrameEngine.getTime() * speed/2.0f % texture.getRegionHeight() : 0;
+				batch.draw(texture, 
+						xx * texture.getRegionWidth() - x_disp, 
+						yy * texture.getRegionHeight() - y_disp
+						);
+				rippleShader.setUniformf("positionx", -x_disp);
+				rippleShader.setUniformf("positiony", -y_disp);
 			}
 		}
-		batch.end();
 	}
 
 	/**
 	 * Draws the pause screen.
 	 */
-	public void drawPause() {
+	void drawPause() {
 		batch.setProjectionMatrix(center_cam.combined);
 		batch.begin();
-		font.draw(batch, 
-				"Taking a break...", 
-				Gdx.graphics.getWidth()/(2/ZOOM), 
-				Gdx.graphics.getHeight()/(2/ZOOM)
-				);
+		String pauseMessage = "Let's take a break.";
+		GlyphLayout glyph = new GlyphLayout(font, pauseMessage);
+		font.draw(batch, pauseMessage, 
+				Gdx.graphics.getWidth()/(2/ZOOM) - glyph.width/2, 
+				Gdx.graphics.getHeight()*((3.0f/4.0f)*ZOOM));
+//		int ii = 0;
+//		for (String item: FrameEngine.getSaveFile().getInventory()){
+//			font.draw(batch, item, 200, 200 + (FrameEngine.TILE * ii));
+//			ii++;
+//		}
 		batch.end();
 	}
 
@@ -275,12 +341,12 @@ public class GraphicsHandler {
 		ow_cam.position.x = MathUtils.clamp(
 				ow_cam.position.x, 
 				Gdx.graphics.getWidth()/(2/ZOOM), 
-				FrameEngine.getCurrentArea().map_width - Gdx.graphics.getWidth()/(2/ZOOM)
+				FrameEngine.getArea().map_width - Gdx.graphics.getWidth()/(2/ZOOM)
 				);
 		ow_cam.position.y = MathUtils.clamp(
 				ow_cam.position.y, 
 				Gdx.graphics.getHeight()/(2/ZOOM), 
-				FrameEngine.getCurrentArea().map_height - Gdx.graphics.getHeight()/(2/ZOOM)
+				FrameEngine.getArea().map_height - Gdx.graphics.getHeight()/(2/ZOOM)
 				);
 		// Round camera position to avoid ugly tile splitting
 		final float roundTo = 10.0f;
@@ -294,8 +360,8 @@ public class GraphicsHandler {
 	 */
 	private void updateCameraFixed(){
 		ow_cam.position.set(
-				FrameEngine.getCurrentArea().map_width/(2),
-				FrameEngine.getCurrentArea().map_height/(2),
+				FrameEngine.getArea().map_width/(2),
+				FrameEngine.getArea().map_height/(2),
 				0
 				);
 		ow_cam.update();
@@ -305,37 +371,57 @@ public class GraphicsHandler {
 	 * Draws text in textbox at given position and size.
 	 */
 	protected void drawText(String text, Vector2 position, Vector2 size, boolean center){
-		batch.begin();
 		batch.setColor(DEFAULT_COLOR);
 		batch.setProjectionMatrix(center_cam.combined);
 		drawTextboxTiles((int)position.x, (int)position.y, (int)size.x, (int)size.y, 0);
+		batch.begin();
 		GlyphLayout glyph = new GlyphLayout(font, text);
+		String spacedText = getSpacedText(((size.x - 2) * FrameEngine.TILE), text);
 		if (center){
 			font.draw(
-					batch, text, 
+					batch, spacedText, 
 					position.x + FrameEngine.TILE * size.x/2 - glyph.width/2, 
 					position.y + FrameEngine.TILE * size.y/2 + font.getCapHeight()/2
 					);
 		}
 		else{
 			font.draw(
-					batch, text, 
+					batch, spacedText, 
 					position.x + FrameEngine.TILE/2, 
 					position.y + (FrameEngine.TILE * (size.y - 0.5f)) 
 					);
 		}
 		batch.end();
 	}
+	
+	/**
+	 * Creates text that won't go out of the textbox.
+	 */
+	private String getSpacedText(float width, String text){
+		GlyphLayout glyph;
+		String[] words = text.split(" ");
+		String spacedText = "";
+		for (String word: words){
+			String test = spacedText.concat(word);
+			glyph = new GlyphLayout(font, test);
+			if (glyph.width >= width){
+				spacedText += "\n";
+				width += FrameEngine.TILE/2;
+			}
+			spacedText = spacedText.concat(word + " ");
+		}
+		return spacedText;
+	}
 
 	/**
 	 * Draws the normal textbox.
 	 */
-	public void drawDefaultTextbox(Textbox textbox) {
-		final int x_tiles = (int) (Gdx.graphics.getWidth()/(FrameEngine.TILE/ZOOM));
-		final int y_tiles = 2;
+	void drawDefaultTextbox(Textbox textbox) {
+		final int x_tiles = (int) (Gdx.graphics.getWidth()/(FrameEngine.TILE/ZOOM)) - 1;
+		final int y_tiles = 3;
 		drawText(
 				textbox.getDisplayedText(), 
-				new Vector2(0, 0),
+				new Vector2(FrameEngine.TILE/2, FrameEngine.TILE/2),
 				new Vector2(x_tiles, y_tiles),
 				false
 				);
@@ -345,6 +431,7 @@ public class GraphicsHandler {
 	 * Draws the tiles underlying a textbox.
 	 */
 	protected void drawTextboxTiles(int position_x, int position_y, int x_tiles, int y_tiles, int center){
+		batch.begin();
 		for(int xx = 0; xx < x_tiles; ++xx){
 			for (int yy = 0; yy < y_tiles; ++yy){
 				TextureRegion tile = getProperTile(x_tiles, y_tiles, xx, yy);
@@ -353,6 +440,35 @@ public class GraphicsHandler {
 						position_y + yy * FrameEngine.TILE);
 			}
 		}
+		batch.end();
+		drawTextOverlay(position_x, position_y, x_tiles, y_tiles, center);
+	}
+	
+	/**
+	 * Draws texture over textbox.
+	 */
+	private void drawTextOverlay(int position_x, int position_y, int x_tiles, int y_tiles, int center){
+		beginOverlay();
+		batch.draw(textboxOverlay, position_x, position_y, x_tiles * FrameEngine.TILE, y_tiles * FrameEngine.TILE);
+		endOverlay();
+	}
+	
+	/**
+	 * Prepares batch for drawing an overlay.
+	 */
+	private void beginOverlay(){
+		batch.setBlendFunction(GL20.GL_DST_COLOR, GL20.GL_SRC_ALPHA);
+		batch.setColor(1.0f, 1.0f, 1.0f, 0.5f);
+		batch.begin();
+	}
+	
+	/**
+	 * Flushes overlay and returns batch to normal.
+	 */
+	private void endOverlay(){
+		batch.end();
+		batch.setColor(DEFAULT_COLOR);
+		batch.setBlendFunction(770, 771); // Changes blend function back to normal.
 	}
 
 	/**
@@ -363,21 +479,59 @@ public class GraphicsHandler {
 		boolean x_side = (xx == 0 || xx == x_tiles - 1);
 		boolean y_side = (yy == 0 || yy == y_tiles - 1);
 		if (x_side && y_side){
-			tile = textbox_corner;
+			tile = textboxCorner;
 			tile.flip(xx != 0 ^ tile.isFlipX(), yy == 0 ^ tile.isFlipY());
 		}
 		else if (x_side){
-			tile = textbox_side;
+			tile = textboxSide;
 			tile.flip(xx != 0 ^ tile.isFlipX(), false);
 		}
 		else if (y_side){
-			tile = textbox_top;
+			tile = textboxTop;
 			tile.flip(false, yy == 0 ^ tile.isFlipY());
 		}
 		else{
-			return textbox_center;
+			return textboxCenter;
 		}
 		return tile;
+	}
+	
+	/**
+	 * Draws buttons on screen.
+	 */
+	private void drawButtons(ButtonContainer buttonContainer){
+		int position = 0;
+		for (Button button: buttonContainer.getButtons()){
+			String name = new String(button.getName());
+			if (position == buttonContainer.getPosition()){
+				name = ">".concat(name);
+			}
+			drawText(
+					name, 
+					button.getArea().getPosition(new Vector2()), 
+					button.getArea().getSize(new Vector2()).scl(1.0f/FrameEngine.TILE),
+					true
+					);
+			position++;
+		}
+	}
+
+	/**
+	 * Draws the game's Debug menu.
+	 */
+	void drawDebug() {
+		wipeScreen();
+		batch.setProjectionMatrix(center_cam.combined);
+		int i = 1; // start higher than bottom
+		batch.begin();
+		for (String mapID: FrameEngine.debugMenu.getMapIDs()){
+			++i;
+			if (mapID.equals(FrameEngine.debugMenu.getSelectedMapID())){
+				mapID = "*" + mapID + "*";
+			}
+			debugFont.draw(batch, mapID, 200, FrameEngine.TILE * i);
+		}
+		batch.end();
 	}
 
 	/**
@@ -396,24 +550,6 @@ public class GraphicsHandler {
 		public int compare(Entity o1, Entity o2) {
 			return (int) (o2.getPosition().y - o1.getPosition().y);
 		}
-	}
-
-	/**
-	 * Draws the game's Debug menu.
-	 */
-	public void drawDebug() {
-		wipeScreen();
-		batch.setProjectionMatrix(center_cam.combined);
-		int i = 1; // start higher than bottom
-		batch.begin();
-		for (String mapID: FrameEngine.debugMenu.getMapIDs()){
-			++i;
-			if (mapID.equals(FrameEngine.debugMenu.getSelectedMapID())){
-				mapID = "*" + mapID + "*";
-			}
-			debugFont.draw(batch, mapID, 200, FrameEngine.TILE * i);
-		}
-		batch.end();
 	}
 
 }

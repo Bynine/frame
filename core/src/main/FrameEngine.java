@@ -8,31 +8,40 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.ArrayMap;
 
+import area.Area;
 import debug.DebugMenu;
-import encounter.Encounter;
-import overworld.Player;
-import overworld.Area;
-import overworld.InteractableEntity;
+import entity.InteractableEntity;
+import entity.Player;
+import text.ButtonContainer;
+import text.DialogueTree;
+import text.Textbox;
 
 public class FrameEngine extends ApplicationAdapter {
-	public static boolean DEBUG	= false;
+	public static boolean DEBUG	= true;
 
-	public static boolean DRAW 	= true && DEBUG;
-	public static boolean MUTE	= true && DEBUG;
-	public static boolean LOG	= true && DEBUG;
+	@SuppressWarnings("unused")
+	public static boolean 
+	DRAW 	= false	&& DEBUG,
+	MUTE	= true	&& DEBUG,
+	LOG		= false	&& DEBUG,
+	SAVE	= false	&& DEBUG;
 
+	private static final String startAreaName = "FOREST";
 	private static Player player;
 	private static FPSLogger fpsLogger;
 	private static GameState gameState = GameState.OVERWORLD;
 	private static InputHandler inputHandler;
 	private static Area currArea = null;
-	private static Encounter currEncounter;
 	private static InteractableEntity currInteractable;
-	private static Textbox currTextbox;
+	private static DialogueTree dialogueTree = null;
+	private static ButtonContainer buttonContainer = null;
+	private static SaveFile saveFile;
+	private static ProgressionHandler progressionHandler;
 	private static Timer 
 	time = new Timer(0),
-	transition = new Timer(30);
+	transition = new Timer(20);
 	private static ArrayList<Timer> timers = new ArrayList<Timer>(Arrays.asList(
 			time, transition
 			));
@@ -43,27 +52,25 @@ public class FrameEngine extends ApplicationAdapter {
 	public static final Logger logger = Logger.getLogger("ERROR_LOG");
 	public static DebugMenu debugMenu;
 	public static GraphicsHandler graphicsHandler;
-	public static EncounterGraphicsHandler encounterGraphicsHandler;
 
 	public static final Vector2 resolution = new Vector2(TILE * 40, TILE * 20);
 	public static float elapsedTime = 0;
-	
-	public static int playerHealth = 1;
 
 	@Override
 	public void create() {
 		player = new Player(0, 0);
-		AudioHandler.initialize();
-		debugMenu = new DebugMenu();
-		newArea = new Area("FOREST");
-		currEncounter = new Encounter("HUNGRY");
-		newPosition.set(newArea.getStartLocation());
-		currArea = newArea;
+		
+		saveFile = new SaveFile();
 		fpsLogger = new FPSLogger();
+		debugMenu = new DebugMenu();
+		AudioHandler.initialize();
+		
+		newArea = new Area(startAreaName);
+		newPosition.set(newArea.getStartLocation());
 
 		graphicsHandler = new GraphicsHandler();
-		encounterGraphicsHandler = new EncounterGraphicsHandler();
-		inputHandler = new KeyboardMouseInputHandler();
+		inputHandler = new KeyboardInputHandler();
+		progressionHandler = new ProgressionHandler();
 		inputHandler.initialize();
 		changeArea();
 	}
@@ -85,11 +92,6 @@ public class FrameEngine extends ApplicationAdapter {
 		switch(gameState){
 		case OVERWORLD:{
 			updateOverworld();
-		} break;
-		case ENCOUNTER:{
-			if (currEncounter != null){
-				updateEncounter();
-			}
 		} break;
 		case PAUSED:{
 			updatePause();
@@ -125,13 +127,22 @@ public class FrameEngine extends ApplicationAdapter {
 	 * Performs actions when player hits Action.
 	 */
 	private void handleActionPressed(){
-		if (null != currTextbox){
-			if (currTextbox.isFinished()){
-				currTextbox.dispose();
-				currTextbox = null;
+		if (null != dialogueTree){
+			Textbox textbox = dialogueTree.getTextbox();
+			if (textbox.isFinished()){
+				if (null != buttonContainer){
+					dialogueTree.handleAnswer(buttonContainer.getChoice());
+					buttonContainer = null;
+				}
+				else if (dialogueTree.finished()){
+					dialogueTree = null;
+				}
+				else{
+					dialogueTree.advanceBranch();
+				}
 			}
 			else{
-				currTextbox.complete();
+				textbox.complete();
 			}
 		}
 		else if (null != currInteractable){
@@ -148,6 +159,10 @@ public class FrameEngine extends ApplicationAdapter {
 		}
 		if (canUpdateEntities()){
 			EntityHandler.update();
+			progressionHandler.update();
+		}
+		else{
+			EntityHandler.updateImages();
 		}
 		if (inTransition()){
 			graphicsHandler.drawTransition();
@@ -155,17 +170,13 @@ public class FrameEngine extends ApplicationAdapter {
 		else{
 			graphicsHandler.drawOverworld();
 		}
-		if (null != currTextbox){
-			currTextbox.update();
-		}
-	}
+		if (null != buttonContainer){
+			buttonContainer.update();
 
-	/**
-	 * Loop for ENCOUNTER state.
-	 */
-	private void updateEncounter(){
-		encounterGraphicsHandler.draw(currEncounter);
-		currEncounter.update();
+		}
+		if (null != dialogueTree){
+			dialogueTree.getTextbox().update();
+		}
 	}
 
 	/**
@@ -175,7 +186,7 @@ public class FrameEngine extends ApplicationAdapter {
 		graphicsHandler.drawOverworld();
 		graphicsHandler.drawPause();
 	}
-	
+
 	/**
 	 * Loop for DEBUG state.
 	 */
@@ -183,34 +194,12 @@ public class FrameEngine extends ApplicationAdapter {
 		graphicsHandler.drawDebug();
 		debugMenu.update();
 	}
-	
+
 	/**
 	 * Prints the state of the game when the game lags significantly.
 	 */
 	private void printDebugOnLag(){
 		System.out.println("Last frame lasted for more than a second: " + Gdx.graphics.getDeltaTime());
-	}
-
-	/**
-	 * Called when transitioning from OVERWORLD to BATTLE.
-	 */
-	public static boolean attemptStartEncounter(String encounterID) {
-		if (gameState == GameState.ENCOUNTER){
-			return false;
-		}
-		else{
-			gameState = GameState.ENCOUNTER;
-			currEncounter = new Encounter(encounterID);
-			encounterGraphicsHandler.begin();
-			return true;
-		}
-	}
-
-	/**
-	 * Called when transitioning from BATTLE to OVERWORLD.
-	 */
-	public static void endEncounter() {
-		if (gameState == GameState.ENCOUNTER) gameState = GameState.OVERWORLD;
 	}
 
 	/**
@@ -220,7 +209,7 @@ public class FrameEngine extends ApplicationAdapter {
 		initiateAreaChangeHelper(area_id);
 		newPosition.set(position);
 	}
-	
+
 	/**
 	 * Spawns player in map's default start location.
 	 */
@@ -228,7 +217,7 @@ public class FrameEngine extends ApplicationAdapter {
 		initiateAreaChangeHelper(area_id);
 		newPosition.set(newArea.getStartLocation());
 	}
-	
+
 	/**
 	 * Next frame, the area will change.
 	 */
@@ -241,12 +230,13 @@ public class FrameEngine extends ApplicationAdapter {
 	 * Cleans out the old area and initializes the new one.
 	 */
 	private static void changeArea(){
+		if (null != currArea) currArea.dispose();
 		currArea = newArea;
 		newArea = null;
 		player.getPosition().set(newPosition.x, (currArea.map_height) - (newPosition.y));
 		player.getVelocity().setZero();
-		AudioHandler.clearAudioSources();
 		EntityHandler.dispose();
+		AudioHandler.clearAudioSources();
 		EntityHandler.initializeAreaEntities(currArea);
 		graphicsHandler.startArea();
 		transition.reset();
@@ -270,8 +260,40 @@ public class FrameEngine extends ApplicationAdapter {
 	/**
 	 * Starts a textbox.
 	 */
-	public static void setTextbox(Textbox textbox){
-		currTextbox = textbox;
+	public static void putTextbox(Textbox textbox){
+		dialogueTree = new DialogueTree((textbox));
+	}
+
+	/**
+	 * Runs through Dialogue until finished.
+	 */
+	public static void startDialogueTree(DialogueTree dialogue) {
+		dialogueTree = dialogue;
+	}
+
+	/**
+	 * Establishes a button container with answers to a question.
+	 */
+	public static void setQuestion(String[] strings) {
+		ArrayMap<String, String> options = new ArrayMap<>();
+		for (String string: strings){
+			options.put(string, string);
+		}
+		buttonContainer = new ButtonContainer(new Vector2(5, 2), options);
+	}
+
+	/**
+	 * Pulls up inventory screen to request an item.
+	 */
+	public static void setInventoryRequest(String string) {
+		dialogueTree.handleAnswer(string);
+	}
+	
+	/**
+	 * Redirects dialogue tree to a different branch.
+	 */
+	public static void setRedirect(String string) {
+		dialogueTree.handleAnswer(string);
 	}
 
 	// GET
@@ -280,12 +302,8 @@ public class FrameEngine extends ApplicationAdapter {
 		return inputHandler;
 	}
 
-	public static Area getCurrentArea(){
+	public static Area getArea(){
 		return currArea;
-	}
-
-	public static Encounter getCurrentEncounter() {
-		return currEncounter;
 	}
 
 	public static Player getPlayer() {
@@ -293,7 +311,7 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	public static float getGameSpeed(){
-		if (DEBUG && inputHandler.debug_speed_up_held()) {
+		if (DEBUG && inputHandler.getDebugSpeedUpHeld()) {
 			return 5.0f;
 		}
 		else{
@@ -306,7 +324,7 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	public static boolean canUpdateEntities(){
-		return transition.timeUp() && null == currTextbox;
+		return null == getCurrentTextbox() && transition.timeUp();
 	}
 
 	public static boolean inTransition(){
@@ -314,15 +332,28 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	public static Textbox getCurrentTextbox(){
-		return currTextbox;
+		if (null == dialogueTree) return null;
+		return dialogueTree.getTextbox();
 	}
 
 	private enum GameState{
-		OVERWORLD, ENCOUNTER, PAUSED, DEBUG
+		OVERWORLD, PAUSED, DEBUG
 	}
 
 	public static float getTime() {
 		return time.getCounter();
+	}
+
+	public static ButtonContainer getButtonContainer() {
+		return buttonContainer;
+	}
+
+	public static SaveFile getSaveFile() {
+		return saveFile;
+	}
+
+	public static ProgressionHandler getProgressionHandler() {
+		return progressionHandler;
 	}
 
 }

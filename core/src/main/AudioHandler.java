@@ -9,7 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 
-import overworld.AudioLocation;
+import entity.AudioLocation;
 
 /**
  * Handles all audio (Music and Sound).
@@ -148,6 +148,10 @@ public class AudioHandler {
 		}
 		
 		void dispose(){
+			for (AudioLocation sourcelet: sourcelets){
+				sourcelet.dispose();
+			}
+			sourcelets.clear();
 			audio.stop();
 			audio.dispose();
 		}

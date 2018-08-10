@@ -1,0 +1,6 @@
+*TALK_BEETLE4
+I've seen some small stone statues in these woods. They give off a weird vibe.
+Heck if I know what they're for, though. I'm just a beetle!
+&TALK_BEETLE4
+I wish I knew more about those little statues. 
+But it's a miracle I can even speak. After all, I'm just a beetle!

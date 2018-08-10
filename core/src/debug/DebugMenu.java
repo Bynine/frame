@@ -12,7 +12,7 @@ import main.Timer;
 public class DebugMenu {
 
 	private final ArrayList<String> mapIDs = new ArrayList<>();
-	private static final int HEADER_ROWS = 2;
+	private static final int HEADER_ROWS = 1;
 	private int cursor = 0;
 	private final Timer cursorHalt = new Timer(5);
 

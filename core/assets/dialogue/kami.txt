@@ -1,0 +1,9 @@
+*TALK_KAMI
+Why, hello there! Well done for making it this far, traveller from another land.
+I'm sorry to say that right now, I do not have what you're looking for. This world is not complete yet.
+Even my body is not done yet, as you can see... I am merely borrowing your image.
+In time, your hard work will be rewarded. For now, this is all there is.
+I hope to see you in the future, in my realized vision...
+&TALK_KAMI
+...I'm sorry, but I have to get back to work.
+Creation is a hard task, you know!

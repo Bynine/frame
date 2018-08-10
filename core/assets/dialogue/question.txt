@@ -1,0 +1,8 @@
+Do you like what I'm saying?
+>YES,NO
+<YES
+1. That's good.
+2. That's great.
+3. That's amazing.
+<NO
+Well, that's a shame.

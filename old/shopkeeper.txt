@@ -1,0 +1,28 @@
+*TALK_SHOPKEEPER
+Hello there, stranger!
+You must be new around here. Welcome to the humble land of Wabika.
+Say, could I ask you a favor? Lately this place hasn't had many visitors.
+If you do leave back to where you came from, could you tell them of this place?
+And... maybe mention this shop, too. Hehe.
+How does that sound?
+>YES,NO
+<YES
+*AGREED_SHOPKEEPER
+Oh, wonderful! Thank you so much!
+>END
+<NO
+Ahh... very well.
+>END
+<END
+Have a nice day.
+&TALK_SHOPKEEPER
+Hello again!
+Did you change your mind about telling people about this place?
+>YES,NO
+<YES
+*AGREED_SHOPKEEPER
+Oh, wonderful! Thank you so much!
+<NO
+Ahh... very well.
+&TALK_SHOPKEEPER,AGREED_SHOPKEEPER
+Thanks so much for helping to spread the word!

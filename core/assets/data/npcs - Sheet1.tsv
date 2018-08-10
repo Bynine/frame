@@ -1,5 +1,11 @@
-0	1	2	3
-ID	NAME	VOICE	ANIMATE
-DESC	Description:	blip	FALSE
-SHOPKEEPER	Shopkeeper	bup	TRUE
-FREB	Freb	croak	TRUE
+SHOPKEEPER	Shopkeeper	bup	TRUE	1
+FREB	Freb	croak	TRUE	1
+WESTERN	Tall Stranger	mih	TRUE	2
+BEETLE	Friendly Bug	meoh	TRUE	1
+LIBRARIAN	Librarian	bwep	TRUE	1
+KAMI	???	bup	TRUE	1
+GUITARIST	Guitarist	bup	TRUE	1
+CAT	Fancy Lady	mih	TRUE	1
+WATER	Water Guy	bup	TRUE	2
+WITCH	Witch	mih	TRUE	1
+CARPENTER	Carpenter	meoh	TRUE	1
