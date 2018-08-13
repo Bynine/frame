@@ -17,10 +17,14 @@ public class Textbox {
 	private Sound text_sound;
 	private final NPC speaker;
 	/**
+	 * Whether to animate player talking.
+	 */
+	private boolean talking;
+	/**
 	 * How many frames it takes to draw a new character.
 	 */
-	private static final float TEXT_SPEED = 1.5f;
-	private static final float TALK_SPEED = 8.0f;
+	private static float TEXT_SPEED = 1.5f;
+	private static float TALK_SPEED = 8.0f;
 
 	public Textbox(String text){
 		parseText(text);
@@ -82,12 +86,26 @@ public class Textbox {
 		text_timer.countUp();
 		if (!isFinished() && text_timer.getCounter()/TEXT_SPEED > text_pos){ 
 			if (characters.get(text_pos) instanceof Command){
-				((Command)characters.get(text_pos)).activate();
+				handleCommand(((Command)characters.get(text_pos)));
 			}
 			text_pos++;
 			if (text_pos % TALK_SPEED == 0){
 				AudioHandler.playSound(text_sound);
 			}
+		}
+	}
+	
+	private void handleCommand(Command command){
+		switch(command.getID()){
+		case "SLOW":{
+			TEXT_SPEED = 4.0f;
+		} break;
+		case "TALK":{
+			talking = true;
+		} break;
+		default:{
+			command.activate();
+		} break;
 		}
 	}
 
@@ -126,6 +144,10 @@ public class Textbox {
 			}
 		}
 		return text;
+	}
+
+	public boolean playerTalking() {
+		return talking;
 	}
 
 }

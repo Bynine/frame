@@ -1,7 +1,7 @@
 *TALK_BEETLE1
 Oh, hello there. I'm a talking beetle, as you can hear.
-Did you know? There can be cool stuff hidden inside tree trunks.
-Keep your eyes open... That's what my father always said.
+Say, where did you come from, anyway? Your clothes are weird.
+Oops - I mean... they're... a nice kind of weird. Hehe.
 &TALK_BEETLE1
-Always check those tree trunks. Yup, just like my father used to tell me...
-Ohh, pops... I miss you.
+Maybe I should try getting myself a new outfit.
+What do you think, stranger?

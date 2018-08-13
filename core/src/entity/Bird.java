@@ -3,6 +3,8 @@ package entity;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -21,6 +23,7 @@ public class Bird extends Critter {
 	private int flightDir = 0;
 	private final Random random;
 	private Timer wanderTimer = new Timer(45);
+	private final Sound startled = Gdx.audio.newSound(Gdx.files.internal("sfx/bird_startled.wav"));
 	
 	private final Rectangle noticeBox = new Rectangle(
 				0,
@@ -70,7 +73,7 @@ public class Bird extends Critter {
 		flightDir = (int) Math.signum(position.x - FrameEngine.getPlayer().position.x);
 		flying = true;
 		collides = false;
-		AudioHandler.playTemporarySound("sfx/bird_startled.wav");
+		AudioHandler.playSound(startled);
 	}
 
 	@Override
@@ -82,6 +85,7 @@ public class Bird extends Critter {
 	public void dispose() {
 		ground.getTexture().dispose();
 		hop.getTexture().dispose();
+		startled.dispose();
 		Animator.freeAnimation(fly);
 	}
 

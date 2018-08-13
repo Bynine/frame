@@ -14,14 +14,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
-import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.GdxRuntimeException;
-
 import entity.Critter;
 import entity.Emitter;
 import entity.Entity;
@@ -48,12 +45,9 @@ public class GraphicsHandler {
 	public static final float ZOOM = 1.0f/2.0f;
 	private final EntityDepthSorter sorter = new EntityDepthSorter();
 	protected Color wipeColor = new Color(0.05f, 0.07f, 0.12f, 1);
-
-	private boolean shaderOn = false;
-	private static ShaderProgram shader, rippleShader;
-
 	private static final TextureRegion 
 	interactBubble = new TextureRegion(new Texture("sprites/player/interact.png")),
+	talkingBubble = new TextureRegion(new Texture("sprites/player/talk.png")),
 	textboxOverlay = new TextureRegion(new Texture("sprites/gui/textbox_overlay.png")),
 	textboxCorner = new TextureRegion(new Texture("sprites/gui/textbox_corner.png")),
 	textboxTop = new TextureRegion(new Texture("sprites/gui/textbox_top.png")),
@@ -64,17 +58,7 @@ public class GraphicsHandler {
 	private static TextureRegion water = new TextureRegion(new Texture("sprites/graphics/water.png"));
 
 	GraphicsHandler(){
-		shader = new ShaderProgram(
-				Gdx.files.internal("shaders/vert.glsl"),
-				Gdx.files.internal("shaders/frag.glsl")
-				);
-		rippleShader = new ShaderProgram(
-				Gdx.files.internal("shaders/vert.glsl"), 
-				Gdx.files.internal("shaders/wavy.glsl")
-				);
-		if (!rippleShader.isCompiled()) throw new GdxRuntimeException("Couldn't compile shader: " + shader.getLog());
 		batch = new SpriteBatch();
-		if (shaderOn) batch.setShader(shader);
 		ow_cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		ow_cam.zoom = ZOOM;
 		center_cam.zoom = ZOOM;
@@ -102,7 +86,6 @@ public class GraphicsHandler {
 	 */
 	void startArea(){
 		renderer = new OrthogonalTiledMapRenderer(FrameEngine.getArea().getMap());
-		if (shaderOn) renderer.getBatch().setShader(shader);
 		overlay = new TextureRegion(new Texture(
 				"sprites/gui/watercolor_" + FrameEngine.getArea().overlayString + ".png"));
 	}
@@ -140,6 +123,10 @@ public class GraphicsHandler {
 		if (FrameEngine.canUpdateEntities() && FrameEngine.canInteract()) {
 			drawInteractBubble();
 		}
+		else if(null != FrameEngine.getCurrentTextbox()
+				&& FrameEngine.getCurrentTextbox().playerTalking()){
+			drawTalkingBubble();
+		}
 		
 		drawOverlay();
 		
@@ -171,10 +158,11 @@ public class GraphicsHandler {
 
 	private void drawWater(){
 		batch.begin();
-		rippleShader.setUniformf("time", FrameEngine.getTime()/100.0f);
-		rippleShader.setUniformf("resolutionx", Gdx.graphics.getWidth());
-		rippleShader.setUniformf("resolutiony", Gdx.graphics.getHeight());
 		drawByTiles(water, true);
+		batch.draw(Player.ripple,
+				FrameEngine.getPlayer().getPosition().x,
+				FrameEngine.getPlayer().getPosition().y
+				);
 		batch.end();
 	}
 
@@ -184,6 +172,18 @@ public class GraphicsHandler {
 	private void drawInteractBubble(){
 		batch.begin();
 		batch.draw(interactBubble,
+				FrameEngine.getPlayer().getPosition().x,
+				FrameEngine.getPlayer().getPosition().y
+				);
+		batch.end();
+	}
+	
+	/**
+	 * Draws the bubble above the player's head that shows they can interact with something.
+	 */
+	private void drawTalkingBubble(){
+		batch.begin();
+		batch.draw(talkingBubble,
 				FrameEngine.getPlayer().getPosition().x,
 				FrameEngine.getPlayer().getPosition().y
 				);
@@ -234,7 +234,7 @@ public class GraphicsHandler {
 		final float maxHeight = 320.0f;
 		batch.begin();
 		for(Entity en: entities){
-			if (null != en.getImage() && !en.shouldDelete()){
+			if (null != en.getImage() && null != en.getShadow() && !en.shouldDelete()){
 				if (		en instanceof Player
 						||	en instanceof Critter
 						||	en instanceof NPC
@@ -297,8 +297,8 @@ public class GraphicsHandler {
 	 * Draws a texture over the entire map.
 	 */
 	private void drawByTiles(TextureRegion texture, boolean scrolls){
-		int x_tiles = 2 + (int) (FrameEngine.getArea().map_width / texture.getRegionWidth());
-		int y_tiles = 2 + (int) (FrameEngine.getArea().map_height / texture.getRegionHeight());
+		int x_tiles = 3 + (int) (FrameEngine.getArea().map_width / texture.getRegionWidth());
+		int y_tiles = 3 + (int) (FrameEngine.getArea().map_height / texture.getRegionHeight());
 		for (int xx = 0; xx < x_tiles; ++xx){
 			for (int yy = 0; yy < y_tiles; ++yy){
 				final float speed = 0.5f;
@@ -308,8 +308,6 @@ public class GraphicsHandler {
 						xx * texture.getRegionWidth() - x_disp, 
 						yy * texture.getRegionHeight() - y_disp
 						);
-				rippleShader.setUniformf("positionx", -x_disp);
-				rippleShader.setUniformf("positiony", -y_disp);
 			}
 		}
 	}

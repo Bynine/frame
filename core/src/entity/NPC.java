@@ -2,8 +2,6 @@ package entity;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -24,19 +22,11 @@ public class NPC extends InteractableEntity{
 		String[] data = new TSVReader().loadDataByID(id, TSVReader.NPC_URL);
 		name = data[1];
 		voiceUrl = data[2];
-		boolean animate = Boolean.parseBoolean(data[3]);
+		boolean hasShadow = Boolean.parseBoolean(data[3]);
+		if (!hasShadow) shadow = null;
 		int animNumber = Integer.parseInt(data[4]);
-		if (animate){
-			anim = Animator.createAnimation(30, "sprites/npcs/" + imagePath + ".png", 2, animNumber);
-			if (anim.size() == 1) canFlip = false;
-		}
-		else{
-			anim = null;
-			image = new TextureRegion(new Texture(
-					Gdx.files.internal("sprites/npcs/" + imagePath + ".png"
-							)));
-			canFlip = false;
-		}
+		anim = Animator.createAnimation(30, "sprites/npcs/" + imagePath + ".png", 2, animNumber);
+		if (anim.size() == 1) canFlip = false;
 		hitbox.setSize(width, height);
 		interactHitbox.setSize(width, height);
 		this.interactXDisp = interactXDisp;

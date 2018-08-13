@@ -118,7 +118,7 @@ public class FrameEngine extends ApplicationAdapter {
 			}
 		}
 		if (inputHandler.getActionJustPressed()) handleActionPressed();
-		if (inputHandler.getDebugJustPressed()){
+		if (DEBUG && inputHandler.getDebugJustPressed()){
 			gameState = GameState.DEBUG;
 		}
 	}

@@ -15,6 +15,7 @@ import entity.DialogueDescription;
 import entity.Door;
 import entity.Emitter;
 import entity.Entity;
+import entity.Glimmer;
 import entity.HiddenItem;
 import entity.Item;
 import entity.NPC;
@@ -110,6 +111,10 @@ public class EntityLoader {
 			} break;
 			case "shrine_door":{
 				entities.add(new ShrineDoor(x, y));
+			} break;
+			case "glimmer":{
+				String flag = properties.get("FLAG", String.class);
+				entities.add(new Glimmer(x, y, flag));
 			} break;
 			default: {
 				FrameEngine.logger.log( Level.WARNING, 

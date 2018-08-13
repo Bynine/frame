@@ -1,4 +1,4 @@
 *STATUETTE_2
-[FOUND_STATUETTE]The strange little statue seems to react to you touching it.
+[FOUND_STATUETTE]The strange little statue seems to react to you.
 &STATUETTE_2
-[CHECK_STATUETTE]You try touching the little statue again.
+[CHECK_STATUETTE]You try talking to the little statue again.

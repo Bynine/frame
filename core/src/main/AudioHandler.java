@@ -69,15 +69,15 @@ public class AudioHandler {
 		}
 	}
 
-	/**
-	 * Plays the sound effect specified by the path and puts it in sound_disposal for later removal.
-	 */
-	public static void playTemporarySound(String path){
-		Sound sound = Gdx.audio.newSound(Gdx.files.internal(path));
-		final int time_before_dispose_sound = 1000;
-		soundDisposal.put(new TimerDuration(time_before_dispose_sound), sound);
-		sound.play(VOLUME);
-	}
+//	/**
+//	 * Plays the sound effect specified by the path and puts it in sound_disposal for later removal.
+//	 */
+//	public static void playTemporarySound(String path){
+//		Sound sound = Gdx.audio.newSound(Gdx.files.internal(path));
+//		final int time_before_dispose_sound = 1000;
+//		soundDisposal.put(new TimerDuration(time_before_dispose_sound), sound);
+//		sound.play(VOLUME);
+//	}
 
 	/**
 	 * Plays a preloaded sound. The calling class needs to dispose the sound of its own accord.

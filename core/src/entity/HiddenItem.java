@@ -16,8 +16,8 @@ public class HiddenItem extends Item {
 	public HiddenItem(float x, float y, String id) {
 		super(x, y, id);
 		image = null;
-		hitbox.setSize(8, 8);
-		interactHitbox.setSize(16, 16);
+		hitbox.setSize(8);
+		interactHitbox.setSize(16); // TODO: Reset
 	}
 
 	@Override

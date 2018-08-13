@@ -1,6 +1,6 @@
 ID	NAME	MUSIC	CAMLOCK	OVERLAY	START
 FOREST	?	forest	FALSE	dim	2&26
-SHOP	?	inside	TRUE	bright	12&10
+SHOP	?	crackling	TRUE	bright	12&10
 SPRING	?	forest	FALSE	bright	9&33
-BOOKSTORE	?	inside	TRUE	dim	12&10
+BOOKSTORE	?	inside	TRUE	bright	12&10
 EMPTY	?	nothing	TRUE	paper	11&10

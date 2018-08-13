@@ -23,13 +23,18 @@ public class Player extends Entity{
 	private final Timer 
 	invincibility = new Timer(60),
 	stepTimer = new Timer(stepTime * 2);
+	
 	private static final ArrayList<Animation<TextureRegion>> walk = 
 			Animator.createAnimation(stepTime, "sprites/player/walk.png", 4, 3);
 	private static final ArrayList<Animation<TextureRegion>> idle = 
 			Animator.createAnimation(35, "sprites/player/idle.png", 2, 3);
+	public static final TextureRegion ripple = 
+			new TextureRegion(new Texture(Gdx.files.internal("sprites/graphics/ripple.png")));
+	
 	private static final Rectangle interaction_box = 
 			new Rectangle(0, 0, 16, 16);
 	private final Vector2 input = new Vector2();
+	
 	private static final Sound 
 	stepGrass = Gdx.audio.newSound(Gdx.files.internal("sfx/step_grass.wav")),
 	stepWood = Gdx.audio.newSound(Gdx.files.internal("sfx/step_wood.wav")),
