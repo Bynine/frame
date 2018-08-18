@@ -26,12 +26,12 @@ public class FrameEngine extends ApplicationAdapter {
 	DRAW 	= false	&& DEBUG,
 	MUTE	= true	&& DEBUG,
 	LOG		= false	&& DEBUG,
-	SAVE	= false	&& DEBUG;
+	SAVE	= true	&& DEBUG;
 
-	private static final String startAreaName = "FOREST";
+	public static String startAreaName = "BEACH";
 	private static Player player;
 	private static FPSLogger fpsLogger;
-	private static GameState gameState = GameState.OVERWORLD;
+	private static GameState gameState = GameState.MAIN;
 	private static InputHandler inputHandler;
 	private static Area currArea = null;
 	private static InteractableEntity currInteractable;
@@ -39,6 +39,8 @@ public class FrameEngine extends ApplicationAdapter {
 	private static ButtonContainer buttonContainer = null;
 	private static SaveFile saveFile;
 	private static ProgressionHandler progressionHandler;
+	private static Inventory inventory;
+	private static MainMenu mainMenu;
 	private static Timer 
 	time = new Timer(0),
 	transition = new Timer(20);
@@ -53,14 +55,16 @@ public class FrameEngine extends ApplicationAdapter {
 	public static DebugMenu debugMenu;
 	public static GraphicsHandler graphicsHandler;
 
-	public static final Vector2 resolution = new Vector2(TILE * 40, TILE * 20);
+	public static final Vector2 resolution = new Vector2(TILE * 36, TILE * 24);
 	public static float elapsedTime = 0;
 
 	@Override
 	public void create() {
 		player = new Player(0, 0);
 		
+		inventory = new Inventory();
 		saveFile = new SaveFile();
+		mainMenu = new MainMenu();
 		fpsLogger = new FPSLogger();
 		debugMenu = new DebugMenu();
 		AudioHandler.initialize();
@@ -99,10 +103,54 @@ public class FrameEngine extends ApplicationAdapter {
 		case DEBUG:{
 			updateDebug();
 		} break;
+		case MAIN:{
+			updateMain();
+		} break;
 		}
 
 		inputHandler.update();
 		if (LOG) fpsLogger.log();
+	}
+	
+	private void updateOverworld(){
+		if (newArea != null) {
+			changeArea();
+		}
+		if (canUpdateEntities()){
+			EntityHandler.update();
+			progressionHandler.update();
+		}
+		else{
+			EntityHandler.updateImages();
+		}
+		if (inTransition()){
+			graphicsHandler.drawTransition();
+		}
+		else{
+			graphicsHandler.drawOverworld();
+		}
+		if (null != buttonContainer){
+			buttonContainer.update();
+		}
+		if (null != dialogueTree){
+			dialogueTree.getTextbox().update();
+		}
+	}
+
+	private void updatePause(){
+		graphicsHandler.drawOverworld();
+		graphicsHandler.drawPause();
+		inventory.update();
+	}
+
+	private void updateDebug(){
+		graphicsHandler.drawDebug();
+		debugMenu.update();
+	}
+	
+	private void updateMain(){
+		graphicsHandler.drawMainMenu();
+		mainMenu.update();
 	}
 
 	/**
@@ -114,13 +162,23 @@ public class FrameEngine extends ApplicationAdapter {
 				gameState = GameState.OVERWORLD;
 			}
 			else if (gameState == GameState.OVERWORLD){
-				gameState = GameState.PAUSED;
+				handlePause();
 			}
 		}
-		if (inputHandler.getActionJustPressed()) handleActionPressed();
+		if (inputHandler.getActionJustPressed()) {
+			handleActionPressed();
+		}
+		if (inputHandler.getSaveJustPressed()){
+			handleSavePressed();
+		}
 		if (DEBUG && inputHandler.getDebugJustPressed()){
 			gameState = GameState.DEBUG;
 		}
+	}
+	
+	private void handlePause(){
+		gameState = GameState.PAUSED;
+		inventory.open();
 	}
 
 	/**
@@ -149,50 +207,9 @@ public class FrameEngine extends ApplicationAdapter {
 			currInteractable.interact();
 		}
 	}
-
-	/**
-	 * Loop for OVERWORLD state.
-	 */
-	private void updateOverworld(){
-		if (newArea != null) {
-			changeArea();
-		}
-		if (canUpdateEntities()){
-			EntityHandler.update();
-			progressionHandler.update();
-		}
-		else{
-			EntityHandler.updateImages();
-		}
-		if (inTransition()){
-			graphicsHandler.drawTransition();
-		}
-		else{
-			graphicsHandler.drawOverworld();
-		}
-		if (null != buttonContainer){
-			buttonContainer.update();
-
-		}
-		if (null != dialogueTree){
-			dialogueTree.getTextbox().update();
-		}
-	}
-
-	/**
-	 * Loop for PAUSED state.
-	 */
-	private void updatePause(){
-		graphicsHandler.drawOverworld();
-		graphicsHandler.drawPause();
-	}
-
-	/**
-	 * Loop for DEBUG state.
-	 */
-	private void updateDebug(){
-		graphicsHandler.drawDebug();
-		debugMenu.update();
+	
+	private void handleSavePressed(){
+		saveFile.save();
 	}
 
 	/**
@@ -233,13 +250,28 @@ public class FrameEngine extends ApplicationAdapter {
 		if (null != currArea) currArea.dispose();
 		currArea = newArea;
 		newArea = null;
-		player.getPosition().set(newPosition.x, (currArea.map_height) - (newPosition.y));
+		player.getPosition().set(newPosition.x, (currArea.mapHeight) - (newPosition.y));
 		player.getVelocity().setZero();
 		EntityHandler.dispose();
 		AudioHandler.clearAudioSources();
 		EntityHandler.initializeAreaEntities(currArea);
 		graphicsHandler.startArea();
 		transition.reset();
+	}
+	
+	/**
+	 * Begin a new game.
+	 */
+	static void newGame(){
+		saveFile.wipeSave();
+		gameState = GameState.OVERWORLD;
+	}
+	
+	/**
+	 * Continues from established save file.
+	 */
+	static void continueGame(){
+		gameState = GameState.OVERWORLD;
 	}
 
 	/**
@@ -286,7 +318,12 @@ public class FrameEngine extends ApplicationAdapter {
 	 * Pulls up inventory screen to request an item.
 	 */
 	public static void setInventoryRequest(String string) {
-		dialogueTree.handleAnswer(string);
+		inventory.open();
+		ArrayMap<String, String> options = new ArrayMap<>();
+		for (ItemDescription desc: inventory.getDescriptions()){
+			options.put(desc.name, desc.id);
+		}
+		buttonContainer = new ButtonContainer(new Vector2(5, 2), options);
 	}
 	
 	/**
@@ -312,7 +349,7 @@ public class FrameEngine extends ApplicationAdapter {
 
 	public static float getGameSpeed(){
 		if (DEBUG && inputHandler.getDebugSpeedUpHeld()) {
-			return 5.0f;
+			return 8.0f;
 		}
 		else{
 			return 1.0f;
@@ -336,10 +373,6 @@ public class FrameEngine extends ApplicationAdapter {
 		return dialogueTree.getTextbox();
 	}
 
-	private enum GameState{
-		OVERWORLD, PAUSED, DEBUG
-	}
-
 	public static float getTime() {
 		return time.getCounter();
 	}
@@ -354,6 +387,18 @@ public class FrameEngine extends ApplicationAdapter {
 
 	public static ProgressionHandler getProgressionHandler() {
 		return progressionHandler;
+	}
+
+	public static Inventory getInventory() {
+		return inventory;
+	}
+	
+	public static MainMenu getMainMenu(){
+		return mainMenu;
+	}
+	
+	private enum GameState{
+		OVERWORLD, PAUSED, DEBUG, MAIN
 	}
 
 }

@@ -24,8 +24,8 @@ public class Item extends InteractableEntity {
 	@Override
 	public void interact() {
 		setDelete();
-		FrameEngine.putTextbox(new Textbox("You picked up " + getIndefinite(name) + " " + name + "! Nice."));
-		FrameEngine.getSaveFile().addItem(id);
+		FrameEngine.putTextbox(new Textbox("You picked up " + getIndefinite(name) + " " + name + "!"));
+		FrameEngine.getInventory().addItem(id);
 	}
 	
 	@Override

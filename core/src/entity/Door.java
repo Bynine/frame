@@ -1,5 +1,7 @@
 package entity;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 
 import main.FrameEngine;
@@ -8,6 +10,7 @@ public class Door extends InteractableEntity {
 	
 	private final String destArea;
 	private final Vector2 destLocation = new Vector2();
+	private final Sound open = Gdx.audio.newSound(Gdx.files.internal("sfx/door_open.wav"));
 
 	public Door(float x, float y, String destArea, double destX, double destY) {
 		super(x, y, "");
@@ -21,12 +24,13 @@ public class Door extends InteractableEntity {
 	}
 	
 	public void interact() {
+		open.play();
 		FrameEngine.initiateAreaChange(destArea, destLocation);
 	}
 
 	@Override
 	public void dispose() {
-		
+		open.dispose();
 	}
 
 }

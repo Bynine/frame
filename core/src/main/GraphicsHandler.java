@@ -2,7 +2,6 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -19,6 +18,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+
+import debug.DebugMenu;
 import entity.Critter;
 import entity.Emitter;
 import entity.Entity;
@@ -37,8 +38,8 @@ public class GraphicsHandler {
 	public static final Color DEFAULT_COLOR = new Color(1, 1, 1, 1);
 
 	protected SpriteBatch batch;
-	protected final OrthographicCamera ow_cam = new OrthographicCamera();
-	protected final OrthographicCamera center_cam = new OrthographicCamera();
+	protected final OrthographicCamera worldCam = new OrthographicCamera();
+	protected final OrthographicCamera centerCam = new OrthographicCamera();
 	protected OrthogonalTiledMapRenderer renderer;
 	protected BitmapFont font, debugFont;
 	protected ShapeRenderer shapeRenderer;
@@ -59,10 +60,10 @@ public class GraphicsHandler {
 
 	GraphicsHandler(){
 		batch = new SpriteBatch();
-		ow_cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		ow_cam.zoom = ZOOM;
-		center_cam.zoom = ZOOM;
-		center_cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		worldCam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		worldCam.zoom = ZOOM;
+		centerCam.zoom = ZOOM;
+		centerCam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/lato.ttf"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		parameter.size = 20;
@@ -105,10 +106,10 @@ public class GraphicsHandler {
 			updateCameraFixed();
 		}
 		else{
-			updateOverworldCam();
+			updateWorldCam();
 		}
-		renderer.setView(ow_cam);
-		batch.setProjectionMatrix(ow_cam.combined);
+		renderer.setView(worldCam);
+		batch.setProjectionMatrix(worldCam.combined);
 
 		batch.setColor(DEFAULT_COLOR);
 		drawWater();
@@ -138,7 +139,7 @@ public class GraphicsHandler {
 		}
 
 		if (FrameEngine.DRAW){
-			shapeRenderer.setProjectionMatrix(ow_cam.combined);
+			shapeRenderer.setProjectionMatrix(worldCam.combined);
 			shapeRenderer.begin();
 			Rectangle interactionBox = FrameEngine.getPlayer().getInteractionBox();
 			shapeRenderer.rect(
@@ -288,7 +289,7 @@ public class GraphicsHandler {
 	 */
 	protected void drawOverlay(){
 		beginOverlay();
-		batch.setProjectionMatrix(ow_cam.combined);
+		batch.setProjectionMatrix(worldCam.combined);
 		drawByTiles(overlay, false);
 		endOverlay();
 	}
@@ -297,8 +298,8 @@ public class GraphicsHandler {
 	 * Draws a texture over the entire map.
 	 */
 	private void drawByTiles(TextureRegion texture, boolean scrolls){
-		int x_tiles = 3 + (int) (FrameEngine.getArea().map_width / texture.getRegionWidth());
-		int y_tiles = 3 + (int) (FrameEngine.getArea().map_height / texture.getRegionHeight());
+		int x_tiles = 3 + (int) (FrameEngine.getArea().mapWidth / texture.getRegionWidth());
+		int y_tiles = 3 + (int) (FrameEngine.getArea().mapHeight / texture.getRegionHeight());
 		for (int xx = 0; xx < x_tiles; ++xx){
 			for (int yy = 0; yy < y_tiles; ++yy){
 				final float speed = 0.5f;
@@ -316,65 +317,63 @@ public class GraphicsHandler {
 	 * Draws the pause screen.
 	 */
 	void drawPause() {
-		batch.setProjectionMatrix(center_cam.combined);
+		batch.setProjectionMatrix(centerCam.combined);
 		batch.begin();
-		String pauseMessage = "Let's take a break.";
-		GlyphLayout glyph = new GlyphLayout(font, pauseMessage);
-		font.draw(batch, pauseMessage, 
-				Gdx.graphics.getWidth()/(2/ZOOM) - glyph.width/2, 
-				Gdx.graphics.getHeight()*((3.0f/4.0f)*ZOOM));
-//		int ii = 0;
-//		for (String item: FrameEngine.getSaveFile().getInventory()){
-//			font.draw(batch, item, 200, 200 + (FrameEngine.TILE * ii));
-//			ii++;
-//		}
+		int ii = 0;
+		for (ItemDescription desc: FrameEngine.getInventory().getDescriptions()){
+			float x = FrameEngine.TILE/2;
+			float y = Gdx.graphics.getHeight()*((3.0f/4.0f)*ZOOM) - (FrameEngine.TILE * ii);
+			batch.draw(desc.icon, x, y);
+			ii++;
+		}
+		font.draw(batch, FrameEngine.getInventory().getSelectedItem().toString(), 200, 200);
 		batch.end();
 	}
 
 	/**
 	 * Updates the camera in the overworld to follow the player.
 	 */
-	private void updateOverworldCam(){
-		ow_cam.position.set(FrameEngine.getPlayer().getCenter(), 0);
-		ow_cam.position.x = MathUtils.clamp(
-				ow_cam.position.x, 
+	private void updateWorldCam(){
+		worldCam.position.set(FrameEngine.getPlayer().getCenter(), 0);
+		worldCam.position.x = MathUtils.clamp(
+				worldCam.position.x, 
 				Gdx.graphics.getWidth()/(2/ZOOM), 
-				FrameEngine.getArea().map_width - Gdx.graphics.getWidth()/(2/ZOOM)
+				FrameEngine.getArea().mapWidth - Gdx.graphics.getWidth()/(2/ZOOM)
 				);
-		ow_cam.position.y = MathUtils.clamp(
-				ow_cam.position.y, 
+		worldCam.position.y = MathUtils.clamp(
+				worldCam.position.y, 
 				Gdx.graphics.getHeight()/(2/ZOOM), 
-				FrameEngine.getArea().map_height - Gdx.graphics.getHeight()/(2/ZOOM)
+				FrameEngine.getArea().mapHeight - Gdx.graphics.getHeight()/(2/ZOOM)
 				);
 		// Round camera position to avoid ugly tile splitting
 		final float roundTo = 10.0f;
-		ow_cam.position.x = Math.round(ow_cam.position.x * roundTo)/roundTo;
-		ow_cam.position.y = Math.round(ow_cam.position.y * roundTo)/roundTo;
-		ow_cam.update();
+		worldCam.position.x = Math.round(worldCam.position.x * roundTo)/roundTo;
+		worldCam.position.y = Math.round(worldCam.position.y * roundTo)/roundTo;
+		worldCam.update();
 	}
 
 	/**
 	 * 
 	 */
 	private void updateCameraFixed(){
-		ow_cam.position.set(
-				FrameEngine.getArea().map_width/(2),
-				FrameEngine.getArea().map_height/(2),
+		worldCam.position.set(
+				FrameEngine.getArea().mapWidth/(2),
+				FrameEngine.getArea().mapHeight/(2),
 				0
 				);
-		ow_cam.update();
+		worldCam.update();
 	}
 
 	/**
 	 * Draws text in textbox at given position and size.
 	 */
-	protected void drawText(String text, Vector2 position, Vector2 size, boolean center){
+	protected void drawText(String text, String fullText, Vector2 position, Vector2 size, boolean center){
 		batch.setColor(DEFAULT_COLOR);
-		batch.setProjectionMatrix(center_cam.combined);
+		batch.setProjectionMatrix(centerCam.combined);
 		drawTextboxTiles((int)position.x, (int)position.y, (int)size.x, (int)size.y, 0);
 		batch.begin();
 		GlyphLayout glyph = new GlyphLayout(font, text);
-		String spacedText = getSpacedText(((size.x - 2) * FrameEngine.TILE), text);
+		String spacedText = getSpacedText(((size.x - 2) * FrameEngine.TILE), text, fullText);
 		if (center){
 			font.draw(
 					batch, spacedText, 
@@ -395,18 +394,23 @@ public class GraphicsHandler {
 	/**
 	 * Creates text that won't go out of the textbox.
 	 */
-	private String getSpacedText(float width, String text){
-		GlyphLayout glyph;
+	private String getSpacedText(float width, String text, String fullText){
 		String[] words = text.split(" ");
+		String[] fullWords = fullText.split(" ");
+		int num = text.split(" ").length;
 		String spacedText = "";
-		for (String word: words){
-			String test = spacedText.concat(word);
-			glyph = new GlyphLayout(font, test);
-			if (glyph.width >= width){
+		String testText = "";
+		for (int ii = 0; ii < num; ++ii){
+			String word = words[ii];
+			String testTextFuture = testText.concat(fullWords[ii]);
+			GlyphLayout futureCheck = new GlyphLayout(font, testTextFuture);
+			if (futureCheck.width >= (width - FrameEngine.TILE/4)){
 				spacedText += "\n";
+				testText += "\n";
 				width += FrameEngine.TILE/2;
 			}
 			spacedText = spacedText.concat(word + " ");
+			testText = testText.concat(fullWords[ii]);
 		}
 		return spacedText;
 	}
@@ -419,6 +423,7 @@ public class GraphicsHandler {
 		final int y_tiles = 3;
 		drawText(
 				textbox.getDisplayedText(), 
+				textbox.getAllText(),
 				new Vector2(FrameEngine.TILE/2, FrameEngine.TILE/2),
 				new Vector2(x_tiles, y_tiles),
 				false
@@ -456,7 +461,7 @@ public class GraphicsHandler {
 	 */
 	private void beginOverlay(){
 		batch.setBlendFunction(GL20.GL_DST_COLOR, GL20.GL_SRC_ALPHA);
-		batch.setColor(1.0f, 1.0f, 1.0f, 0.5f);
+		batch.setColor(1.0f, 1.0f, 1.0f, 0.25f);
 		batch.begin();
 	}
 	
@@ -506,6 +511,7 @@ public class GraphicsHandler {
 			}
 			drawText(
 					name, 
+					name,
 					button.getArea().getPosition(new Vector2()), 
 					button.getArea().getSize(new Vector2()).scl(1.0f/FrameEngine.TILE),
 					true
@@ -519,15 +525,24 @@ public class GraphicsHandler {
 	 */
 	void drawDebug() {
 		wipeScreen();
-		batch.setProjectionMatrix(center_cam.combined);
-		int i = 1; // start higher than bottom
+		batch.setProjectionMatrix(centerCam.combined);
+		int ii = 1; // start higher than bottom
+		int jj = 0;
 		batch.begin();
-		for (String mapID: FrameEngine.debugMenu.getMapIDs()){
-			++i;
-			if (mapID.equals(FrameEngine.debugMenu.getSelectedMapID())){
+		for (String mapID: FrameEngine.debugMenu.getList()){
+			if (ii > DebugMenu.split) {
+				ii = 1;
+				jj++;
+			}
+			++ii;
+			if (mapID.equals(FrameEngine.debugMenu.getSelectedItem())){
 				mapID = "*" + mapID + "*";
 			}
-			debugFont.draw(batch, mapID, 200, FrameEngine.TILE * i);
+			debugFont.draw(
+					batch, 
+					mapID,
+					(FrameEngine.TILE * 6 * jj) + 16, 
+					Gdx.graphics.getHeight()*ZOOM - FrameEngine.TILE * ii);
 		}
 		batch.end();
 	}
@@ -548,6 +563,27 @@ public class GraphicsHandler {
 		public int compare(Entity o1, Entity o2) {
 			return (int) (o2.getPosition().y - o1.getPosition().y);
 		}
+	}
+
+	public void drawMainMenu() {
+		wipeScreen();
+		batch.setProjectionMatrix(centerCam.combined);
+		int ii = 1; // start higher than bottom
+		batch.begin();
+		for (Object obj: FrameEngine.getMainMenu().getList()){
+			String option = obj.toString();
+			++ii;
+			if (obj.equals(FrameEngine.getMainMenu().getSelectedItem())){
+				option = "*" + option + "*";
+			}
+			debugFont.draw(
+					batch, 
+					option.toString(), 
+					FrameEngine.TILE * 6, 
+					Gdx.graphics.getHeight()*ZOOM - FrameEngine.TILE * ii
+					);
+		}
+		batch.end();
 	}
 
 }

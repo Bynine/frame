@@ -12,7 +12,7 @@ import main.Timer;
 public class Textbox {
 
 	private Timer text_timer = new Timer(0);
-	private int text_pos = 0;
+	private int textPos = 0;
 	private final ArrayList<Object> characters = new ArrayList<>();
 	private Sound text_sound;
 	private final NPC speaker;
@@ -23,8 +23,9 @@ public class Textbox {
 	/**
 	 * How many frames it takes to draw a new character.
 	 */
-	private static float TEXT_SPEED = 1.5f;
-	private static float TALK_SPEED = 8.0f;
+	public static final float DEFAULT_TEXT_SPEED = 2.0F;
+	private float TEXT_SPEED = DEFAULT_TEXT_SPEED;
+	private float TALK_SPEED = 6.0f;
 
 	public Textbox(String text){
 		parseText(text);
@@ -84,28 +85,34 @@ public class Textbox {
 	 */
 	public void update(){
 		text_timer.countUp();
-		if (!isFinished() && text_timer.getCounter()/TEXT_SPEED > text_pos){ 
-			if (characters.get(text_pos) instanceof Command){
-				handleCommand(((Command)characters.get(text_pos)));
+		if (!isFinished() && text_timer.getCounter()/TEXT_SPEED > textPos){ 
+			if (characters.get(textPos) instanceof Command){
+				handleCommand(((Command)characters.get(textPos)));
 			}
-			text_pos++;
-			if (text_pos % TALK_SPEED == 0){
+			textPos++;
+			if (textPos % TALK_SPEED == 1){
 				AudioHandler.playSound(text_sound);
 			}
 		}
 	}
-	
+
 	private void handleCommand(Command command){
-		switch(command.getID()){
-		case "SLOW":{
-			TEXT_SPEED = 4.0f;
-		} break;
-		case "TALK":{
-			talking = true;
-		} break;
-		default:{
-			command.activate();
-		} break;
+		if (command.getID().startsWith("SPEED")){
+			String[] speedData = command.getID().split("=");
+			TEXT_SPEED = Float.parseFloat(speedData[1]);
+		}
+		else{
+			switch(command.getID()){
+			case "NSPEED":{
+				TEXT_SPEED = DEFAULT_TEXT_SPEED;
+			} break;
+			case "TALK":{
+				talking = true;
+			} break;
+			default:{
+				command.activate();
+			} break;
+			}
 		}
 	}
 
@@ -113,7 +120,7 @@ public class Textbox {
 	 * The entire string will now be drawn.
 	 */
 	public void complete(){
-		text_pos = characters.size();
+		textPos = characters.size();
 		AudioHandler.playSound(text_sound);
 	}
 
@@ -121,7 +128,7 @@ public class Textbox {
 	 * Whether this textbox is displaying all of its text.
 	 */
 	public boolean isFinished(){
-		return text_pos == characters.size();
+		return textPos == characters.size();
 	}
 
 	/**
@@ -135,19 +142,27 @@ public class Textbox {
 	 * Returns what text will be displayed.
 	 */
 	public String getDisplayedText(){
-		String text = "";
-		if (null != speaker) text = speaker.getName() + ": " + text;
-		for (int ii = 0; ii < text_pos; ++ii){
-			Object obj = characters.get(ii);
-			if (obj instanceof Character){
-				text = text + ((char)obj);
-			}
-		}
-		return text;
+		return getText(textPos);
 	}
 
 	public boolean playerTalking() {
 		return talking;
+	}
+
+	public String getAllText() {
+		return getText(characters.size());
+	}
+
+	private String getText(int length){
+		StringBuilder text = new StringBuilder();
+		if (null != speaker) text.append(speaker.getName() + ": ");
+		for (int ii = 0; ii < length; ++ii){
+			Object obj = characters.get(ii);
+			if (obj instanceof Character){
+				text.append((char)obj);
+			}
+		}
+		return text.toString();
 	}
 
 }

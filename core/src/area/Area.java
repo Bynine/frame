@@ -26,12 +26,13 @@ public class Area {
 	private final HashMap<Entity, Rectangle> hitboxCollision = new HashMap<>();
 	private final Vector2 startLocation = new Vector2();
 	public final TiledMap map;
-	public final int map_width;
-	public final int map_height;
+	public final int mapWidth;
+	public final int mapHeight;
 	public final boolean cameraFixed;
-	public final String overlayString;
+	public final String overlayString, id;
 
 	public Area(String id){
+		this.id = id;
 		String[] data = new TSVReader().loadDataByID(id, TSVReader.MAP_URL);
 		AudioHandler.startNewAudio("music/" + data[2] + ".ogg");
 		cameraFixed = Boolean.parseBoolean(data[3].toLowerCase());
@@ -42,8 +43,8 @@ public class Area {
 				Integer.parseInt(locationData[1]) * FrameEngine.TILE
 				);
 		map = tmx_map_loader.load("maps/" + id + ".tmx");
-		map_width  = getMap().getProperties().get("width",  Integer.class) * FrameEngine.TILE;
-		map_height = getMap().getProperties().get("height", Integer.class) * FrameEngine.TILE;
+		mapWidth  = getMap().getProperties().get("width",  Integer.class) * FrameEngine.TILE;
+		mapHeight = getMap().getProperties().get("height", Integer.class) * FrameEngine.TILE;
 		
 		setCollision();
 		setMapSlopes();
@@ -142,6 +143,10 @@ public class Area {
 
 	public void dispose() {
 		map.dispose();
+	}
+
+	public String getID() {
+		return id;
 	}
 
 }

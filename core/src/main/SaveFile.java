@@ -1,6 +1,5 @@
 package main;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
@@ -15,22 +14,48 @@ public class SaveFile {
 	private final HashMap<String, Integer> counters = new HashMap<>();
 	
 	private String moneyKey = "smiles";
-	private int money = 0;
-	
 	private String inventoryKey = "kindnesses";
-	private final ArrayList<String> inventory = new ArrayList<String>();
+	private String mapKey = "travels";
 	
+	private int money = 0;
 	private static final String saveFile = "mrbsv.xml";
-	
-	@SuppressWarnings("unchecked")
+
 	SaveFile(){
 		if (!FrameEngine.SAVE) return;
 		Preferences preferences = Gdx.app.getPreferences(saveFile);
-		for (String key: preferences.get().keySet()){
-			flags.put(key, preferences.getBoolean(key));
-		}
 		money = preferences.getInteger(moneyKey);
-		inventory.addAll((ArrayList<String>) preferences.get().get(inventoryKey));
+		
+		for (String key: preferences.get().keySet()){
+			String value = preferences.get().get(key).toString();
+			if (value.equals("true")){
+				System.out.println("Bool:" + key + " " + value);
+				flags.put(key, true);
+			}
+			else{
+				try{
+					int val = Integer.parseInt(value);
+					System.out.println("Int: " + key + " " + val);
+					counters.put(key, val);
+				}
+				catch(Exception e){
+					// kludgey 
+				}
+			}
+		}
+		
+		if (preferences.get().containsKey(inventoryKey)){
+			String[] items = preferences.getString(inventoryKey).split(",");
+			for (String item: items){
+				if (!item.isEmpty()){
+					FrameEngine.getInventory().addItem(item);
+				}
+			}
+		}
+		
+		if (preferences.get().containsKey(mapKey)){
+			FrameEngine.startAreaName = preferences.getString(mapKey);
+		}
+
 	}
 	
 	/**
@@ -40,11 +65,19 @@ public class SaveFile {
 		if (!FrameEngine.SAVE) return;
 		Preferences preferences = Gdx.app.getPreferences(saveFile);
 		preferences.put(flags);
+		preferences.put(counters);
 		preferences.putInteger(moneyKey, money);
-		preferences.put(new HashMap<String, ArrayList<String>>(){{
-			put(inventoryKey, inventory);
-		}});
+		preferences.putString(mapKey, FrameEngine.getArea().getID());
+		
+		StringBuilder builder = new StringBuilder();
+		for (Object obj: FrameEngine.getInventory().getList()){
+			ItemDescription desc = (ItemDescription) obj;
+			builder.append(desc.id + ",");
+		}
+		preferences.putString(inventoryKey, builder.toString());
+
 		preferences.flush();
+		System.out.println("Saved!");
 	}
 	
 	/**
@@ -64,14 +97,6 @@ public class SaveFile {
 		return false;
 	}
 	
-	public void addItem(String item){
-		inventory.add(item);
-	}
-	
-	public boolean hasItem(String checkItem){
-		return inventory.contains(checkItem);
-	}
-	
 	/**
 	 * If the counter does not exist, creates it and sets it to n.
 	 * If it does, adds the given value.
@@ -88,10 +113,6 @@ public class SaveFile {
 	public int getMoney(){
 		return money;
 	}
-	
-	public ArrayList<String> getInventory(){
-		return inventory;
-	}
 
 	/**
 	 * If counter exists, returns its value.
@@ -100,6 +121,12 @@ public class SaveFile {
 	public int getCounter(String string) {
 		if (!counters.containsKey(string)) return -1;
 		else return counters.get(string);
+	}
+
+	public void wipeSave() {
+		Preferences preferences = Gdx.app.getPreferences(saveFile);
+		preferences.clear();
+		preferences.flush();
 	}
 	
 }

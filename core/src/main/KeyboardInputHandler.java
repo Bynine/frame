@@ -36,6 +36,15 @@ public class KeyboardInputHandler implements InputHandler, InputProcessor {
 		return getInput(Gdx.input.isKeyPressed(KEY_UP), Gdx.input.isKeyPressed(KEY_DOWN));
 	}
 	
+	/**
+	 * Helper for WASD input.
+	 */
+	private float getInput(boolean input_A, boolean input_B){
+		if (input_A) return 1;
+		else if (input_B) return -1;
+		else return 0;
+	}
+	
 	@Override
 	public boolean getPauseJustPressed(){
 		return Gdx.input.isKeyJustPressed(Keys.ENTER);
@@ -71,13 +80,9 @@ public class KeyboardInputHandler implements InputHandler, InputProcessor {
 		return Gdx.input.isKeyJustPressed(Keys.Q);
 	}
 	
-	/**
-	 * Helper for WASD input.
-	 */
-	private float getInput(boolean input_A, boolean input_B){
-		if (input_A) return 1;
-		else if (input_B) return -1;
-		else return 0;
+	@Override
+	public boolean getSaveJustPressed() {
+		return Gdx.input.isKeyJustPressed(Keys.E);
 	}
 
 	@Override

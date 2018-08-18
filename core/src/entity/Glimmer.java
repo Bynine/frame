@@ -22,7 +22,7 @@ public class Glimmer extends Entity {
 	@Override
 	public void updateImage(){
 		if (
-				FrameEngine.getTime() % 70 >= 15 ||
+				FrameEngine.getTime() % 60 >= 15 ||
 				position.dst(FrameEngine.getPlayer().getPosition()) > FrameEngine.TILE * 5 ||
 				FrameEngine.getSaveFile().getFlag(flag)
 				) {

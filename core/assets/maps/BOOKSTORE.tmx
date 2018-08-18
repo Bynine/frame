@@ -119,7 +119,7 @@
 *SHRINE_BOOK
 &quot;In this land of Wabika, there exists a legendary item that represents Hope.
 It has the power to bring civilizations back from despair.
-However, only those who both truly understand this land and truly need it will be able to obtain it.
+However, only those who both truly understand this land and truly need this item will be able to obtain it.
 It lies dormant within the Shrine, waiting for the worthy one who would claim it for their own.&quot;</property>
     <property name="TYPE" value="DESC"/>
    </properties>
@@ -136,7 +136,7 @@ You feel your stomach growl.</property>
    <properties>
     <property name="TEXT">You open a fancy looking book and take a look inside.
 &quot;Wabika is ruled over by a guardian deity.
-They are swift to remove dark-hearted intruders into our land...
+They are swift to remove dark-hearted intruders from our land...
 but just as swift to welcome travellers whose intentions are pure.
 Take note, those who enter - your actions are being judged.&quot;</property>
     <property name="TYPE" value="DESC"/>

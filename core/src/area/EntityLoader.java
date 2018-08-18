@@ -15,8 +15,9 @@ import entity.DialogueDescription;
 import entity.Door;
 import entity.Emitter;
 import entity.Entity;
+import entity.Finish;
 import entity.Glimmer;
-import entity.HiddenItem;
+import entity.Secret;
 import entity.Item;
 import entity.NPC;
 import entity.Portal;
@@ -89,7 +90,7 @@ public class EntityLoader {
 			} break;
 			case "secret": {
 				String id = properties.get("ID", String.class);
-				entities.add(new HiddenItem(x, y, id));
+				entities.add(new Secret(x, y, id));
 			} break;
 			case "audio": {
 				String audio = properties.get("AUDIO", String.class);
@@ -115,6 +116,9 @@ public class EntityLoader {
 			case "glimmer":{
 				String flag = properties.get("FLAG", String.class);
 				entities.add(new Glimmer(x, y, flag));
+			} break;
+			case "finish":{
+				entities.add(new Finish(x, y, width, height));
 			} break;
 			default: {
 				FrameEngine.logger.log( Level.WARNING, 

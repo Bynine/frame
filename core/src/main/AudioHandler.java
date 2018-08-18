@@ -23,7 +23,7 @@ public class AudioHandler {
 	private static HashSet<AudioSource> audioSources = new HashSet<>();
 	private static Music currAudio = null;
 	private static String currAudioName = "";
-	public static float VOLUME = 1.0f;
+	public static float VOLUME = 0.4f;
 
 	/**
 	 * Any start-up calls.

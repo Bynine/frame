@@ -13,17 +13,14 @@ public class TSVReader {
 	public static final String split = "\t";
 	public static final String long_split = " ";
 	public static final String short_split = "&";
-	public static final int valid_species = 4;
 
 	public static final String 
-	ACTION_URL = "data/actions - Sheet1.tsv",
-	ENCOUNTERS_URL = "data/encounters - Sheet1.tsv",
 	MAP_URL = "data/maps - Sheet1.tsv",
 	NPC_URL = "data/npcs - Sheet1.tsv",
 	ITEM_URL = "data/items - Sheet1.tsv"
 	;
 
-	String data = null;
+	private String data = null;
 
 	/**
 	 * Finds the id from the csv list and returns the relevant data.

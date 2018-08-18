@@ -1,20 +1,22 @@
 package debug;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import com.badlogic.gdx.math.MathUtils;
 
 import main.TSVReader;
 import main.FrameEngine;
-import main.Timer;
+import main.AbstractMenu;
 
 /**
  * Used to access various content for debugging purposes.
  */
-public class DebugMenu {
+public class DebugMenu extends AbstractMenu{
 
 	private final ArrayList<String> mapIDs = new ArrayList<>();
+	public static final int split = 8;
 	private static final int HEADER_ROWS = 1;
-	private int cursor = 0;
-	private final Timer cursorHalt = new Timer(5);
 
 	/**
 	 * Loads all map names but the headers.
@@ -27,40 +29,21 @@ public class DebugMenu {
 			ii++;
 		}
 	}
-	
-	/**
-	 * Called every frame while in Debug state.
-	 */
-	public void update(){
-		acceptInputs();
-		cursorHalt.countUp();
-	}
 
-	/**
-	 * Updates based on input handler.
-	 */
-	private void acceptInputs(){
-		if (FrameEngine.getInputHandler().getActionJustPressed()){
-			FrameEngine.initiateAreaChange(getSelectedMapID());
-		}
-		if (cursorHalt.timeUp()){
-			moveCursor((int)FrameEngine.getInputHandler().getYInput());
-			cursorHalt.reset();
-		}
-	}
-	
-	private void moveCursor(int i){
-		cursor += i;
-		if (cursor < 0) cursor = 0;
-		else if (cursor >= mapIDs.size()) cursor = mapIDs.size() - 1;
-	}
-
-	public ArrayList<String> getMapIDs(){
+	@Override
+	public List<String> getList(){
 		return mapIDs;
 	}
+	
+	@Override
+	protected void moveCursorHorizontal(int i){
+		super.moveCursorHorizontal(i);
+		cursor = MathUtils.clamp(cursor + (i*split), 0, getList().size() - 1);
+	}
 
-	public String getSelectedMapID(){
-		return mapIDs.get(cursor);
+	@Override
+	protected void selectItem() {
+		FrameEngine.initiateAreaChange((String)getSelectedItem());
 	}
 
 }

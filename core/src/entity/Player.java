@@ -19,7 +19,7 @@ import main.Timer;
 
 public class Player extends Entity{
 
-	private static final int stepTime = 14;
+	private static final int stepTime = 15;
 	private final Timer 
 	invincibility = new Timer(60),
 	stepTimer = new Timer(stepTime * 2);
@@ -27,7 +27,7 @@ public class Player extends Entity{
 	private static final ArrayList<Animation<TextureRegion>> walk = 
 			Animator.createAnimation(stepTime, "sprites/player/walk.png", 4, 3);
 	private static final ArrayList<Animation<TextureRegion>> idle = 
-			Animator.createAnimation(35, "sprites/player/idle.png", 2, 3);
+			Animator.createAnimation(30, "sprites/player/idle.png", 2, 3);
 	public static final TextureRegion ripple = 
 			new TextureRegion(new Texture(Gdx.files.internal("sprites/graphics/ripple.png")));
 	

@@ -64,7 +64,7 @@ public class DialogueTree{
 				for (String flag: flagCheck.split(",")){
 					if (flag.startsWith("ITEM_")){
 						String itemID = flag.split("_")[1];
-						if (!FrameEngine.getSaveFile().hasItem(itemID)){
+						if (!FrameEngine.getInventory().hasItem(itemID)){
 							check = false;
 						}
 					}
