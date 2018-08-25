@@ -8,8 +8,12 @@ import java.util.Iterator;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 
 import entity.AudioLocation;
+import entity.Entity;
+import timer.TimerDuration;
 
 /**
  * Handles all audio (Music and Sound).
@@ -69,23 +73,19 @@ public class AudioHandler {
 		}
 	}
 
-//	/**
-//	 * Plays the sound effect specified by the path and puts it in sound_disposal for later removal.
-//	 */
-//	public static void playTemporarySound(String path){
-//		Sound sound = Gdx.audio.newSound(Gdx.files.internal(path));
-//		final int time_before_dispose_sound = 1000;
-//		soundDisposal.put(new TimerDuration(time_before_dispose_sound), sound);
-//		sound.play(VOLUME);
-//	}
-
 	/**
 	 * Plays a preloaded sound. The calling class needs to dispose the sound of its own accord.
 	 */
-	public static void playSound(Sound sound){
+	public static long playSound(Sound sound){
 		final float pitchDisparity = 20.0f;
 		float pitch = (1.0f - 0.5f/pitchDisparity) + (float) (Math.random()/pitchDisparity);
-		sound.play(VOLUME, pitch, 0);
+		return sound.play(VOLUME, pitch, 0);
+	}
+	
+
+	public static void playPositionalSound(Entity owner, Sound sound) {
+		long id = playSound(sound);
+		sound.setVolume(id, VOLUME * getVolume(owner.getPosition()));
 	}
 	
 	/**
@@ -118,6 +118,14 @@ public class AudioHandler {
 		}
 		audioSources.clear();
 	}
+	
+	/**
+	 * Calculates volume as distance between position and player.
+	 */
+	private static float getVolume(Vector2 position){
+		float volume = 1.1f - (position.dst(FrameEngine.getPlayer().getPosition())/(FrameEngine.TILE*15.2f));
+		return MathUtils.clamp(volume, 0, 1.0f);
+	}
 
 	/**
 	 * A collection of AudioLocations. This class determines the closest one and uses that
@@ -137,7 +145,7 @@ public class AudioHandler {
 		float getVolume(){
 			float volume = 0.0f;
 			for (AudioLocation sourcelet: sourcelets){
-				float sourceletVolume = sourcelet.getVolume();
+				float sourceletVolume = AudioHandler.getVolume(sourcelet.getPosition());
 				if (sourceletVolume > volume) volume = sourceletVolume;
 			}
 			return volume;

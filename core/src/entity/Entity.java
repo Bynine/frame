@@ -10,17 +10,17 @@ import com.badlogic.gdx.math.Vector2;
 
 import main.FrameEngine;
 import main.GraphicsHandler;
-import main.Timer;
+import timer.Timer;
 
 public abstract class Entity {
 
 	protected final Vector2 position = new Vector2();
 	protected final Vector2 velocity = new Vector2();
-	protected final TextureRegion sample = new TextureRegion(new Texture("sprites/dummy.png"));
+	protected final TextureRegion sample = new TextureRegion(new Texture("sprites/npcs/dummy.png"));
 	protected final Rectangle hitbox = new Rectangle(0, 0, 30, 20);
 	protected final ArrayList<Timer> timerList = new ArrayList<Timer>();
 	protected float acceleration = 0.8f;
-	protected float corner_acceleration = 0.5f;
+	protected float corner_acceleration = 0.35f;
 	protected float friction = 0.74f;
 	protected float contact_friction = 0.92f;
 
@@ -41,7 +41,7 @@ public abstract class Entity {
 	protected Layer layer = Layer.NORMAL;
 	protected float zPosition = 0;
 	protected TextureRegion image = sample;
-	protected TextureRegion shadow = new TextureRegion(new Texture("sprites/shadow.png"));
+	protected TextureRegion shadow = new TextureRegion(new Texture("sprites/npcs/shadow.png"));
 
 	public Entity(float x, float y){
 		position.set(x, y);
@@ -165,8 +165,8 @@ public abstract class Entity {
 		if (is_x) temp2.x += dir * distance_check;
 		else temp2.y += dir * distance_check;
 		if (!temp2.overlaps(collider)){
-			if (is_x) velocity.x += speed;
-			else velocity.y += speed;
+			if (is_x) velocity.x += speed/FrameEngine.getGameSpeed();
+			else velocity.y += speed/FrameEngine.getGameSpeed();
 		}
 	}
 	

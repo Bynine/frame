@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="55" height="50" tilewidth="32" tileheight="32" nextobjectid="678">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="55" height="50" tilewidth="32" tileheight="32" nextobjectid="679">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/trees.tsx"/>
  <tileset firstgid="130" source="tilesets/forest.tsx"/>
@@ -102,7 +102,7 @@
 0,0,0,42,0,31,31,31,0,0,0,0,24,25,0,0,0,0,0,0,0,0,31,31,0,31,31,31,31,31,31,42,0,0,0,0,0,0,206,207,0,0,0,0,0,0,0,0,0,0,0,13,14,0,0,
 0,0,0,0,0,31,31,31,31,0,0,0,0,0,0,0,0,0,0,0,0,0,31,0,31,31,31,31,31,31,75,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,25,31,0,
 0,0,0,0,0,75,31,53,75,0,0,0,0,0,0,0,0,0,0,0,0,0,31,31,31,31,31,79,80,31,31,0,0,0,0,0,0,0,0,0,338,0,0,0,0,0,0,0,0,0,0,338,0,31,0,
-0,0,0,0,0,42,31,31,31,0,0,0,0,0,0,0,0,0,24,25,0,0,31,31,31,0,31,79,69,31,42,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,189,0,0,42,0,
+0,0,0,0,0,42,31,31,75,0,0,0,0,0,0,0,0,0,0,0,0,0,31,31,31,0,31,79,69,31,42,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,189,0,0,42,0,
 0,0,0,0,0,0,101,102,103,0,0,0,0,0,0,0,0,0,0,0,0,0,31,31,31,0,31,68,80,42,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,205,0,0,0,0,
 0,0,0,0,0,0,0,0,205,0,0,42,0,0,0,0,0,0,0,0,0,53,31,31,31,0,31,90,91,0,0,0,0,0,0,0,0,0,0,42,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,42,31,75,87,0,42,0,0,0,0,0,0,0,0,0,0,0,338,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -155,7 +155,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,13,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,78,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,78,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,78,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,14,0,0,0,0,0,0,0,0,0,0,0,0,78,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,78,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,31,0,0,0,0,0,0,0,0,0,0,66,0,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,189,0,0,31,0,0,0,0,0,0,0,0,0,31,0,0,0,0,0,0,0,0,0,0,66,0,0,0,0,0,0,31,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,31,0,0,0,0,0,0,0,0,0,0,66,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -303,11 +303,10 @@
   <object id="657" x="672" y="1440" width="32" height="32"/>
   <object id="658" x="704" y="1216" width="64" height="288"/>
   <object id="662" x="384" y="1248" width="64" height="32"/>
-  <object id="663" x="576" y="1344" width="64" height="32"/>
   <object id="665" x="864" y="832" width="64" height="32"/>
  </objectgroup>
  <objectgroup color="#f99a00" name="ENTITIES" opacity="0.76">
-  <object id="544" name="portal" gid="6" x="512" y="1600" width="96" height="32">
+  <object id="544" name="portal" gid="6" x="512" y="1616" width="96" height="32">
    <properties>
     <property name="DEST" value="FOREST,20,7"/>
     <property name="TYPE" value="PORTAL"/>
@@ -319,20 +318,12 @@
     <property name="TYPE" value="PORTAL"/>
    </properties>
   </object>
-  <object id="608" name="western" gid="1" x="1216" y="960" width="32" height="32">
-   <properties>
-    <property name="DIALOGUE" value="western"/>
-    <property name="ID" value="WESTERN"/>
-    <property name="IMAGE" value="western"/>
-    <property name="TYPE" value="NPC"/>
-   </properties>
-  </object>
   <object id="609" name="bird" gid="4" x="1280" y="1088" width="32" height="32">
    <properties>
     <property name="TYPE" value="BIRD"/>
    </properties>
   </object>
-  <object id="610" name="bird" gid="4" x="1632" y="1440" width="32" height="32">
+  <object id="610" name="bird" gid="4" x="1624" y="1440" width="32" height="32">
    <properties>
     <property name="TYPE" value="BIRD"/>
    </properties>
@@ -352,7 +343,7 @@
   </object>
   <object id="660" name="portal" gid="6" x="544" y="816" width="32" height="32">
    <properties>
-    <property name="DEST" value="EMPTY,12,13"/>
+    <property name="DEST" value="SHRINE,12,11"/>
     <property name="TYPE" value="PORTAL"/>
    </properties>
   </object>
@@ -439,6 +430,12 @@
     <property name="AUDIO" value="river"/>
     <property name="ID" value="RIVER"/>
     <property name="TYPE" value="AUDIO"/>
+   </properties>
+  </object>
+  <object id="678" name="freb" gid="1" x="1344" y="936" width="24" height="16">
+   <properties>
+    <property name="FLAG" value="FREB_SHELL_3"/>
+    <property name="TYPE" value="FREB"/>
    </properties>
   </object>
  </objectgroup>

@@ -9,12 +9,12 @@ import main.FrameEngine;
 
 public class Item extends InteractableEntity {
 	
-	protected final String name;
-	protected final String id;
+	protected final String name, id, flag;
 
-	public Item(float x, float y, String id) {
+	public Item(float x, float y, String id, String flag) {
 		super(x, y, id);
 		this.id = id;
+		this.flag = flag;
 		hitbox.setSize(24, 16);
 		String[] data = new TSVReader().loadDataByID(id, TSVReader.ITEM_URL);
 		image = new TextureRegion(new Texture("sprites/items/" + data[0].toLowerCase() + ".png"));
@@ -24,8 +24,9 @@ public class Item extends InteractableEntity {
 	@Override
 	public void interact() {
 		setDelete();
-		FrameEngine.putTextbox(new Textbox("You picked up " + getIndefinite(name) + " " + name + "!"));
+		FrameEngine.putTextbox(new Textbox("You obtained " + getIndefinite(name) + " " + name + "!"));
 		FrameEngine.getInventory().addItem(id);
+		FrameEngine.getSaveFile().setFlag(flag, true);
 	}
 	
 	@Override

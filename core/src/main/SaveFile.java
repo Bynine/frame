@@ -19,8 +19,11 @@ public class SaveFile {
 	
 	private int money = 0;
 	private static final String saveFile = "mrbsv.xml";
+	
+	private boolean verbose = false;
 
-	SaveFile(){
+	SaveFile(boolean verbose){
+		this.verbose = verbose;
 		if (!FrameEngine.SAVE) return;
 		Preferences preferences = Gdx.app.getPreferences(saveFile);
 		money = preferences.getInteger(moneyKey);
@@ -28,13 +31,13 @@ public class SaveFile {
 		for (String key: preferences.get().keySet()){
 			String value = preferences.get().get(key).toString();
 			if (value.equals("true")){
-				System.out.println("Bool:" + key + " " + value);
+				if (verbose) System.out.println("Bool:" + key + " " + value);
 				flags.put(key, true);
 			}
 			else{
 				try{
 					int val = Integer.parseInt(value);
-					System.out.println("Int: " + key + " " + val);
+					if (verbose) System.out.println("Int: " + key + " " + val);
 					counters.put(key, val);
 				}
 				catch(Exception e){
@@ -47,12 +50,14 @@ public class SaveFile {
 			String[] items = preferences.getString(inventoryKey).split(",");
 			for (String item: items){
 				if (!item.isEmpty()){
+					if (verbose) System.out.println("Added item: " + item);
 					FrameEngine.getInventory().addItem(item);
 				}
 			}
 		}
 		
 		if (preferences.get().containsKey(mapKey)){
+			if (verbose) System.out.println("Now arriving at: " + mapKey);
 			FrameEngine.startAreaName = preferences.getString(mapKey);
 		}
 
@@ -77,7 +82,7 @@ public class SaveFile {
 		preferences.putString(inventoryKey, builder.toString());
 
 		preferences.flush();
-		System.out.println("Saved!");
+		if (verbose) System.out.println("Saved!");
 	}
 	
 	/**
@@ -85,6 +90,7 @@ public class SaveFile {
 	 */
 	public void setFlag(String flag, boolean bool){
 		flags.put(flag, bool);
+		if (verbose) System.out.println(flag + " set to " + bool);
 	}
 	
 	/**

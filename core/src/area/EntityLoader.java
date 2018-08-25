@@ -16,6 +16,8 @@ import entity.Door;
 import entity.Emitter;
 import entity.Entity;
 import entity.Finish;
+import entity.Freb;
+import entity.FrebKing;
 import entity.Glimmer;
 import entity.Secret;
 import entity.Item;
@@ -58,23 +60,32 @@ public class EntityLoader {
 				entities.add(new Door(x, y, destination[0], x_dest, y_dest));
 			} break;
 			case "npc": {
-				String dialoguePath = properties.get("DIALOGUE", String.class);
+				String flag = properties.containsKey("FLAG") ? properties.get("FLAG", String.class) : "";
+				if (flag != "" && !FrameEngine.getSaveFile().getFlag(flag)){
+					break;
+				}
 				String id = properties.get("ID", String.class);
-				int interactXDisp = 0;
-				int interactYDisp = 0;
-				if (properties.containsKey("INTERACTXDISP")) {
-					interactXDisp = Integer.parseInt(properties.get("INTERACTXDISP", String.class));
+				if (id.equals("FREBKING")){
+					entities.add(new FrebKing(x, y, width, height));
 				}
-				if (properties.containsKey("INTERACTYDISP")) {
-					interactYDisp = Integer.parseInt(properties.get("INTERACTYDISP", String.class));
+				else{
+					String dialoguePath = properties.get("DIALOGUE", String.class);
+					int interactXDisp = 0;
+					int interactYDisp = 0;
+					if (properties.containsKey("INTERACTXDISP")) {
+						interactXDisp = Integer.parseInt(properties.get("INTERACTXDISP", String.class));
+					}
+					if (properties.containsKey("INTERACTYDISP")) {
+						interactYDisp = Integer.parseInt(properties.get("INTERACTYDISP", String.class));
+					}
+					String imagePath = properties.get("IMAGE", String.class);
+
+					entities.add(new NPC(
+							x, y, 
+							interactXDisp, interactYDisp,
+							width, height,
+							id, imagePath, dialoguePath));
 				}
-				String imagePath = properties.get("IMAGE", String.class);
-				
-				entities.add(new NPC(
-						x, y, 
-						interactXDisp, interactYDisp,
-						width, height,
-						id, imagePath, dialoguePath));
 			} break;
 			case "desc": {
 				String text = properties.get("TEXT", String.class);
@@ -85,12 +96,24 @@ public class EntityLoader {
 				entities.add(new DialogueDescription(x, y, width, height, dialogue));
 			} break;
 			case "item": {
+				String flag = properties.get("FLAG", String.class);
+				if (null == flag){
+					FrameEngine.logger.log( Level.WARNING, 
+							"Couldn't find flag of " + entity.getName() + "");
+				}
+				if (FrameEngine.getSaveFile().getFlag(flag)) break;
 				String id = properties.get("ID", String.class);
-				entities.add(new Item(x, y, id));
+				entities.add(new Item(x, y, id, flag));
 			} break;
 			case "secret": {
+				String flag = properties.get("FLAG", String.class);
+				if (null == flag){
+					FrameEngine.logger.log( Level.WARNING, 
+							"Couldn't find flag of " + entity.getName() + "");
+				}
+				if (FrameEngine.getSaveFile().getFlag(flag)) break;
 				String id = properties.get("ID", String.class);
-				entities.add(new Secret(x, y, id));
+				entities.add(new Secret(x, y, id, flag));
 			} break;
 			case "audio": {
 				String audio = properties.get("AUDIO", String.class);
@@ -105,6 +128,10 @@ public class EntityLoader {
 			} break;
 			case "bird":{
 				entities.add(new Bird(x, y));
+			} break;
+			case "freb":{
+				String flag = properties.get("FLAG", String.class);
+				entities.add(new Freb(x, y, width, height, flag));
 			} break;
 			case "statue":{
 				String cc = properties.get("CORRECTCOLOR", String.class);
@@ -128,5 +155,5 @@ public class EntityLoader {
 		}
 		return entities;
 	}
-	
+
 }

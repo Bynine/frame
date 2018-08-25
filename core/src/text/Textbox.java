@@ -7,7 +7,8 @@ import com.badlogic.gdx.audio.Sound;
 
 import entity.NPC;
 import main.AudioHandler;
-import main.Timer;
+import main.FrameEngine;
+import timer.Timer;
 
 public class Textbox {
 
@@ -15,7 +16,7 @@ public class Textbox {
 	private int textPos = 0;
 	private final ArrayList<Object> characters = new ArrayList<>();
 	private Sound text_sound;
-	private final NPC speaker;
+	private NPC speaker;
 	/**
 	 * Whether to animate player talking.
 	 */
@@ -100,6 +101,14 @@ public class Textbox {
 		if (command.getID().startsWith("SPEED")){
 			String[] speedData = command.getID().split("=");
 			TEXT_SPEED = Float.parseFloat(speedData[1]);
+		}
+		else if (command.getID().startsWith("GIVE_")){
+			String[] itemData = command.getID().split("_");
+			FrameEngine.getInventory().addItem(itemData[1]);
+		}
+		else if (command.getID().equals("NOSPEAKER")){
+			speaker = null;
+			text_sound = Gdx.audio.newSound(Gdx.files.internal("sfx/speech/blip.wav"));
 		}
 		else{
 			switch(command.getID()){

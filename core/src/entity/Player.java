@@ -15,7 +15,7 @@ import com.badlogic.gdx.math.Vector2;
 import area.Area.Terrain;
 import main.AudioHandler;
 import main.FrameEngine;
-import main.Timer;
+import timer.Timer;
 
 public class Player extends Entity{
 

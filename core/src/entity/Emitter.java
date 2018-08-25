@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import main.FrameEngine;
-import main.TimerDuration;
+import timer.TimerDuration;
 
 /**
  * Creates designated graphic at regular intervals.

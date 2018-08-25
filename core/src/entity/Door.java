@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 
+import main.AudioHandler;
 import main.FrameEngine;
 
 public class Door extends InteractableEntity {
@@ -24,7 +25,7 @@ public class Door extends InteractableEntity {
 	}
 	
 	public void interact() {
-		open.play();
+		AudioHandler.playSound(open);
 		FrameEngine.initiateAreaChange(destArea, destLocation);
 	}
 

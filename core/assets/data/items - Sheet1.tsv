@@ -1,13 +1,16 @@
 KEEPSAKE	satchel	NONE	For holding something special.
-ACORN	acorn	NATURAL	this shouldn't exist :(
-APPLE	apple	NATURAL,SWEET	Pleasantly juicy.	
-PUMPKIN	pumpkin	NATURAL	???
-MUSHROOM	mushroom	NATURAL	???
-SHOVEL	shovel	NONE	???
-BAIT	bait	NONE	???
-TREASURE1	Freb Crown	NONE	???
+APPLE	apple	FOOD,SWEET	Pleasantly juicy.	
+PUMPKIN	pumpkin	FOOD	Great for pies
+SHELL1	nice shell	SHELL	The red color is pretty
+SHELL2	cool shell	SHELL	The yellow color is comfortable
+SHELL3	rad shell	SHELL	The blue color is suave
+MUSHROOM	mushroom	NATURAL	Pleasantly shaped toadstool
+SHOVEL	shovel	NONE	Dig up holes
+BAIT	bait	NONE	Attracts fish
+TREASURE1	Ultra Shell	NONE	???
 TREASURE2	Mushroom of Health	NONE	???
 TREASURE3	Shining Scale	NONE	???
 TREASURE4	Kindly Teacup	NONE	???
 TREASURE5	Gossamer Silk	NONE	???
 TREASURE6	Ancient Horn	NONE	???
+ACORN	REMOVEACORN	REMOVEACORN	REMOVEACORN

@@ -10,7 +10,7 @@ import main.FrameEngine;
 public class Glimmer extends Entity {
 
 	private final ArrayList<Animation<TextureRegion>> anim = 
-			Animator.createAnimation(5, "sprites/secret.png", 2, 1);
+			Animator.createAnimation(5, "sprites/items/secret.png", 2, 1);
 	private final String flag;
 
 	public Glimmer(float x, float y, String flag) {

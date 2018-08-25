@@ -2,11 +2,14 @@ package text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
 import entity.NPC;
 import main.FrameEngine;
+import main.ItemDescription;
 
 /**
  * Build from a .txt file. Represents a conversation with an NPC.
@@ -16,10 +19,19 @@ public class DialogueTree{
 	private Branch activeBranch;
 	private ArrayList<Branch> branches = new ArrayList<>();
 	private static final String DEFAULT = "default";
+	private NPC speaker;
+	private boolean terminated;
 
-	public DialogueTree(NPC npc, String path){
+	@SafeVarargs
+	public DialogueTree(NPC npc, String path, Map<String, String>... vars){
+		this.speaker = npc;
 		FileHandle handle = Gdx.files.internal("dialogue/" + path + ".txt");
 		String dialogue =  "DEFAULT\n" + handle.readString();
+		for (Map<String, String> map: vars){
+			for (String key: map.keySet()){
+				dialogue = dialogue.replace(key, map.get(key));
+			}
+		}
 		String[] tree = findTree(dialogue);
 		branches.add(new Branch(DEFAULT));
 		createBranches(npc, tree);
@@ -37,7 +49,7 @@ public class DialogueTree{
 		branches.add(branch);
 		switchBranch(branches.get(0));
 	}
-	
+
 	/**
 	 * Tree without a corresponding NPC.
 	 */
@@ -117,25 +129,66 @@ public class DialogueTree{
 	}
 
 	/**
-	 * Dialogue should end now.
+	 * Dialogue will end after action is pressed again.
 	 */
 	public boolean finished(){
 		return activeBranch.isFinished();
 	}
 
 	/**
+	 * Dialogue will end immediately.
+	 */
+	public boolean terminated() {
+		return terminated;
+	}
+
+	/**
 	 * Chooses a branch based on the answer given.
 	 */
 	public void handleAnswer(String answer){
+		if (activeBranch.inventoryRequestMode){
+			if (answer.equals("YES")){
+				activeBranch.doInventoryRequest();
+			}
+			else{
+				terminated = true;
+			}
+		}
+		else{
+			boolean found = false;
+			for (Branch branch: branches){
+				if (branch.matchesPointer(answer)) {
+					switchBranch(branch);
+					found = true;
+				}
+			}
+			if (!found){
+				FrameEngine.logger.warning("I can't find branch \"" + answer + "\"");
+			}
+		}
+	}
+
+	public void handleItemChoice(ItemDescription desc){
 		boolean found = false;
 		for (Branch branch: branches){
-			if (branch.matchesPointer(answer)) {
+			if (branch.matchesPointer(desc.id) || branch.matchesAttributes(desc.attributes)) {
+				if (speaker != null){
+					speaker.receiveMessage(desc.id);
+				}
 				switchBranch(branch);
 				found = true;
 			}
 		}
 		if (!found){
-			FrameEngine.logger.warning("I can't find branch \"" + answer + "\"");
+			for (Branch branch: branches){
+				if (branch.matchesPointer("OTHER")) {
+					switchBranch(branch);
+					found = true;
+				}
+			}
+		}
+		if (!found){
+			FrameEngine.logger.warning("This tree is incorrectly configured for items");
 		}
 	}
 

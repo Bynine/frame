@@ -4,9 +4,9 @@ SHOP	?	crackling	TRUE	bright	12&10
 SPRING	?	forest	FALSE	bright	9&33
 BOOKSTORE	?	inside	TRUE	dim	12&10
 HOLE	?	inside	TRUE	dim	8&8
-SHRINE	?	nothing	FALSE	soft	8&8
-BEACH	?	beach	FALSE	soft	58&20
-SHELL	?	cove	TRUE	soft	8&8
+SHRINE	?	nothing	FALSE	twilit	8&8
+BEACH	?	beach	FALSE	soft	18&18
+SHELL	?	cove	TRUE	pretty	12&9
 ORCHARD	?	night	FALSE	twilit	35&25
 CAFE	?	nightinside	TRUE	bright	8&8
 WITCH	?	nightinside	TRUE	bright	8&8

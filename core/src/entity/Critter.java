@@ -2,7 +2,7 @@ package entity;
 
 import com.badlogic.gdx.math.Rectangle;
 
-import main.Timer;
+import timer.Timer;
 
 /**
  * Small animal that wanders around world.

@@ -1,4 +1,6 @@
-package main;
+package timer;
+
+import main.FrameEngine;
 
 public class Timer {
 

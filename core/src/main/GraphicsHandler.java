@@ -19,7 +19,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-import debug.DebugMenu;
 import entity.Critter;
 import entity.Emitter;
 import entity.Entity;
@@ -28,14 +27,17 @@ import entity.NPC;
 import entity.Player;
 import entity.Emitter.Graphic;
 import text.Button;
-import text.ButtonContainer;
 import text.Textbox;
+import timer.Timer;
 
 /**
  * Handles drawing overworld.
  */
 public class GraphicsHandler {
-	public static final Color DEFAULT_COLOR = new Color(1, 1, 1, 1);
+	public static final Color 
+	DEFAULT_COLOR = new Color(1, 1, 1, 1),
+	SELECT_COLOR = new Color(0.5f, 0.6f, 0.7f, 1.0f),
+	WIPE_COLOR = new Color(0.05f, 0.07f, 0.12f, 1);
 
 	protected SpriteBatch batch;
 	protected final OrthographicCamera worldCam = new OrthographicCamera();
@@ -45,7 +47,6 @@ public class GraphicsHandler {
 	protected ShapeRenderer shapeRenderer;
 	public static final float ZOOM = 1.0f/2.0f;
 	private final EntityDepthSorter sorter = new EntityDepthSorter();
-	protected Color wipeColor = new Color(0.05f, 0.07f, 0.12f, 1);
 	private static final TextureRegion 
 	interactBubble = new TextureRegion(new Texture("sprites/player/interact.png")),
 	talkingBubble = new TextureRegion(new Texture("sprites/player/talk.png")),
@@ -54,6 +55,7 @@ public class GraphicsHandler {
 	textboxTop = new TextureRegion(new Texture("sprites/gui/textbox_top.png")),
 	textboxSide = new TextureRegion(new Texture("sprites/gui/textbox_side.png")),
 	textboxCenter = new TextureRegion(new Texture("sprites/gui/textbox_center.png"));
+	Timer selectTimer = new Timer(10);
 
 	private static TextureRegion overlay = new TextureRegion(new Texture("sprites/gui/watercolor_dim.png"));
 	private static TextureRegion water = new TextureRegion(new Texture("sprites/graphics/water.png"));
@@ -80,6 +82,10 @@ public class GraphicsHandler {
 		generator.dispose();
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setAutoShapeType(true);
+	}
+	
+	void update(){
+		selectTimer.countUp();
 	}
 
 	/**
@@ -128,14 +134,11 @@ public class GraphicsHandler {
 				&& FrameEngine.getCurrentTextbox().playerTalking()){
 			drawTalkingBubble();
 		}
-		
+
 		drawOverlay();
-		
+
 		if (null != FrameEngine.getCurrentTextbox()) {
 			drawDefaultTextbox(FrameEngine.getCurrentTextbox());
-		}
-		if (null != FrameEngine.getButtonContainer()){
-			drawButtons(FrameEngine.getButtonContainer());
 		}
 
 		if (FrameEngine.DRAW){
@@ -178,7 +181,7 @@ public class GraphicsHandler {
 				);
 		batch.end();
 	}
-	
+
 	/**
 	 * Draws the bubble above the player's head that shows they can interact with something.
 	 */
@@ -317,17 +320,53 @@ public class GraphicsHandler {
 	 * Draws the pause screen.
 	 */
 	void drawPause() {
+		drawItems();
+	}
+
+	/**
+	 * Draws the player's inventory in a bunch of nice little boxes.
+	 */
+	void drawItems(){
 		batch.setProjectionMatrix(centerCam.combined);
-		batch.begin();
 		int ii = 0;
-		for (ItemDescription desc: FrameEngine.getInventory().getDescriptions()){
+		for (Button button: FrameEngine.getInventory().getList()){
+			if (button == FrameEngine.getInventory().getActiveButton()){
+				setSelectColor();
+			}
+			final int dim = 2;
 			float x = FrameEngine.TILE/2;
-			float y = Gdx.graphics.getHeight()*((3.0f/4.0f)*ZOOM) - (FrameEngine.TILE * ii);
-			batch.draw(desc.icon, x, y);
+			float y = Gdx.graphics.getHeight()*((3.0f/4.0f)*ZOOM) - (FrameEngine.TILE * ii * dim);
+			ItemDescription desc = (ItemDescription)button.getOutput();
+			drawTextboxTiles((int)x, (int)y, dim, dim, 0);
+			batch.begin();
+			batch.draw(
+					desc.icon, 
+					x + FrameEngine.TILE - desc.icon.getRegionWidth()/2, 
+					y + FrameEngine.TILE - desc.icon.getRegionHeight()/2
+					);
+			batch.end();
 			ii++;
 		}
-		font.draw(batch, FrameEngine.getInventory().getSelectedItem().toString(), 200, 200);
-		batch.end();
+		if (null != FrameEngine.getInventory().getActiveButton()){
+			ItemDescription desc = ((ItemDescription)FrameEngine.getInventory().getActiveButton().getOutput());
+			final int width = 8;
+			drawText(desc.name, 
+					new Vector2(
+							Gdx.graphics.getWidth()/(2/ZOOM), 
+							Gdx.graphics.getHeight()/(2/ZOOM) + FrameEngine.TILE * 2
+							),
+					new Vector2(width, 2),
+					true
+					);
+			drawText(desc.description, 
+					new Vector2(
+							Gdx.graphics.getWidth()/(2/ZOOM), 
+							Gdx.graphics.getHeight()/(2/ZOOM) - FrameEngine.TILE
+							),
+					new Vector2(width, 3),
+					false
+					);
+		}
 	}
 
 	/**
@@ -364,13 +403,22 @@ public class GraphicsHandler {
 		worldCam.update();
 	}
 
+	protected void drawText(String text, Vector2 position, Vector2 size, boolean center){
+		drawText(text, text, position, size, center, false);
+	}
+
 	/**
 	 * Draws text in textbox at given position and size.
 	 */
-	protected void drawText(String text, String fullText, Vector2 position, Vector2 size, boolean center){
+	protected void drawText(String text, String fullText, 
+			Vector2 position, Vector2 size, boolean center, boolean selected){
 		batch.setColor(DEFAULT_COLOR);
 		batch.setProjectionMatrix(centerCam.combined);
+		if (selected) {
+			setSelectColor();
+		}
 		drawTextboxTiles((int)position.x, (int)position.y, (int)size.x, (int)size.y, 0);
+		batch.setColor(DEFAULT_COLOR);
 		batch.begin();
 		GlyphLayout glyph = new GlyphLayout(font, text);
 		String spacedText = getSpacedText(((size.x - 2) * FrameEngine.TILE), text, fullText);
@@ -390,7 +438,7 @@ public class GraphicsHandler {
 		}
 		batch.end();
 	}
-	
+
 	/**
 	 * Creates text that won't go out of the textbox.
 	 */
@@ -426,6 +474,7 @@ public class GraphicsHandler {
 				textbox.getAllText(),
 				new Vector2(FrameEngine.TILE/2, FrameEngine.TILE/2),
 				new Vector2(x_tiles, y_tiles),
+				false,
 				false
 				);
 	}
@@ -446,7 +495,7 @@ public class GraphicsHandler {
 		batch.end();
 		drawTextOverlay(position_x, position_y, x_tiles, y_tiles, center);
 	}
-	
+
 	/**
 	 * Draws texture over textbox.
 	 */
@@ -455,7 +504,7 @@ public class GraphicsHandler {
 		batch.draw(textboxOverlay, position_x, position_y, x_tiles * FrameEngine.TILE, y_tiles * FrameEngine.TILE);
 		endOverlay();
 	}
-	
+
 	/**
 	 * Prepares batch for drawing an overlay.
 	 */
@@ -464,7 +513,7 @@ public class GraphicsHandler {
 		batch.setColor(1.0f, 1.0f, 1.0f, 0.25f);
 		batch.begin();
 	}
-	
+
 	/**
 	 * Flushes overlay and returns batch to normal.
 	 */
@@ -498,60 +547,37 @@ public class GraphicsHandler {
 		}
 		return tile;
 	}
-	
+
 	/**
-	 * Draws buttons on screen.
+	 * Draws the buttons of a menu.
 	 */
-	private void drawButtons(ButtonContainer buttonContainer){
+	public void drawMenu(AbstractMenu menu){
 		int position = 0;
-		for (Button button: buttonContainer.getButtons()){
+		for (Button button: menu.getList()){
+			boolean selected = false;
 			String name = new String(button.getName());
-			if (position == buttonContainer.getPosition()){
-				name = ">".concat(name);
+			if (position == menu.cursor){
+				selected = true;
 			}
 			drawText(
 					name, 
 					name,
-					button.getArea().getPosition(new Vector2()), 
-					button.getArea().getSize(new Vector2()).scl(1.0f/FrameEngine.TILE),
-					true
+					menu.getButtonPosition(position),
+					(new Vector2(
+							button.getDimensions().x, 
+							button.getDimensions().y)),
+					true,
+					selected
 					);
 			position++;
 		}
 	}
 
 	/**
-	 * Draws the game's Debug menu.
-	 */
-	void drawDebug() {
-		wipeScreen();
-		batch.setProjectionMatrix(centerCam.combined);
-		int ii = 1; // start higher than bottom
-		int jj = 0;
-		batch.begin();
-		for (String mapID: FrameEngine.debugMenu.getList()){
-			if (ii > DebugMenu.split) {
-				ii = 1;
-				jj++;
-			}
-			++ii;
-			if (mapID.equals(FrameEngine.debugMenu.getSelectedItem())){
-				mapID = "*" + mapID + "*";
-			}
-			debugFont.draw(
-					batch, 
-					mapID,
-					(FrameEngine.TILE * 6 * jj) + 16, 
-					Gdx.graphics.getHeight()*ZOOM - FrameEngine.TILE * ii);
-		}
-		batch.end();
-	}
-
-	/**
 	 * Underlying drawing. Cleans screen.
 	 */
 	protected void wipeScreen(){
-		Gdx.gl.glClearColor(wipeColor.r, wipeColor.g, wipeColor.b, wipeColor.a);
+		Gdx.gl.glClearColor(WIPE_COLOR.r, WIPE_COLOR.g, WIPE_COLOR.b, WIPE_COLOR.a);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 
@@ -561,29 +587,32 @@ public class GraphicsHandler {
 	private static class EntityDepthSorter implements Comparator<Entity>{
 		@Override
 		public int compare(Entity o1, Entity o2) {
-			return (int) (o2.getPosition().y - o1.getPosition().y);
+			return (int) (
+					(o2.getPosition().y + o2.getZPosition()) - 
+					(o1.getPosition().y + o1.getZPosition())
+					);
 		}
 	}
 
 	public void drawMainMenu() {
 		wipeScreen();
-		batch.setProjectionMatrix(centerCam.combined);
-		int ii = 1; // start higher than bottom
 		batch.begin();
-		for (Object obj: FrameEngine.getMainMenu().getList()){
-			String option = obj.toString();
-			++ii;
-			if (obj.equals(FrameEngine.getMainMenu().getSelectedItem())){
-				option = "*" + option + "*";
-			}
-			debugFont.draw(
-					batch, 
-					option.toString(), 
-					FrameEngine.TILE * 6, 
-					Gdx.graphics.getHeight()*ZOOM - FrameEngine.TILE * ii
-					);
-		}
+		batch.draw(overlay, 0, 0);
 		batch.end();
+	}
+
+	public void drawDebug() {
+		wipeScreen();
+	}
+	
+	final int blipTime = 60;
+	private void setSelectColor(){
+		if (selectTimer.getCounter() % blipTime > blipTime/2){
+			batch.setColor(DEFAULT_COLOR);
+		}
+		else{
+			batch.setColor(SELECT_COLOR);
+		}
 	}
 
 }

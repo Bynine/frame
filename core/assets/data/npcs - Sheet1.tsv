@@ -1,11 +1,11 @@
-SHOPKEEPER	Shopkeeper	bup	TRUE	1
-FREB	Freb	croak	TRUE	1
-WESTERN	Tall Stranger	mih	TRUE	2
-BEETLE	Friendly Bug	meoh	FALSE	1
-LIBRARIAN	Book Seller	bwep	TRUE	2
-KAMI	???	bup	TRUE	1
-GUITARIST	Musician	bup	TRUE	1
-CAT	Fancy Lady	mih	TRUE	1
-WATER	Water Bug	bup	FALSE	1
-WITCH	Witch	mih	TRUE	1
-FREBKING	Freb King	heavy	FALSE	1
+SHOPKEEPER	Shopkeeper	bup	TRUE	1	30
+FREB	Freb	croak	TRUE	1	30
+WESTERN	Tall Stranger	mih	TRUE	2	30
+BEETLE	Friendly Bug	meoh	FALSE	1	30
+LIBRARIAN	Book Seller	bwep	TRUE	2	30
+KAMI	???	bup	TRUE	1	30
+GUITARIST	Musician	bup	TRUE	1	30
+CAT	Fancy Lady	mih	TRUE	1	30
+WATER	Water Bug	bup	FALSE	1	30
+WITCH	Witch	mih	TRUE	1	30
+FREBKING	Freb King	heavy	FALSE	1	60

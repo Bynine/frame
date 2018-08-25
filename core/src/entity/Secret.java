@@ -11,10 +11,10 @@ import text.Textbox;
 public class Secret extends Item {
 
 	private final ArrayList<Animation<TextureRegion>> anim = 
-			Animator.createAnimation(5, "sprites/secret.png", 2, 1);
+			Animator.createAnimation(5, "sprites/items/secret.png", 2, 1);
 
-	public Secret(float x, float y, String id) {
-		super(x, y, id);
+	public Secret(float x, float y, String id, String flag) {
+		super(x, y, id, flag);
 		image = null;
 		hitbox.setSize(8);
 		interactHitbox.setSize(16); // TODO: Reset
@@ -27,6 +27,7 @@ public class Secret extends Item {
 				new Textbox("Ooh, you found " + getIndefinite(name) + " " + name + " hidden in the tree!")
 				);
 		FrameEngine.getInventory().addItem(id);
+		FrameEngine.getSaveFile().setFlag(flag, true);
 	}
 
 	@Override

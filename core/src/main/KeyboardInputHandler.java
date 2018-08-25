@@ -3,13 +3,10 @@ package main;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 
-import text.Pointer;
-
 import com.badlogic.gdx.InputProcessor;
 
 public class KeyboardInputHandler implements InputHandler, InputProcessor {
 	
-	Pointer active_pointer = new Pointer(false, -1, -1);
 	private static final int
 	KEY_LEFT = Keys.A,
 	KEY_RIGHT = Keys.D,
@@ -23,7 +20,6 @@ public class KeyboardInputHandler implements InputHandler, InputProcessor {
 	
 	@Override
 	public void update(){
-		active_pointer = new Pointer(Gdx.input.justTouched(), Gdx.input.getX(), Gdx.input.getY());
 	}
 	
 	@Override

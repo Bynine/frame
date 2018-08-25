@@ -11,6 +11,7 @@ import text.DialogueTree;
 public class ProgressionHandler {
 	
 	public static final String 
+	shellFreb = "SHELL_FREB",
 	foundStatuette = "FOUND_STATUETTE",
 	checkStatuette = "CHECK_STATUETTE";
 	

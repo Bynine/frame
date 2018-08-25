@@ -9,7 +9,7 @@ import main.ProgressionHandler;
 public class ShrineDoor extends InteractableEntity {
 	
 	private final boolean opened;
-	private final TextureRegion closed = new TextureRegion(new Texture("sprites/shrine_door.png"));
+	private final TextureRegion closed = new TextureRegion(new Texture("sprites/objects/shrine_door.png"));
 
 	public ShrineDoor(float x, float y) {
 		super(x, y, 

@@ -23,6 +23,9 @@ public class Command {
 		case ProgressionHandler.checkStatuette:{
 			FrameEngine.getSaveFile().setFlag(ProgressionHandler.checkStatuette, true);
 		} break;
+		case ProgressionHandler.shellFreb:{
+			FrameEngine.getSaveFile().addToCounter(1, ProgressionHandler.shellFreb);
+		} break;
 		default: {
 			FrameEngine.logger.warning("Can't activate command with ID " + ID);
 		} break;

@@ -1,8 +1,9 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+
+import text.Button;
 
 /**
  * Represents player's items.
@@ -10,12 +11,10 @@ import java.util.List;
 public class Inventory extends AbstractMenu{
 	
 	private final ArrayList<String> items = new ArrayList<String>();
-	private final ArrayList<ItemDescription> descs = new ArrayList<ItemDescription>();
-	private final HashMap<String, ItemDescription> descMap = new HashMap<>();
+	private final ArrayList<Button> descs = new ArrayList<Button>();
 	
 	Inventory(){
-		items.add("KEEPSAKE");
-		items.add("APPLE");
+		//items.add("KEEPSAKE");
 	}
 	
 	public boolean hasItem(String item){
@@ -28,9 +27,8 @@ public class Inventory extends AbstractMenu{
 	
 	public void removeItem(String item){
 		items.remove(item);
+		// TOOD: Look through buttons, dispose item description in matching button
 		descs.remove(item);
-		descMap.get(item).dispose();
-		descMap.remove(item);
 	}
 
 	/**
@@ -44,25 +42,18 @@ public class Inventory extends AbstractMenu{
 	private void updateDescriptions(){
 		descs.clear();
 		for (String item: items){
-			if (!(descMap.containsKey(item))){
-				descMap.put(item, new ItemDescription(item));
-			}
-			descs.add(descMap.get(item));
+			descs.add(new Button(2, 2, item, new ItemDescription(item)));
 		}
 	}
-	
-	public List<ItemDescription> getDescriptions(){
+
+	@Override
+	public List<Button> getList() {
 		return descs;
 	}
 
 	@Override
-	public List<? extends Object> getList() {
-		return getDescriptions();
-	}
-
-	@Override
 	protected void selectItem() {
-		// ???
+		//
 	}
 	
 }

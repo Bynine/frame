@@ -1,1 +1,8 @@
-Fribbit!
+[NOSPEAKER]The little creature looks at you with sad, watery eyes. Give it something?
+{
+<ADJ_SHELL
+*SHELL_FREB_FLAG
+[NOSPEAKER]It gladly accepts the shell!
+Fribbit! Fribbit!
+<OTHER
+[NOSPEAKER]Unfortunately, it just doesn't seem interested.

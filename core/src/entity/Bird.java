@@ -12,14 +12,14 @@ import com.badlogic.gdx.math.Rectangle;
 
 import main.AudioHandler;
 import main.FrameEngine;
-import main.Timer;
+import timer.Timer;
 
 public class Bird extends Critter {
 	
-	private final TextureRegion ground = new TextureRegion(new Texture("sprites/bird.png"));
-	private final TextureRegion hop = new TextureRegion(new Texture("sprites/birdhop.png"));
+	private final TextureRegion ground = new TextureRegion(new Texture("sprites/critters/bird.png"));
+	private final TextureRegion hop = new TextureRegion(new Texture("sprites/critters/birdhop.png"));
 	private final ArrayList<Animation<TextureRegion>> fly = 
-			Animator.createAnimation(5, "sprites/birdfly.png", 2, 1);
+			Animator.createAnimation(5, "sprites/critters/birdfly.png", 2, 1);
 	private int flightDir = 0;
 	private final Random random;
 	private Timer wanderTimer = new Timer(45);

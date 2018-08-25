@@ -25,13 +25,26 @@ public class NPC extends InteractableEntity{
 		boolean hasShadow = Boolean.parseBoolean(data[3]);
 		if (!hasShadow) shadow = null;
 		int animNumber = Integer.parseInt(data[4]);
-		anim = Animator.createAnimation(30, "sprites/npcs/" + imagePath + ".png", 2, animNumber);
+		int animSpeed = Integer.parseInt(data[5]);
+		anim = Animator.createAnimation(animSpeed, "sprites/npcs/" + imagePath + ".png", 2, animNumber);
 		if (anim.size() == 1) canFlip = false;
 		hitbox.setSize(width, height);
 		interactHitbox.setSize(width, height);
 		this.interactXDisp = interactXDisp;
 		this.interactYDisp = interactYDisp;
 		this.dialoguePath = dialoguePath;
+	}
+	
+	/**
+	 * An NPC for textboxes. Not actually created on map.
+	 */
+	public NPC(String id, String dialoguePath){
+		super(0, 0, "");
+		String[] data = new TSVReader().loadDataByID(id, TSVReader.NPC_URL);
+		name = data[1];
+		voiceUrl = data[2];
+		this.dialoguePath = dialoguePath;
+		anim = null;
 	}
 	
 	@Override
@@ -73,6 +86,13 @@ public class NPC extends InteractableEntity{
 	
 	public String getName(){
 		return name;
+	}
+
+	/**
+	 * DialogueTree can send the speaker a message.
+	 */
+	public void receiveMessage(String message) {
+		//
 	}
 
 }

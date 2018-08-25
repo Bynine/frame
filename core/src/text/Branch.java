@@ -12,6 +12,7 @@ class Branch{
 	private final ArrayList<String> flagSets = new ArrayList<>();
 	private String[] question = null;
 	private String inventoryRequest = null;
+	boolean inventoryRequestMode = false;
 
 	Branch(String pointer){
 		this.pointer = pointer;
@@ -45,10 +46,18 @@ class Branch{
 				}
 			}
 			else if (null != inventoryRequest){
-				FrameEngine.setInventoryRequest(inventoryRequest);
+				FrameEngine.setQuestion(new String[]{"YES", "NO"});
+				inventoryRequestMode = true;
 			}
 		}
 	}
+	
+	void doInventoryRequest() {
+		FrameEngine.setInventoryRequest(inventoryRequest);
+		inventoryRequest = null;
+		inventoryRequestMode = false;
+	}
+
 
 	Textbox getTextbox(){
 		if (position >= textboxes.size() - 1) return textboxes.get(textboxes.size() - 1);
@@ -88,4 +97,14 @@ class Branch{
 		return pointer + ": " + textboxes.size();
 	}
 
+	public boolean matchesAttributes(String[] attributes) {
+		if (!pointer.startsWith("ADJ_")) return false;
+		else{
+			String matchAttribute = pointer.substring(4);
+			for (String attribute: attributes){
+				if (attribute.equals(matchAttribute)) return true;
+			}
+			return false;
+		}
+	}
 }

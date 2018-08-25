@@ -28,16 +28,19 @@ public class Animator {
 		}
 		return lst;
 	}
-	
+
 	/**
 	 * Disposes all frames of animation list.
 	 */
-	public static void freeAnimation(ArrayList<Animation<TextureRegion>> anims){
-		for (Animation<TextureRegion> anim: anims){
-			for (TextureRegion tr: anim.getKeyFrames()){
-				tr.getTexture().dispose();
+	@SafeVarargs
+	public static void freeAnimation(ArrayList<Animation<TextureRegion>>... anims){
+		for (ArrayList<Animation<TextureRegion>> subAnims: anims){
+			for (Animation<TextureRegion> anim: subAnims){
+				for (TextureRegion tr: anim.getKeyFrames()){
+					tr.getTexture().dispose();
+				}
 			}
 		}
 	}
-	
+
 }

@@ -8,14 +8,18 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class ItemDescription {
 	
-	final String id, name, description;
-	final TextureRegion icon;
+	public final String id;
+	public final String name;
+	public final String description;
+	public final String[] attributes;
+	public final TextureRegion icon;
 
 	ItemDescription(String id){
 		String[] data = new TSVReader().loadDataByID(id, TSVReader.ITEM_URL);
 		this.id = id;
-		name = data[1];
 		icon = new TextureRegion(new Texture("sprites/items/" + data[0].toLowerCase() + ".png"));
+		name = data[1];
+		attributes = data[2].split(",");
 		description = data[3];
 	}
 	

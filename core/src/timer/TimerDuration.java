@@ -1,4 +1,4 @@
-package main;
+package timer;
 
 /**
  * A timer that starts from 0 and counts up.

@@ -2,6 +2,8 @@ package entity;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import main.FrameEngine;
+
 public class Finish extends Entity {
 
 	public Finish(float x, float y, int width, int height) {
@@ -13,7 +15,7 @@ public class Finish extends Entity {
 	public void update(){
 		super.update();
 		if (touchingPlayer(hitbox)){
-			System.out.println("FINISH???");
+			FrameEngine.startMainMenu();
 		}
 	}
 

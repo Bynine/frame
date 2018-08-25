@@ -4,3 +4,6 @@ Sometimes, following the trail isn't enough! Be adventurous, my little friend!
 &TALK_BEETLE3
 Have you been looking for hidden paths, my little friend?
 I definitely saw one somewhere in the northwestern part of the woods...
+&ENTERED_SHRINE
+Keep looking for hidden paths, my little friend!
+I suspect there's one close by...

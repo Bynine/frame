@@ -7,6 +7,9 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
+import text.Button;
+import timer.Timer;
+
 /**
  * Abstract class representing any menu with a list of options to select from.
  */
@@ -16,7 +19,7 @@ public abstract class AbstractMenu {
 	protected Timer cursorHalt = new Timer(10);
 	protected Vector2 inputBuffer = new Vector2();
 	
-	public abstract List<? extends Object> getList();
+	public abstract List<Button> getList();
 	protected abstract void selectItem();
 	private static final Sound moveCursor = Gdx.audio.newSound(Gdx.files.internal("sfx/speech/blip.wav"));
 
@@ -74,8 +77,20 @@ public abstract class AbstractMenu {
 		AudioHandler.playSound(moveCursor);
 	}
 
-	public Object getSelectedItem(){
+	public Button getActiveButton(){
+		if (getList().size() == 0) return null;
 		return getList().get(cursor);
+	}
+	
+	public Vector2 getButtonPosition(int pos) {
+		int posX = 1 + (int) pos/6;
+		int posY = 2 + (pos % 6);
+		Button button = getList().get(pos);
+		Vector2 position = new Vector2(
+				(button.getDimensions().x * FrameEngine.TILE * posX),
+				(Gdx.graphics.getHeight()/2) - (button.getDimensions().y * FrameEngine.TILE * posY)
+				);
+		return position;
 	}
 
 }
