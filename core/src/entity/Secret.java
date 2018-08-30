@@ -6,28 +6,22 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import main.FrameEngine;
-import text.Textbox;
 
-public class Secret extends Item {
+public class Secret extends Currency {
 
 	private final ArrayList<Animation<TextureRegion>> anim = 
 			Animator.createAnimation(5, "sprites/items/secret.png", 2, 1);
 
-	public Secret(float x, float y, String id, String flag) {
-		super(x, y, id, flag);
+	public Secret(float x, float y,  int amount, String flag) {
+		super(x, y, amount, flag);
 		image = null;
 		hitbox.setSize(8);
 		interactHitbox.setSize(16); // TODO: Reset
 	}
-
+	
 	@Override
-	public void interact() {
-		setDelete();
-		FrameEngine.putTextbox(
-				new Textbox("Ooh, you found " + getIndefinite(name) + " " + name + " hidden in the tree!")
-				);
-		FrameEngine.getInventory().addItem(id);
-		FrameEngine.getSaveFile().setFlag(flag, true);
+	protected String getString(String currency){
+		return "Wow! You found " + amount + " " + currency + "!";
 	}
 
 	@Override

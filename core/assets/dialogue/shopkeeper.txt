@@ -1,7 +1,7 @@
 *INTRO_SHOPKEEPER
 Hello there, stranger! Welcome to Wabika. Looking for something in particular?
-[TALK][SPEED=5]...[NSPEED]Oh, is that so...
-[NSPEED]Interesting. I gotta admit, I don't know much about that sort of thing.
+[TALK][SPEED=6]...[NSPEED]Oh, is that so...
+Interesting. I gotta admit, I don't know much about that sort of thing.
 But tell you what - try visiting my friend up northeast. They run a little book store.
 I'll bet you anything they've got some old books on what you're looking for.
 Good luck! Come again soon!

@@ -66,7 +66,7 @@ public class Freb extends NPC {
 	}
 	
 	@Override
-	public void receiveMessage(String message){
+	public void getMessage(String message){
 		switch(message){
 		case "SHELL1": setShell(message, 1); break;
 		case "SHELL2": setShell(message, 2); break;
@@ -77,7 +77,6 @@ public class Freb extends NPC {
 	private void setShell(String item, int num){
 		shell = num;
 		FrameEngine.getSaveFile().addToCounter(num, flag);
-		FrameEngine.getInventory().removeItem(item);
 	}
 	
 	private boolean hasShell(){

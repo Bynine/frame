@@ -25,11 +25,13 @@ public class FrameEngine extends ApplicationAdapter {
 	@SuppressWarnings("unused")
 	public static boolean 
 	DRAW 	= false	&& DEBUG,
-	MUTE	= false	&& DEBUG,
+	MUTE	= true	&& DEBUG,
 	LOG		= false	&& DEBUG,
-	SAVE	= false	&& DEBUG;
+	NOMAIN	= true	&& DEBUG,
+	INVIS	= false	&& DEBUG,
+	SAVE	= false	|| !DEBUG;
 
-	public static String startAreaName = "BEACH";
+	public static String startAreaName = DEBUG ? "BEACH" : "FOREST";
 	private static Player player;
 	private static FPSLogger fpsLogger;
 	private static GameState gameState = GameState.OVERWORLD;
@@ -42,7 +44,9 @@ public class FrameEngine extends ApplicationAdapter {
 	private static ProgressionHandler progressionHandler;
 	private static Inventory inventory;
 	private static MainMenu mainMenu;
+	private static ShopMenu shopMenu;
 	private static AnswersMenu answersMenu;
+	private static String givenItemID = "";
 	private static Timer 
 	time = new Timer(0),
 	transition = new Timer(20);
@@ -68,6 +72,7 @@ public class FrameEngine extends ApplicationAdapter {
 		inventory = new Inventory();
 		saveFile = new SaveFile(LOG);
 		mainMenu = new MainMenu();
+		shopMenu = new ShopMenu();
 		fpsLogger = new FPSLogger();
 		debugMenu = new DebugMenu();
 		AudioHandler.initialize();
@@ -76,8 +81,12 @@ public class FrameEngine extends ApplicationAdapter {
 		inputHandler = new KeyboardInputHandler();
 		progressionHandler = new ProgressionHandler();
 		inputHandler.initialize();
-		//changeArea();
-		startMainMenu();
+		if (!NOMAIN) {
+			startMainMenu();
+		}
+		else {
+			continueGame();
+		}
 	}
 
 	@Override
@@ -107,6 +116,9 @@ public class FrameEngine extends ApplicationAdapter {
 		} break;
 		case MAIN:{
 			updateMain();
+		} break;
+		case SHOP:{
+			updateShop();
 		} break;
 		}
 
@@ -165,6 +177,12 @@ public class FrameEngine extends ApplicationAdapter {
 		graphicsHandler.drawMainMenu();
 		graphicsHandler.drawMenu(mainMenu);
 		mainMenu.update();
+	}
+	
+	private void updateShop(){
+		graphicsHandler.drawOverworld();
+		graphicsHandler.drawMenu(shopMenu);
+		shopMenu.update();
 	}
 
 	/**
@@ -282,6 +300,7 @@ public class FrameEngine extends ApplicationAdapter {
 	 */
 	static void newGame(){
 		saveFile.wipeSave();
+		inventory.addItem("KEEPSAKE");
 		contGame();
 	}
 
@@ -296,7 +315,7 @@ public class FrameEngine extends ApplicationAdapter {
 		newArea = new Area(startAreaName);
 		newPosition.set(newArea.getStartLocation());
 		changeArea();
-		player.getPosition().set(newPosition.x, (currArea.mapHeight) - (newPosition.y));
+		//player.getPosition().set(newPosition.x, (currArea.mapHeight) - (newPosition.y));
 		gameState = GameState.OVERWORLD;
 		transition.reset();
 	}
@@ -424,7 +443,15 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	private enum GameState{
-		OVERWORLD, PAUSED, DEBUG, MAIN
+		OVERWORLD, PAUSED, DEBUG, MAIN, SHOP
+	}
+	
+	public static void setGivenItemID(String newItemID){
+		givenItemID = newItemID;
+	}
+
+	public static String getGivenItemID() {
+		return givenItemID;
 	}
 
 }

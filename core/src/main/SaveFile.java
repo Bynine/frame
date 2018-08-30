@@ -24,6 +24,8 @@ public class SaveFile {
 
 	SaveFile(boolean verbose){
 		this.verbose = verbose;
+		// TODO: remove
+		//flags.put("ENTERED_SHRINE",  true);
 		if (!FrameEngine.SAVE) return;
 		Preferences preferences = Gdx.app.getPreferences(saveFile);
 		money = preferences.getInteger(moneyKey);
@@ -60,7 +62,6 @@ public class SaveFile {
 			if (verbose) System.out.println("Now arriving at: " + mapKey);
 			FrameEngine.startAreaName = preferences.getString(mapKey);
 		}
-
 	}
 	
 	/**
@@ -89,7 +90,11 @@ public class SaveFile {
 	 * Sets the value of the given flag.
 	 */
 	public void setFlag(String flag, boolean bool){
-		flags.put(flag, bool);
+		boolean invert = flag.startsWith("!");
+		if (invert){
+			flag = flag.substring(1);
+		}
+		flags.put(flag, invert ^ bool);
 		if (verbose) System.out.println(flag + " set to " + bool);
 	}
 	
@@ -97,10 +102,15 @@ public class SaveFile {
 	 * Checks if this flag has been set to true.
 	 */
 	public boolean getFlag(String flag){
-		if (flags.containsKey(flag)){
-			return flags.get(flag);
+		boolean value = false;
+		boolean invert = flag.startsWith("!");
+		if (invert){
+			flag = flag.substring(1);
 		}
-		return false;
+		if (flags.containsKey(flag)){
+			return invert ^ flags.get(flag);
+		}
+		return invert ^ value;
 	}
 	
 	/**
@@ -114,6 +124,10 @@ public class SaveFile {
 		else{
 			counters.put(counter, n);
 		}
+	}
+	
+	public void addMoney(int n){
+		money += n;
 	}
 	
 	public int getMoney(){

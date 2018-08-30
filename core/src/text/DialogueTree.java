@@ -7,7 +7,7 @@ import java.util.Map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
-import entity.NPC;
+import entity.InteractableEntity;
 import main.FrameEngine;
 import main.ItemDescription;
 
@@ -19,11 +19,11 @@ public class DialogueTree{
 	private Branch activeBranch;
 	private ArrayList<Branch> branches = new ArrayList<>();
 	private static final String DEFAULT = "default";
-	private NPC speaker;
+	private InteractableEntity speaker;
 	private boolean terminated;
 
 	@SafeVarargs
-	public DialogueTree(NPC npc, String path, Map<String, String>... vars){
+	public DialogueTree(InteractableEntity npc, String path, Map<String, String>... vars){
 		this.speaker = npc;
 		FileHandle handle = Gdx.files.internal("dialogue/" + path + ".txt");
 		String dialogue =  "DEFAULT\n" + handle.readString();
@@ -96,7 +96,7 @@ public class DialogueTree{
 	 * Creates "branches", which are series of textboxes headed with some reference pointer
 	 * referring to the answer that calls them.
 	 */
-	private void createBranches(NPC npc, String[] dialogueSplit){
+	private void createBranches(InteractableEntity npc, String[] dialogueSplit){
 		String line;
 		String pointer = DEFAULT;
 		int branchPosition = 0;
@@ -173,9 +173,10 @@ public class DialogueTree{
 		for (Branch branch: branches){
 			if (branch.matchesPointer(desc.id) || branch.matchesAttributes(desc.attributes)) {
 				if (speaker != null){
-					speaker.receiveMessage(desc.id);
+					speaker.getMessage(desc.id);
 				}
 				switchBranch(branch);
+				FrameEngine.setGivenItemID(desc.id);
 				found = true;
 			}
 		}

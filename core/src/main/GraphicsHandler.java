@@ -36,7 +36,7 @@ import timer.Timer;
 public class GraphicsHandler {
 	public static final Color 
 	DEFAULT_COLOR = new Color(1, 1, 1, 1),
-	SELECT_COLOR = new Color(0.5f, 0.6f, 0.7f, 1.0f),
+	SELECT_COLOR = new Color(0.8f, 0.9f, 1.0f, 1.0f),
 	WIPE_COLOR = new Color(0.05f, 0.07f, 0.12f, 1);
 
 	protected SpriteBatch batch;
@@ -58,6 +58,7 @@ public class GraphicsHandler {
 	Timer selectTimer = new Timer(10);
 
 	private static TextureRegion overlay = new TextureRegion(new Texture("sprites/gui/watercolor_dim.png"));
+	private static TextureRegion splash = new TextureRegion(new Texture("sprites/gui/splashsmall.png"));
 	private static TextureRegion water = new TextureRegion(new Texture("sprites/graphics/water.png"));
 
 	GraphicsHandler(){
@@ -102,9 +103,11 @@ public class GraphicsHandler {
 	 */
 	void drawOverworld(){
 		wipeScreen();
+		ArrayList<Entity> backEntities = new ArrayList<Entity>();
 		ArrayList<Entity> normalEntities = new ArrayList<Entity>();
 		ArrayList<Entity> frontEntities = new ArrayList<Entity>();
 		for (Entity entity: EntityHandler.getEntities()){
+			if (entity.getLayer() == Entity.Layer.BACK) backEntities.add(entity);
 			if (entity.getLayer() == Entity.Layer.NORMAL) normalEntities.add(entity);
 			if (entity.getLayer() == Entity.Layer.FRONT) frontEntities.add(entity);
 		}
@@ -121,10 +124,11 @@ public class GraphicsHandler {
 		drawWater();
 		renderer.render(new int[]{0, 1});	// Render background tiles.
 
-		drawShadows(EntityHandler.getEntities());
-		drawEntities(normalEntities);
+		if (!FrameEngine.INVIS) drawEntities(backEntities);
+		if (!FrameEngine.INVIS) drawShadows(EntityHandler.getEntities());
+		if (!FrameEngine.INVIS) drawEntities(normalEntities);
 		renderer.render(new int[]{2, 3}); 	// Render foreground tiles.
-		drawEntities(frontEntities);
+		if (!FrameEngine.INVIS) drawEntities(frontEntities);
 		handleEmitters();
 
 		if (FrameEngine.canUpdateEntities() && FrameEngine.canInteract()) {
@@ -324,7 +328,7 @@ public class GraphicsHandler {
 	}
 
 	/**
-	 * Draws the player's inventory in a bunch of nice little boxes.
+	 * Draws the item menu in a bunch of nice little boxes.
 	 */
 	void drawItems(){
 		batch.setProjectionMatrix(centerCam.combined);
@@ -347,6 +351,15 @@ public class GraphicsHandler {
 			batch.end();
 			ii++;
 		}
+		float itemBoxWidth = 3.0f;
+		drawText(Integer.toString(FrameEngine.getSaveFile().getMoney()), 
+				new Vector2(
+						Gdx.graphics.getWidth()/(2/ZOOM) - (FrameEngine.TILE * itemBoxWidth/2.0f), 
+						Gdx.graphics.getHeight()/(2) - FrameEngine.TILE*2
+						),
+				new Vector2(itemBoxWidth, 2),
+				true
+				);
 		if (null != FrameEngine.getInventory().getActiveButton()){
 			ItemDescription desc = ((ItemDescription)FrameEngine.getInventory().getActiveButton().getOutput());
 			final int width = 8;
@@ -597,7 +610,7 @@ public class GraphicsHandler {
 	public void drawMainMenu() {
 		wipeScreen();
 		batch.begin();
-		batch.draw(overlay, 0, 0);
+		batch.draw(splash, 0, 0);
 		batch.end();
 	}
 
@@ -605,7 +618,7 @@ public class GraphicsHandler {
 		wipeScreen();
 	}
 	
-	final int blipTime = 60;
+	final int blipTime = 20;
 	private void setSelectColor(){
 		if (selectTimer.getCounter() % blipTime > blipTime/2){
 			batch.setColor(DEFAULT_COLOR);

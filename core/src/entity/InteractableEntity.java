@@ -57,6 +57,13 @@ public abstract class InteractableEntity extends ImmobileEntity {
 		}
 		return "a";
 	}
+
+	/**
+	 * DialogueTree can send the speaker a message.
+	 */
+	public void getMessage(String message) {
+		//
+	}
 	
 	public String getText(){
 		return text;

@@ -1,4 +1,4 @@
-SHOPKEEPER	Shopkeeper	bup	TRUE	1	30
+SHOPKEEPER	Shopkeeper	bup2	TRUE	1	30
 FREB	Freb	croak	TRUE	1	30
 WESTERN	Tall Stranger	mih	TRUE	2	30
 BEETLE	Friendly Bug	meoh	FALSE	1	30
@@ -9,3 +9,6 @@ CAT	Fancy Lady	mih	TRUE	1	30
 WATER	Water Bug	bup	FALSE	1	30
 WITCH	Witch	mih	TRUE	1	30
 FREBKING	Freb King	heavy	FALSE	1	60
+PUMPKIN	Cafe Owner	bup	TRUE	1	30
+CUSTOMER2	CUSTOMER2	mih	TRUE	1	30
+CUSTOMER3	CUSTOMER3	bwep	TRUE	1	30

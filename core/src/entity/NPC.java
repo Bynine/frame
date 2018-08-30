@@ -88,11 +88,4 @@ public class NPC extends InteractableEntity{
 		return name;
 	}
 
-	/**
-	 * DialogueTree can send the speaker a message.
-	 */
-	public void receiveMessage(String message) {
-		//
-	}
-
 }

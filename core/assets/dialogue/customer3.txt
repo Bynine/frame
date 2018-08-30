@@ -1,0 +1,9 @@
+Oh, do you have my order?
+{
+<ORDER3
+*GIVEN_ORDER3
+[REMOVE_ITEM]Thank-Q
+<OTHER
+WTF brah
+&GIVEN_ORDER3
+Thanks again

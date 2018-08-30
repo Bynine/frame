@@ -17,7 +17,7 @@ public abstract class Entity {
 	protected final Vector2 position = new Vector2();
 	protected final Vector2 velocity = new Vector2();
 	protected final TextureRegion sample = new TextureRegion(new Texture("sprites/npcs/dummy.png"));
-	protected final Rectangle hitbox = new Rectangle(0, 0, 30, 20);
+	protected final Rectangle hitbox = new Rectangle(0, 0, 28, 18);
 	protected final ArrayList<Timer> timerList = new ArrayList<Timer>();
 	protected float acceleration = 0.8f;
 	protected float corner_acceleration = 0.35f;
@@ -302,11 +302,15 @@ public abstract class Entity {
 	}
 	
 	public static enum Layer{
-		NORMAL, FRONT
+		BACK, NORMAL, FRONT
 	}
 
 	public TextureRegion getShadow() {
 		return shadow;
+	}
+
+	public boolean collides() {
+		return collides;
 	}
 
 }

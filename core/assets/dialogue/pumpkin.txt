@@ -1,0 +1,35 @@
+Sorry, hon, I'm busy getting ready right now.
+Be sure to come back soon!
+&ENTERED_SHRINE
+Howdy, hon! 'Fraid I can't serve anything to you right now, I've got a lot of orders to make!
+Say... You look like a capable kid. How's about you help me out with serving these orders?
+Your pay will be worth the while! Pumpkin's honor!
+>YES,NO
+<YES
+*ACCEPTED_CAFE_JOB
+*CAFE_QUEST
+Oh, wonderful! You're a real sweetheart!
+Ok, hon, here're the orders.
+[GIVE_ORDER1][GIVE_ORDER2][GIVE_ORDER3][NOSPEAKER]You got handed the orders!
+The first one goes to the pretty lady over there with the big ears...
+The second one goes to...
+And the third one goes to...
+Got all that?
+<NO
+[SAD]Ohhh.
+That's fine, hon. Really. I'll just... 
+stand here working while the cafe goes out of business...
+[SPEED=5]ohhhh......
+&ACCEPTED_CAFE_JOB
+Need to hear it again?
+The first one goes to the pretty lady over there with the big ears...
+The second one goes to...
+And the third one goes to...
+Got all that?
+&ACCEPTED_CAFE_JOB,GIVEN_ORDER1,GIVEN_ORDER2,GIVEN_ORDER3
+*!CAFE_QUEST
+*COMPLETED_CAFE_JOB
+You did it!!!!
+[GIVE_TREASURE4][NOSPEAKER]You received Treasure 4!
+&COMPLETED_CAFE_JOB
+Thanks again!!!

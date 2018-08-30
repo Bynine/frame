@@ -15,7 +15,7 @@ import main.AbstractMenu;
 public class DebugMenu extends AbstractMenu{
 
 	private final ArrayList<Button> mapIDs = new ArrayList<>();
-	public static final int horizontalMove = 6;
+	public static final int horizontalMove = 5;
 	private static final int HEADER_ROWS = 1;
 
 	/**
@@ -26,7 +26,7 @@ public class DebugMenu extends AbstractMenu{
 		int ii = 0;
 		for (String data: mapData){	
 			if (ii >= HEADER_ROWS) mapIDs.add(new Button(
-					4, 2,
+					5, 2,
 					data.split(TSVReader.split)[0],
 					data.split(TSVReader.split)[0]
 							));

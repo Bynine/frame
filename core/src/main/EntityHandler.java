@@ -51,7 +51,7 @@ public class EntityHandler {
 			if (en instanceof AudioLocation){
 				audioSources.add((AudioLocation)en);
 			}
-			if (en instanceof InteractableEntity){
+			if (en instanceof InteractableEntity && en.collides()){
 				en.update();
 				area.addToCollision(en);
 			}

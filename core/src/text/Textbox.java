@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 
+import entity.InteractableEntity;
 import entity.NPC;
 import main.AudioHandler;
 import main.FrameEngine;
@@ -16,7 +17,7 @@ public class Textbox {
 	private int textPos = 0;
 	private final ArrayList<Object> characters = new ArrayList<>();
 	private Sound text_sound;
-	private NPC speaker;
+	private InteractableEntity speaker;
 	/**
 	 * Whether to animate player talking.
 	 */
@@ -26,7 +27,7 @@ public class Textbox {
 	 */
 	public static final float DEFAULT_TEXT_SPEED = 2.0F;
 	private float TEXT_SPEED = DEFAULT_TEXT_SPEED;
-	private float TALK_SPEED = 6.0f;
+	//private float TALK_SPEED = 6.0f;
 
 	public Textbox(String text){
 		parseText(text);
@@ -34,9 +35,14 @@ public class Textbox {
 		this.speaker = null;
 	}
 
-	public Textbox(String text, NPC speaker){
+	public Textbox(String text, InteractableEntity speaker){
 		parseText(text);
-		text_sound = Gdx.audio.newSound(Gdx.files.internal("sfx/speech/" + speaker.getVoiceUrl() + ".wav"));
+		if (speaker instanceof NPC){
+			text_sound = Gdx.audio.newSound(Gdx.files.internal("sfx/speech/" + speaker.getVoiceUrl() + ".wav"));
+		}
+		else{
+			text_sound = Gdx.audio.newSound(Gdx.files.internal("sfx/speech/blip.wav"));
+		}
 		this.speaker = speaker;
 	}
 
@@ -87,17 +93,24 @@ public class Textbox {
 	public void update(){
 		text_timer.countUp();
 		if (!isFinished() && text_timer.getCounter()/TEXT_SPEED > textPos){ 
-			if (characters.get(textPos) instanceof Command){
+			Object currChar = characters.get(textPos);
+			if (currChar instanceof Command){
 				handleCommand(((Command)characters.get(textPos)));
 			}
-			textPos++;
-			if (textPos % TALK_SPEED == 1){
-				AudioHandler.playSound(text_sound);
+			else{
+				Character c = (Character)currChar;
+				if (!Character.isWhitespace(c)){
+					AudioHandler.playSound(text_sound);
+				}
 			}
+			textPos++;
 		}
 	}
 
 	private void handleCommand(Command command){
+		if (null != speaker){
+			speaker.getMessage(command.getID());
+		}
 		if (command.getID().startsWith("SPEED")){
 			String[] speedData = command.getID().split("=");
 			TEXT_SPEED = Float.parseFloat(speedData[1]);
@@ -109,6 +122,9 @@ public class Textbox {
 		else if (command.getID().equals("NOSPEAKER")){
 			speaker = null;
 			text_sound = Gdx.audio.newSound(Gdx.files.internal("sfx/speech/blip.wav"));
+		}
+		else if (command.getID().equals("REMOVE_ITEM")){
+			FrameEngine.getInventory().removeItem(FrameEngine.getGivenItemID());
 		}
 		else{
 			switch(command.getID()){
@@ -164,7 +180,9 @@ public class Textbox {
 
 	private String getText(int length){
 		StringBuilder text = new StringBuilder();
-		if (null != speaker) text.append(speaker.getName() + ": ");
+		if (null != speaker && speaker instanceof NPC) {
+			text.append(((NPC)speaker).getName() + ": ");
+		}
 		for (int ii = 0; ii < length; ++ii){
 			Object obj = characters.get(ii);
 			if (obj instanceof Character){

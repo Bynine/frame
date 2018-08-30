@@ -83,11 +83,13 @@ public abstract class AbstractMenu {
 	}
 	
 	public Vector2 getButtonPosition(int pos) {
-		int posX = 1 + (int) pos/6;
-		int posY = 2 + (pos % 6);
+		int onScreen = 5;
+		int posX = (int) pos/onScreen;
+		int posY = 2 + (pos % onScreen);
 		Button button = getList().get(pos);
 		Vector2 position = new Vector2(
-				(button.getDimensions().x * FrameEngine.TILE * posX),
+				(Gdx.graphics.getWidth()/(2/GraphicsHandler.ZOOM) + 
+						FrameEngine.TILE * (button.getDimensions().x) * (posX - 0.5f)),
 				(Gdx.graphics.getHeight()/2) - (button.getDimensions().y * FrameEngine.TILE * posY)
 				);
 		return position;

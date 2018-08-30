@@ -1,5 +1,5 @@
-KEEPSAKE	satchel	NONE	For holding something special.
-APPLE	apple	FOOD,SWEET	Pleasantly juicy.	
+KEEPSAKE	satchel	NONE	For holding something special
+APPLE	apple	FOOD,SWEET	Pleasantly juicy
 PUMPKIN	pumpkin	FOOD	Great for pies
 SHELL1	nice shell	SHELL	The red color is pretty
 SHELL2	cool shell	SHELL	The yellow color is comfortable
@@ -13,4 +13,9 @@ TREASURE3	Shining Scale	NONE	???
 TREASURE4	Kindly Teacup	NONE	???
 TREASURE5	Gossamer Silk	NONE	???
 TREASURE6	Ancient Horn	NONE	???
-ACORN	REMOVEACORN	REMOVEACORN	REMOVEACORN
+ORDER1	ORDER1	NONE	???
+ORDER2	ORDER2	NONE	???
+ORDER3	ORDER3	NONE	???
+GRUB1	Chubby Grub	NONE	This grub loves to eat
+GRUB2	Nubby Grub	NONE	This grub has little bumps
+GRUB3	Grubby Grub	NONE	This grub is a bit dirty

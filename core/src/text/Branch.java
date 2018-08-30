@@ -58,7 +58,6 @@ class Branch{
 		inventoryRequestMode = false;
 	}
 
-
 	Textbox getTextbox(){
 		if (position >= textboxes.size() - 1) return textboxes.get(textboxes.size() - 1);
 		return textboxes.get(position);

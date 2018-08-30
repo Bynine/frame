@@ -1,0 +1,9 @@
+The dirt looks soft here.
+&ITEM_SHOVEL
+The dirt looks soft here. Dig with your shovel?
+>YES,NO
+<YES
+Dig, dig...
+[DIG]
+<NO
+You decide to leave well enough alone.

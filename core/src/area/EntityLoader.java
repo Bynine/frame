@@ -10,8 +10,10 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import entity.AudioLocation;
 import entity.Bird;
+import entity.Currency;
 import entity.Description;
 import entity.DialogueDescription;
+import entity.DialogueTrigger;
 import entity.Door;
 import entity.Emitter;
 import entity.Entity;
@@ -21,10 +23,11 @@ import entity.FrebKing;
 import entity.Glimmer;
 import entity.Secret;
 import entity.Item;
+import entity.ItemHole;
 import entity.NPC;
 import entity.Portal;
+import entity.PortalHole;
 import entity.ShrineDoor;
-import entity.Statue;
 import main.FrameEngine;
 
 /**
@@ -52,6 +55,13 @@ public class EntityLoader {
 				double x_dest = Double.parseDouble(destination[1]);
 				double y_dest = Double.parseDouble(destination[2]);
 				entities.add(new Portal(x, y, width, height, destination[0], x_dest, y_dest));
+			} break;
+			case "portalhole": {
+				String[] destination = properties.get("DEST", String.class).split(",");
+				String flag = properties.get("FLAG", String.class);
+				double x_dest = Double.parseDouble(destination[1]);
+				double y_dest = Double.parseDouble(destination[2]);
+				entities.add(new PortalHole(x, y, flag, destination[0], x_dest, y_dest));
 			} break;
 			case "door": {
 				String[] destination = properties.get("DEST", String.class).split(",");
@@ -97,23 +107,27 @@ public class EntityLoader {
 			} break;
 			case "item": {
 				String flag = properties.get("FLAG", String.class);
-				if (null == flag){
-					FrameEngine.logger.log( Level.WARNING, 
-							"Couldn't find flag of " + entity.getName() + "");
-				}
-				if (FrameEngine.getSaveFile().getFlag(flag)) break;
+				if (checkFlag(entity, flag)) break;
 				String id = properties.get("ID", String.class);
 				entities.add(new Item(x, y, id, flag));
 			} break;
+			case "itemhole": {
+				String flag = properties.get("FLAG", String.class);
+				if (checkFlag(entity, flag)) break;
+				String id = properties.get("ID", String.class);
+				entities.add(new ItemHole(x, y, id, flag));
+			} break;
 			case "secret": {
 				String flag = properties.get("FLAG", String.class);
-				if (null == flag){
-					FrameEngine.logger.log( Level.WARNING, 
-							"Couldn't find flag of " + entity.getName() + "");
-				}
-				if (FrameEngine.getSaveFile().getFlag(flag)) break;
-				String id = properties.get("ID", String.class);
-				entities.add(new Secret(x, y, id, flag));
+				if (checkFlag(entity, flag)) break;
+				int amount = Integer.parseInt(properties.get("AMOUNT", String.class));
+				entities.add(new Secret(x, y, amount, flag));
+			} break;
+			case "currency":{
+				String flag = properties.get("FLAG", String.class);
+				if (checkFlag(entity, flag)) break;
+				int amount = Integer.parseInt(properties.get("AMOUNT", String.class));
+				entities.add(new Currency(x, y, amount, flag));
 			} break;
 			case "audio": {
 				String audio = properties.get("AUDIO", String.class);
@@ -133,10 +147,6 @@ public class EntityLoader {
 				String flag = properties.get("FLAG", String.class);
 				entities.add(new Freb(x, y, width, height, flag));
 			} break;
-			case "statue":{
-				String cc = properties.get("CORRECTCOLOR", String.class);
-				entities.add(new Statue(x, y, cc));
-			} break;
 			case "shrine_door":{
 				entities.add(new ShrineDoor(x, y));
 			} break;
@@ -147,6 +157,12 @@ public class EntityLoader {
 			case "finish":{
 				entities.add(new Finish(x, y, width, height));
 			} break;
+			case "dialogue_trigger":{
+				String flag = properties.get("FLAG", String.class);
+				if (checkFlag(entity, flag)) break;
+				String dialoguePath = properties.get("DIALOGUE", String.class);
+				entities.add(new DialogueTrigger(x, y, width, height, dialoguePath));
+			} break;
 			default: {
 				FrameEngine.logger.log( Level.WARNING, 
 						"Couldn't parse type " + type + " of " + entity.getName() + "");
@@ -154,6 +170,14 @@ public class EntityLoader {
 			}
 		}
 		return entities;
+	}
+	
+	private boolean checkFlag(MapObject entity, String flag){
+		if (null == flag){
+			FrameEngine.logger.log( Level.WARNING, 
+					"Couldn't find flag of " + entity.getName() + "");
+		}
+		return (FrameEngine.getSaveFile().getFlag(flag));
 	}
 
 }
