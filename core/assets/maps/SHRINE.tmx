@@ -145,8 +145,8 @@
   </object>
   <object id="290" name="entered shrine trigger" gid="1" x="376" y="368" width="48" height="24">
    <properties>
+    <property name="APPEAR" value="!ENTERED_SHRINE"/>
     <property name="DIALOGUE" value="entered_shrine"/>
-    <property name="FLAG" value="ENTERED_SHRINE"/>
     <property name="TYPE" value="DIALOGUE_TRIGGER"/>
    </properties>
   </object>

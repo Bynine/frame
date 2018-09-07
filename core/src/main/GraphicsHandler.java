@@ -36,7 +36,8 @@ import timer.Timer;
 public class GraphicsHandler {
 	public static final Color 
 	DEFAULT_COLOR = new Color(1, 1, 1, 1),
-	SELECT_COLOR = new Color(0.8f, 0.9f, 1.0f, 1.0f),
+	SELECT_COLOR1 = new Color(0.75f, 0.85f, 0.95f, 1.0f),
+	SELECT_COLOR2 = new Color(0.85f, 0.85f, 0.85f, 1.0f),
 	WIPE_COLOR = new Color(0.05f, 0.07f, 0.12f, 1);
 
 	protected SpriteBatch batch;
@@ -48,6 +49,8 @@ public class GraphicsHandler {
 	public static final float ZOOM = 1.0f/2.0f;
 	private final EntityDepthSorter sorter = new EntityDepthSorter();
 	private static final TextureRegion 
+	arrowUp = new TextureRegion(new Texture("sprites/gui/arrow_up.png")),
+	arrowDown = new TextureRegion(new Texture("sprites/gui/arrow_down.png")),
 	interactBubble = new TextureRegion(new Texture("sprites/player/interact.png")),
 	talkingBubble = new TextureRegion(new Texture("sprites/player/talk.png")),
 	textboxOverlay = new TextureRegion(new Texture("sprites/gui/textbox_overlay.png")),
@@ -69,7 +72,7 @@ public class GraphicsHandler {
 		centerCam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/lato.ttf"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-		parameter.size = 20;
+		parameter.size = 18;
 		parameter.spaceY = 2;
 		parameter.color = new Color(
 				26.0f/255.0f, 
@@ -84,7 +87,7 @@ public class GraphicsHandler {
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setAutoShapeType(true);
 	}
-	
+
 	void update(){
 		selectTimer.countUp();
 	}
@@ -321,40 +324,53 @@ public class GraphicsHandler {
 	}
 
 	/**
-	 * Draws the pause screen.
-	 */
-	void drawPause() {
-		drawItems();
-	}
-
-	/**
 	 * Draws the item menu in a bunch of nice little boxes.
 	 */
 	void drawItems(){
 		batch.setProjectionMatrix(centerCam.combined);
 		int ii = 0;
+		int cursor = FrameEngine.getInventory().getCursor();
+		int stipend = Math.max( 0, (5 * ((int)(cursor/5))) - 15 );
+		Vector2 range = new Vector2(stipend, stipend+20);
 		for (Button button: FrameEngine.getInventory().getList()){
-			if (button == FrameEngine.getInventory().getActiveButton()){
-				setSelectColor();
+			if (range.x <= ii && range.y > ii){
+				if (button == FrameEngine.getInventory().getActiveButton()){
+					setSelectColor();
+				}
+				final int dim = 2;
+				Vector2 position = FrameEngine.getInventory().getButtonPosition(ii - stipend);
+				ItemDescription desc = (ItemDescription)button.getOutput();
+				drawTextboxTiles((int)position.x, (int)position.y, dim, dim, 0);
+				batch.begin();
+				batch.draw(
+						desc.icon, 
+						position.x + FrameEngine.TILE - desc.icon.getRegionWidth()/2, 
+						position.y + FrameEngine.TILE - desc.icon.getRegionHeight()/2
+						);
+				batch.end();
 			}
-			final int dim = 2;
-			float x = FrameEngine.TILE/2;
-			float y = Gdx.graphics.getHeight()*((3.0f/4.0f)*ZOOM) - (FrameEngine.TILE * ii * dim);
-			ItemDescription desc = (ItemDescription)button.getOutput();
-			drawTextboxTiles((int)x, (int)y, dim, dim, 0);
-			batch.begin();
-			batch.draw(
-					desc.icon, 
-					x + FrameEngine.TILE - desc.icon.getRegionWidth()/2, 
-					y + FrameEngine.TILE - desc.icon.getRegionHeight()/2
-					);
-			batch.end();
 			ii++;
 		}
-		float itemBoxWidth = 3.0f;
-		drawText(Integer.toString(FrameEngine.getSaveFile().getMoney()), 
+		batch.begin();
+		float center = FrameEngine.TILE * 4.5f;
+		if (range.y < FrameEngine.getInventory().getList().size()) {
+			batch.draw(arrowDown, center, FrameEngine.TILE * 0.125f);
+		}
+		if (range.x > 0) {
+			batch.draw(arrowUp, center, FrameEngine.TILE * 8.875f);
+		}
+		batch.end();
+		drawItemDescription();
+	}
+
+	/**
+	 * Draws the description of the currently selected item.
+	 */
+	private void drawItemDescription(){
+		float itemBoxWidth = 6.0f;
+		drawText(Integer.toString(FrameEngine.getSaveFile().getMoney()) + " ACORNS", 
 				new Vector2(
-						Gdx.graphics.getWidth()/(2/ZOOM) - (FrameEngine.TILE * itemBoxWidth/2.0f), 
+						Gdx.graphics.getWidth()/(4/ZOOM) - (FrameEngine.TILE * 2.5f), 
 						Gdx.graphics.getHeight()/(2) - FrameEngine.TILE*2
 						),
 				new Vector2(itemBoxWidth, 2),
@@ -362,10 +378,11 @@ public class GraphicsHandler {
 				);
 		if (null != FrameEngine.getInventory().getActiveButton()){
 			ItemDescription desc = ((ItemDescription)FrameEngine.getInventory().getActiveButton().getOutput());
-			final int width = 8;
+			final int width = 7;
+			final float x = (FrameEngine.TILE * 2) + Gdx.graphics.getWidth()/(2/ZOOM);
 			drawText(desc.name, 
 					new Vector2(
-							Gdx.graphics.getWidth()/(2/ZOOM), 
+							x, 
 							Gdx.graphics.getHeight()/(2/ZOOM) + FrameEngine.TILE * 2
 							),
 					new Vector2(width, 2),
@@ -373,7 +390,7 @@ public class GraphicsHandler {
 					);
 			drawText(desc.description, 
 					new Vector2(
-							Gdx.graphics.getWidth()/(2/ZOOM), 
+							x, 
 							Gdx.graphics.getHeight()/(2/ZOOM) - FrameEngine.TILE
 							),
 					new Vector2(width, 3),
@@ -405,7 +422,7 @@ public class GraphicsHandler {
 	}
 
 	/**
-	 * 
+	 * Updates the camera in a locked position.
 	 */
 	private void updateCameraFixed(){
 		worldCam.position.set(
@@ -434,7 +451,10 @@ public class GraphicsHandler {
 		batch.setColor(DEFAULT_COLOR);
 		batch.begin();
 		GlyphLayout glyph = new GlyphLayout(font, text);
-		String spacedText = getSpacedText(((size.x - 2) * FrameEngine.TILE), text, fullText);
+		String spacedText = getSpacedText(
+				(Math.max((size.x - 2), 4) * FrameEngine.TILE), 
+				text, fullText
+				);
 		if (center){
 			font.draw(
 					batch, spacedText, 
@@ -465,7 +485,7 @@ public class GraphicsHandler {
 			String word = words[ii];
 			String testTextFuture = testText.concat(fullWords[ii]);
 			GlyphLayout futureCheck = new GlyphLayout(font, testTextFuture);
-			if (futureCheck.width >= (width - FrameEngine.TILE/4)){
+			if (futureCheck.width >= (width - FrameEngine.TILE/8)){
 				spacedText += "\n";
 				testText += "\n";
 				width += FrameEngine.TILE/2;
@@ -617,14 +637,14 @@ public class GraphicsHandler {
 	public void drawDebug() {
 		wipeScreen();
 	}
-	
-	final int blipTime = 20;
+
+	final int blipTime = 30;
 	private void setSelectColor(){
 		if (selectTimer.getCounter() % blipTime > blipTime/2){
-			batch.setColor(DEFAULT_COLOR);
+			batch.setColor(SELECT_COLOR2);
 		}
 		else{
-			batch.setColor(SELECT_COLOR);
+			batch.setColor(SELECT_COLOR1);
 		}
 	}
 

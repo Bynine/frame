@@ -1,7 +1,6 @@
 Enter the hole?
 >YES,NO
 <YES
-You summon your courage and enter.
 [ENTER]
 <NO
 That's fair, it is pretty dark.

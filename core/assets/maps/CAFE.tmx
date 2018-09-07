@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" nextobjectid="297">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" nextobjectid="309">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/shop.tsx"/>
  <tileset firstgid="265" source="tilesets/bookstore.tsx"/>
@@ -29,14 +29,14 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,73,74,0,0,0,73,74,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,89,90,0,0,0,89,90,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,73,74,0,350,0,73,74,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,89,90,0,358,0,89,90,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,377,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,364,354,365,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,121,122,122,123,0,0,356,361,362,363,357,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,353,354,355,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,121,122,122,123,0,0,0,361,362,363,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,353,355,0,0,0,353,355,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,361,363,0,0,0,361,363,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,364,355,0,0,0,353,365,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,356,361,363,357,0,356,361,363,357,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,58,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -50,12 +50,12 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,369,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,345,346,347,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,105,106,106,107,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,105,106,106,107,0,0,348,0,0,0,349,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,345,347,0,0,0,345,347,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,348,0,0,349,0,348,0,0,349,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -101,66 +101,87 @@
   <object id="287" x="448" y="392" width="32" height="56"/>
   <object id="288" x="480" y="384" width="128" height="64"/>
   <object id="289" x="608" y="96" width="80" height="352"/>
+  <object id="299" x="576" y="160" width="32" height="24"/>
+  <object id="300" x="320" y="312" width="32" height="32"/>
+  <object id="301" x="416" y="312" width="32" height="32"/>
+  <object id="302" x="480" y="312" width="32" height="32"/>
+  <object id="303" x="576" y="312" width="32" height="32"/>
+  <object id="304" x="512" y="216" width="32" height="32"/>
+  <object id="305" x="384" y="216" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="ENTITIES" opacity="0.64">
   <object id="290" name="portal" gid="6" x="448" y="416" width="32" height="32">
    <properties>
-    <property name="DEST" value="FOREST,74.5,19"/>
+    <property name="DEST" value="ORCHARD,33,43"/>
     <property name="TYPE" value="PORTAL"/>
    </properties>
   </object>
-  <object id="291" name="pumpkin cleaning up" gid="1" x="408" y="184" width="40" height="24">
+  <object id="291" name="pumpkin cleaning up" gid="1" x="328" y="216" width="24" height="24">
    <properties>
+    <property name="APPEAR" value="!ENTERED_SHRINE"/>
     <property name="DIALOGUE" value="pumpkin"/>
-    <property name="FLAG" value="!ENTERED_SHRINE"/>
     <property name="ID" value="PUMPKIN"/>
-    <property name="IMAGE" value="pumpkin"/>
-    <property name="INTERACTYDISP" value="-32"/>
+    <property name="IMAGE" value="pumpkin_sweep"/>
     <property name="TYPE" value="NPC"/>
    </properties>
   </object>
   <object id="292" name="pumpkin running cafe" gid="1" x="232" y="216" width="40" height="24">
    <properties>
+    <property name="APPEAR" value="ENTERED_SHRINE"/>
     <property name="DIALOGUE" value="pumpkin"/>
-    <property name="FLAG" value="ENTERED_SHRINE"/>
     <property name="ID" value="PUMPKIN"/>
     <property name="IMAGE" value="pumpkin"/>
     <property name="INTERACTYDISP" value="-32"/>
     <property name="TYPE" value="NPC"/>
    </properties>
   </object>
-  <object id="293" name="customer1" gid="1" x="376" y="232" width="40" height="24">
+  <object id="293" name="customer1" gid="1" x="384" y="240" width="32" height="32">
    <properties>
+    <property name="APPEAR" value="ENTERED_SHRINE"/>
     <property name="DIALOGUE" value="customer1"/>
-    <property name="FLAG" value="ENTERED_SHRINE"/>
     <property name="ID" value="CAT"/>
     <property name="IMAGE" value="cat"/>
     <property name="TYPE" value="NPC"/>
    </properties>
   </object>
-  <object id="294" name="customer2" gid="1" x="312" y="320" width="40" height="24">
+  <object id="294" name="customer2" gid="1" x="320" y="336" width="32" height="32">
    <properties>
+    <property name="APPEAR" value="ENTERED_SHRINE"/>
     <property name="DIALOGUE" value="customer2"/>
-    <property name="FLAG" value="ENTERED_SHRINE"/>
     <property name="ID" value="CUSTOMER2"/>
     <property name="IMAGE" value="shopkeeper"/>
     <property name="TYPE" value="NPC"/>
    </properties>
   </object>
-  <object id="295" name="customer3" gid="1" x="560" y="280" width="40" height="24">
+  <object id="295" name="customer3" gid="1" x="576" y="336" width="32" height="32">
    <properties>
+    <property name="APPEAR" value="ENTERED_SHRINE"/>
     <property name="DIALOGUE" value="customer3"/>
-    <property name="FLAG" value="ENTERED_SHRINE"/>
     <property name="ID" value="CUSTOMER3"/>
-    <property name="IMAGE" value="librarian"/>
+    <property name="IMAGE" value="beetle"/>
     <property name="TYPE" value="NPC"/>
    </properties>
   </object>
   <object id="296" name="left with orders" gid="1" x="440" y="376" width="48" height="24">
    <properties>
+    <property name="APPEAR" value="CAFE_QUEST"/>
     <property name="DIALOGUE" value="left_with_orders"/>
-    <property name="FLAG" value="!CAFE_QUEST"/>
     <property name="TYPE" value="DIALOGUE_TRIGGER"/>
+   </properties>
+  </object>
+  <object id="307" name="text" gid="1" x="448" y="160" width="32" height="40">
+   <properties>
+    <property name="TEXT" value="It's a menu. Today's special appears to be Spiced Pumpkin Cider."/>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="308" name="customer1partner" gid="1" x="512" y="240" width="32" height="32">
+   <properties>
+    <property name="APPEAR" value="ENTERED_SHRINE"/>
+    <property name="DIALOGUE" value="customer1partner"/>
+    <property name="ID" value="GUITARIST"/>
+    <property name="IMAGE" value="guitarist"/>
+    <property name="TYPE" value="NPC"/>
    </properties>
   </object>
  </objectgroup>

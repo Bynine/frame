@@ -1,5 +1,5 @@
 *TALK_WESTERN
-That outfit... You're from the West, aren't you?
+That outfit... You're from the West too, aren't you?
 You did well to leave that place. It gets worse there every day.
 Take my advice; never go back.
 &TALK_WESTERN

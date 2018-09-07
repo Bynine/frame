@@ -45,12 +45,13 @@ public class FrameEngine extends ApplicationAdapter {
 	private static Inventory inventory;
 	private static MainMenu mainMenu;
 	private static ShopMenu shopMenu;
+	private static PauseMenu pauseMenu;
 	private static AnswersMenu answersMenu;
 	private static String givenItemID = "";
 	private static Timer 
 	time = new Timer(0),
 	transition = new Timer(20);
-	// TODO: Measure transition by real time, not in game time
+	// TODO: Measure transition by real time, not in game time?
 	private static ArrayList<Timer> timers = new ArrayList<Timer>(Arrays.asList(
 			time, transition
 			));
@@ -73,6 +74,7 @@ public class FrameEngine extends ApplicationAdapter {
 		saveFile = new SaveFile(LOG);
 		mainMenu = new MainMenu();
 		shopMenu = new ShopMenu();
+		pauseMenu = new PauseMenu();
 		fpsLogger = new FPSLogger();
 		debugMenu = new DebugMenu();
 		AudioHandler.initialize();
@@ -120,6 +122,9 @@ public class FrameEngine extends ApplicationAdapter {
 		case SHOP:{
 			updateShop();
 		} break;
+		case INVENTORY: {
+			updateInventory();
+		}
 		}
 
 		inputHandler.update();
@@ -163,8 +168,8 @@ public class FrameEngine extends ApplicationAdapter {
 
 	private void updatePause(){
 		graphicsHandler.drawOverworld();
-		graphicsHandler.drawPause();
-		inventory.update();
+		graphicsHandler.drawMenu(pauseMenu);
+		pauseMenu.update();
 	}
 
 	private void updateDebug(){
@@ -184,6 +189,12 @@ public class FrameEngine extends ApplicationAdapter {
 		graphicsHandler.drawMenu(shopMenu);
 		shopMenu.update();
 	}
+	
+	private void updateInventory(){
+		graphicsHandler.drawOverworld();
+		graphicsHandler.drawItems();
+		inventory.update();
+	}
 
 	/**
 	 * Checks inputs from input handler and performs necessary actions.
@@ -192,6 +203,9 @@ public class FrameEngine extends ApplicationAdapter {
 		if (inputHandler.getPauseJustPressed()){
 			if (gameState == GameState.PAUSED){
 				gameState = GameState.OVERWORLD;
+			}
+			else if (gameState == GameState.INVENTORY){
+				gameState = GameState.PAUSED;
 			}
 			else if (gameState == GameState.OVERWORLD){
 				handlePause();
@@ -203,14 +217,13 @@ public class FrameEngine extends ApplicationAdapter {
 		if (inputHandler.getSaveJustPressed()){
 			handleSavePressed();
 		}
-		if (DEBUG && inputHandler.getDebugJustPressed()){
+		if (inputHandler.getDebugJustPressed()){ // TODO: Don't allow in final release
 			gameState = GameState.DEBUG;
 		}
 	}
 
 	private void handlePause(){
 		gameState = GameState.PAUSED;
-		inventory.open();
 	}
 
 	/**
@@ -324,6 +337,11 @@ public class FrameEngine extends ApplicationAdapter {
 		AudioHandler.startNewAudio("music/forest.ogg");
 		gameState = GameState.MAIN;
 	}
+	
+	public static void startInventory(){
+		inventory.open();
+		gameState = GameState.INVENTORY;
+	}
 
 	/**
 	 * Updates which entity the player will interact with when they hit Action.
@@ -380,6 +398,10 @@ public class FrameEngine extends ApplicationAdapter {
 	 */
 	public static void setRedirect(String string) {
 		dialogueTree.handleAnswer(string);
+	}
+	
+	public static void endDialogueTree() {
+		dialogueTree = null;
 	}
 
 	// GET
@@ -443,7 +465,7 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	private enum GameState{
-		OVERWORLD, PAUSED, DEBUG, MAIN, SHOP
+		OVERWORLD, PAUSED, DEBUG, MAIN, SHOP, INVENTORY
 	}
 	
 	public static void setGivenItemID(String newItemID){

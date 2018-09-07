@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
+
 import main.TSVReader;
 import text.Button;
 import main.FrameEngine;
@@ -48,6 +50,12 @@ public class DebugMenu extends AbstractMenu{
 	@Override
 	protected void selectItem() {
 		FrameEngine.initiateAreaChange(getActiveButton().getOutput().toString());
+	}
+	
+	public Vector2 getButtonPosition(int pos) {
+		Vector2 superPosition = super.getButtonPosition(pos);
+		superPosition.add(-FrameEngine.TILE*5, FrameEngine.TILE*2);
+		return superPosition;
 	}
 
 }

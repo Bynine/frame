@@ -69,11 +69,15 @@ public abstract class AbstractMenu {
 	}
 
 	protected void moveCursorVertical(int i){
-		AudioHandler.playSound(moveCursor);
+		playCursorSound();
 		cursor = MathUtils.clamp(cursor - i, 0, getList().size() - 1);
 	}
 
 	protected void moveCursorHorizontal(int i){
+		playCursorSound();
+	}
+	
+	protected final void playCursorSound(){
 		AudioHandler.playSound(moveCursor);
 	}
 
@@ -93,6 +97,10 @@ public abstract class AbstractMenu {
 				(Gdx.graphics.getHeight()/2) - (button.getDimensions().y * FrameEngine.TILE * posY)
 				);
 		return position;
+	}
+	
+	public final int getCursor(){
+		return cursor;
 	}
 
 }

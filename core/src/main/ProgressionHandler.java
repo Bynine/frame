@@ -26,6 +26,7 @@ public class ProgressionHandler {
 		statuetteFoundHelper(2);
 		statuetteFoundHelper(3);
 		checkStatuetteHelper();
+		// TODO: If a grub is found, tell the player something about where its mother is.
 	}
 	
 	/**

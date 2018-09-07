@@ -28,8 +28,8 @@ And the third one goes to...
 Got all that?
 &ACCEPTED_CAFE_JOB,GIVEN_ORDER1,GIVEN_ORDER2,GIVEN_ORDER3
 *!CAFE_QUEST
-*COMPLETED_CAFE_JOB
+*CAFE_REWARD
 You did it!!!!
 [GIVE_TREASURE4][NOSPEAKER]You received Treasure 4!
-&COMPLETED_CAFE_JOB
+&CAFE_REWARD
 Thanks again!!!

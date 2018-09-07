@@ -1,11 +1,11 @@
 KEEPSAKE	satchel	NONE	For holding something special
 APPLE	apple	FOOD,SWEET	Pleasantly juicy
 PUMPKIN	pumpkin	FOOD	Great for pies
-SHELL1	nice shell	SHELL	The red color is pretty
-SHELL2	cool shell	SHELL	The yellow color is comfortable
-SHELL3	rad shell	SHELL	The blue color is suave
+SHELL1	nice shell	SHELL	The red color is charming
+SHELL2	cool shell	SHELL	The yellow color is soothing
+SHELL3	rad shell	SHELL	The blue color is elegant
 MUSHROOM	mushroom	NATURAL	Pleasantly shaped toadstool
-SHOVEL	shovel	NONE	Dig up holes
+SHOVEL	shovel	NONE	Unsurprisingly good at digging
 BAIT	bait	NONE	Attracts fish
 TREASURE1	Ultra Shell	NONE	???
 TREASURE2	Mushroom of Health	NONE	???
@@ -19,3 +19,4 @@ ORDER3	ORDER3	NONE	???
 GRUB1	Chubby Grub	NONE	This grub loves to eat
 GRUB2	Nubby Grub	NONE	This grub has little bumps
 GRUB3	Grubby Grub	NONE	This grub is a bit dirty
+GOAL	Seed of Hope	NONE	Said to grow in any condition

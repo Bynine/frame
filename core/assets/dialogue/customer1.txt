@@ -1,9 +1,14 @@
-Oh, do you have my order?
+ADD DIALOGUE
+&ACCEPTED_CAFE_JOB
+And so I - oh, do you have my drink?
 {
 <ORDER1
 *GIVEN_ORDER1
-[REMOVE_ITEM]Thank-Q
+[REMOVE_ITEM]Thanks! Anyhow, as I was saying...
+I tried touching that statue in the garden... And I heard a voice!
+No lie! It told me something about a traveller from another land being here.
+Mmhmm, I thought so too. We haven't seen many travellers lately, have we?
 <OTHER
-WTF brah
+Umm, this isn't what I asked for...
 &GIVEN_ORDER1
-Thanks again
+Thanks again for the drink, it's top notch! Jackie always makes it just how I want it.

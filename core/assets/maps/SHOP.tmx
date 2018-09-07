@@ -176,6 +176,7 @@ the desk.)</property>
   </object>
   <object id="226" name="cat" gid="1" x="488" y="280" width="32" height="24">
    <properties>
+    <property name="APPEAR" value="!ENTERED_SHRINE"/>
     <property name="DIALOGUE" value="cat"/>
     <property name="ID" value="CAT"/>
     <property name="IMAGE" value="cat"/>

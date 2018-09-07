@@ -48,11 +48,13 @@ public class PortalHole extends InteractableEntity {
 	@Override
 	public void getMessage(String message){
 		if (message.equals("DIG")){
+			//System.out.println("This hole to " + destArea + " is open!");
 			opened = true;
 			FrameEngine.getSaveFile().setFlag(flag, true);
 			FrameEngine.startDialogueTree(new DialogueTree("It looks just wide enough to enter."));
 		}
 		if (message.equals("ENTER")){
+			FrameEngine.endDialogueTree();
 			FrameEngine.initiateAreaChange(destArea, destLocation);
 		}
 	}
