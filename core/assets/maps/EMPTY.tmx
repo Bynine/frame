@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" nextobjectid="227">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" nextobjectid="228">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/shop.tsx"/>
  <layer name="FLOOR" width="25" height="16">
@@ -99,6 +99,13 @@
     <property name="ID" value="KAMI"/>
     <property name="IMAGE" value="kami"/>
     <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="227" name="shovel" gid="2" x="456" y="288" width="24" height="24">
+   <properties>
+    <property name="FLAG" value="ITEM_SHOVEL"/>
+    <property name="ID" value="SHOVEL"/>
+    <property name="TYPE" value="ITEM"/>
    </properties>
   </object>
  </objectgroup>

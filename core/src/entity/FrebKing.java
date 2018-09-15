@@ -1,13 +1,9 @@
 package entity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
 import main.AudioHandler;
 import main.FrameEngine;
 import text.DialogueTree;
@@ -19,12 +15,9 @@ public class FrebKing extends NPC {
 	private final Timer croakTimer = new Timer(120);
 	private final Sound 
 	croak = Gdx.audio.newSound(Gdx.files.internal("sfx/speech/croak.wav"));
-	private final ArrayList<Animation<TextureRegion>> 
-	normal = Animator.createAnimation(60, "sprites/npcs/frebking.png", 2, 1),
-	happy = Animator.createAnimation(60, "sprites/npcs/frebking_happy.png", 2, 1);
 
 	public FrebKing(float x, float y, int width, int height) {
-		super(x, y, 0, 0, width, height, "FREBKING", "dummy", "");
+		super(x, y, 0, 0, width, height, "FREBKING", "frebking", "", Layer.NORMAL);
 		checkFrebShellCounter(1);
 		checkFrebShellCounter(2);
 		checkFrebShellCounter(3);
@@ -52,9 +45,9 @@ public class FrebKing extends NPC {
 	@Override
 	public void updateImage(){
 		if (happy()) {
-			image = happy.get(0).getKeyFrame(FrameEngine.getTime());
+			image = anims.get(1).get(0).getKeyFrame(FrameEngine.getTime());
 		}
-		else image = normal.get(0).getKeyFrame(FrameEngine.getTime());
+		else image = anims.get(0).get(0).getKeyFrame(FrameEngine.getTime());
 	}
 	
 	@Override

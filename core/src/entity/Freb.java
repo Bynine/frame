@@ -8,6 +8,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import main.Animator;
 import main.AudioHandler;
 import main.FrameEngine;
 import text.DialogueTree;
@@ -31,7 +32,7 @@ public class Freb extends NPC {
 	chirp = Gdx.audio.newSound(Gdx.files.internal("sfx/speech/croak.wav"));
 
 	public Freb(float x, float y, int width, int height, String flag) {
-		super(x, y, 0, 0, width, height, "FREB", "dummy", "");
+		super(x, y, 0, 0, width, height, "FREB", "dummy", "", Layer.NORMAL);
 		shell = FrameEngine.getSaveFile().getCounter(flag);
 		this.flag = flag;
 		timerList.add(chirpTimer);
@@ -67,6 +68,7 @@ public class Freb extends NPC {
 	
 	@Override
 	public void getMessage(String message){
+		super.getMessage(message);
 		switch(message){
 		case "SHELL1": setShell(message, 1); break;
 		case "SHELL2": setShell(message, 2); break;

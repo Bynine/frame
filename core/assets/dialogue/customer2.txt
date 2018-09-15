@@ -1,15 +1,19 @@
+Hello there! You wouldn't happen to know how long my drink will take, do you?
+I might turn into dust if I don't drink soon! [ANIM_1]Hahaha!
+&ACCEPTED_CAFE_JOB
 Oh, hello there, dear. Is that my drink you have there?
 {
 <ORDER2
 *GIVEN_ORDER2
 [REMOVE_ITEM]Thank you, dearie.
 You know, your outfit... It reminds me of the clothing of the people of a country I saw when I was young.
-[LAUGH]Yes, that was a long time ago! Hahaha!
-Back when I used to travel, I visited a country far to the west.
+[ANIM_1]Yes, that was a long time ago! Hahaha!
+[ANIM_0]Back when I used to travel, I visited a country far to the west.
 It was very beautiful... You should have seen it.
-But these days, I hear it's destitute. I'm not sure what happened, but it's a real pity.
-Either way, sorry to bore you with my old tales. [LAUGH]Hahaha!
+But these days, I hear it's destitute. I'm not sure what happened. It's a real pity...
+Either way, sorry to bore you with this old man's ramblings. [ANIM_1]Hahaha!
 <OTHER
-Hrmm... I don't recall ordering that. Am I having a senior moment? [LAUGH]Hahaha!
+Hrmm... I don't recall ordering that. Am I having a senior moment? [ANIM_1]Hahaha!
 &GIVEN_ORDER2
 Thank you again for the drink, dearie!
+With those serving skills, you should work here full time! [ANIM_1]Hahaha!

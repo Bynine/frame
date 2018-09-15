@@ -15,8 +15,8 @@ import text.Button;
  */
 public class Inventory extends AbstractMenu{
 
-	private final ArrayList<String> items = new ArrayList<String>();
-	private final ArrayList<Button> descs = new ArrayList<Button>();
+	protected final ArrayList<String> items = new ArrayList<String>();
+	protected final ArrayList<Button> descs = new ArrayList<Button>();
 
 	Inventory(){
 //		for (int ii = 0; ii < 30; ++ii){
@@ -48,12 +48,13 @@ public class Inventory extends AbstractMenu{
 	/**
 	 * descs will have a description for each item in items.
 	 */
+	@Override
 	public void open(){
-		cursor = 0;
+		super.open();
 		updateDescriptions();
 	}
 
-	private void updateDescriptions(){
+	protected void updateDescriptions(){
 		descs.clear();
 		for (String item: items){
 			descs.add(new Button(2, 2, item, new ItemDescription(item)));

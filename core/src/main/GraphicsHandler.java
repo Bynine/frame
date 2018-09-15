@@ -38,13 +38,14 @@ public class GraphicsHandler {
 	DEFAULT_COLOR = new Color(1, 1, 1, 1),
 	SELECT_COLOR1 = new Color(0.75f, 0.85f, 0.95f, 1.0f),
 	SELECT_COLOR2 = new Color(0.85f, 0.85f, 0.85f, 1.0f),
+	INVALID_COLOR = new Color(0.5f, 0.65f, 0.7f, 1.0f),
 	WIPE_COLOR = new Color(0.05f, 0.07f, 0.12f, 1);
 
 	protected SpriteBatch batch;
 	protected final OrthographicCamera worldCam = new OrthographicCamera();
 	protected final OrthographicCamera centerCam = new OrthographicCamera();
 	protected OrthogonalTiledMapRenderer renderer;
-	protected BitmapFont font, debugFont;
+	protected BitmapFont font, debugFont, warningFont, textFont;
 	protected ShapeRenderer shapeRenderer;
 	public static final float ZOOM = 1.0f/2.0f;
 	private final EntityDepthSorter sorter = new EntityDepthSorter();
@@ -83,7 +84,10 @@ public class GraphicsHandler {
 		font = generator.generateFont(parameter);
 		parameter.color = new Color(1, 1, 1, 1);
 		debugFont = generator.generateFont(parameter);
+		parameter.color = new Color(0.8f, 0.1f, 0.05f, 1);
+		warningFont = generator.generateFont(parameter);
 		generator.dispose();
+		textFont = font;
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setAutoShapeType(true);
 	}
@@ -142,11 +146,11 @@ public class GraphicsHandler {
 			drawTalkingBubble();
 		}
 
-		drawOverlay();
-
 		if (null != FrameEngine.getCurrentTextbox()) {
 			drawDefaultTextbox(FrameEngine.getCurrentTextbox());
 		}
+
+		drawOverlay();
 
 		if (FrameEngine.DRAW){
 			shapeRenderer.setProjectionMatrix(worldCam.combined);
@@ -324,22 +328,27 @@ public class GraphicsHandler {
 	}
 
 	/**
-	 * Draws the item menu in a bunch of nice little boxes.
+	 * Draws an item menu in a bunch of nice little boxes.
 	 */
-	void drawItems(){
+	void drawItems(AbstractMenu menu, boolean price){
 		batch.setProjectionMatrix(centerCam.combined);
 		int ii = 0;
-		int cursor = FrameEngine.getInventory().getCursor();
+		int cursor = menu.getCursor();
 		int stipend = Math.max( 0, (5 * ((int)(cursor/5))) - 15 );
 		Vector2 range = new Vector2(stipend, stipend+20);
-		for (Button button: FrameEngine.getInventory().getList()){
+		for (Button button: menu.getList()){
 			if (range.x <= ii && range.y > ii){
-				if (button == FrameEngine.getInventory().getActiveButton()){
+				ItemDescription desc = (ItemDescription)button.getOutput();
+				if (price){
+					if (desc.tooExpensive()){
+						batch.setColor(INVALID_COLOR);
+					}
+				}
+				if (button == menu.getActiveButton()){
 					setSelectColor();
 				}
 				final int dim = 2;
-				Vector2 position = FrameEngine.getInventory().getButtonPosition(ii - stipend);
-				ItemDescription desc = (ItemDescription)button.getOutput();
+				Vector2 position = menu.getButtonPosition(ii - stipend);
 				drawTextboxTiles((int)position.x, (int)position.y, dim, dim, 0);
 				batch.begin();
 				batch.draw(
@@ -353,20 +362,24 @@ public class GraphicsHandler {
 		}
 		batch.begin();
 		float center = FrameEngine.TILE * 4.5f;
-		if (range.y < FrameEngine.getInventory().getList().size()) {
+		if (range.y < menu.getList().size()) {
 			batch.draw(arrowDown, center, FrameEngine.TILE * 0.125f);
 		}
 		if (range.x > 0) {
 			batch.draw(arrowUp, center, FrameEngine.TILE * 8.875f);
 		}
 		batch.end();
-		drawItemDescription();
+		drawText("Press ENTER to finish.", 
+				new Vector2(Gdx.graphics.getWidth()/(1.8f/ZOOM), FrameEngine.TILE), 
+				new Vector2(8, 2), 
+				true);
+		drawItemDescription(menu, price);
 	}
 
 	/**
 	 * Draws the description of the currently selected item.
 	 */
-	private void drawItemDescription(){
+	private void drawItemDescription(AbstractMenu menu, boolean price){
 		float itemBoxWidth = 6.0f;
 		drawText(Integer.toString(FrameEngine.getSaveFile().getMoney()) + " ACORNS", 
 				new Vector2(
@@ -376,8 +389,8 @@ public class GraphicsHandler {
 				new Vector2(itemBoxWidth, 2),
 				true
 				);
-		if (null != FrameEngine.getInventory().getActiveButton()){
-			ItemDescription desc = ((ItemDescription)FrameEngine.getInventory().getActiveButton().getOutput());
+		if (null != menu.getActiveButton()){
+			ItemDescription desc = ((ItemDescription)menu.getActiveButton().getOutput());
 			final int width = 7;
 			final float x = (FrameEngine.TILE * 2) + Gdx.graphics.getWidth()/(2/ZOOM);
 			drawText(desc.name, 
@@ -396,6 +409,19 @@ public class GraphicsHandler {
 					new Vector2(width, 3),
 					false
 					);
+			if (price){
+				if (desc.tooExpensive()) {
+					textFont = warningFont;
+				}
+				drawText("COST: " + desc.price + " ACORN(S)", 
+						new Vector2(
+								x, 
+								Gdx.graphics.getHeight()/(2/ZOOM) - FrameEngine.TILE * 3
+								),
+						new Vector2(width, 2),
+						false
+						);
+			}
 		}
 	}
 
@@ -456,20 +482,21 @@ public class GraphicsHandler {
 				text, fullText
 				);
 		if (center){
-			font.draw(
+			textFont.draw(
 					batch, spacedText, 
 					position.x + FrameEngine.TILE * size.x/2 - glyph.width/2, 
 					position.y + FrameEngine.TILE * size.y/2 + font.getCapHeight()/2
 					);
 		}
 		else{
-			font.draw(
+			textFont.draw(
 					batch, spacedText, 
 					position.x + FrameEngine.TILE/2, 
 					position.y + (FrameEngine.TILE * (size.y - 0.5f)) 
 					);
 		}
 		batch.end();
+		textFont = font;
 	}
 
 	/**
@@ -640,11 +667,22 @@ public class GraphicsHandler {
 
 	final int blipTime = 30;
 	private void setSelectColor(){
+		Color currColor = batch.getColor();
 		if (selectTimer.getCounter() % blipTime > blipTime/2){
-			batch.setColor(SELECT_COLOR2);
+			batch.setColor(
+					currColor.r - 0.25f,
+					currColor.g - 0.15f,
+					currColor.b - 0.05f,
+					1
+					);
 		}
 		else{
-			batch.setColor(SELECT_COLOR1);
+			batch.setColor(
+					currColor.r - 0.12f,
+					currColor.g - 0.12f,
+					currColor.b - 0.12f,
+					1
+					);
 		}
 	}
 

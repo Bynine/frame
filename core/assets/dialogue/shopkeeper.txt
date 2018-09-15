@@ -1,12 +1,14 @@
 *INTRO_SHOPKEEPER
-Hello there, stranger! Welcome to Wabika. Looking for something in particular?
+[ANIM_1]Howdy there, stranger! [ANIM_0]Welcome to Wabika. Looking for something in particular?
 [TALK][SPEED=6]...[NSPEED]Oh, is that so...
 Interesting. I gotta admit, I don't know much about that sort of thing.
 But tell you what - try visiting my friend up northeast. They run a little book store.
 I'll bet you anything they've got some old books on what you're looking for.
 Good luck! Come again soon!
 &INTRO_SHOPKEEPER
-Hello again! Have you headed up northeast yet? I definitely recommend it.
+[ANIM_1]Howdy again! [ANIM_0]Have you headed up northeast yet? I definitely recommend it.
 Unfortunately, I don't have anything to sell right now, but feel free to look around.
+And be sure to check back soon! I've always got new stuff in stock.
 &TALK_LIBRARIAN
-Hello again, stranger! I don't have anything to sell right now, but feel free to look around.
+[ANIM_1]Howdy again, stranger! [ANIM_0]I don't have anything to sell right now, but feel free to look around.
+And be sure to check back soon! I've always got new stuff in stock.

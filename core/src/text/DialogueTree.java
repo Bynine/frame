@@ -212,4 +212,10 @@ public class DialogueTree{
 		return activeBranch.getTextbox();
 	}
 
+	public void messageSpeaker() {
+		if (null != speaker){
+			speaker.getMessage("ANIM_0");
+		}
+	}
+
 }

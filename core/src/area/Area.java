@@ -138,7 +138,7 @@ public class Area {
 	}
 	
 	public enum Terrain{
-		NORMAL, WOOD, WATER
+		NORMAL, WOOD, WATER, STONE
 	}
 
 	public void dispose() {

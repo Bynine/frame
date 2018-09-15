@@ -27,7 +27,7 @@ public class Command {
 			FrameEngine.getSaveFile().addToCounter(1, ProgressionHandler.shellFreb);
 		} break;
 		default: {
-			FrameEngine.logger.warning("Can't activate command with ID " + ID);
+			FrameEngine.logger.fine("Can't activate command with ID " + ID);
 		} break;
 		}
 	}

@@ -1,23 +1,49 @@
 package main;
 
-import java.util.List;
+public class ShopMenu extends Inventory {
 
-import text.Button;
-
-public class ShopMenu extends AbstractMenu {
+	ShopMenu(){
+	}
 	
-	// TODO: Design this first
-
 	@Override
-	public List<Button> getList() {
-		// TODO Auto-generated method stub
-		return null;
+	public void open(){
+		items.clear();
+		descs.clear();
+		addIfNotPurchased("SHOVEL");
+		addIfNotPurchased("SHELL3");
+		super.open();
+	}
+	
+	/**
+	 * Adds an item to the shop menu only if the player hasn't purchased it before.
+	 */
+	private void addIfNotPurchased(String id){
+		if (!FrameEngine.getSaveFile().getFlag("SHOP_" + id)){
+			items.add(id);
+		}
 	}
 
 	@Override
 	protected void selectItem() {
-		// TODO Auto-generated method stub
-
+		ItemDescription desc = (ItemDescription)getActiveButton().getOutput();
+		if (desc.tooExpensive()){
+			// TODO: Display something
+		}
+		else{
+			FrameEngine.getSaveFile().addMoney(-desc.price);
+			String id = desc.id;
+			FrameEngine.getSaveFile().setFlag("SHOP_" + id, true);
+			FrameEngine.getInventory().addItem(id);
+			removeItem(id);
+			cursor = 0;
+		}
+		if (outOfStock()){
+			FrameEngine.endShop();
+		}
+	}
+	
+	public boolean outOfStock(){
+		return items.size() == 0;
 	}
 
 }

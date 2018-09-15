@@ -86,6 +86,8 @@ public class Textbox {
 	private Object parseCommand(String commandID){
 		return new Command(commandID);
 	}
+	
+	private int talkTime = 0;
 
 	/**
 	 * Change many characters are drawn to screen and play voice clip.
@@ -100,7 +102,11 @@ public class Textbox {
 			else{
 				Character c = (Character)currChar;
 				if (!Character.isWhitespace(c)){
+					talkTime ++;
+				}
+				if (talkTime % 4 == 3){
 					AudioHandler.playSound(text_sound);
+					talkTime = 0;
 				}
 			}
 			textPos++;
@@ -144,9 +150,10 @@ public class Textbox {
 	/**
 	 * The entire string will now be drawn.
 	 */
+	// TODO: Remove?
 	public void complete(){
-		textPos = characters.size();
-		AudioHandler.playSound(text_sound);
+//		textPos = characters.size();
+//		AudioHandler.playSound(text_sound);
 	}
 
 	/**
@@ -181,7 +188,13 @@ public class Textbox {
 	private String getText(int length){
 		StringBuilder text = new StringBuilder();
 		if (null != speaker && speaker instanceof NPC) {
-			text.append(((NPC)speaker).getName() + ": ");
+			boolean name = true;
+			Object firstChar = characters.get(0);
+			if (firstChar instanceof Command){
+				Command firstCommand = (Command)firstChar;
+				name = (!firstCommand.getID().equals("NOSPEAKER"));
+			}
+			if (name) text.append(((NPC)speaker).getName() + ": ");
 		}
 		for (int ii = 0; ii < length; ++ii){
 			Object obj = characters.get(ii);

@@ -25,7 +25,7 @@ public class SaveFile {
 	SaveFile(boolean verbose){
 		this.verbose = verbose;
 		// TODO: remove
-		//flags.put("ENTERED_SHRINE",  true);
+		flags.put("ENTERED_SHRINE",  true);
 		if (!FrameEngine.SAVE) return;
 		Preferences preferences = Gdx.app.getPreferences(saveFile);
 		money = preferences.getInteger(moneyKey);

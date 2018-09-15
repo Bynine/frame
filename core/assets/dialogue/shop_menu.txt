@@ -1,0 +1,6 @@
+[ANIM_1]Howdy again, stranger! [ANIM_0]Care to buy something?
+>YES,NO
+<YES
+[BUY]
+<NO
+Oh, just taking a look around? Well, feel free to stop by again any time!

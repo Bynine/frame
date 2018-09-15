@@ -1,5 +1,5 @@
-This forest is full of secrets. 
-I would know, as I'm a beetle.
-&ITEM_APPLE
-I couldn't help but notice you have an apple.
-Oh, no, I don't want it or anything. Please enjoy your delicious apple!
+*TALK_BEETLE2
+You know, even if you've talked to someone once, they might have more to say later.
+It's always a good idea to check back on your friends on occasion.
+&TALK_BEETLE2
+Oh, you're a clever one, aren't you?

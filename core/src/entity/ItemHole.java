@@ -23,6 +23,7 @@ public class ItemHole extends Item {
 	
 	@Override
 	public void getMessage(String message){
+		super.getMessage(message);
 		if (message.equals("DIG")){
 			super.interact();
 		}

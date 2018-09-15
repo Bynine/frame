@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import area.Area.Terrain;
+import main.Animator;
 import main.AudioHandler;
 import main.FrameEngine;
 import timer.Timer;
@@ -38,6 +39,7 @@ public class Player extends Entity{
 	private static final Sound 
 	stepGrass = Gdx.audio.newSound(Gdx.files.internal("sfx/step_grass.wav")),
 	stepWood = Gdx.audio.newSound(Gdx.files.internal("sfx/step_wood.wav")),
+	stepStone = Gdx.audio.newSound(Gdx.files.internal("sfx/step_stone.wav")),
 	stepWater = Gdx.audio.newSound(Gdx.files.internal("sfx/step_water.wav"));
 
 	public Player(float x, float y) {
@@ -136,6 +138,9 @@ public class Player extends Entity{
 		} break;
 		case WATER: {
 			step = stepWater;
+		} break;
+		case STONE: {
+			step = stepStone;
 		} break;
 		case NORMAL:
 		default: step = stepGrass;

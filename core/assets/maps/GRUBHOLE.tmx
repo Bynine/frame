@@ -104,11 +104,11 @@
  <objectgroup name="ENTITIES" opacity="0.64">
   <object id="277" name="portal" gid="6" x="304" y="504" width="96" height="64">
    <properties>
-    <property name="DEST" value="ORCHARD,50,40"/>
+    <property name="DEST" value="ORCHARD,51,38"/>
     <property name="TYPE" value="PORTAL"/>
    </properties>
   </object>
-  <object id="282" name="grub reward" gid="2" x="360" y="208" width="24" height="24">
+  <object id="282" name="grub reward" gid="2" x="376" y="200" width="24" height="24">
    <properties>
     <property name="APPEAR" value="GRUB_REWARD"/>
     <property name="FLAG" value="ITEM_TREASURE3"/>
@@ -116,7 +116,7 @@
     <property name="TYPE" value="ITEM"/>
    </properties>
   </object>
-  <object id="283" name="grubmom" gid="1" x="344" y="160" width="48" height="24">
+  <object id="283" name="grubmom" gid="1" x="360" y="168" width="56" height="32">
    <properties>
     <property name="DIALOGUE" value="grubmom"/>
     <property name="ID" value="GRUBMOM"/>
@@ -126,14 +126,16 @@
   </object>
   <object id="284" name="grub1" gid="1" x="232" y="280" width="24" height="24">
    <properties>
+    <property name="APPEAR" value="RETURNED_GRUB1"/>
     <property name="DIALOGUE" value="grub1"/>
     <property name="ID" value="GRUB1"/>
     <property name="IMAGE" value="grub1"/>
     <property name="TYPE" value="NPC"/>
    </properties>
   </object>
-  <object id="285" name="grub2" gid="1" x="432" y="240" width="24" height="24">
+  <object id="285" name="grub2" gid="1" x="440" y="248" width="24" height="24">
    <properties>
+    <property name="APPEAR" value="RETURNED_GRUB3"/>
     <property name="DIALOGUE" value="grub2"/>
     <property name="ID" value="GRUB2"/>
     <property name="IMAGE" value="grub2"/>
@@ -142,6 +144,7 @@
   </object>
   <object id="286" name="grub3" gid="1" x="400" y="352" width="24" height="24">
    <properties>
+    <property name="APPEAR" value="RETURNED_GRUB3"/>
     <property name="DIALOGUE" value="grub3"/>
     <property name="ID" value="GRUB3"/>
     <property name="IMAGE" value="grub3"/>

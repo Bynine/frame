@@ -12,6 +12,7 @@ public class ItemDescription {
 	public final String name;
 	public final String description;
 	public final String[] attributes;
+	public final int price;
 	public final TextureRegion icon;
 
 	ItemDescription(String id){
@@ -21,6 +22,11 @@ public class ItemDescription {
 		name = data[1];
 		attributes = data[2].split(",");
 		description = data[3];
+		price = Integer.parseInt(data[4]);
+	}
+	
+	public boolean tooExpensive(){
+		return price > FrameEngine.getSaveFile().getMoney();
 	}
 	
 	@Override

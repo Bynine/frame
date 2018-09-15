@@ -17,17 +17,21 @@ import entity.DialogueTrigger;
 import entity.Door;
 import entity.Emitter;
 import entity.Entity;
+import entity.Entity.Layer;
 import entity.Finish;
 import entity.Freb;
 import entity.FrebKing;
 import entity.Glimmer;
+import entity.GrubMom;
 import entity.Secret;
+import entity.Shopkeeper;
 import entity.Item;
 import entity.ItemHole;
 import entity.NPC;
 import entity.Portal;
 import entity.PortalHole;
 import entity.ShrineDoor;
+import entity.SummonObject;
 import main.FrameEngine;
 
 /**
@@ -80,26 +84,44 @@ public class EntityLoader {
 		} break;
 		case "npc": {
 			String id = properties.get("ID", String.class);
+			String dialoguePath = properties.get("DIALOGUE", String.class);
+			int interactXDisp = 0;
+			int interactYDisp = 0;
+			Layer layer = Layer.NORMAL;
+			if (properties.containsKey("INTERACTXDISP")) {
+				interactXDisp = Integer.parseInt(properties.get("INTERACTXDISP", String.class));
+			}
+			if (properties.containsKey("INTERACTYDISP")) {
+				interactYDisp = Integer.parseInt(properties.get("INTERACTYDISP", String.class));
+			}
+			if (properties.containsKey("LAYER")){
+				layer = Layer.valueOf(properties.get("LAYER", String.class));
+			}
+			String imagePath = properties.get("IMAGE", String.class);
+
 			if (id.equals("FREBKING")){
 				entities.add(new FrebKing(x, y, width, height));
 			}
-			else{
-				String dialoguePath = properties.get("DIALOGUE", String.class);
-				int interactXDisp = 0;
-				int interactYDisp = 0;
-				if (properties.containsKey("INTERACTXDISP")) {
-					interactXDisp = Integer.parseInt(properties.get("INTERACTXDISP", String.class));
-				}
-				if (properties.containsKey("INTERACTYDISP")) {
-					interactYDisp = Integer.parseInt(properties.get("INTERACTYDISP", String.class));
-				}
-				String imagePath = properties.get("IMAGE", String.class);
-
-				entities.add(new NPC(
+			else if (id.equals("SHOPKEEPER")){
+				entities.add(new Shopkeeper(
 						x, y, 
 						interactXDisp, interactYDisp,
 						width, height,
 						id, imagePath, dialoguePath));
+			}
+			else if (id.equals("GRUBMOM")){
+				entities.add(new GrubMom(
+						x, y, 
+						interactXDisp, interactYDisp,
+						width, height,
+						id, imagePath, dialoguePath, layer));
+			}
+			else {
+				entities.add(new NPC(
+						x, y, 
+						interactXDisp, interactYDisp,
+						width, height,
+						id, imagePath, dialoguePath, layer));
 			}
 		} break;
 		case "desc": {
@@ -165,6 +187,11 @@ public class EntityLoader {
 		case "dialogue_trigger":{
 			String dialoguePath = properties.get("DIALOGUE", String.class);
 			entities.add(new DialogueTrigger(x, y, width, height, dialoguePath));
+		} break;
+		case "summonobject":{
+			String image = properties.get("IMAGE", String.class);
+			String flag = properties.get("FLAG", String.class);
+			entities.add(new SummonObject(x, y, image, flag));
 		} break;
 		default: {
 			FrameEngine.logger.log( Level.WARNING, 

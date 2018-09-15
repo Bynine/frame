@@ -102,5 +102,9 @@ public abstract class AbstractMenu {
 	public final int getCursor(){
 		return cursor;
 	}
+	
+	public void open(){
+		cursor = 0;
+	}
 
 }

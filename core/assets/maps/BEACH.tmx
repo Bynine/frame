@@ -376,7 +376,7 @@
     <property name="TYPE" value="FREB"/>
    </properties>
   </object>
-  <object id="247" name="shell1" gid="2" x="2288" y="784" width="24" height="24">
+  <object id="247" name="shell1" gid="2" x="2992" y="408" width="24" height="24">
    <properties>
     <property name="FLAG" value="ITEM_SHELL1_BEACH"/>
     <property name="ID" value="SHELL1"/>
@@ -387,13 +387,6 @@
    <properties>
     <property name="FLAG" value="ITEM_SHELL2_BEACH"/>
     <property name="ID" value="SHELL2"/>
-    <property name="TYPE" value="ITEM"/>
-   </properties>
-  </object>
-  <object id="283" name="shell3" gid="2" x="2992" y="408" width="24" height="24">
-   <properties>
-    <property name="FLAG" value="ITEM_SHELL3_BEACH"/>
-    <property name="ID" value="SHELL3"/>
     <property name="TYPE" value="ITEM"/>
    </properties>
   </object>

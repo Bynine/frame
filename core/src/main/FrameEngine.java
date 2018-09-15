@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.badlogic.gdx.ApplicationAdapter;
@@ -31,7 +32,7 @@ public class FrameEngine extends ApplicationAdapter {
 	INVIS	= false	&& DEBUG,
 	SAVE	= false	|| !DEBUG;
 
-	public static String startAreaName = DEBUG ? "BEACH" : "FOREST";
+	public static String startAreaName = DEBUG ? "CAFE" : "FOREST";
 	private static Player player;
 	private static FPSLogger fpsLogger;
 	private static GameState gameState = GameState.OVERWORLD;
@@ -69,6 +70,7 @@ public class FrameEngine extends ApplicationAdapter {
 	@Override
 	public void create() {
 		player = new Player(0, 0);
+		logger.setLevel(Level.ALL);
 
 		inventory = new Inventory();
 		saveFile = new SaveFile(LOG);
@@ -94,6 +96,11 @@ public class FrameEngine extends ApplicationAdapter {
 	@Override
 	public void render() {
 		elapsedTime = 60.0f * getGameSpeed() * (Gdx.graphics.getDeltaTime());
+		// Don't compensate for less than 6 FPS
+		final float maxTime = 10;
+		if (elapsedTime/getGameSpeed() > maxTime) {
+			elapsedTime = maxTime;
+		}
 		if (Gdx.graphics.getDeltaTime() > 1) {
 			printDebugOnLag();
 		}
@@ -161,7 +168,7 @@ public class FrameEngine extends ApplicationAdapter {
 			}
 		}
 		if (inventoryRequest){
-			graphicsHandler.drawItems();
+			graphicsHandler.drawItems(inventory, false);
 			inventory.update();
 		}
 	}
@@ -186,13 +193,13 @@ public class FrameEngine extends ApplicationAdapter {
 	
 	private void updateShop(){
 		graphicsHandler.drawOverworld();
-		graphicsHandler.drawMenu(shopMenu);
+		graphicsHandler.drawItems(shopMenu, true);
 		shopMenu.update();
 	}
 	
 	private void updateInventory(){
 		graphicsHandler.drawOverworld();
-		graphicsHandler.drawItems();
+		graphicsHandler.drawItems(inventory, false);
 		inventory.update();
 	}
 
@@ -206,6 +213,9 @@ public class FrameEngine extends ApplicationAdapter {
 			}
 			else if (gameState == GameState.INVENTORY){
 				gameState = GameState.PAUSED;
+			}
+			else if (gameState == GameState.SHOP){
+				endShop();
 			}
 			else if (gameState == GameState.OVERWORLD){
 				handlePause();
@@ -223,6 +233,7 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	private void handlePause(){
+		pauseMenu.open();
 		gameState = GameState.PAUSED;
 	}
 
@@ -242,6 +253,7 @@ public class FrameEngine extends ApplicationAdapter {
 					inventoryRequest = false;
 				}
 				else if (dialogueTree.finished()){
+					dialogueTree.messageSpeaker();
 					dialogueTree = null;
 				}
 				else{
@@ -328,7 +340,6 @@ public class FrameEngine extends ApplicationAdapter {
 		newArea = new Area(startAreaName);
 		newPosition.set(newArea.getStartLocation());
 		changeArea();
-		//player.getPosition().set(newPosition.x, (currArea.mapHeight) - (newPosition.y));
 		gameState = GameState.OVERWORLD;
 		transition.reset();
 	}
@@ -342,6 +353,17 @@ public class FrameEngine extends ApplicationAdapter {
 		inventory.open();
 		gameState = GameState.INVENTORY;
 	}
+
+	public static void startShop() {
+		endDialogueTree();
+		shopMenu.open();
+		gameState = GameState.SHOP;
+	}
+	
+	public static void endShop() {
+		gameState = GameState.OVERWORLD;
+	}
+
 
 	/**
 	 * Updates which entity the player will interact with when they hit Action.
@@ -381,7 +403,7 @@ public class FrameEngine extends ApplicationAdapter {
 	public static void setInventoryRequest(String string) {
 		inventory.open();
 		if (inventory.getList().isEmpty()){
-			dialogueTree = new DialogueTree("Inventory is empty");
+			dialogueTree = new DialogueTree("But you don't have anything to give!");
 		}
 		else{
 			ArrayMap<String, String> options = new ArrayMap<>();
@@ -462,6 +484,10 @@ public class FrameEngine extends ApplicationAdapter {
 
 	public static MainMenu getMainMenu(){
 		return mainMenu;
+	}
+
+	public static ShopMenu getShopMenu() {
+		return shopMenu;
 	}
 
 	private enum GameState{

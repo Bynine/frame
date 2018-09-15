@@ -25,8 +25,10 @@ public class ProgressionHandler {
 		statuetteFoundHelper(1);
 		statuetteFoundHelper(2);
 		statuetteFoundHelper(3);
+		statuetteFoundHelper(4);
 		checkStatuetteHelper();
 		// TODO: If a grub is found, tell the player something about where its mother is.
+		// TODO: When a grub jumps into hole, if all of them have jumped in, set GRUB_REWARD to true.
 	}
 	
 	/**
@@ -59,14 +61,19 @@ public class ProgressionHandler {
 		case 1:{
 			FrameEngine.startDialogueTree(new DialogueTree(
 					"A mysterious voice echoes...\n"
-					+ "\"Two... remain...\""));
+					+ "\"Three... remain...\""));
 		} break;
 		case 2:{
 			FrameEngine.startDialogueTree(new DialogueTree(
 					"A mysterious voice echoes...\n"
-					+ "\"One... remains...\""));
+					+ "\"Two... remain...\""));
 		} break;
 		case 3:{
+			FrameEngine.startDialogueTree(new DialogueTree(
+					"A mysterious voice echoes...\n"
+					+ "\"One... remains...\""));
+		} break;
+		case 4:{
 			FrameEngine.startDialogueTree(new DialogueTree(
 					"A mysterious voice echoes...\n"
 					+ "\"I can see your resolve... The Shrine has opened. Come North, young traveller.\""));

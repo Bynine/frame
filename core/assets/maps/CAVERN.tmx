@@ -84,8 +84,8 @@
 </data>
  </layer>
  <objectgroup name="SLOPES" visible="0"/>
- <objectgroup color="#32e3c6" name="TERRAIN" visible="0">
-  <object id="224" name="wood" x="0" y="0" width="800" height="512"/>
+ <objectgroup color="#32e3c6" name="TERRAIN">
+  <object id="224" name="stone" x="0" y="0" width="800" height="512"/>
  </objectgroup>
  <objectgroup color="#50734a" name="COLLISION" opacity="0.5"/>
  <objectgroup name="ENTITIES" opacity="0.64">

@@ -7,34 +7,37 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import main.TSVReader;
 import text.DialogueTree;
+import main.Animator;
 import main.FrameEngine;
 
 public class NPC extends InteractableEntity{
 
-	private final ArrayList<Animation<TextureRegion>> anim;
+	protected final ArrayList<ArrayList<Animation<TextureRegion>>> anims;
 	private final String name, dialoguePath;
+	private int currentAnim = 0;
 
 	public NPC(float x, float y, 
 			int interactXDisp, int interactYDisp,
 			int width, int height, 
-			String id, String imagePath, String dialoguePath) {
+			String id, String imagePath, String dialoguePath,
+			Layer layer
+			) {
 		super(x, y, "");
 		String[] data = new TSVReader().loadDataByID(id, TSVReader.NPC_URL);
 		name = data[1];
 		voiceUrl = data[2];
 		boolean hasShadow = Boolean.parseBoolean(data[3]);
 		if (!hasShadow) shadow = null;
-		int animNumber = Integer.parseInt(data[4]);
-		int animSpeed = Integer.parseInt(data[5]);
-		anim = Animator.createAnimation(animSpeed, "sprites/npcs/" + imagePath + ".png", 2, animNumber);
-		if (anim.size() == 1) canFlip = false;
+		anims = Animator.createAnimationList(data, imagePath);
+		if (Integer.parseInt(data[4]) == 1) canFlip = false;
 		hitbox.setSize(width, height);
 		interactHitbox.setSize(width, height);
 		this.interactXDisp = interactXDisp;
 		this.interactYDisp = interactYDisp;
 		this.dialoguePath = dialoguePath;
+		this.layer = layer;
 	}
-	
+
 	/**
 	 * An NPC for textboxes. Not actually created on map.
 	 */
@@ -44,9 +47,9 @@ public class NPC extends InteractableEntity{
 		name = data[1];
 		voiceUrl = data[2];
 		this.dialoguePath = dialoguePath;
-		anim = null;
+		anims = new ArrayList<>();
 	}
-	
+
 	@Override
 	public void interact(){
 		int playerDir = FrameEngine.getPlayer().dir;
@@ -69,21 +72,30 @@ public class NPC extends InteractableEntity{
 
 	@Override
 	public void updateImage(){
-		if (null != anim){
+		if (anims.size() > currentAnim){
+			ArrayList<Animation<TextureRegion>> anim = anims.get(currentAnim);
 			image = anim.get(dir >= anim.size() ? anim.size()-1 : dir).getKeyFrame(FrameEngine.getTime());
+		}
+	}
+	
+	@Override
+	public void getMessage(String message) {
+		super.getMessage(message);
+		if (message.startsWith("ANIM_")){
+			currentAnim = Integer.parseInt(message.split("_")[1]);
 		}
 	}
 
 	@Override
 	public void dispose(){
-		if (null != anim) {
-			Animator.freeAnimation(anim);
+		for (ArrayList<Animation<TextureRegion>> anim: anims){
+				Animator.freeAnimation(anim);
 		}
 		if (null != image) {
 			image.getTexture().dispose();
 		}
 	}
-	
+
 	public String getName(){
 		return name;
 	}
