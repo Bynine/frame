@@ -23,7 +23,7 @@ public class Item extends InteractableEntity {
 	
 	@Override
 	public void interact() {
-		setDelete();
+		setRemove();
 		FrameEngine.putTextbox(new Textbox("You obtained " + getIndefinite(name) + " " + name + "!"));
 		FrameEngine.getInventory().addItem(id);
 		FrameEngine.getSaveFile().setFlag(flag, true);

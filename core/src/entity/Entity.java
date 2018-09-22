@@ -212,7 +212,7 @@ public abstract class Entity {
 	/**
 	 * Marks this entity for deletion. It will no longer be updated and be removed from the Area.
 	 */
-	public void setDelete(){
+	public void setRemove(){
 		delete = true;
 	}
 

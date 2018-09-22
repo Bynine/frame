@@ -1,5 +1,6 @@
 package main;
 
+import entity.NPC;
 import text.DialogueTree;
 
 /**
@@ -11,6 +12,7 @@ import text.DialogueTree;
 public class ProgressionHandler {
 	
 	public static final String 
+	beforeShrineWarning = "BEFORE_SHRINE_WARNING",
 	shellFreb = "SHELL_FREB",
 	foundStatuette = "FOUND_STATUETTE",
 	checkStatuette = "CHECK_STATUETTE";
@@ -27,8 +29,7 @@ public class ProgressionHandler {
 		statuetteFoundHelper(3);
 		statuetteFoundHelper(4);
 		checkStatuetteHelper();
-		// TODO: If a grub is found, tell the player something about where its mother is.
-		// TODO: When a grub jumps into hole, if all of them have jumped in, set GRUB_REWARD to true.
+		checkOutOfWoodsBeforeEnteredShrine();
 	}
 	
 	/**
@@ -61,23 +62,39 @@ public class ProgressionHandler {
 		case 1:{
 			FrameEngine.startDialogueTree(new DialogueTree(
 					"A mysterious voice echoes...\n"
-					+ "\"Three... remain...\""));
+					+ "\"Three of us... remain...\""));
 		} break;
 		case 2:{
 			FrameEngine.startDialogueTree(new DialogueTree(
 					"A mysterious voice echoes...\n"
-					+ "\"Two... remain...\""));
+					+ "\"Two of us... remain...\""));
 		} break;
 		case 3:{
 			FrameEngine.startDialogueTree(new DialogueTree(
 					"A mysterious voice echoes...\n"
-					+ "\"One... remains...\""));
+					+ "\"One of us... remains...\""));
 		} break;
 		case 4:{
 			FrameEngine.startDialogueTree(new DialogueTree(
 					"A mysterious voice echoes...\n"
-					+ "\"I can see your resolve... The Shrine has opened. Come North, young traveller.\""));
+					+ "\"I can see your resolve... The Shrine has opened. Come North, traveller.\""));
 		} break;
+		}
+	}
+	
+	private void checkOutOfWoodsBeforeEnteredShrine(){
+		if (
+				(FrameEngine.getArea().getID().equals("BEACH") || 
+				FrameEngine.getArea().getID().equals("ORCHARD")) &&
+				!sf.getFlag("ENTERED_SHRINE") &&
+				!sf.getFlag(beforeShrineWarning)
+				){
+			sf.setFlag(beforeShrineWarning, true);
+			FrameEngine.startDialogueTree(
+					new DialogueTree(
+							new NPC("KAMI", "before_shrine_warning"),
+							"before_shrine_warning"
+					));
 		}
 	}
 	

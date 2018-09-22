@@ -51,7 +51,12 @@ public class Player extends Entity{
 	
 	@Override
 	public void update(){
-		input.set(FrameEngine.getInputHandler().getXInput(), FrameEngine.getInputHandler().getYInput());
+		if (FrameEngine.canControlPlayer()){
+			input.set(FrameEngine.getInputHandler().getXInput(), FrameEngine.getInputHandler().getYInput());
+		}
+		else{
+			input.setZero();
+		}
 		super.update();
 	}
 

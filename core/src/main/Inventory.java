@@ -8,7 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
-import text.Button;
+import text.MenuOption;
 
 /**
  * Represents player's items.
@@ -16,12 +16,21 @@ import text.Button;
 public class Inventory extends AbstractMenu{
 
 	protected final ArrayList<String> items = new ArrayList<String>();
-	protected final ArrayList<Button> descs = new ArrayList<Button>();
+	protected final ArrayList<MenuOption> descs = new ArrayList<MenuOption>();
 
 	Inventory(){
 //		for (int ii = 0; ii < 30; ++ii){
 //			items.add("KEEPSAKE");
 //		}
+//		items.add("GRUB1");
+//		items.add("GRUB2");
+//		items.add("GRUB3");
+//		items.add("SHOVEL");
+		items.add("APPLE");
+		items.add("TREASURE1");
+		items.add("TREASURE2");
+		items.add("TREASURE3");
+		items.add("TREASURE4");
 	}
 
 	public boolean hasItem(String item){
@@ -34,9 +43,9 @@ public class Inventory extends AbstractMenu{
 
 	public void removeItem(String item){
 		items.remove(item);
-		Iterator<Button> descIter = descs.iterator();
+		Iterator<MenuOption> descIter = descs.iterator();
 		while(descIter.hasNext()){
-			Button desc= descIter.next();
+			MenuOption desc= descIter.next();
 			if (((ItemDescription)desc.getOutput()).id.equals(item)){
 				((ItemDescription)desc.getOutput()).dispose();
 				descIter.remove();
@@ -57,7 +66,7 @@ public class Inventory extends AbstractMenu{
 	protected void updateDescriptions(){
 		descs.clear();
 		for (String item: items){
-			descs.add(new Button(2, 2, item, new ItemDescription(item)));
+			descs.add(new MenuOption(2, 2, item, new ItemDescription(item)));
 		}
 	}
 	
@@ -77,7 +86,7 @@ public class Inventory extends AbstractMenu{
 	}
 
 	@Override
-	public List<Button> getList() {
+	public List<MenuOption> getList() {
 		return descs;
 	}
 

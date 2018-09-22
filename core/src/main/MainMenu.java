@@ -3,20 +3,20 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
-import text.Button;
+import text.MenuOption;
 
 public class MainMenu extends AbstractMenu {
 	
-	private ArrayList<Button> options = new ArrayList<>();
+	private ArrayList<MenuOption> options = new ArrayList<>();
 	
 	MainMenu(){
 		cursor = 1;
-		options.add(new Button(8, 2, "New Adventure", Option.NEW));
-		options.add(new Button(8, 2, "Wake Up", Option.CONTINUE));
+		options.add(new MenuOption(8, 2, "New Adventure", Option.NEW));
+		options.add(new MenuOption(8, 2, "Wake Up", Option.CONTINUE));
 	}
 	
 	@Override
-	public List<Button> getList() {
+	public List<MenuOption> getList() {
 		return options;
 	}
 

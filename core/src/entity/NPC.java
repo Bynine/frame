@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import main.TSVReader;
 import text.DialogueTree;
 import main.Animator;
+import main.EntityHandler;
 import main.FrameEngine;
 
 public class NPC extends InteractableEntity{
@@ -36,6 +37,7 @@ public class NPC extends InteractableEntity{
 		this.interactYDisp = interactYDisp;
 		this.dialoguePath = dialoguePath;
 		this.layer = layer;
+		collides = (!id.equals("GHOST"));
 	}
 
 	/**
@@ -83,6 +85,20 @@ public class NPC extends InteractableEntity{
 		super.getMessage(message);
 		if (message.startsWith("ANIM_")){
 			currentAnim = Integer.parseInt(message.split("_")[1]);
+		}
+		if (message.startsWith("TOSS_")){
+			EntityHandler.addEntity(
+					new Toss(
+							position.x,
+							position.y,
+							message.split("_")[1],
+							30,
+							FrameEngine.getPlayer().getPosition()
+							)
+					);
+		}
+		if (message.equals("SET_REMOVE")){
+			setRemove();
 		}
 	}
 

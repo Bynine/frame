@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import text.Button;
+import text.MenuOption;
 
 public class AnswersMenu extends AbstractMenu{
 	
-	private final ArrayList<Button> options = new ArrayList<Button>();
+	private final ArrayList<MenuOption> options = new ArrayList<MenuOption>();
 	
 	AnswersMenu(ArrayMap<String, String> map){
 		for (String key: map.keys()){
 			options.add(
-					new Button(
+					new MenuOption(
 							6, 2,
 							map.get(key), 
 							key)
@@ -22,13 +22,12 @@ public class AnswersMenu extends AbstractMenu{
 	}
 
 	@Override
-	public List<Button> getList() {
+	public List<MenuOption> getList() {
 		return options;
 	}
 
 	@Override
 	protected void selectItem() {
-		// TODO
 	}
 
 }

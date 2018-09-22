@@ -17,7 +17,7 @@ public class Secret extends Currency {
 		super(x, y, amount, flag);
 		image = null;
 		hitbox.setSize(8);
-		interactHitbox.setSize(16); // TODO: Reset
+		interactHitbox.setSize(16);
 	}
 	
 	@Override

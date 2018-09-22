@@ -12,7 +12,12 @@ public class DialogueTrigger extends ImmobileEntity {
 	public DialogueTrigger(float x, float y, float width, float height, String dialoguePath) {
 		super(x, y);
 		hitbox.setSize(width, height);
-		dialogueTree = new DialogueTree(null, dialoguePath);
+		if (dialoguePath.equals("entered_shrine")){
+			dialogueTree = new DialogueTree(new NPC("KAMI", dialoguePath), dialoguePath);
+		}
+		else{
+			dialogueTree = new DialogueTree(null, dialoguePath);
+		}
 	}
 	
 	@Override
@@ -20,7 +25,7 @@ public class DialogueTrigger extends ImmobileEntity {
 		super.update();
 		if (touchingPlayer(hitbox)){
 			FrameEngine.startDialogueTree(dialogueTree);
-			setDelete();
+			setRemove();
 		}
 	}
 

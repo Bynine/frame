@@ -20,13 +20,16 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import entity.Critter;
+import entity.Currency;
 import entity.Emitter;
 import entity.Entity;
 import entity.InteractableEntity;
+import entity.Item;
 import entity.NPC;
 import entity.Player;
+import entity.Secret;
 import entity.Emitter.Graphic;
-import text.Button;
+import text.MenuOption;
 import text.Textbox;
 import timer.Timer;
 
@@ -53,6 +56,7 @@ public class GraphicsHandler {
 	arrowUp = new TextureRegion(new Texture("sprites/gui/arrow_up.png")),
 	arrowDown = new TextureRegion(new Texture("sprites/gui/arrow_down.png")),
 	interactBubble = new TextureRegion(new Texture("sprites/player/interact.png")),
+	surpriseBubble = new TextureRegion(new Texture("sprites/player/surprise.png")),
 	talkingBubble = new TextureRegion(new Texture("sprites/player/talk.png")),
 	textboxOverlay = new TextureRegion(new Texture("sprites/gui/textbox_overlay.png")),
 	textboxCorner = new TextureRegion(new Texture("sprites/gui/textbox_corner.png")),
@@ -77,7 +81,7 @@ public class GraphicsHandler {
 		parameter.spaceY = 2;
 		parameter.color = new Color(
 				26.0f/255.0f, 
-				39.0f/255.0f, 
+				29.0f/255.0f, 
 				39.0f/255.0f, 
 				1);
 		parameter.mono = true;
@@ -138,19 +142,22 @@ public class GraphicsHandler {
 		if (!FrameEngine.INVIS) drawEntities(frontEntities);
 		handleEmitters();
 
-		if (FrameEngine.canUpdateEntities() && FrameEngine.canInteract()) {
-			drawInteractBubble();
+		if (FrameEngine.canControlPlayer() && FrameEngine.canInteract()) {
+			InteractableEntity ien = FrameEngine.getCurrentInteractable();
+			if (ien instanceof NPC) drawBubble(talkingBubble);
+			else if (ien instanceof Secret || ien instanceof Item || ien instanceof Currency) {
+				drawBubble(surpriseBubble);
+			}
+			else drawBubble(interactBubble);
 		}
 		else if(null != FrameEngine.getCurrentTextbox()
 				&& FrameEngine.getCurrentTextbox().playerTalking()){
-			drawTalkingBubble();
+			drawBubble(talkingBubble);
 		}
 
 		if (null != FrameEngine.getCurrentTextbox()) {
 			drawDefaultTextbox(FrameEngine.getCurrentTextbox());
 		}
-
-		drawOverlay();
 
 		if (FrameEngine.DRAW){
 			shapeRenderer.setProjectionMatrix(worldCam.combined);
@@ -168,7 +175,6 @@ public class GraphicsHandler {
 	 */
 	void drawTransition(){
 		wipeScreen();
-		drawOverlay();
 	}
 
 	private void drawWater(){
@@ -180,25 +186,13 @@ public class GraphicsHandler {
 				);
 		batch.end();
 	}
-
+	
 	/**
-	 * Draws the bubble above the player's head that shows they can interact with something.
+	 * Draws given bubble above player's head.
 	 */
-	private void drawInteractBubble(){
+	private void drawBubble(TextureRegion bubble){
 		batch.begin();
-		batch.draw(interactBubble,
-				FrameEngine.getPlayer().getPosition().x,
-				FrameEngine.getPlayer().getPosition().y
-				);
-		batch.end();
-	}
-
-	/**
-	 * Draws the bubble above the player's head that shows they can interact with something.
-	 */
-	private void drawTalkingBubble(){
-		batch.begin();
-		batch.draw(talkingBubble,
+		batch.draw(bubble,
 				FrameEngine.getPlayer().getPosition().x,
 				FrameEngine.getPlayer().getPosition().y
 				);
@@ -301,7 +295,7 @@ public class GraphicsHandler {
 	/**
 	 * Draws watercolor overlay on top of map.
 	 */
-	protected void drawOverlay(){
+	public void drawOverlay(){
 		beginOverlay();
 		batch.setProjectionMatrix(worldCam.combined);
 		drawByTiles(overlay, false);
@@ -336,7 +330,7 @@ public class GraphicsHandler {
 		int cursor = menu.getCursor();
 		int stipend = Math.max( 0, (5 * ((int)(cursor/5))) - 15 );
 		Vector2 range = new Vector2(stipend, stipend+20);
-		for (Button button: menu.getList()){
+		for (MenuOption button: menu.getList()){
 			if (range.x <= ii && range.y > ii){
 				ItemDescription desc = (ItemDescription)button.getOutput();
 				if (price){
@@ -391,8 +385,8 @@ public class GraphicsHandler {
 				);
 		if (null != menu.getActiveButton()){
 			ItemDescription desc = ((ItemDescription)menu.getActiveButton().getOutput());
-			final int width = 7;
-			final float x = (FrameEngine.TILE * 2) + Gdx.graphics.getWidth()/(2/ZOOM);
+			final int width = 8;
+			final float x = Gdx.graphics.getWidth()/(1.8f/ZOOM);
 			drawText(desc.name, 
 					new Vector2(
 							x, 
@@ -613,7 +607,7 @@ public class GraphicsHandler {
 	 */
 	public void drawMenu(AbstractMenu menu){
 		int position = 0;
-		for (Button button: menu.getList()){
+		for (MenuOption button: menu.getList()){
 			boolean selected = false;
 			String name = new String(button.getName());
 			if (position == menu.cursor){
@@ -684,6 +678,10 @@ public class GraphicsHandler {
 					1
 					);
 		}
+	}
+
+	public void drawCredits() {
+		// TODO Draw credits
 	}
 
 }

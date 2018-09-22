@@ -1,0 +1,25 @@
+KEEPSAKE	satchel	NONE	For holding something special	0
+GOAL	Seed of Hope	NONE	Said to grow in any condition	0
+APPLE	apple	FOOD,SWEET	Pleasantly juicy	1
+SHELL1	nice shell	SHELL	The red color is charming	2
+SHELL2	cool shell	SHELL	The yellow color is soothing	2
+SHELL3	rad shell	SHELL	The blue color is elegant	2
+SHOVEL	shovel	NONE	Unsurprisingly good at digging	3
+WATERINGCAN	watering can	NONE	Pour it to water things	3
+TREASURE1	Golden Shell	TREASURE	Pretty but too heavy to wear	1
+TREASURE2	Mushroom of Health	TREASURE	???	1
+TREASURE3	Happy Root	TREASURE	Treasured by any grub	1
+TREASURE4	Pumpkin Cupcake	TREASURE	Made with love	1
+TREASURE5	Shining Scale	TREASURE	???	1
+TREASURE6	Ancient Horn	TREASURE		???	1
+ORDER1	extra-milk latte	NONE	Delicious, but barely coffee	1
+ORDER2	spiced pumpkin cider	NONE	Smells unbelievably good	1
+ORDER3	red-bean coffee	NONE	What a striking color!	1
+GRUB1	Chubby Grub	NONE	This grub loves to eat	1
+GRUB2	Nubby Grub	NONE	This grub has little bumps	1
+GRUB3	Grubby Grub	NONE	This grub is a bit dirty	1
+GHOST	Ghost	NONE	"You gotta help me out..."	0
+
+MUSHROOM	mushroom	NATURAL	Pleasantly shaped toadstool	1
+BAIT	bait	NONE	Attracts fish	4
+PUMPKIN	pumpkin	FOOD	Great for pies	1

@@ -20,7 +20,7 @@ public class Currency extends InteractableEntity{
 	
 	@Override
 	public void interact() {
-		setDelete();
+		setRemove();
 		String currency = "acorn";
 		if (amount > 1) currency = currency.concat("s");
 		FrameEngine.putTextbox(new Textbox(getString(currency)));

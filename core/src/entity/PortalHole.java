@@ -9,9 +9,9 @@ import text.DialogueTree;
 
 public class PortalHole extends InteractableEntity {
 
-	private boolean opened;
-	private final TextureRegion marker = new TextureRegion(new Texture("sprites/objects/hole_marker.png"));
-	private final TextureRegion hole = new TextureRegion(new Texture("sprites/objects/hole.png"));
+	protected boolean opened;
+	protected TextureRegion marker = new TextureRegion(new Texture("sprites/objects/hole_marker.png"));
+	protected TextureRegion hole = new TextureRegion(new Texture("sprites/objects/hole.png"));
 	final String destArea;
 	final Vector2 destLocation = new Vector2();
 	final String flag;
@@ -41,8 +41,12 @@ public class PortalHole extends InteractableEntity {
 			FrameEngine.startDialogueTree(new DialogueTree(this, "hole"));
 		}
 		else{
-			FrameEngine.startDialogueTree(new DialogueTree(this, "enter_hole"));
+			enter();
 		}
+	}
+	
+	protected void enter(){
+		FrameEngine.startDialogueTree(new DialogueTree(this, "enter_hole"));
 	}
 
 	@Override

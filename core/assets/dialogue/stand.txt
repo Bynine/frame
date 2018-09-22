@@ -1,0 +1,6 @@
+Place an item here?
+{
+<ADJ_TREASURE
+[REMOVE_ITEM][PLACED]You put the item on the stand. The compassion you showed in getting it is true!
+<OTHER
+It doesn't seem like this item is important enough to someone.

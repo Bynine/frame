@@ -1,14 +1,13 @@
-&!RETURNED_GRUB1,!RETURNED_GRUB2,!RETURNED_GRUB3
-*TALK_GRUBMOM
-Oh... thank goodness someone came.
-Dear traveller... I am ever so sorry, but I must ask for your help.
-My children... They ran off just as I began to pupate... And now they're lost out in the woods...
-When they're afraid, they usually bury themselves under a tree...
-If you could return them here... I would be forever indebted.
-&RETURNED_GRUB1,RETURNED_GRUB2,RETURNED_GRUB3
+Dear traveller... NUM_GRUBS_STILL_LOST of my children AREIS still lost somewhere in the green woods... [ANIM_1]Boohoohoo!
+[ANIM_0]Sniffle... When they're afraid, they usually bury themselves under a tree...
+If you could return them here... You would make this mother so happy.
+&GRUB_REWARD
 [NOSPEAKER]It's a cocoon.
 [NOSPEAKER]A warm glow of appreciation seems to surround it.
-&TALK_GRUBMOM
-Dear traveller... NUM_GRUBS_STILL_LOST of my children are still lost somewhere in the woods...
-When they're afraid, they usually bury themselves under a tree...
-If you could return them here... I would be forever indebted.
+&!GRUB_REWARD,!RETURNED_GRUB1,!RETURNED_GRUB2,!RETURNED_GRUB3
+*TALK_GRUBMOM
+Oh, thank goodness someone came!
+[ANIM_1]My poor babies... Boohoohoo...
+[ANIM_0]They ran off just as I began to pupate... And now they're lost out in the green woods! [ANIM_1]Boohoohoo!
+[ANIM_0]Sniffle... When they're afraid, they usually bury themselves under a tree...
+If you could return them here... You would make this mother so happy.

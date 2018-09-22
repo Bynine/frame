@@ -22,6 +22,7 @@ import entity.Finish;
 import entity.Freb;
 import entity.FrebKing;
 import entity.Glimmer;
+import entity.GrubHole;
 import entity.GrubMom;
 import entity.Secret;
 import entity.Shopkeeper;
@@ -31,7 +32,9 @@ import entity.NPC;
 import entity.Portal;
 import entity.PortalHole;
 import entity.ShrineDoor;
+import entity.Stand;
 import entity.SummonObject;
+import entity.TrapDoor;
 import main.FrameEngine;
 
 /**
@@ -61,20 +64,30 @@ public class EntityLoader {
 		int y = Math.round(properties.get("y", Float.class));
 		int width = Math.round(properties.get("width", Float.class));
 		int height = Math.round(properties.get("height", Float.class));
-		String type = (String)properties.get("TYPE");
-		switch(type.toLowerCase()){
+		String type = ((String)properties.get("TYPE")).toLowerCase();
+		switch(type){
 		case "portal": {
 			String[] destination = properties.get("DEST", String.class).split(",");
 			double x_dest = Double.parseDouble(destination[1]);
 			double y_dest = Double.parseDouble(destination[2]);
 			entities.add(new Portal(x, y, width, height, destination[0], x_dest, y_dest));
 		} break;
+		case "grubhole": 
+		case "trapdoor":
 		case "portalhole": {
 			String[] destination = properties.get("DEST", String.class).split(",");
-			String flag = properties.get("FLAG", String.class);
+			String flag = properties.containsKey("FLAG") ? properties.get("FLAG", String.class) : "";
 			double x_dest = Double.parseDouble(destination[1]);
 			double y_dest = Double.parseDouble(destination[2]);
-			entities.add(new PortalHole(x, y, flag, destination[0], x_dest, y_dest));
+			if (type.equals("grubhole")){
+				entities.add(new GrubHole(x, y, flag, destination[0], x_dest, y_dest));
+			}
+			else if (type.equals("trapdoor")){
+				entities.add(new TrapDoor(x, y, destination[0], x_dest, y_dest));
+			}
+			else{
+				entities.add(new PortalHole(x, y, flag, destination[0], x_dest, y_dest));
+			}
 		} break;
 		case "door": {
 			String[] destination = properties.get("DEST", String.class).split(",");
@@ -98,7 +111,6 @@ public class EntityLoader {
 				layer = Layer.valueOf(properties.get("LAYER", String.class));
 			}
 			String imagePath = properties.get("IMAGE", String.class);
-
 			if (id.equals("FREBKING")){
 				entities.add(new FrebKing(x, y, width, height));
 			}
@@ -192,6 +204,10 @@ public class EntityLoader {
 			String image = properties.get("IMAGE", String.class);
 			String flag = properties.get("FLAG", String.class);
 			entities.add(new SummonObject(x, y, image, flag));
+		} break;
+		case "stand":{
+			String id = properties.get("ID", String.class);
+			entities.add(new Stand(x, y, id));
 		} break;
 		default: {
 			FrameEngine.logger.log( Level.WARNING, 

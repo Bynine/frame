@@ -30,7 +30,6 @@ public class GrubMom extends NPC {
 	}
 	
 	private void checkGrubsLost(int num){
-		FrameEngine.getSaveFile().setFlag(("RETURNED_GRUB" + num), true);
 		if (FrameEngine.getSaveFile().getFlag("RETURNED_GRUB" + num)){
 			NUM_GRUBS_STILL_LOST--;
 		}
@@ -42,6 +41,7 @@ public class GrubMom extends NPC {
 		FrameEngine.startDialogueTree(
 			new DialogueTree(this, "grubmom", new HashMap<String, String>(){{
 				put("NUM_GRUBS_STILL_LOST", Integer.toString(NUM_GRUBS_STILL_LOST));
+				put("AREIS", NUM_GRUBS_STILL_LOST == 1 ? "is" : "are");
 			}})
 		);
 	}

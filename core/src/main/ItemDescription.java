@@ -15,7 +15,7 @@ public class ItemDescription {
 	public final int price;
 	public final TextureRegion icon;
 
-	ItemDescription(String id){
+	public ItemDescription(String id){
 		String[] data = new TSVReader().loadDataByID(id, TSVReader.ITEM_URL);
 		this.id = id;
 		icon = new TextureRegion(new Texture("sprites/items/" + data[0].toLowerCase() + ".png"));

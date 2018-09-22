@@ -4,8 +4,6 @@ import main.FrameEngine;
 import text.DialogueTree;
 
 public class Shopkeeper extends NPC {
-	
-	// TODO: Implement functionality
 
 	public Shopkeeper(float x, float y, int interactXDisp, int interactYDisp, int width, int height, String id,
 			String imagePath, String dialoguePath) {

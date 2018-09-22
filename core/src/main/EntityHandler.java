@@ -14,9 +14,14 @@ import entity.InteractableEntity;
 public class EntityHandler {
 
 	protected static final ArrayList<Entity> entities = new ArrayList<Entity>();
+	protected static final ArrayList<Entity> entitiesToAdd = new ArrayList<Entity>();
 	
 	public static void update() {
 		ArrayList<Entity> entities_to_remove = new ArrayList<Entity>();
+		for (Entity en: entitiesToAdd){
+			entities.add(en);
+		}
+		entitiesToAdd.clear();
 		for (Entity en: entities){
 			if (en.shouldDelete()){
 				entities_to_remove.add(en);
@@ -29,6 +34,10 @@ public class EntityHandler {
 			FrameEngine.getArea().removeFromCollision(en);
 			entities.remove(en);
 		}
+	}
+	
+	public static void addEntity(Entity en){
+		entitiesToAdd.add(en);
 	}
 	
 	/**
@@ -62,7 +71,7 @@ public class EntityHandler {
 	public static void dispose(){
 		for (Entity en: entities){
 			if (!en.equals(FrameEngine.getPlayer())) {
-				en.setDelete();
+				en.setRemove();
 				en.dispose();
 			}
 		}

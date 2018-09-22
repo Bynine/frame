@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 import main.TSVReader;
-import text.Button;
+import text.MenuOption;
 import main.FrameEngine;
 import main.AbstractMenu;
 
@@ -16,35 +16,32 @@ import main.AbstractMenu;
  */
 public class DebugMenu extends AbstractMenu{
 
-	private final ArrayList<Button> mapIDs = new ArrayList<>();
-	public static final int horizontalMove = 5;
-	private static final int HEADER_ROWS = 1;
+	private final ArrayList<MenuOption> mapIDs = new ArrayList<>();
 
 	/**
 	 * Loads all map names but the headers.
 	 */
 	public DebugMenu(){
+		perColumn = 6;
 		String[] mapData = new TSVReader().loadAllData(TSVReader.MAP_URL);
-		int ii = 0;
 		for (String data: mapData){	
-			if (ii >= HEADER_ROWS) mapIDs.add(new Button(
-					5, 2,
+			mapIDs.add(new MenuOption(
+					4, 2,
 					data.split(TSVReader.split)[0],
 					data.split(TSVReader.split)[0]
 							));
-			ii++;
 		}
 	}
 
 	@Override
-	public List<Button> getList(){
+	public List<MenuOption> getList(){
 		return mapIDs;
 	}
 	
 	@Override
 	protected void moveCursorHorizontal(int i){
 		super.moveCursorHorizontal(i);
-		cursor = MathUtils.clamp(cursor + (i*horizontalMove), 0, getList().size() - 1);
+		cursor = MathUtils.clamp(cursor + (i*perColumn), 0, getList().size() - 1);
 	}
 
 	@Override
@@ -54,7 +51,7 @@ public class DebugMenu extends AbstractMenu{
 	
 	public Vector2 getButtonPosition(int pos) {
 		Vector2 superPosition = super.getButtonPosition(pos);
-		superPosition.add(-FrameEngine.TILE*5, FrameEngine.TILE*2);
+		superPosition.add(-FrameEngine.TILE*7, FrameEngine.TILE*2);
 		return superPosition;
 	}
 

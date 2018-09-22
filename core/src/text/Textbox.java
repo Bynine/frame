@@ -25,7 +25,7 @@ public class Textbox {
 	/**
 	 * How many frames it takes to draw a new character.
 	 */
-	public static final float DEFAULT_TEXT_SPEED = 2.0F;
+	public static final float DEFAULT_TEXT_SPEED = 1.5F;
 	private float TEXT_SPEED = DEFAULT_TEXT_SPEED;
 	//private float TALK_SPEED = 6.0f;
 
@@ -88,6 +88,7 @@ public class Textbox {
 	}
 	
 	private int talkTime = 0;
+	private final int talkSpeed = 6;
 
 	/**
 	 * Change many characters are drawn to screen and play voice clip.
@@ -104,7 +105,7 @@ public class Textbox {
 				if (!Character.isWhitespace(c)){
 					talkTime ++;
 				}
-				if (talkTime % 4 == 3){
+				if (talkTime % talkSpeed == (talkSpeed-1)){
 					AudioHandler.playSound(text_sound);
 					talkTime = 0;
 				}
@@ -150,11 +151,10 @@ public class Textbox {
 	/**
 	 * The entire string will now be drawn.
 	 */
-	// TODO: Remove?
-	public void complete(){
-//		textPos = characters.size();
-//		AudioHandler.playSound(text_sound);
-	}
+//	public void complete(){
+////		textPos = characters.size();
+////		AudioHandler.playSound(text_sound);
+//	}
 
 	/**
 	 * Whether this textbox is displaying all of its text.

@@ -27,7 +27,7 @@ public class ShopMenu extends Inventory {
 	protected void selectItem() {
 		ItemDescription desc = (ItemDescription)getActiveButton().getOutput();
 		if (desc.tooExpensive()){
-			// TODO: Display something
+			// TODO: Play error sound
 		}
 		else{
 			FrameEngine.getSaveFile().addMoney(-desc.price);

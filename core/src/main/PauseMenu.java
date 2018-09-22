@@ -7,19 +7,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
-import text.Button;
+import text.MenuOption;
 
 public class PauseMenu extends AbstractMenu{
 	
-	private ArrayList<Button> options = new ArrayList<>();
+	private ArrayList<MenuOption> options = new ArrayList<>();
 	
 	PauseMenu(){
-		options.add(new Button(6, 2, "Inventory", Option.INVENTORY));
-		options.add(new Button(6, 2, "Save & Rest", Option.EXIT));
+		options.add(new MenuOption(6, 2, "Inventory", Option.INVENTORY));
+		options.add(new MenuOption(6, 2, "Save & Rest", Option.EXIT));
 	}
 
 	@Override
-	public List<Button> getList() {
+	public List<MenuOption> getList() {
 		return options;
 	}
 

@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import entity.AudioLocation;
 import entity.Entity;
-import timer.TimerDuration;
+import timer.DurationTimer;
 
 /**
  * Handles all audio (Music and Sound).
@@ -23,7 +23,7 @@ public class AudioHandler {
 	/**
 	 * A certain period after a newly created sound is played, it gets disposed.
 	 */
-	private static HashMap<TimerDuration, Sound> soundDisposal = new HashMap<>();
+	private static HashMap<DurationTimer, Sound> soundDisposal = new HashMap<>();
 	private static HashSet<AudioSource> audioSources = new HashSet<>();
 	private static Music currAudio = null;
 	private static String currAudioName = "";
@@ -42,9 +42,9 @@ public class AudioHandler {
 	 * Counts up each sound in sound_disposal.
 	 */
 	public static void update(){
-		Iterator<TimerDuration> sound_iter = soundDisposal.keySet().iterator();
+		Iterator<DurationTimer> sound_iter = soundDisposal.keySet().iterator();
 		while (sound_iter.hasNext()){
-			TimerDuration timer = sound_iter.next();
+			DurationTimer timer = sound_iter.next();
 			timer.countUp();
 			if (timer.timeUp()){
 				soundDisposal.get(timer).dispose();

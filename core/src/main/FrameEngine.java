@@ -15,7 +15,7 @@ import area.Area;
 import debug.DebugMenu;
 import entity.InteractableEntity;
 import entity.Player;
-import text.Button;
+import text.MenuOption;
 import text.DialogueTree;
 import text.Textbox;
 import timer.Timer;
@@ -30,9 +30,10 @@ public class FrameEngine extends ApplicationAdapter {
 	LOG		= false	&& DEBUG,
 	NOMAIN	= true	&& DEBUG,
 	INVIS	= false	&& DEBUG,
+	MAPS	= false && DEBUG,
 	SAVE	= false	|| !DEBUG;
 
-	public static String startAreaName = DEBUG ? "CAFE" : "FOREST";
+	public static String startAreaName = DEBUG ? "FOREST" : "FOREST";
 	private static Player player;
 	private static FPSLogger fpsLogger;
 	private static GameState gameState = GameState.OVERWORLD;
@@ -52,7 +53,6 @@ public class FrameEngine extends ApplicationAdapter {
 	private static Timer 
 	time = new Timer(0),
 	transition = new Timer(20);
-	// TODO: Measure transition by real time, not in game time?
 	private static ArrayList<Timer> timers = new ArrayList<Timer>(Arrays.asList(
 			time, transition
 			));
@@ -131,11 +131,22 @@ public class FrameEngine extends ApplicationAdapter {
 		} break;
 		case INVENTORY: {
 			updateInventory();
+		} break;
+		case CREDITS:{
+			updateCredits();
+		} break;
 		}
-		}
+		
+		graphicsHandler.drawOverlay();
 
 		inputHandler.update();
 		if (LOG) fpsLogger.log();
+		if (MAPS && getTime() > 6000){
+			time.reset();
+			if (newArea == null) newArea = new Area("BEACH");
+			initiateAreaChange(newArea.getID().equals("FOREST") ? "BEACH" : "FOREST", new Vector2(8, 8));
+			changeArea();
+		}
 	}
 
 	private void updateOverworld(){
@@ -202,6 +213,10 @@ public class FrameEngine extends ApplicationAdapter {
 		graphicsHandler.drawItems(inventory, false);
 		inventory.update();
 	}
+	
+	private void updateCredits(){
+		graphicsHandler.drawCredits();
+	}
 
 	/**
 	 * Checks inputs from input handler and performs necessary actions.
@@ -217,7 +232,7 @@ public class FrameEngine extends ApplicationAdapter {
 			else if (gameState == GameState.SHOP){
 				endShop();
 			}
-			else if (gameState == GameState.OVERWORLD){
+			else if (gameState == GameState.OVERWORLD && canControlPlayer()){
 				handlePause();
 			}
 		}
@@ -261,10 +276,10 @@ public class FrameEngine extends ApplicationAdapter {
 				}
 			}
 			else{
-				textbox.complete();
+				//textbox.complete();
 			}
 		}
-		else if (null != currInteractable){
+		else if (canControlPlayer() && null != currInteractable){
 			currInteractable.interact();
 		}
 	}
@@ -407,7 +422,7 @@ public class FrameEngine extends ApplicationAdapter {
 		}
 		else{
 			ArrayMap<String, String> options = new ArrayMap<>();
-			for (Button button: inventory.getList()){
+			for (MenuOption button: inventory.getList()){
 				ItemDescription desc = (ItemDescription)button.getOutput();
 				options.put(desc.name, desc.id);
 			}
@@ -448,13 +463,21 @@ public class FrameEngine extends ApplicationAdapter {
 			return 1.0f;
 		}
 	}
+	
+	public static InteractableEntity getCurrentInteractable(){
+		return currInteractable;
+	}
 
 	public static boolean canInteract(){
 		return null != currInteractable;
 	}
 
 	public static boolean canUpdateEntities(){
-		return null == getCurrentTextbox() && transition.timeUp();
+		return transition.timeUp();
+	}
+	
+	public static boolean canControlPlayer(){
+		return null == getCurrentTextbox() && canUpdateEntities();
 	}
 
 	public static boolean inTransition(){
@@ -491,7 +514,7 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	private enum GameState{
-		OVERWORLD, PAUSED, DEBUG, MAIN, SHOP, INVENTORY
+		OVERWORLD, PAUSED, DEBUG, MAIN, SHOP, INVENTORY, CREDITS
 	}
 	
 	public static void setGivenItemID(String newItemID){

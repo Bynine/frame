@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import main.FrameEngine;
-import timer.TimerDuration;
+import timer.DurationTimer;
 
 /**
  * Creates designated graphic at regular intervals.
@@ -17,7 +17,7 @@ import timer.TimerDuration;
 public class Emitter extends ImmobileEntity{
 	
 	private final TextureRegion graphicImage;
-	private final TimerDuration intervalTimer;
+	private final DurationTimer intervalTimer;
 	private final int duration;
 	private final HashSet<Graphic> graphics = new HashSet<>();
 
@@ -27,7 +27,7 @@ public class Emitter extends ImmobileEntity{
 				"sprites/graphics/" + graphicPath + ".png"
 				)));
 		this.duration = duration;
-		intervalTimer = new TimerDuration(interval);
+		intervalTimer = new DurationTimer(interval);
 		timerList.add(intervalTimer);
 	}
 	
@@ -75,10 +75,10 @@ public class Emitter extends ImmobileEntity{
 	 */
 	public class Graphic{
 		private final Vector2 position = new Vector2();
-		private final TimerDuration life;
+		private final DurationTimer life;
 		
 		private Graphic(Emitter emitter, int lifetime){
-			life = new TimerDuration(lifetime);
+			life = new DurationTimer(lifetime);
 			position.set(emitter.getPosition());
 		}
 		public Vector2 getPosition(){

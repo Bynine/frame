@@ -1,0 +1,7 @@
+Enter the hole?
+>YES,NO
+<YES
+The CHECK_GRUB1 grubs CHECK_GRUB2 in CHECK_GRUB3 your backpack jump into the hole!
+[ENTER]
+<NO
+That's fair, it is pretty dark.
