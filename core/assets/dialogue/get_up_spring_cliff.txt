@@ -1,0 +1,10 @@
+Man, I wish I could get up that cliff behind us and see what's up there. But I can't climb up, it's too high!
+There's got to be a way to get up there, right? I just know it!
+&FOUND_GOAL
+*TALK_GETUPSPRINGCLIFF
+Hey, you'll never believe it! I found out how to get up around the cliff!
+There's a path just[SPEED=4] - [NSPEED]oh.
+If you're up here, then you already know about it, right?
+... Dang.
+&TALK_GETUPSPRINGCLIFF
+Well, I'm happy I found this place, at least. It's nice and serene, right?

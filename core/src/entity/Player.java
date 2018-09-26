@@ -23,12 +23,17 @@ public class Player extends Entity{
 	private static final int stepTime = 15;
 	private final Timer 
 	invincibility = new Timer(60),
-	stepTimer = new Timer(stepTime * 2);
+	stepTimer = new Timer(stepTime * 2),
+	walkRightTimer = new Timer(30);
 	
 	private static final ArrayList<Animation<TextureRegion>> walk = 
 			Animator.createAnimation(stepTime, "sprites/player/walk.png", 4, 3);
 	private static final ArrayList<Animation<TextureRegion>> idle = 
 			Animator.createAnimation(30, "sprites/player/idle.png", 2, 3);
+	private static final ArrayList<Animation<TextureRegion>> slope = 
+			Animator.createAnimation(stepTime, "sprites/player/slope.png", 4, 3);
+	private static final ArrayList<Animation<TextureRegion>> idle_slope = 
+			Animator.createAnimation(30, "sprites/player/idle_slope.png", 2, 3);
 	public static final TextureRegion ripple = 
 			new TextureRegion(new Texture(Gdx.files.internal("sprites/graphics/ripple.png")));
 	
@@ -44,14 +49,17 @@ public class Player extends Entity{
 
 	public Player(float x, float y) {
 		super(x, y);
-		timerList.addAll(Arrays.asList(invincibility, stepTimer));
+		timerList.addAll(Arrays.asList(invincibility, stepTimer, walkRightTimer));
 		shadow = new TextureRegion(new Texture("sprites/player/shadow.png"));
 		setRight();
 	}
 	
 	@Override
 	public void update(){
-		if (FrameEngine.canControlPlayer()){
+		if (!walkRightTimer.timeUp()){
+			input.set(1, 0);
+		}
+		else if (FrameEngine.canControlPlayer()){
 			input.set(FrameEngine.getInputHandler().getXInput(), FrameEngine.getInputHandler().getYInput());
 		}
 		else{
@@ -123,11 +131,13 @@ public class Player extends Entity{
 	public void updateImage(){
 		if (!FrameEngine.canUpdateEntities() ||
 				(input.x == 0 && input.y == 0)){
-			image = idle.get(dir).getKeyFrame(FrameEngine.getTime());
+			if (onSlope) image = idle_slope.get(dir).getKeyFrame(FrameEngine.getTime());
+			else image = idle.get(dir).getKeyFrame(FrameEngine.getTime());
 		}
 		else{
 			if (stepTimer.timeUp()) stepSound();
-			image = walk.get(dir).getKeyFrame(FrameEngine.getTime());
+			if (onSlope) image = slope.get(dir).getKeyFrame(FrameEngine.getTime());
+			else image = walk.get(dir).getKeyFrame(FrameEngine.getTime());
 		}
 	}
 
@@ -157,6 +167,12 @@ public class Player extends Entity{
 	@Override
 	public void dispose() {
 		// Don't dispose player assets.
+	}
+
+	public void walkRight(int i) {
+		setRight();
+		walkRightTimer.setEndTime(i);
+		walkRightTimer.reset();
 	}
 
 }

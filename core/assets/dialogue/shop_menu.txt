@@ -1,7 +1,11 @@
-[ANIM_1]Howdy again, stranger! [ANIM_0]Care to buy something?
+[ANIM_1]Howdy there, my friend! [ANIM_0]Care to buy something?
 >YES,NO
 <YES
 Great! I accept any and all acorns as trade for my wares.
 [BUY]
 <NO
 Oh, just taking a look around? Well, feel free to stop by again any time!
+&ITEM_GHOST,!GHOST_SHOPKEEPER
+*GHOST_SHOPKEEPER
+Test
+[GHOST_THING]

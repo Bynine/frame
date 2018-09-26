@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="24" height="16" tilewidth="32" tileheight="32" nextobjectid="311">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="24" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="311">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/underground.tsx"/>
  <tileset firstgid="73" source="tilesets/forest.tsx"/>
- <layer name="FLOOR" width="24" height="16">
+ <layer id="1" name="FLOOR" width="24" height="16">
   <data encoding="csv">
 19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,
 19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,
@@ -11,7 +11,7 @@
 19,19,0,19,19,19,19,19,19,13,16,14,14,14,19,19,19,19,19,19,19,19,0,0,
 19,19,0,19,19,19,19,16,15,21,24,22,22,22,13,16,14,19,19,19,19,19,0,0,
 19,19,0,19,19,19,15,24,23,10,11,11,11,12,21,24,22,13,19,19,19,19,0,0,
-19,19,0,19,19,15,23,10,33,34,35,17,19,19,11,11,12,21,19,19,19,19,0,0,
+19,19,0,19,19,15,23,10,33,34,35,17,19,19,11,11,12,38,19,19,19,19,0,0,
 19,19,0,19,19,23,10,19,41,36,124,35,19,19,19,19,19,12,19,19,19,19,0,0,
 19,19,0,19,19,10,19,19,49,139,42,43,19,19,19,33,34,34,19,19,19,19,0,0,
 19,19,0,19,19,18,17,19,19,49,50,51,19,19,19,41,37,42,19,19,19,19,0,0,
@@ -23,7 +23,7 @@
 19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19
 </data>
  </layer>
- <layer name="MIDDLE" width="24" height="16">
+ <layer id="2" name="MIDDLE" width="24" height="16">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -32,7 +32,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,52,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46,0,0,0,0,0,0,
 0,0,0,0,0,0,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,52,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -43,7 +43,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="ABOVE" width="24" height="16">
+ <layer id="3" name="ABOVE" width="24" height="16">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -63,7 +63,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="OVERHEAD" width="24" height="16">
+ <layer id="4" name="OVERHEAD" width="24" height="16">
   <data encoding="csv">
 9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
 9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
@@ -83,9 +83,9 @@
 9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
 </data>
  </layer>
- <objectgroup name="SLOPES"/>
- <objectgroup color="#32e3c6" name="TERRAIN"/>
- <objectgroup color="#50734a" name="COLLISION" opacity="0.5">
+ <objectgroup id="5" name="SLOPES"/>
+ <objectgroup color="#32e3c6" id="6" name="TERRAIN"/>
+ <objectgroup color="#50734a" id="7" name="COLLISION" opacity="0.5">
   <object id="289" x="0" y="416" width="288" height="96"/>
   <object id="291" x="288" y="448" width="128" height="64"/>
   <object id="292" x="416" y="416" width="352" height="96"/>
@@ -100,13 +100,13 @@
   <object id="303" x="224" y="0" width="64" height="192"/>
   <object id="304" x="288" y="0" width="160" height="160"/>
   <object id="305" x="448" y="0" width="96" height="192"/>
-  <object id="306" x="544" y="0" width="32" height="224"/>
+  <object id="306" x="544" y="0" width="32" height="232"/>
   <object id="307" x="368" y="160" width="40" height="8"/>
   <object id="308" x="416" y="288" width="32" height="32"/>
   <object id="309" x="192" y="256" width="32" height="32"/>
   <object id="310" x="320" y="160" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="ENTITIES" opacity="0.64">
+ <objectgroup id="8" name="ENTITIES" opacity="0.64">
   <object id="277" name="portal" gid="6" x="304" y="504" width="96" height="64">
    <properties>
     <property name="DEST" value="ORCHARD,12,60"/>

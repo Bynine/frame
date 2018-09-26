@@ -126,12 +126,19 @@ public class Textbox {
 			String[] itemData = command.getID().split("_");
 			FrameEngine.getInventory().addItem(itemData[1]);
 		}
+		else if (command.getID().startsWith("CURRENCY_")){
+			String[] itemData = command.getID().split("_");
+			FrameEngine.getSaveFile().addMoney(Integer.parseInt(itemData[1]));
+		}
 		else if (command.getID().equals("NOSPEAKER")){
 			speaker = null;
 			text_sound = Gdx.audio.newSound(Gdx.files.internal("sfx/speech/blip.wav"));
 		}
 		else if (command.getID().equals("REMOVE_ITEM")){
 			FrameEngine.getInventory().removeItem(FrameEngine.getGivenItemID());
+		}
+		else if (command.getID().equals("DESTROY")){
+			FrameEngine.endDialogueTree();
 		}
 		else{
 			switch(command.getID()){

@@ -1,6 +1,6 @@
-The dirt looks soft here.
+The ground looks cracked up here.
 &ITEM_SHOVEL
-The dirt looks soft here. Dig with your shovel?
+The ground looks cracked up here. Dig with your shovel?
 >YES,NO
 <YES
 Dig, dig...

@@ -19,9 +19,11 @@ import entity.Emitter;
 import entity.Entity;
 import entity.Entity.Layer;
 import entity.Finish;
+import entity.Flower;
 import entity.Freb;
 import entity.FrebKing;
 import entity.Glimmer;
+import entity.Goal;
 import entity.GrubHole;
 import entity.GrubMom;
 import entity.Secret;
@@ -168,6 +170,11 @@ public class EntityLoader {
 			int amount = Integer.parseInt(properties.get("AMOUNT", String.class));
 			entities.add(new Currency(x, y, amount, flag));
 		} break;
+		case "goal":{
+			String flag = properties.get("FLAG", String.class);
+			if (checkFlag(entity, flag)) break;
+			entities.add(new Goal(x, y, flag));
+		} break;
 		case "audio": {
 			String audio = properties.get("AUDIO", String.class);
 			String id = properties.get("ID", String.class);
@@ -208,6 +215,10 @@ public class EntityLoader {
 		case "stand":{
 			String id = properties.get("ID", String.class);
 			entities.add(new Stand(x, y, id));
+		} break;
+		case "flower":{
+			String id = properties.get("ID", String.class);
+			entities.add(new Flower(x, y, id));
 		} break;
 		default: {
 			FrameEngine.logger.log( Level.WARNING, 

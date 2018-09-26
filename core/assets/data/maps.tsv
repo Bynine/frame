@@ -1,10 +1,10 @@
-FOREST	?	forest	FALSE	dim	2&26
+FOREST	?	forest	FALSE	dim	0.5&26
 SHOP	?	crackling	TRUE	bright	12&10
 SPRING	?	forest	FALSE	bright	9&33
 BOOKSTORE	?	inside	TRUE	dim	12&10
 BEACH	?	beach	FALSE	soft	18&18
 SHELL	?	cove	TRUE	pretty	12&9
-CAVERN	?	cove	FALSE	twilit	8&8
+CAVERN	?	cove	FALSE	twilit	12&13
 ORCHARD	?	night	FALSE	twilit	32&55
 CAFE	?	nightinside	TRUE	bright	14&8
 WITCH	?	nightinside	TRUE	bright	8&8

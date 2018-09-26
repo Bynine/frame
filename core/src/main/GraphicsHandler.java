@@ -3,6 +3,7 @@ package main;
 import java.util.ArrayList;
 import java.util.Comparator;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -64,6 +65,7 @@ public class GraphicsHandler {
 	textboxSide = new TextureRegion(new Texture("sprites/gui/textbox_side.png")),
 	textboxCenter = new TextureRegion(new Texture("sprites/gui/textbox_center.png"));
 	Timer selectTimer = new Timer(10);
+	private final String credits;
 
 	private static TextureRegion overlay = new TextureRegion(new Texture("sprites/gui/watercolor_dim.png"));
 	private static TextureRegion splash = new TextureRegion(new Texture("sprites/gui/splashsmall.png"));
@@ -94,6 +96,8 @@ public class GraphicsHandler {
 		textFont = font;
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setAutoShapeType(true);
+		FileHandle handle = Gdx.files.internal("misc/credits.txt");
+		credits = handle.readString();
 	}
 
 	void update(){
@@ -133,6 +137,7 @@ public class GraphicsHandler {
 
 		batch.setColor(DEFAULT_COLOR);
 		drawWater();
+		if (!FrameEngine.INVIS) drawWaterEntities(EntityHandler.getEntities());
 		renderer.render(new int[]{0, 1});	// Render background tiles.
 
 		if (!FrameEngine.INVIS) drawEntities(backEntities);
@@ -186,7 +191,7 @@ public class GraphicsHandler {
 				);
 		batch.end();
 	}
-	
+
 	/**
 	 * Draws given bubble above player's head.
 	 */
@@ -233,6 +238,38 @@ public class GraphicsHandler {
 			shapeRenderer.rect(
 					interactionBox.x, interactionBox.y, interactionBox.width, interactionBox.height
 					);
+		}
+	}
+
+	/**
+	 * Draws all given entities.
+	 */
+	private void drawWaterEntities(ArrayList<Entity> entities){
+		batch.begin();
+		shapeRenderer.begin();
+		entities.sort(sorter);
+		for (Entity en: entities){
+			drawWaterEntity(en);
+		}
+		batch.end();
+		shapeRenderer.end();
+	}
+
+	/**
+	 * Draws a single entity.
+	 */
+	private void drawWaterEntity(Entity en){
+		if (null != en.getImage() && !en.shouldDelete()){
+			batch.setColor(en.getColor().r, en.getColor().g, en.getColor().b, en.getColor().a / 2);
+			if (en.isFlipped() ^ en.getImage().isFlipX()) en.getImage().flip(true, false);
+			en.getImage().flip(false, true);
+			batch.draw(
+					en.getImage(), 
+					en.getPosition().x, 
+					en.getPosition().y - en.getZPosition() - en.getImage().getRegionHeight() + 4
+					);
+			batch.setColor(DEFAULT_COLOR);
+			en.getImage().flip(false, true);
 		}
 	}
 
@@ -680,8 +717,15 @@ public class GraphicsHandler {
 		}
 	}
 
+	final float creditSpeed = 0.5f;
 	public void drawCredits() {
-		// TODO Draw credits
+		wipeScreen();
+		batch.begin();
+		final float posX = FrameEngine.TILE;
+		final float posY = FrameEngine.getTime() * creditSpeed;
+		debugFont.draw(batch, credits, posX, posY);
+		batch.draw(splash, posX, posY - 500);
+		batch.end();
 	}
 
 }

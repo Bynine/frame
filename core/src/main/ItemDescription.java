@@ -21,7 +21,12 @@ public class ItemDescription {
 		icon = new TextureRegion(new Texture("sprites/items/" + data[0].toLowerCase() + ".png"));
 		name = data[1];
 		attributes = data[2].split(",");
-		description = data[3];
+		if (data[3].equals("GHOST")){
+			description = "\"I remember someone who wanted to open a shop...\"";
+		}
+		else{
+			description = data[3];
+		}
 		price = Integer.parseInt(data[4]);
 	}
 	

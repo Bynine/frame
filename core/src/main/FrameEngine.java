@@ -91,6 +91,7 @@ public class FrameEngine extends ApplicationAdapter {
 		else {
 			continueGame();
 		}
+		//gameState = GameState.CREDITS;
 	}
 
 	@Override
@@ -341,6 +342,7 @@ public class FrameEngine extends ApplicationAdapter {
 	static void newGame(){
 		saveFile.wipeSave();
 		inventory.addItem("KEEPSAKE");
+		player.walkRight(18);
 		contGame();
 	}
 
@@ -379,6 +381,10 @@ public class FrameEngine extends ApplicationAdapter {
 		gameState = GameState.OVERWORLD;
 	}
 
+	public static void startCredits(){
+		time.reset();
+		gameState = GameState.CREDITS;
+	}
 
 	/**
 	 * Updates which entity the player will interact with when they hit Action.

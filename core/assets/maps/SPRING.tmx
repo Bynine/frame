@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="55" height="50" tilewidth="32" tileheight="32" nextobjectid="680">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="55" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="685">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/trees.tsx"/>
  <tileset firstgid="130" source="tilesets/forest.tsx"/>
  <tileset firstgid="386" source="tilesets/shrine.tsx"/>
- <layer name="FLOOR" width="55" height="50">
+ <layer id="1" name="FLOOR" width="55" height="50">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -58,7 +58,7 @@
 235,235,235,235,235,235,235,235,235,219,235,235,235,235,235,236,339,340,341,250,251,251,251,251,219,219,219,219,219,219,219,219,148,148,148,148,148,148,148,148,148,150,151,0,0,0,0,0,0,0,153,147,162,148,148
 </data>
  </layer>
- <layer name="MIDDLE" width="55" height="50">
+ <layer id="2" name="MIDDLE" width="55" height="50">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -112,7 +112,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,194,195,0,0,0,0,0,0,0,0,0,0,0,0,0,0,31,0
 </data>
  </layer>
- <layer name="ABOVE" width="55" height="50">
+ <layer id="3" name="ABOVE" width="55" height="50">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -166,7 +166,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="OVERHEAD" width="55" height="50">
+ <layer id="4" name="OVERHEAD" width="55" height="50">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -220,11 +220,11 @@
 66,66,66,66,66,66,66,66,66,66,66,43,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,45,66,66,66,66,66,66,66,66,66,66,76,0,0,0,0,0,0,0,0,0,0,0,0,0,56,66
 </data>
  </layer>
- <objectgroup color="#b038d8" name="SLOPES">
+ <objectgroup color="#b038d8" id="5" name="SLOPES">
   <object id="638" x="512" y="1504" width="96" height="96"/>
  </objectgroup>
- <objectgroup name="TERRAIN">
-  <object id="634" name="water" x="1056" y="128" width="96" height="592"/>
+ <objectgroup id="6" name="TERRAIN">
+  <object id="634" name="water" x="1024" y="128" width="128" height="592"/>
   <object id="635" name="water" x="1200" y="704" width="160" height="48"/>
   <object id="636" name="wood" x="544" y="800" width="32" height="256"/>
   <object id="646" name="water" x="1360" y="704" width="288" height="144"/>
@@ -232,8 +232,10 @@
   <object id="648" name="water" x="1360" y="1072" width="256" height="160"/>
   <object id="649" name="water" x="1360" y="1232" width="232" height="368"/>
   <object id="650" name="water" x="1592" y="1488" width="24" height="112"/>
+  <object id="683" name="water" x="1648" y="704" width="288" height="88"/>
+  <object id="684" name="water" x="1152" y="696" width="48" height="24"/>
  </objectgroup>
- <objectgroup color="#c1e702" name="COLLISION" opacity="0.51">
+ <objectgroup color="#c1e702" id="7" name="COLLISION" opacity="0.51">
   <object id="545" x="480" y="576" width="64" height="480"/>
   <object id="546" x="704" y="640" width="32" height="352"/>
   <object id="550" x="576" y="576" width="64" height="480"/>
@@ -305,14 +307,14 @@
   <object id="662" x="384" y="1248" width="64" height="32"/>
   <object id="665" x="864" y="832" width="64" height="32"/>
  </objectgroup>
- <objectgroup color="#f99a00" name="ENTITIES" opacity="0.76">
+ <objectgroup color="#f99a00" id="8" name="ENTITIES" opacity="0.76">
   <object id="544" name="portal" gid="6" x="512" y="1616" width="96" height="32">
    <properties>
     <property name="DEST" value="FOREST,20,7"/>
     <property name="TYPE" value="PORTAL"/>
    </properties>
   </object>
-  <object id="548" name="portal" gid="4" x="1280" y="1600" width="96" height="32">
+  <object id="548" name="portal" gid="6" x="1280" y="1616" width="96" height="32">
    <properties>
     <property name="DEST" value="FOREST,46,1"/>
     <property name="TYPE" value="PORTAL"/>
@@ -443,6 +445,30 @@
     <property name="AMOUNT" value="1"/>
     <property name="FLAG" value="CURRENCY_SPRING_1"/>
     <property name="TYPE" value="CURRENCY"/>
+   </properties>
+  </object>
+  <object id="680" name="cliff guy" gid="1" x="1312" y="1192" width="32" height="24">
+   <properties>
+    <property name="APPEAR" value="!FOUND_GOAL"/>
+    <property name="DIALOGUE" value="get_up_spring_cliff"/>
+    <property name="ID" value="PLACEHOLDER"/>
+    <property name="IMAGE" value="placeholder"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="681" name="cliff guy" gid="1" x="496" y="1104" width="32" height="24">
+   <properties>
+    <property name="APPEAR" value="FOUND_GOAL"/>
+    <property name="DIALOGUE" value="get_up_spring_cliff"/>
+    <property name="ID" value="PLACEHOLDER"/>
+    <property name="IMAGE" value="placeholder"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="682" name="portal" gid="6" x="1608" y="1616" width="96" height="32">
+   <properties>
+    <property name="DEST" value="FOREST,58,1"/>
+    <property name="TYPE" value="PORTAL"/>
    </properties>
   </object>
  </objectgroup>

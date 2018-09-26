@@ -1,5 +1,5 @@
-Dear traveller... NUM_GRUBS_STILL_LOST of my children AREIS still lost somewhere in the green woods... [ANIM_1]Boohoohoo!
-[ANIM_0]Sniffle... When they're afraid, they usually bury themselves under a tree...
+Dear traveller... NUM_GRUBS_STILL_LOST of my children AREIS still lost somewhere in the grove... [ANIM_1]Boohoohoo!
+[ANIM_0]Sniffle... When they're afraid, they usually bury themselves under a birch tree... It's their favorite kind...
 If you could return them here... You would make this mother so happy.
 &GRUB_REWARD
 [NOSPEAKER]It's a cocoon.
@@ -8,6 +8,6 @@ If you could return them here... You would make this mother so happy.
 *TALK_GRUBMOM
 Oh, thank goodness someone came!
 [ANIM_1]My poor babies... Boohoohoo...
-[ANIM_0]They ran off just as I began to pupate... And now they're lost out in the green woods! [ANIM_1]Boohoohoo!
-[ANIM_0]Sniffle... When they're afraid, they usually bury themselves under a tree...
+[ANIM_0]They ran off just as I began to pupate... And now they're lost out in the grove! [ANIM_1]Boohoohoo!
+[ANIM_0]Sniffle... When they're afraid, they usually bury themselves under a birch tree... It's their favorite kind...
 If you could return them here... You would make this mother so happy.

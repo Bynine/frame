@@ -1,1 +1,2 @@
-[NOSPEAKER]This grub is chewing on a root.
+Num, num, num...
+[NOSPEAKER]This grub is contentedly chewing on a root.

@@ -90,7 +90,7 @@ public abstract class Entity {
 	protected void updateVelocity(){
 		final float minVelocity = 0.01f;
 		if (onSlope && (velocity.y > 0 || velocity.y < -1.8f)){
-			velocity.y -= getFrameFriction(0.35f);
+			velocity.y -= getFrameFriction(0.25f);
 		}
 		if (Math.abs(velocity.x) < minVelocity) velocity.x = 0;
 		if (Math.abs(velocity.y) < minVelocity) velocity.y = 0;
@@ -103,7 +103,7 @@ public abstract class Entity {
 		final float limit = 0.5f;
 		velocity.scl(getFrameFriction(friction));
 		if (Math.abs(velocity.x) > limit && Math.abs(velocity.y) > limit) {
-			final float diagonalFriction = 0.92f;
+			final float diagonalFriction = 0.91f;
 			velocity.scl(getFrameFriction(diagonalFriction));
 		}
 	}

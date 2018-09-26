@@ -39,8 +39,8 @@ public class Area {
 		overlayString = data[4].toLowerCase();
 		String[] locationData = data[5].split("&");
 		startLocation.set(
-				Integer.parseInt(locationData[0]) * FrameEngine.TILE,
-				Integer.parseInt(locationData[1]) * FrameEngine.TILE
+				Float.parseFloat(locationData[0]) * FrameEngine.TILE,
+				Float.parseFloat(locationData[1]) * FrameEngine.TILE
 				);
 		map = tmx_map_loader.load("maps/" + id + ".tmx");
 		mapWidth  = getMap().getProperties().get("width",  Integer.class) * FrameEngine.TILE;

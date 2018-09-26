@@ -26,7 +26,14 @@ public class DialogueTree{
 	public DialogueTree(InteractableEntity npc, String path, Map<String, String>... vars){
 		this.speaker = npc;
 		FileHandle handle = Gdx.files.internal("dialogue/" + path + ".txt");
-		String dialogue =  "DEFAULT\n" + handle.readString();
+		String dialogue;
+		try{
+			dialogue =  "DEFAULT\n" + handle.readString();
+		}
+		catch(Exception e){
+			FrameEngine.logger.warning("Couldn't load dialogue: " + path);
+			dialogue = "Sorry, I've forgotten what I'm supposed to say!";
+		}
 		for (Map<String, String> map: vars){
 			for (String key: map.keySet()){
 				dialogue = dialogue.replace(key, map.get(key));

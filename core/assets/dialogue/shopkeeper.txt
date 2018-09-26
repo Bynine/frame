@@ -10,5 +10,5 @@ Good luck! Come again soon!
 Unfortunately, I don't have anything to sell right now, but feel free to look around.
 And be sure to check back soon! I get new stuff in stock pretty often.
 &TALK_LIBRARIAN
-[ANIM_1]Howdy again, stranger! [ANIM_0]I don't have anything to sell right now, but feel free to look around.
+[ANIM_1]Howdy again, friend! [ANIM_0]I don't have anything to sell right now, but feel free to look around.
 And be sure to check back soon! I get new stuff in stock pretty often.

@@ -1,6 +1,8 @@
 package main;
 
 public class ShopMenu extends Inventory {
+	
+	private final String shopPrefix = "SHOP_";
 
 	ShopMenu(){
 	}
@@ -11,6 +13,7 @@ public class ShopMenu extends Inventory {
 		descs.clear();
 		addIfNotPurchased("SHOVEL");
 		addIfNotPurchased("SHELL3");
+		addIfNotPurchased("WATERINGCAN");
 		super.open();
 	}
 	
@@ -18,7 +21,7 @@ public class ShopMenu extends Inventory {
 	 * Adds an item to the shop menu only if the player hasn't purchased it before.
 	 */
 	private void addIfNotPurchased(String id){
-		if (!FrameEngine.getSaveFile().getFlag("SHOP_" + id)){
+		if (!FrameEngine.getSaveFile().getFlag(shopPrefix + id)){
 			items.add(id);
 		}
 	}
@@ -32,7 +35,7 @@ public class ShopMenu extends Inventory {
 		else{
 			FrameEngine.getSaveFile().addMoney(-desc.price);
 			String id = desc.id;
-			FrameEngine.getSaveFile().setFlag("SHOP_" + id, true);
+			FrameEngine.getSaveFile().setFlag(shopPrefix + id, true);
 			FrameEngine.getInventory().addItem(id);
 			removeItem(id);
 			cursor = 0;

@@ -26,7 +26,7 @@ public class Inventory extends AbstractMenu{
 //		items.add("GRUB2");
 //		items.add("GRUB3");
 //		items.add("SHOVEL");
-		items.add("APPLE");
+		items.add("GHOST");
 		items.add("TREASURE1");
 		items.add("TREASURE2");
 		items.add("TREASURE3");
