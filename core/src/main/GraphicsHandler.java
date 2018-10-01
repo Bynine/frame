@@ -159,6 +159,10 @@ public class GraphicsHandler {
 				&& FrameEngine.getCurrentTextbox().playerTalking()){
 			drawBubble(talkingBubble);
 		}
+		else if(Player.getImageState() == Player.ImageState.GET 
+				&& null != FrameEngine.getCurrentThing()){
+			drawBubble(FrameEngine.getCurrentThing().icon);
+		}
 
 		if (null != FrameEngine.getCurrentTextbox()) {
 			drawDefaultTextbox(FrameEngine.getCurrentTextbox());
@@ -199,7 +203,7 @@ public class GraphicsHandler {
 		batch.begin();
 		batch.draw(bubble,
 				FrameEngine.getPlayer().getPosition().x,
-				FrameEngine.getPlayer().getPosition().y
+				FrameEngine.getPlayer().getPosition().y + 40
 				);
 		batch.end();
 	}
@@ -260,13 +264,18 @@ public class GraphicsHandler {
 	 */
 	private void drawWaterEntity(Entity en){
 		if (null != en.getImage() && !en.shouldDelete()){
-			batch.setColor(en.getColor().r, en.getColor().g, en.getColor().b, en.getColor().a / 2);
+			final float maxDistance = 960.0f;
+			float sizeReduction = Math.max((maxDistance - en.getZPosition()), 0)/maxDistance;
+			batch.setColor(en.getColor().r, en.getColor().g, en.getColor().b, 
+					(sizeReduction * en.getColor().a) / 1.8F);
 			if (en.isFlipped() ^ en.getImage().isFlipX()) en.getImage().flip(true, false);
 			en.getImage().flip(false, true);
 			batch.draw(
 					en.getImage(), 
 					en.getPosition().x, 
-					en.getPosition().y - en.getZPosition() - en.getImage().getRegionHeight() + 4
+					en.getPosition().y - en.getZPosition()/12 - en.getImage().getRegionHeight() + 4,
+					en.getImage().getRegionWidth() * sizeReduction,
+					en.getImage().getRegionHeight() * sizeReduction
 					);
 			batch.setColor(DEFAULT_COLOR);
 			en.getImage().flip(false, true);
@@ -343,7 +352,9 @@ public class GraphicsHandler {
 	 * Draws a texture over the entire map.
 	 */
 	private void drawByTiles(TextureRegion texture, boolean scrolls){
-		int x_tiles = 3 + (int) (FrameEngine.getArea().mapWidth / texture.getRegionWidth());
+		int x_tiles = 3 + (int) 
+				(FrameEngine.getArea().mapWidth / 
+						texture.getRegionWidth());
 		int y_tiles = 3 + (int) (FrameEngine.getArea().mapHeight / texture.getRegionHeight());
 		for (int xx = 0; xx < x_tiles; ++xx){
 			for (int yy = 0; yy < y_tiles; ++yy){
@@ -543,13 +554,15 @@ public class GraphicsHandler {
 			String word = words[ii];
 			String testTextFuture = testText.concat(fullWords[ii]);
 			GlyphLayout futureCheck = new GlyphLayout(font, testTextFuture);
-			if (futureCheck.width >= (width - FrameEngine.TILE/8)){
+			if (futureCheck.width >= (width - FrameEngine.TILE/8) || word.equals("~")){
 				spacedText += "\n";
 				testText += "\n";
 				width += FrameEngine.TILE/2;
 			}
-			spacedText = spacedText.concat(word + " ");
-			testText = testText.concat(fullWords[ii]);
+			if (!word.equals("~")) {
+				spacedText = spacedText.concat(word + " ");
+				testText = testText.concat(fullWords[ii]);
+			}
 		}
 		return spacedText;
 	}
@@ -722,7 +735,7 @@ public class GraphicsHandler {
 		wipeScreen();
 		batch.begin();
 		final float posX = FrameEngine.TILE;
-		final float posY = FrameEngine.getTime() * creditSpeed;
+		final float posY = Gdx.graphics.getHeight()/2 + FrameEngine.getTime() * creditSpeed;
 		debugFont.draw(batch, credits, posX, posY);
 		batch.draw(splash, posX, posY - 500);
 		batch.end();

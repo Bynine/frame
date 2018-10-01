@@ -24,12 +24,11 @@ public class Currency extends InteractableEntity{
 		String currency = "acorn";
 		if (amount > 1) currency = currency.concat("s");
 		FrameEngine.putTextbox(new Textbox(getString(currency)));
-		FrameEngine.getSaveFile().addMoney(amount);
 		FrameEngine.getSaveFile().setFlag(flag, true);
 	}
 	
 	protected String getString(String currency){
-		return "You obtained " + amount + " " + currency + "!";
+		return "[CURRENCY_" + amount + "]You obtained " + amount + " " + currency + "!";
 	}
 
 	@Override

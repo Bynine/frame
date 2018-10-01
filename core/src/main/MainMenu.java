@@ -22,6 +22,7 @@ public class MainMenu extends AbstractMenu {
 
 	@Override
 	protected void selectItem() {
+		AudioHandler.playSound(select);
 		switch ((Option)getList().get(cursor).getOutput()){
 		case NEW:{
 			FrameEngine.newGame();

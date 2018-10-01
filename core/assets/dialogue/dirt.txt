@@ -1,0 +1,12 @@
+The ground is soft here. Plant something?
+{
+<ADJ_SEED
+[REMOVE_ITEM]You bury the seed in the dirt and wish it luck.
+<ADJ_SHELL
+Unfortunately, shells don't grow on trees, nor do they grow into them.
+<ADJ_TREASURE
+That's kind of rude, isn't it?
+<GOAL
+You ought to save that.
+<OTHER
+That... probably isn't going to work.

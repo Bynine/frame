@@ -29,8 +29,8 @@ public class Item extends InteractableEntity {
 	}
 	
 	protected void get(){
-		FrameEngine.putTextbox(new Textbox("You obtained " + getIndefinite(name) + " " + name + "!"));
-		FrameEngine.getInventory().addItem(id);
+		FrameEngine.putTextbox(new Textbox(
+				"[GIVE_" + id + "]You obtained " + getIndefinite(name) + " " + name + "!"));
 	}
 	
 	@Override

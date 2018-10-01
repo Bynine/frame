@@ -1,12 +1,13 @@
-KEEPSAKE	satchel	NONE	For holding something special	0
+KEEPSAKE	memento	NONE	Once important to you	0
 GOAL	Seed of Hope	NONE	Said to grow in any condition	0
+ACORN	acorn	NONE	Uh oh	1
 
 TREASURE1	Golden Shell	TREASURE	Pretty but too heavy to wear	1
-TREASURE2	Treasure 2	TREASURE	???	1
-TREASURE3	Knitted Sweater	TREASURE	It's just your size	1
+TREASURE2	Puzzle Reward	TREASURE	???	1
+TREASURE3	Knitted Sweater	TREASURE	It's just your size and very warm	1
 TREASURE4	Pumpkin Cupcake	TREASURE	Pumpkin frosted muffin with a gooey chocolate center	1
-TREASURE5	Treasure 5	TREASURE	???	1
-TREASURE6	Ghost Reward	TREASURE		???	1
+TREASURE5	Nice Painting	TREASURE	It's a painting of you, planting a flower!	1
+TREASURE6	Ghost Reward	TREASURE	???	1
 
 SHOVEL	shovel	NONE	Unsurprisingly good at digging	3
 WATERINGCAN	watering can	NONE	Give seeds a nice drink	3
@@ -14,6 +15,12 @@ WATERINGCAN	watering can	NONE	Give seeds a nice drink	3
 SHELL1	nice shell	SHELL	The red color is charming	2
 SHELL2	cool shell	SHELL	The yellow color is soothing	2
 SHELL3	rad shell	SHELL	The blue color is elegant	2
+
+SEED1	silly seed	SEED	It's hard not to smile just looking at it	1
+SEED2	elegant seed	SEED	Seems to exude a gentleness	1
+SEED3	sun seed	SEED	Warm to the touch	1
+SEED4	colorful seed	SEED	Shines under direct light	1
+SEED5	fuzzy seed	SEED	Very soft	1
 
 GRUB1	Chubby Grub	NONE	This grub loves to eat	1
 GRUB2	Nubby Grub	NONE	This grub has little bumps	1

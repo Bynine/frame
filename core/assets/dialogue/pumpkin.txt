@@ -9,7 +9,8 @@ Your pay will be worth the while! Pumpkin's honor!
 *ACCEPTED_CAFE_JOB
 *CAFE_QUEST
 Oh, wonderful! You're a real sweetheart!
-[GIVE_ORDER1][GIVE_ORDER2][GIVE_ORDER3]Ok, [TOSS_ORDER1]hon, [TOSS_ORDER2]here're [TOSS_ORDER3]the orders.
+My name's Jackie, by the way. It's a pleasure to meet you.
+[NEWNAME=Jackie]Ok, [GIVE_ORDER1][TOSS_ORDER1]hon, [GIVE_ORDER2][TOSS_ORDER2]here're [GIVE_ORDER3][TOSS_ORDER3]the orders.
 The latte with extra milk goes to the pretty lady over there with the purple coat...
 The spiced pumpkin cider goes to that older gentleman right there...
 And the red-bean coffee goes to Leslie, the one in the cute bat shirt.
@@ -31,7 +32,7 @@ And the red-bean coffee goes to Leslie, the one in the cute bat shirt.
 Here's your payment for a job well done, hon. Hope you enjoy it - I made it just for you!
 [NOSPEAKER][GIVE_TREASURE4]You received a Pumpkin Cupcake!
 [TALK]What's that, hon? You're looking for something else?
-Sorry, hon, I don't think I've ever heard of that.
-All I know is this... "One good turn deserves another"! You get what I mean?
+Sorry, I don't think I've ever heard of that.
+All I know is this... "One good turn deserves another"! You get what I mean, hon?
 &CAFE_REWARD
 [ANIM_2]Thanks again for your help, hon. You're a real life saver!

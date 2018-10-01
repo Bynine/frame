@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Sound;
 
 import entity.InteractableEntity;
 import entity.NPC;
+import entity.Player;
 import main.AudioHandler;
 import main.FrameEngine;
 import timer.Timer;
@@ -27,7 +28,6 @@ public class Textbox {
 	 */
 	public static final float DEFAULT_TEXT_SPEED = 1.5F;
 	private float TEXT_SPEED = DEFAULT_TEXT_SPEED;
-	//private float TALK_SPEED = 6.0f;
 
 	public Textbox(String text){
 		parseText(text);
@@ -124,11 +124,15 @@ public class Textbox {
 		}
 		else if (command.getID().startsWith("GIVE_")){
 			String[] itemData = command.getID().split("_");
+			FrameEngine.setCurrentThing(itemData[1]);
 			FrameEngine.getInventory().addItem(itemData[1]);
+			Player.setImageState(Player.ImageState.GET);
 		}
 		else if (command.getID().startsWith("CURRENCY_")){
 			String[] itemData = command.getID().split("_");
+			FrameEngine.setCurrentThing("ACORN");
 			FrameEngine.getSaveFile().addMoney(Integer.parseInt(itemData[1]));
+			Player.setImageState(Player.ImageState.GET);
 		}
 		else if (command.getID().equals("NOSPEAKER")){
 			speaker = null;
@@ -139,6 +143,11 @@ public class Textbox {
 		}
 		else if (command.getID().equals("DESTROY")){
 			FrameEngine.endDialogueTree();
+		}
+		else if (command.getID().startsWith("NEWNAME=") && null != speaker && speaker instanceof NPC){
+			NPC npc = (NPC) speaker;
+			String[] itemData = command.getID().split("=");
+			FrameEngine.getSaveFile().setMapping(npc.getName(), itemData[1]);
 		}
 		else{
 			switch(command.getID()){

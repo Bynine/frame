@@ -221,7 +221,7 @@ public class DialogueTree{
 
 	public void messageSpeaker() {
 		if (null != speaker){
-			speaker.getMessage("ANIM_0");
+			speaker.getMessage("DEFAULT_ANIM");
 		}
 	}
 

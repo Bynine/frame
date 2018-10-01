@@ -22,7 +22,11 @@ public abstract class AbstractMenu {
 	
 	public abstract List<MenuOption> getList();
 	protected abstract void selectItem();
-	private static final Sound moveCursor = Gdx.audio.newSound(Gdx.files.internal("sfx/speech/blip.wav"));
+	public static final Sound 
+	moveCursor = Gdx.audio.newSound(Gdx.files.internal("sfx/menu/high_click.wav")),
+	stopCursor = Gdx.audio.newSound(Gdx.files.internal("sfx/menu/empty_click.wav")),
+	select = Gdx.audio.newSound(Gdx.files.internal("sfx/menu/thud.wav")),
+	error = Gdx.audio.newSound(Gdx.files.internal("sfx/menu/wrong.wav"));
 
 	public void update(){
 		cursorHalt.countUp();
@@ -65,21 +69,27 @@ public abstract class AbstractMenu {
 	}
 
 	private void moveCursor(int x, int y){
-		moveCursorVertical(y);
-		moveCursorHorizontal(x);
+		if (y != 0) moveCursorVertical(y);
+		if (x != 0) moveCursorHorizontal(x);
 	}
 
 	protected void moveCursorVertical(int i){
-		playCursorSound();
+		playCursorSound(-i);
 		cursor = MathUtils.clamp(cursor - i, 0, getList().size() - 1);
 	}
 
 	protected void moveCursorHorizontal(int i){
-		playCursorSound();
+		playCursorSound(i);
 	}
 	
-	protected final void playCursorSound(){
-		AudioHandler.playSound(moveCursor);
+	protected final void playCursorSound(int i){
+		int newPosition = cursor + i;
+		if (newPosition >= 0 && newPosition < (getList().size())){
+			AudioHandler.playSound(moveCursor);
+		}
+		else{
+			AudioHandler.playSound(stopCursor);
+		}
 	}
 
 	public MenuOption getActiveButton(){

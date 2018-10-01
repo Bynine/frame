@@ -22,7 +22,7 @@ public class Secret extends Currency {
 	
 	@Override
 	protected String getString(String currency){
-		return "Neat! You found " + amount + " " + currency + "!";
+		return "[CURRENCY_" + amount + "]Neat! You found " + amount + " " + currency + "!";
 	}
 
 	@Override

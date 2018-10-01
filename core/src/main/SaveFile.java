@@ -15,24 +15,26 @@ public class SaveFile {
 	private final HashMap<String, Boolean> flags = new HashMap<>();
 	private final HashMap<String, Integer> counters = new HashMap<>();
 	private final HashMap<String, String> map = new HashMap<>();
-	
+
 	private String moneyKey = "smiles";
 	private String inventoryKey = "kindnesses";
 	private String areaKey = "travels";
 	private String mapPrefix = "MAP_";
-	
+
 	private int money = 0;
 	private static final String saveFile = "mrbsv.xml";
-	
+
 	private boolean verbose = false;
 
 	SaveFile(boolean verbose){
 		this.verbose = verbose;
-		flags.put("ENTERED_SHRINE", true);
+		if (FrameEngine.DEBUG){
+			flags.put("ENTERED_SHRINE", true);
+		}
 		if (!FrameEngine.SAVE) return;
 		Preferences preferences = Gdx.app.getPreferences(saveFile);
 		money = preferences.getInteger(moneyKey);
-		
+
 		for (String key: preferences.get().keySet()){
 			String value = preferences.get().get(key).toString();
 			if (value.equals("true")){
@@ -50,7 +52,7 @@ public class SaveFile {
 				}
 			}
 		}
-		
+
 		if (preferences.get().containsKey(inventoryKey)){
 			String[] items = preferences.getString(inventoryKey).split(",");
 			for (String item: items){
@@ -60,19 +62,19 @@ public class SaveFile {
 				}
 			}
 		}
-		
+
 		for (String key: preferences.get().keySet()){
 			if (key.startsWith(mapPrefix)){
 				map.put(key.substring(4), preferences.get().get(key).toString());
 			}
 		}
-		
+
 		if (preferences.get().containsKey(areaKey)){
 			if (verbose) System.out.println("Now arriving at: " + areaKey);
 			FrameEngine.startAreaName = preferences.getString(areaKey);
 		}
 	}
-	
+
 	/**
 	 * Puts game state into save file.
 	 */
@@ -84,7 +86,7 @@ public class SaveFile {
 		preferences.put(map);
 		preferences.putInteger(moneyKey, money);
 		preferences.putString(areaKey, FrameEngine.getArea().getID());
-		
+
 		StringBuilder builder = new StringBuilder();
 		for (MenuOption menuOption: FrameEngine.getInventory().getList()){
 			ItemDescription desc = (ItemDescription) menuOption.getOutput();
@@ -95,7 +97,7 @@ public class SaveFile {
 		preferences.flush();
 		if (verbose) System.out.println("Saved!");
 	}
-	
+
 	/**
 	 * Sets the value of the given flag.
 	 */
@@ -107,7 +109,7 @@ public class SaveFile {
 		flags.put(flag, invert ^ bool);
 		if (verbose) System.out.println(flag + " set to " + bool);
 	}
-	
+
 	/**
 	 * Checks if this series of flags has been set to true.
 	 */
@@ -119,7 +121,7 @@ public class SaveFile {
 		}
 		return isFlag;
 	}
-	
+
 	/**
 	 * Checks if this flag has been set to true.
 	 */
@@ -134,7 +136,7 @@ public class SaveFile {
 		}
 		return invert ^ value;
 	}
-	
+
 	/**
 	 * If the counter does not exist, creates it and sets it to n.
 	 * If it does, adds the given value.
@@ -147,11 +149,11 @@ public class SaveFile {
 			counters.put(counter, n);
 		}
 	}
-	
+
 	public void addMoney(int n){
 		money += n;
 	}
-	
+
 	public int getMoney(){
 		return money;
 	}
@@ -184,5 +186,5 @@ public class SaveFile {
 		if (!map.containsKey(key)) return "";
 		else return map.get(key);
 	}
-	
+
 }

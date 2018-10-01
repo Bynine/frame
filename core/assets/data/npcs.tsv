@@ -10,7 +10,7 @@ GUITARIST	Musician	bup	TRUE	1	30
 CAT	Fancy Lady	mih	FALSE	1	30
 WATER	Water Bug	bup	FALSE	1	30
 FREBKING	Freb King	heavy	FALSE	1	60
-PUMPKIN	Jackie	mih	TRUE	1	30
+PUMPKIN	Cafe Owner	mih	TRUE	1	30
 FRIEND	Fancy Lady's Partner	mih	FALSE	1	45
 CUSTOMER2	Mysterious Old Guy	bwep	FALSE	1	30
 CUSTOMER3	Reading Person	meoh	FALSE	1	30
@@ -20,6 +20,11 @@ GRUB2	Nubby Grub	bwep	FALSE	1	30
 GRUB3	Grubby Grub	bwep	FALSE	1	30
 VILLAGER	Villager	bwep	TRUE	1	30
 GHOST	Spooky Fella	bwep	TRUE	1	45
+ARTIST	Artist	bup	FALSE	1	45
+COFFEE	Complaining Guy	meoh	TRUE	1	45
+ADVENTURER	Adventurer	mih	TRUE	1	30
+WARRIOR	Ragged Warrior	bup	TRUE	1	60
 
 WITCH	Witch	mih	TRUE	1	30
 SKULL	Ground Head	bup	TRUE	1	45
+DEMON	Cavern Dweller	heavy	TRUE	1	60

@@ -14,6 +14,7 @@ public class ShopMenu extends Inventory {
 		addIfNotPurchased("SHOVEL");
 		addIfNotPurchased("SHELL3");
 		addIfNotPurchased("WATERINGCAN");
+		addIfNotPurchased("SEED1");
 		super.open();
 	}
 	
@@ -30,9 +31,10 @@ public class ShopMenu extends Inventory {
 	protected void selectItem() {
 		ItemDescription desc = (ItemDescription)getActiveButton().getOutput();
 		if (desc.tooExpensive()){
-			// TODO: Play error sound
+			AudioHandler.playSound(error);
 		}
 		else{
+			AudioHandler.playSound(select);
 			FrameEngine.getSaveFile().addMoney(-desc.price);
 			String id = desc.id;
 			FrameEngine.getSaveFile().setFlag(shopPrefix + id, true);

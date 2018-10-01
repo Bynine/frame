@@ -25,7 +25,8 @@ public class Player extends Entity{
 	invincibility = new Timer(60),
 	stepTimer = new Timer(stepTime * 2),
 	walkRightTimer = new Timer(30);
-	
+	private static ImageState imageState = ImageState.NORMAL;
+
 	private static final ArrayList<Animation<TextureRegion>> walk = 
 			Animator.createAnimation(stepTime, "sprites/player/walk.png", 4, 3);
 	private static final ArrayList<Animation<TextureRegion>> idle = 
@@ -34,13 +35,15 @@ public class Player extends Entity{
 			Animator.createAnimation(stepTime, "sprites/player/slope.png", 4, 3);
 	private static final ArrayList<Animation<TextureRegion>> idle_slope = 
 			Animator.createAnimation(30, "sprites/player/idle_slope.png", 2, 3);
+	private static final TextureRegion get = 
+			new TextureRegion(new Texture(Gdx.files.internal("sprites/player/get.png")));
 	public static final TextureRegion ripple = 
 			new TextureRegion(new Texture(Gdx.files.internal("sprites/graphics/ripple.png")));
-	
+
 	private static final Rectangle interaction_box = 
 			new Rectangle(0, 0, 16, 16);
 	private final Vector2 input = new Vector2();
-	
+
 	private static final Sound 
 	stepGrass = Gdx.audio.newSound(Gdx.files.internal("sfx/step_grass.wav")),
 	stepWood = Gdx.audio.newSound(Gdx.files.internal("sfx/step_wood.wav")),
@@ -53,7 +56,7 @@ public class Player extends Entity{
 		shadow = new TextureRegion(new Texture("sprites/player/shadow.png"));
 		setRight();
 	}
-	
+
 	@Override
 	public void update(){
 		if (!walkRightTimer.timeUp()){
@@ -126,18 +129,28 @@ public class Player extends Entity{
 		else if (input.x < -min_control) setLeft();
 		else if (input.x > min_control) setRight(); 
 	}
-	
+
 	@Override
 	public void updateImage(){
-		if (!FrameEngine.canUpdateEntities() ||
-				(input.x == 0 && input.y == 0)){
-			if (onSlope) image = idle_slope.get(dir).getKeyFrame(FrameEngine.getTime());
-			else image = idle.get(dir).getKeyFrame(FrameEngine.getTime());
-		}
-		else{
-			if (stepTimer.timeUp()) stepSound();
-			if (onSlope) image = slope.get(dir).getKeyFrame(FrameEngine.getTime());
-			else image = walk.get(dir).getKeyFrame(FrameEngine.getTime());
+		switch(imageState){
+		case NORMAL:{
+			if (!FrameEngine.canUpdateEntities() ||
+					(input.x == 0 && input.y == 0)){
+				if (onSlope) image = idle_slope.get(dir).getKeyFrame(FrameEngine.getTime());
+				else image = idle.get(dir).getKeyFrame(FrameEngine.getTime());
+			}
+			else{
+				if (stepTimer.timeUp()) stepSound();
+				if (onSlope) image = slope.get(dir).getKeyFrame(FrameEngine.getTime());
+				else image = walk.get(dir).getKeyFrame(FrameEngine.getTime());
+			}
+		} break;
+		case GET:{
+			image = get;
+		} break;
+		default: {
+			image = get;
+		} break;
 		}
 	}
 
@@ -173,6 +186,18 @@ public class Player extends Entity{
 		setRight();
 		walkRightTimer.setEndTime(i);
 		walkRightTimer.reset();
+	}
+
+	public static enum ImageState{
+		NORMAL, GET, DIG, WATER, EXPLAIN
+	}
+
+	public static ImageState getImageState(){
+		return imageState;
+	}
+	
+	public static void setImageState(ImageState is){
+		imageState = is;
 	}
 
 }

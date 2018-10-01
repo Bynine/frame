@@ -8,6 +8,7 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
+import entity.Artist;
 import entity.AudioLocation;
 import entity.Bird;
 import entity.Currency;
@@ -129,6 +130,13 @@ public class EntityLoader {
 						interactXDisp, interactYDisp,
 						width, height,
 						id, imagePath, dialoguePath, layer));
+			}
+			else if (id.equals("ARTIST")){
+				entities.add(new Artist(
+						x, y, 
+						interactXDisp, interactYDisp,
+						width, height
+						));
 			}
 			else {
 				entities.add(new NPC(

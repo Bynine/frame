@@ -21,7 +21,7 @@ import text.Textbox;
 import timer.Timer;
 
 public class FrameEngine extends ApplicationAdapter {
-	public static boolean DEBUG	= true;
+	public static boolean DEBUG	= false;
 
 	@SuppressWarnings("unused")
 	public static boolean 
@@ -49,6 +49,7 @@ public class FrameEngine extends ApplicationAdapter {
 	private static ShopMenu shopMenu;
 	private static PauseMenu pauseMenu;
 	private static AnswersMenu answersMenu;
+	private static ItemDescription currentThing = null;
 	private static String givenItemID = "";
 	private static Timer 
 	time = new Timer(0),
@@ -138,7 +139,7 @@ public class FrameEngine extends ApplicationAdapter {
 		} break;
 		}
 		
-		graphicsHandler.drawOverlay();
+		if (currArea != null) graphicsHandler.drawOverlay();
 
 		inputHandler.update();
 		if (LOG) fpsLogger.log();
@@ -217,6 +218,9 @@ public class FrameEngine extends ApplicationAdapter {
 	
 	private void updateCredits(){
 		graphicsHandler.drawCredits();
+		if (time.getCounter() > 6000){
+			startMainMenu();
+		}
 	}
 
 	/**
@@ -226,15 +230,19 @@ public class FrameEngine extends ApplicationAdapter {
 		if (inputHandler.getPauseJustPressed()){
 			if (gameState == GameState.PAUSED){
 				gameState = GameState.OVERWORLD;
+				AudioHandler.playSound(AbstractMenu.stopCursor);
 			}
 			else if (gameState == GameState.INVENTORY){
 				gameState = GameState.PAUSED;
+				AudioHandler.playSound(AbstractMenu.stopCursor);
 			}
 			else if (gameState == GameState.SHOP){
 				endShop();
+				AudioHandler.playSound(AbstractMenu.stopCursor);
 			}
 			else if (gameState == GameState.OVERWORLD && canControlPlayer()){
 				handlePause();
+				AudioHandler.playSound(AbstractMenu.moveCursor);
 			}
 		}
 		if (inputHandler.getActionJustPressed()) {
@@ -269,10 +277,12 @@ public class FrameEngine extends ApplicationAdapter {
 					inventoryRequest = false;
 				}
 				else if (dialogueTree.finished()){
+					Player.setImageState(Player.ImageState.NORMAL);
 					dialogueTree.messageSpeaker();
 					dialogueTree = null;
 				}
 				else{
+					Player.setImageState(Player.ImageState.NORMAL);
 					dialogueTree.advanceBranch();
 				}
 			}
@@ -383,6 +393,7 @@ public class FrameEngine extends ApplicationAdapter {
 
 	public static void startCredits(){
 		time.reset();
+		saveFile.save();
 		gameState = GameState.CREDITS;
 	}
 
@@ -529,6 +540,16 @@ public class FrameEngine extends ApplicationAdapter {
 
 	public static String getGivenItemID() {
 		return givenItemID;
+	}
+	
+	public static void setCurrentThing(String thing){
+		if (null != currentThing) currentThing.dispose();
+		currentThing = new ItemDescription(thing);
+		
+	}
+	
+	public static ItemDescription getCurrentThing(){
+		return currentThing;
 	}
 
 }

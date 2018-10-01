@@ -15,7 +15,7 @@ public class NPC extends InteractableEntity{
 
 	protected final ArrayList<ArrayList<Animation<TextureRegion>>> anims;
 	private final String name, dialoguePath;
-	private int currentAnim = 0;
+	protected int defaultAnim, currentAnim = 0;
 
 	public NPC(float x, float y, 
 			int interactXDisp, int interactYDisp,
@@ -83,6 +83,9 @@ public class NPC extends InteractableEntity{
 	@Override
 	public void getMessage(String message) {
 		super.getMessage(message);
+		if (message.equals("DEFAULT_ANIM")){
+			currentAnim = defaultAnim;
+		}
 		if (message.startsWith("ANIM_")){
 			currentAnim = Integer.parseInt(message.split("_")[1]);
 		}
@@ -113,6 +116,9 @@ public class NPC extends InteractableEntity{
 	}
 
 	public String getName(){
+		if (!FrameEngine.getSaveFile().getMapping(name).isEmpty()){
+			return FrameEngine.getSaveFile().getMapping(name);
+		}
 		return name;
 	}
 

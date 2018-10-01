@@ -28,6 +28,7 @@ public class AnswersMenu extends AbstractMenu{
 
 	@Override
 	protected void selectItem() {
+		AudioHandler.playSound(select);
 	}
 
 }

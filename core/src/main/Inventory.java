@@ -19,18 +19,20 @@ public class Inventory extends AbstractMenu{
 	protected final ArrayList<MenuOption> descs = new ArrayList<MenuOption>();
 
 	Inventory(){
-//		for (int ii = 0; ii < 30; ++ii){
-//			items.add("KEEPSAKE");
-//		}
-//		items.add("GRUB1");
-//		items.add("GRUB2");
-//		items.add("GRUB3");
-//		items.add("SHOVEL");
-		items.add("GHOST");
-		items.add("TREASURE1");
-		items.add("TREASURE2");
-		items.add("TREASURE3");
-		items.add("TREASURE4");
+		if (FrameEngine.DEBUG){
+			items.add("SHOVEL");
+			items.add("GHOST");
+			items.add("TREASURE1");
+			items.add("TREASURE2");
+			items.add("TREASURE3");
+			items.add("TREASURE4");
+			items.add("SHELL2");
+			items.add("SEED1");
+			items.add("SEED2");
+			items.add("SEED3");
+			items.add("SEED4");
+			items.add("WATERINGCAN");
+		}
 	}
 
 	public boolean hasItem(String item){
@@ -72,16 +74,19 @@ public class Inventory extends AbstractMenu{
 	
 	@Override
 	protected void moveCursorVertical(int i){
-		playCursorSound();
 		int newPosition = cursor - (i * 5);
 		if ((newPosition >= 0) && (newPosition < getList().size())){
 			cursor = newPosition;
+			AudioHandler.playSound(moveCursor);
+		}
+		else{
+			AudioHandler.playSound(stopCursor);
 		}
 	}
 
 	@Override
 	protected void moveCursorHorizontal(int i){
-		playCursorSound();
+		playCursorSound(i);
 		cursor = MathUtils.clamp(cursor + i, 0, getList().size()-1);
 	}
 

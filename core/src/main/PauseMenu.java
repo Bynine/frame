@@ -25,6 +25,7 @@ public class PauseMenu extends AbstractMenu{
 
 	@Override
 	protected void selectItem() {
+		AudioHandler.playSound(select);
 		switch ((Option)getList().get(cursor).getOutput()){
 		case INVENTORY:{
 			FrameEngine.startInventory();
@@ -43,7 +44,7 @@ public class PauseMenu extends AbstractMenu{
 
 	@Override
 	protected void moveCursorHorizontal(int i){
-		playCursorSound();
+		playCursorSound(i);
 		cursor = MathUtils.clamp(cursor + i, 0, 1);
 	}
 

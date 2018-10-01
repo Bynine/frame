@@ -1,0 +1,19 @@
+*TALK_ARTIST
+What?! What do you want?!
+I have no time for little people in funny clothes! I am frustrated!
+In the past beautiful tall flowers bloomed all around here. Now there are none! None at all!
+What am I to do without my muse?! 
+Are you still here?! Leave me in my sorrow, interloper!
+&TALK_ARTIST
+I miss those tall, gorgeous flowers... With all my heart, I miss them.
+How can a painter paint without their muse? Tell me, is it possible? No!
+&GROWN_ENOUGH_FLOWERS
+*WORLD_REWARD
+My friend... THANKS_LINE.
+You are truly kind to grow flowers in this forest. As I walked, I saw you doing so.
+I was so touched by this gesture that I painted you tending to one of the flowers.
+Please, accept it. It is the least I can do.
+[NOSPEAKER][GIVE_TREASURE5]You received a painting!
+&WORLD_REWARD
+Now that I am inspired... I will paint, paint, paint!
+I will never stop! Hahahaha!
