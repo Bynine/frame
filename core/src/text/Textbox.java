@@ -158,7 +158,7 @@ public class Textbox {
 				talking = true;
 			} break;
 			default:{
-				command.activate();
+				command.progressionActivate();
 			} break;
 			}
 		}

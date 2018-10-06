@@ -5,18 +5,6 @@ John Marshall
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 ENGINE DESIGN
 
 Daniel Spencer
@@ -24,14 +12,9 @@ Daniel Spencer
 
 
 
+WRITING ADVICE
 
-
-
-
-
-
-
-
+Nick Ferreira
 
 
 
@@ -43,31 +26,9 @@ Jarrod Roberts, Kyrstin McMaster
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 ART, CODE, SOUND, OTHER BITS N' BOBS
 
 Tyler "Bynine" McMaster
-
-
-
-
-
-
-
-
-
-
 
 
 

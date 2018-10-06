@@ -56,6 +56,8 @@ public class GraphicsHandler {
 	private static final TextureRegion 
 	arrowUp = new TextureRegion(new Texture("sprites/gui/arrow_up.png")),
 	arrowDown = new TextureRegion(new Texture("sprites/gui/arrow_down.png")),
+	heart = new TextureRegion(new Texture("sprites/gui/heart.png")),
+	acorn = new TextureRegion(new Texture("sprites/items/acorn.png")),
 	interactBubble = new TextureRegion(new Texture("sprites/player/interact.png")),
 	surpriseBubble = new TextureRegion(new Texture("sprites/player/surprise.png")),
 	talkingBubble = new TextureRegion(new Texture("sprites/player/talk.png")),
@@ -149,19 +151,19 @@ public class GraphicsHandler {
 
 		if (FrameEngine.canControlPlayer() && FrameEngine.canInteract()) {
 			InteractableEntity ien = FrameEngine.getCurrentInteractable();
-			if (ien instanceof NPC) drawBubble(talkingBubble);
+			if (ien instanceof NPC) drawAbovePlayer(talkingBubble);
 			else if (ien instanceof Secret || ien instanceof Item || ien instanceof Currency) {
-				drawBubble(surpriseBubble);
+				drawAbovePlayer(surpriseBubble);
 			}
-			else drawBubble(interactBubble);
+			else drawAbovePlayer(interactBubble);
 		}
 		else if(null != FrameEngine.getCurrentTextbox()
 				&& FrameEngine.getCurrentTextbox().playerTalking()){
-			drawBubble(talkingBubble);
+			drawAbovePlayer(talkingBubble);
 		}
 		else if(Player.getImageState() == Player.ImageState.GET 
 				&& null != FrameEngine.getCurrentThing()){
-			drawBubble(FrameEngine.getCurrentThing().icon);
+			drawAbovePlayer(FrameEngine.getCurrentThing().icon);
 		}
 
 		if (null != FrameEngine.getCurrentTextbox()) {
@@ -197,12 +199,14 @@ public class GraphicsHandler {
 	}
 
 	/**
-	 * Draws given bubble above player's head.
+	 * Draws given texture above player's head.
 	 */
-	private void drawBubble(TextureRegion bubble){
+	private void drawAbovePlayer(TextureRegion texture){
 		batch.begin();
-		batch.draw(bubble,
-				FrameEngine.getPlayer().getPosition().x,
+		final int xPlus = 
+				(FrameEngine.getPlayer().getImage().getRegionWidth() - texture.getRegionWidth())/2;
+		batch.draw(texture,
+				FrameEngine.getPlayer().getPosition().x + xPlus,
 				FrameEngine.getPlayer().getPosition().y + 40
 				);
 		batch.end();
@@ -246,40 +250,40 @@ public class GraphicsHandler {
 	}
 
 	/**
-	 * Draws all given entities.
+	 * Draws reflections for given entities.
 	 */
 	private void drawWaterEntities(ArrayList<Entity> entities){
 		batch.begin();
 		shapeRenderer.begin();
 		entities.sort(sorter);
 		for (Entity en: entities){
-			drawWaterEntity(en);
+			if (null != en.getImage() && !en.shouldDelete() && en.getLayer() != Entity.Layer.BACK){
+				drawWaterEntity(en);
+			}
 		}
 		batch.end();
 		shapeRenderer.end();
 	}
 
 	/**
-	 * Draws a single entity.
+	 * Draws an entity's reflection in the water.
 	 */
 	private void drawWaterEntity(Entity en){
-		if (null != en.getImage() && !en.shouldDelete()){
-			final float maxDistance = 960.0f;
-			float sizeReduction = Math.max((maxDistance - en.getZPosition()), 0)/maxDistance;
-			batch.setColor(en.getColor().r, en.getColor().g, en.getColor().b, 
-					(sizeReduction * en.getColor().a) / 1.8F);
-			if (en.isFlipped() ^ en.getImage().isFlipX()) en.getImage().flip(true, false);
-			en.getImage().flip(false, true);
-			batch.draw(
-					en.getImage(), 
-					en.getPosition().x, 
-					en.getPosition().y - en.getZPosition()/12 - en.getImage().getRegionHeight() + 4,
-					en.getImage().getRegionWidth() * sizeReduction,
-					en.getImage().getRegionHeight() * sizeReduction
-					);
-			batch.setColor(DEFAULT_COLOR);
-			en.getImage().flip(false, true);
-		}
+		final float maxDistance = 960.0f;
+		float sizeReduction = Math.max((maxDistance - en.getZPosition()), 0)/maxDistance;
+		batch.setColor(en.getColor().r, en.getColor().g, en.getColor().b, 
+				(sizeReduction * en.getColor().a) / 1.8F);
+		if (en.isFlipped() ^ en.getImage().isFlipX()) en.getImage().flip(true, false);
+		en.getImage().flip(false, true);
+		batch.draw(
+				en.getImage(), 
+				en.getPosition().x, 
+				en.getPosition().y - en.getZPosition()/12 - en.getImage().getRegionHeight() + 4,
+				en.getImage().getRegionWidth() * sizeReduction,
+				en.getImage().getRegionHeight() * sizeReduction
+				);
+		batch.setColor(DEFAULT_COLOR);
+		en.getImage().flip(false, true);
 	}
 
 	/**
@@ -398,6 +402,13 @@ public class GraphicsHandler {
 						position.x + FrameEngine.TILE - desc.icon.getRegionWidth()/2, 
 						position.y + FrameEngine.TILE - desc.icon.getRegionHeight()/2
 						);
+				if (desc.hasAttribute("TREASURE")){
+					batch.draw(
+							heart, 
+							position.x + FrameEngine.TILE + 8, 
+							position.y + FrameEngine.TILE + 8
+							);
+				}
 				batch.end();
 			}
 			ii++;
@@ -423,14 +434,20 @@ public class GraphicsHandler {
 	 */
 	private void drawItemDescription(AbstractMenu menu, boolean price){
 		float itemBoxWidth = 6.0f;
+		final float moneyX = Gdx.graphics.getWidth()/(4/ZOOM) - (FrameEngine.TILE * 2.5f);
+		final float moneyY = Gdx.graphics.getHeight()/(2) - FrameEngine.TILE*2;
 		drawText(Integer.toString(FrameEngine.getSaveFile().getMoney()) + " ACORNS", 
-				new Vector2(
-						Gdx.graphics.getWidth()/(4/ZOOM) - (FrameEngine.TILE * 2.5f), 
-						Gdx.graphics.getHeight()/(2) - FrameEngine.TILE*2
-						),
+				new Vector2(moneyX, moneyY),
 				new Vector2(itemBoxWidth, 2),
 				true
 				);
+		batch.begin();
+		batch.draw(
+				acorn, 
+				moneyX + (itemBoxWidth - 1) * FrameEngine.TILE, 
+				moneyY + 32
+				);
+		batch.end();
 		if (null != menu.getActiveButton()){
 			ItemDescription desc = ((ItemDescription)menu.getActiveButton().getOutput());
 			final int width = 8;
@@ -714,30 +731,34 @@ public class GraphicsHandler {
 		Color currColor = batch.getColor();
 		if (selectTimer.getCounter() % blipTime > blipTime/2){
 			batch.setColor(
-					currColor.r - 0.25f,
-					currColor.g - 0.15f,
-					currColor.b - 0.05f,
+					avg(currColor.r, 0.3f),
+					avg(currColor.r, 0.35f),
+					avg(currColor.r, 0.7f),
 					1
 					);
 		}
 		else{
 			batch.setColor(
-					currColor.r - 0.12f,
-					currColor.g - 0.12f,
-					currColor.b - 0.12f,
+					avg(currColor.r, 0.6f),
+					avg(currColor.r, 0.6f),
+					avg(currColor.r, 0.6f),
 					1
 					);
 		}
 	}
 
+	private float avg(float a, float b){
+		return (a + b)/2.0f;
+	}
+
 	final float creditSpeed = 0.5f;
 	public void drawCredits() {
 		wipeScreen();
+		batch.setProjectionMatrix(centerCam.combined);
 		batch.begin();
-		final float posX = FrameEngine.TILE;
-		final float posY = Gdx.graphics.getHeight()/2 + FrameEngine.getTime() * creditSpeed;
+		final float posX = FrameEngine.TILE/2;
+		final float posY = (FrameEngine.getTime() * creditSpeed);
 		debugFont.draw(batch, credits, posX, posY);
-		batch.draw(splash, posX, posY - 500);
 		batch.end();
 	}
 

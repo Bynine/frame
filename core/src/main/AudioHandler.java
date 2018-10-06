@@ -79,9 +79,12 @@ public class AudioHandler {
 	public static long playSound(Sound sound){
 		final float pitchDisparity = 20.0f;
 		float pitch = (1.0f - 0.5f/pitchDisparity) + (float) (Math.random()/pitchDisparity);
-		return sound.play(VOLUME, pitch, 0);
+		return playPitchedSound(sound, pitch);
 	}
 	
+	public static long playPitchedSound(Sound sound, float pitch){
+		return sound.play(VOLUME, pitch, 0);
+	}
 
 	public static void playPositionalSound(Entity owner, Sound sound) {
 		long id = playSound(sound);

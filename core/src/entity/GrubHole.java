@@ -12,6 +12,7 @@ public class GrubHole extends PortalHole {
 
 	public GrubHole(float x, float y, String flag, String destination, double destX, double destY) {
 		super(x, y, flag, destination, destX, destY);
+		opened = true;
 	}
 
 	@Override

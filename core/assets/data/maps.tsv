@@ -2,14 +2,19 @@ FOREST	?	forest	FALSE	dim	0.5&26	40&36
 SHOP	?	crackling	TRUE	bright	12&10
 SPRING	?	forest	FALSE	bright	9&33
 BOOKSTORE	?	inside	TRUE	dim	12&10
+
 BEACH	?	beach	FALSE	soft	18&18
 SHELL	?	cove	TRUE	pretty	12&9
 CAVERN	?	cove	FALSE	twilit	12&13
+
 ORCHARD	?	night	FALSE	twilit	32&55
 CAFE	?	nightinside	TRUE	bright	14&8
-WITCH	?	nightinside	TRUE	bright	8&8
 GRUBHOLE	?	hole	TRUE	dim	8&8
+
+FORT	?	inside	TRUE	dim	8&8
+FORTTOP	?	high	TRUE	dim	8&8
 SHRINE	?	inside	TRUE	dim	10&10
 UNDERSHRINE	?	hole	FALSE	cool	8&8
 DEPTHS	?	hole	FALSE	cool	9&39
+
 TEST	?	nothing	TRUE	paper	11&10

@@ -59,6 +59,10 @@ class Branch{
 	}
 
 	Textbox getTextbox(){
+		if (textboxes.size() == 0){
+			FrameEngine.logger.warning("Empty branch: " + pointer);
+			return null;
+		}
 		if (position >= textboxes.size() - 1) return textboxes.get(textboxes.size() - 1);
 		return textboxes.get(position);
 	}

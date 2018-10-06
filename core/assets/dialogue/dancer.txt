@@ -1,0 +1,17 @@
+*TALK_DANCER1
+...
+&TALK_DANCER1
+*TALK_DANCER2
+....
+&TALK_DANCER2
+*TALK_DANCER3
+.....
+&TALK_DANCER3
+*TALK_DANCER4
+...FINE!
+I'll dance for you!
+[ANIM_1][SPEED=10]Hm! Ha! Hm! Ho!
+[ANIM_0][NSPEED]Puff, puff... I hope it was worth the wait.
+&TALK_DANCER4
+Sorry, that was a once-in-a-lifetime dance.
+My life's work is finished. I am now at peace...

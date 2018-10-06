@@ -15,6 +15,7 @@ public class TrapDoor extends PortalHole {
 	public TrapDoor(float x, float y, String destination, double destX, double destY) {
 		super(x, y, "", destination, destX, destY);
 		marker = null;
+		canInteract = false;
 		hole = new TextureRegion(new Texture("sprites/objects/trapdoor.png"));
 		checkOpened();
 	}
@@ -23,6 +24,11 @@ public class TrapDoor extends PortalHole {
 	public void update(){
 		super.update();
 		checkOpened();
+	}
+	
+	@Override
+	public void interact(){
+		if (opened) super.interact();
 	}
 	
 	private void checkOpened(){
@@ -34,6 +40,7 @@ public class TrapDoor extends PortalHole {
 				;
 		if (!opened && toOpen){
 			AudioHandler.playSound(open);
+			canInteract = true;
 		}
 		opened = toOpen;
 	}

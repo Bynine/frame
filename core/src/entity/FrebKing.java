@@ -45,7 +45,7 @@ public class FrebKing extends NPC {
 	@Override
 	public void updateImage(){
 		if (happy()) {
-			image = anims.get(1).get(0).getKeyFrame(FrameEngine.getTime());
+			image = anims.get(1).get(0).getKeyFrame(croakTimer.getCounter());
 		}
 		else image = anims.get(0).get(0).getKeyFrame(FrameEngine.getTime());
 	}

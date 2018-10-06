@@ -31,6 +31,7 @@ import entity.Secret;
 import entity.Shopkeeper;
 import entity.Item;
 import entity.ItemHole;
+import entity.Memorial;
 import entity.NPC;
 import entity.Portal;
 import entity.PortalHole;
@@ -38,6 +39,7 @@ import entity.ShrineDoor;
 import entity.Stand;
 import entity.SummonObject;
 import entity.TrapDoor;
+import entity.Walkway;
 import main.FrameEngine;
 
 /**
@@ -227,6 +229,12 @@ public class EntityLoader {
 		case "flower":{
 			String id = properties.get("ID", String.class);
 			entities.add(new Flower(x, y, id));
+		} break;
+		case "walkway":{
+			entities.add(new Walkway(x, y, width, height));
+		} break;
+		case "memorial":{
+			entities.add(new Memorial(x, y, width, height));
 		} break;
 		default: {
 			FrameEngine.logger.log( Level.WARNING, 

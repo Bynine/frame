@@ -6,9 +6,9 @@ package entity;
  */
 public abstract class ImmobileEntity extends Entity {
 
-	
 	public ImmobileEntity(float x, float y) {
 		super(x, y);
+		collides = false;
 	}
 
 	/**

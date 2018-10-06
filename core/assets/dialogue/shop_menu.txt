@@ -7,5 +7,13 @@ Great! I accept any and all acorns as trade for my wares.
 Oh, just taking a look around? Well, feel free to stop by again any time!
 &ITEM_GHOST,!GHOST_SHOPKEEPER
 *GHOST_SHOPKEEPER
-Test
-[GHOST_THING]
+[ANIM_1]Howdy there, my friend![ANIM_0]
+[TALK][SPEED=6]...[NSPEED]Oh? What's that?
+Yokey... now there's a name I haven't heard in a while. She was one of my best friends as a kid.
+I remember I would pretend to run a shop, selling stuff like pine cones and oak leaves...
+And she would always come over and pretend to buy things. Kids are silly, huh? Haha.
+[ANIM_2]... I really miss her. She disappeared a while back. I never found out what happened.
+I hope wherever she is, she's doing all right.
+[ANIM_0]Oh! Sorry. Didn't mean to talk your ear off. Have a great day, my friend!
+[ANIM_2]...
+[NEWNAME=Barley][GHOST_THING][DESTROY]

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" nextobjectid="227">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="227">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/shop.tsx"/>
- <layer name="FLOOR" width="25" height="16">
+ <layer id="1" name="FLOOR" width="25" height="16">
   <data encoding="csv">
 27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0,
 27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0,
@@ -22,7 +22,7 @@
 27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0
 </data>
  </layer>
- <layer name="MIDDLE" width="25" height="16">
+ <layer id="2" name="MIDDLE" width="25" height="16">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -42,7 +42,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="ABOVE" width="25" height="16">
+ <layer id="3" name="ABOVE" width="25" height="16">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -62,7 +62,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="OVERHEAD" width="25" height="16">
+ <layer id="4" name="OVERHEAD" width="25" height="16">
   <data encoding="csv">
 9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
 9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
@@ -82,11 +82,11 @@
 9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
 </data>
  </layer>
- <objectgroup name="SLOPES"/>
- <objectgroup color="#32e3c6" name="TERRAIN" visible="0">
+ <objectgroup id="5" name="SLOPES"/>
+ <objectgroup color="#32e3c6" id="6" name="TERRAIN" visible="0">
   <object id="224" name="wood" x="216" y="120" width="368" height="240"/>
  </objectgroup>
- <objectgroup color="#50734a" name="COLLISION" opacity="0.5">
+ <objectgroup color="#50734a" id="7" name="COLLISION" opacity="0.5">
   <object id="166" x="0" y="0" width="224" height="576"/>
   <object id="167" x="224" y="0" width="352" height="192"/>
   <object id="168" x="576" y="0" width="192" height="576"/>
@@ -103,8 +103,8 @@
   <object id="221" x="352" y="256" width="80" height="24"/>
   <object id="222" x="480" y="280" width="64" height="40"/>
  </objectgroup>
- <objectgroup name="ENTITIES" opacity="0.64">
-  <object id="172" name="portal" gid="4" x="448" y="392" width="32" height="32">
+ <objectgroup id="8" name="ENTITIES" opacity="0.64">
+  <object id="172" name="portal" gid="6" x="448" y="392" width="32" height="32">
    <properties>
     <property name="DEST" value="FOREST,62,39"/>
     <property name="TYPE" value="PORTAL"/>

@@ -21,7 +21,7 @@ import text.Textbox;
 import timer.Timer;
 
 public class FrameEngine extends ApplicationAdapter {
-	public static boolean DEBUG	= false;
+	public static boolean DEBUG	= true;
 
 	@SuppressWarnings("unused")
 	public static boolean 
@@ -173,7 +173,7 @@ public class FrameEngine extends ApplicationAdapter {
 			answersMenu.update();
 		}
 		if (null != dialogueTree){
-			if (dialogueTree.terminated()){
+			if (dialogueTree.terminated() || null == dialogueTree.getTextbox()){
 				dialogueTree = null;
 			}
 			else{
@@ -218,7 +218,7 @@ public class FrameEngine extends ApplicationAdapter {
 	
 	private void updateCredits(){
 		graphicsHandler.drawCredits();
-		if (time.getCounter() > 6000){
+		if (time.getCounter() > 2600){
 			startMainMenu();
 		}
 	}
@@ -248,10 +248,7 @@ public class FrameEngine extends ApplicationAdapter {
 		if (inputHandler.getActionJustPressed()) {
 			handleActionPressed();
 		}
-		if (inputHandler.getSaveJustPressed()){
-			handleSavePressed();
-		}
-		if (inputHandler.getDebugJustPressed()){ // TODO: Don't allow in final release
+		if (inputHandler.getDebugJustPressed()){ // TODO: Disable for final release
 			gameState = GameState.DEBUG;
 		}
 	}
@@ -293,10 +290,6 @@ public class FrameEngine extends ApplicationAdapter {
 		else if (canControlPlayer() && null != currInteractable){
 			currInteractable.interact();
 		}
-	}
-
-	private void handleSavePressed(){
-		saveFile.save();
 	}
 
 	/**
@@ -344,6 +337,7 @@ public class FrameEngine extends ApplicationAdapter {
 		EntityHandler.initializeAreaEntities(currArea);
 		graphicsHandler.startArea();
 		transition.reset();
+		time.reset();
 	}
 
 	/**

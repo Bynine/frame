@@ -19,9 +19,9 @@ public abstract class Entity {
 	protected final TextureRegion sample = new TextureRegion(new Texture("sprites/npcs/dummy.png"));
 	protected final Rectangle hitbox = new Rectangle(0, 0, 28, 18);
 	protected final ArrayList<Timer> timerList = new ArrayList<Timer>();
-	protected float acceleration = 0.8f;
+	protected float acceleration = 1.0f;
 	protected float corner_acceleration = 0.35f;
-	protected float friction = 0.74f;
+	protected float friction = 0.69f;
 	protected float contact_friction = 0.92f;
 
 	/**

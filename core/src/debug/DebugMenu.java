@@ -25,11 +25,13 @@ public class DebugMenu extends AbstractMenu{
 		perColumn = 6;
 		String[] mapData = new TSVReader().loadAllData(TSVReader.MAP_URL);
 		for (String data: mapData){	
-			mapIDs.add(new MenuOption(
-					4, 2,
-					data.split(TSVReader.split)[0],
-					data.split(TSVReader.split)[0]
-							));
+			if (!data.split(TSVReader.split)[0].matches("\\s")){
+				mapIDs.add(new MenuOption(
+						4, 2,
+						data.split(TSVReader.split)[0],
+						data.split(TSVReader.split)[0]
+						));
+			}
 		}
 	}
 
@@ -37,7 +39,7 @@ public class DebugMenu extends AbstractMenu{
 	public List<MenuOption> getList(){
 		return mapIDs;
 	}
-	
+
 	@Override
 	protected void moveCursorHorizontal(int i){
 		super.moveCursorHorizontal(i);
@@ -48,7 +50,7 @@ public class DebugMenu extends AbstractMenu{
 	protected void selectItem() {
 		FrameEngine.initiateAreaChange(getActiveButton().getOutput().toString());
 	}
-	
+
 	public Vector2 getButtonPosition(int pos) {
 		Vector2 superPosition = super.getButtonPosition(pos);
 		superPosition.add(-FrameEngine.TILE*7, FrameEngine.TILE*2);

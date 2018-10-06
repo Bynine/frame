@@ -6,7 +6,7 @@ import area.Area;
 import area.EntityLoader;
 import entity.AudioLocation;
 import entity.Entity;
-import entity.InteractableEntity;
+import entity.ImmobileEntity;
 
 /**
  * Controls and updates overworld entities.
@@ -60,7 +60,7 @@ public class EntityHandler {
 			if (en instanceof AudioLocation){
 				audioSources.add((AudioLocation)en);
 			}
-			if (en instanceof InteractableEntity && en.collides()){
+			if (en instanceof ImmobileEntity && en.collides()){
 				en.update();
 				area.addToCollision(en);
 			}

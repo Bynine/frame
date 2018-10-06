@@ -36,6 +36,7 @@ public class Freb extends NPC {
 		shell = FrameEngine.getSaveFile().getCounter(flag);
 		this.flag = flag;
 		timerList.add(chirpTimer);
+		chirpTimer.end();
 	}
 	
 	@Override
@@ -59,9 +60,9 @@ public class Freb extends NPC {
 				AudioHandler.playPositionalSound(this, chirp);
 				chirpTimer.reset();
 			}
-			if (shell == 1) image = shell1.get(0).getKeyFrame(FrameEngine.getTime());
-			if (shell == 2) image = shell2.get(0).getKeyFrame(FrameEngine.getTime());
-			if (shell == 3) image = shell3.get(0).getKeyFrame(FrameEngine.getTime());
+			if (shell == 1) image = shell1.get(0).getKeyFrame(chirpTimer.getCounter());
+			if (shell == 2) image = shell2.get(0).getKeyFrame(chirpTimer.getCounter());
+			if (shell == 3) image = shell3.get(0).getKeyFrame(chirpTimer.getCounter());
 		}
 		else image = sulk.get(0).getKeyFrame(FrameEngine.getTime());
 	}

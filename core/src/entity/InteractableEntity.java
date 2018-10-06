@@ -12,11 +12,13 @@ public abstract class InteractableEntity extends ImmobileEntity {
 	
 	protected final String text;
 	protected final Rectangle interactHitbox = new Rectangle(0, 0, 32, 32);
+	protected boolean canInteract = true;
 	protected String voiceUrl;
 	protected int interactXDisp, interactYDisp;
 
 	public InteractableEntity(float x, float y, String text) {
 		super(x, y);
+		collides = true;
 		this.text = text;
 	}
 
@@ -42,7 +44,7 @@ public abstract class InteractableEntity extends ImmobileEntity {
 	 */
 	private boolean canInteractWithPlayer(){
 		Player player = FrameEngine.getPlayer();
-		return interactHitbox.overlaps(player.getInteractionBox());
+		return canInteract && interactHitbox.overlaps(player.getInteractionBox());
 	}
 	
 	@Override

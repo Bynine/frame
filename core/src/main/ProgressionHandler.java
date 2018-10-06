@@ -12,6 +12,11 @@ import text.DialogueTree;
 public class ProgressionHandler {
 	
 	public static final String 
+	ghostShopkeeper = "GHOST_SHOPKEEPER",
+	ghostLibrarian = "GHOST_LIBRARIAN",
+	ghostLeslie = "GHOST_LESLIE",
+	ghostThing = "GHOST_THING",
+	ghostEvent = "GHOST_EVENT",
 	beforeShrineWarning = "BEFORE_SHRINE_WARNING",
 	shellFreb = "SHELL_FREB",
 	foundStatuette = "FOUND_STATUETTE",

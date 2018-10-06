@@ -2,3 +2,5 @@
 [FOUND_STATUETTE]The strange little statue seems to react to you.
 &STATUETTE_1
 [CHECK_STATUETTE]You try talking to the little statue again.
+&ENTERED_SHRINE
+There's no response. It seems at peace now.

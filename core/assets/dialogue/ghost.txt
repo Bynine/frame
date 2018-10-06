@@ -6,9 +6,9 @@ Wow!! This is so exciting!! I haven't talked to anyone in years!
 How's it going? [SPEED=1]What's your favorite food? Do you like playing cards? 
 [SPEED=0.5]Do you prefer green or black tea? Sunshine or rain? Gasp - do you like acoustic guitar? I love acoustic guitar!
 [NSPEED][ANIM_0]Whew... Sorry... Hi. My name is Yokey.
-[NEWNAME=Yokey]Anyhow, since you can see me, I was wondering if I could ask you for a favor.
-Before I became a spirit, I used to have a lot of friends here. But it's been so long by now I've forgotten what they look like.
-Is there any chance I could tag along with you? Maybe you can figure out who they are so I can find peace.
+[NEWNAME=Yokey]Before I became a spirit, I used to have a lot of friends here. But it's been so long by now I've forgotten what they look like.
+The only person I can remember... it was someone who wanted to open a shop someday, I think...
+Hey, is there any chance I could tag along with you? Maybe you can figure out who they are! I'd really appreciate that.
 I promise I'm very lightweight!
 >YES, NO
 <YES
@@ -20,8 +20,8 @@ If you want me to tell you what I remember, just check on me in your backpack!
 [ANIM_2]...
 Boo... hoohoo...
 &TALK_GHOST
-Oh, have you reconsidered?! Please let me tag along with you!
-I promise I'm very lightweight!
+[ANIM_1]Oh, have you reconsidered?! Please let me tag along with you!
+I promise I'm very lightweight! Really!
 >YES, NO
 <YES
 *GOT_GHOST

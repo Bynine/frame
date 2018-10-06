@@ -8,5 +8,7 @@ Unfortunately, shells don't grow on trees, nor do they grow into them.
 That's kind of rude, isn't it?
 <GOAL
 You ought to save that.
+<GRUB
+It'd probably much prefer to be back home.
 <OTHER
 That... probably isn't going to work.
