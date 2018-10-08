@@ -1,2 +1,5 @@
-[GIVE_GOAL]You obtained the Seed of Hope!
-You put it in the satchel in your backpack for safekeeping.
+[NOSPEAKER][GIVE_GOAL]You obtained the Seed of Hope!
+Congratulations, traveller.
+What will you do now? Will you stay here in Wabika, or return to your home and use what you've found here?
+Whatever the case... you are welcome to stay here whenever you like.
+Thank you for all you've done.

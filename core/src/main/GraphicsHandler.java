@@ -376,7 +376,7 @@ public class GraphicsHandler {
 	/**
 	 * Draws an item menu in a bunch of nice little boxes.
 	 */
-	void drawItems(AbstractMenu menu, boolean price){
+	void drawItems(AbstractMenu menu, boolean price, boolean enterToFinish){
 		batch.setProjectionMatrix(centerCam.combined);
 		int ii = 0;
 		int cursor = menu.getCursor();
@@ -422,10 +422,12 @@ public class GraphicsHandler {
 			batch.draw(arrowUp, center, FrameEngine.TILE * 8.875f);
 		}
 		batch.end();
-		drawText("Press ENTER to finish.", 
-				new Vector2(Gdx.graphics.getWidth()/(1.8f/ZOOM), FrameEngine.TILE), 
-				new Vector2(8, 2), 
-				true);
+		if (enterToFinish){
+			drawText("Press ENTER to finish.", 
+					new Vector2(Gdx.graphics.getWidth()/(1.8f/ZOOM), FrameEngine.TILE), 
+					new Vector2(8, 2), 
+					true);
+		}
 		drawItemDescription(menu, price);
 	}
 
@@ -717,6 +719,7 @@ public class GraphicsHandler {
 
 	public void drawMainMenu() {
 		wipeScreen();
+		batch.setProjectionMatrix(centerCam.combined);
 		batch.begin();
 		batch.draw(splash, 0, 0);
 		batch.end();

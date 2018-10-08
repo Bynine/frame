@@ -976,12 +976,5 @@ Spring to the North</property>
     <property name="TYPE" value="FLOWER"/>
    </properties>
   </object>
-  <object id="892" name="seed" gid="2" x="2280" y="600" width="24" height="24">
-   <properties>
-    <property name="FLAG" value="ITEM_SEED3"/>
-    <property name="ID" value="SEED3"/>
-    <property name="TYPE" value="ITEM"/>
-   </properties>
-  </object>
  </objectgroup>
 </map>

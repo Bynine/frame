@@ -2,7 +2,7 @@ PLACEHOLDER	Placeholder	bup	TRUE	1	45
 
 SHOPKEEPER	Shopkeeper	bup	TRUE	1	30
 FREB	Freb	croak	TRUE	1	30
-WESTERN	Tall Stranger	mih	TRUE	2	30
+WESTERN	Tall Stranger	bup	TRUE	2	30
 BEETLE	Friendly Bug	meoh	FALSE	1	30
 LIBRARIAN	Book Seller	bwep	TRUE	2	30
 KAMI	???	bup	TRUE	1	30
@@ -22,7 +22,8 @@ VILLAGER	Villager	bwep	TRUE	1	30
 GHOST	Restless Spirit	bwep	TRUE	1	45
 ARTIST	Passionate Artist	bup	FALSE	1	45
 COFFEE	Complaining Guy	meoh	TRUE	1	45
-CLIFF	Adventurous Girl	meoh	TRUE	1	30
+CLIFF	Adventurous Girl	meoh	FALSE	1	30
+CLIFFSTAND	Adventurous Girl	meoh	TRUE	2	30
 ADVENTURER	Adventurer	mih	TRUE	1	30
 WARRIOR	Ragged Warrior	bup	TRUE	1	21
 

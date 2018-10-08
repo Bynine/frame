@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset name="beach" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+<tileset version="1.2" tiledversion="1.2.0" name="beach" tilewidth="32" tileheight="32" tilecount="256" columns="16">
  <image source="beach.png" width="512" height="512"/>
  <tile id="1">
   <animation>
@@ -95,6 +95,24 @@
   <animation>
    <frame tileid="40" duration="1200"/>
    <frame tileid="152" duration="1200"/>
+  </animation>
+ </tile>
+ <tile id="70">
+  <animation>
+   <frame tileid="70" duration="1200"/>
+   <frame tileid="134" duration="1200"/>
+  </animation>
+ </tile>
+ <tile id="71">
+  <animation>
+   <frame tileid="71" duration="1200"/>
+   <frame tileid="135" duration="1200"/>
+  </animation>
+ </tile>
+ <tile id="72">
+  <animation>
+   <frame tileid="72" duration="1200"/>
+   <frame tileid="136" duration="1200"/>
   </animation>
  </tile>
  <tile id="82">

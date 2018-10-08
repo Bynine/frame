@@ -14,7 +14,7 @@ public class ShopMenu extends Inventory {
 		addIfNotPurchased("SHOVEL");
 		addIfNotPurchased("SHELL3");
 		addIfNotPurchased("WATERINGCAN");
-		addIfNotPurchased("SEED1");
+		addIfNotPurchased("SEED4");
 		super.open();
 	}
 	

@@ -1,16 +1,16 @@
 [SPEED=3]...
 [SPEED=3][ANIM_1]...Yo.
 &ACCEPTED_CAFE_JOB
-[NEWNAME=Leslie][SPEED=3][ANIM_1]Hey man... you got my drink?
+[NEWNAME=Leslie][ANIM_1]Hey man... you got my drink?
 {
 <ORDER3
 *GIVEN_ORDER3
 [REMOVE_ITEM][ANIM_1]Thanks, little guy...
 [SPEED=3][ANIM_0]...
 [SPEED=3]...
-[SPEED=3]... [ANIM_1]Sorry, did you need something?
+... [ANIM_1]Sorry, did you need something?
 <OTHER
-[SPEED=3][ANIM_1]Uhhh... That's not my drink, dude.
+[ANIM_1]Uhhh... That's not my drink, dude.
 &ACCEPTED_CAFE_JOB,ITEM_GHOST,!GHOST_LESLIE,GHOST_LIBRARIAN
 [NEWNAME=Leslie][SPEED=3][ANIM_1]Hey man... you got my drink?
 {
@@ -18,9 +18,9 @@
 *GIVEN_ORDER3
 *GHOST_LESLIE
 [REMOVE_ITEM][ANIM_1]Thanks, little guy...
-[SPEED=3][ANIM_0]...
-[SPEED=3]...
-[SPEED=3]... [ANIM_1]Sorry, did you need something?
+[ANIM_0]...
+...
+... [ANIM_1]Sorry, did you need something?
 [TALK][SPEED=6]...[NSPEED]Yokey...
 [ANIM_1]You... who are you, exactly?
 Yokey... yeah, I knew her. Very well. One day, in fact...
@@ -30,14 +30,14 @@ I thought it was weird, but I didn't bother following them.
 [NSPEED]Nobody ever saw that warrior or Yokey ever again. They've disappeared to time.
 And I could have stopped it.
 [SPEED=6]...[NSPEED] Ha. To be honest, it feels good to get that off my chest. I've been holding that in for a while.
-Thanks, little guy. You're a good listener and a good waiter too.
+Thanks, little guy. You're a good listener and a good waiter too.[ANIM_0]
 [GHOST_THING][DESTROY]
 &GIVEN_ORDER3
-[SPEED=3]...
-[SPEED=3][ANIM_1]Thanks for the drink, little guy.
+...
+[ANIM_1]Thanks for the drink, little guy.
 &ITEM_GHOST,!GHOST_LESLIE,GIVEN_ORDER3,GHOST_LIBRARIAN
 *GHOST_LESLIE
-[SPEED=3]Hey, little dude. Sorry, but I'm in the middle of this book, so - [TALK][SPEED=6]...[NSPEED]Yokey...
+Hey, little dude. Sorry, but I'm in the middle of this book, so - [TALK][SPEED=4]...[NSPEED]Yokey...
 [ANIM_1]You... who are you, exactly?
 Yokey... yeah, I knew her. Very well. One day, in fact...
 I remember seeing some person in armor, wearing a cape, walking toward that shrine that she was always around.
@@ -45,6 +45,6 @@ I thought it was weird, but I didn't bother following them.
 [SPEED=3]...That was a mistake.
 [NSPEED]Nobody ever saw that warrior or Yokey ever again. They've disappeared to time.
 And I could have stopped it.
-[SPEED=6]...[NSPEED] Ha. To be honest, it feels good to get that off my chest. I've been holding that in for a while.
-Thanks, little guy. You're a good listener and a good waiter too.
+[SPEED=4]...[NSPEED] Ha. To be honest, it feels good to get that off my chest. I've been holding that in for a while.
+Thanks, little guy. You're a good listener and a good waiter too.[ANIM_0]
 [GHOST_THING][DESTROY]

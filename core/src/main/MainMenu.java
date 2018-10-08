@@ -9,8 +9,8 @@ public class MainMenu extends AbstractMenu {
 	
 	private ArrayList<MenuOption> options = new ArrayList<>();
 	
-	MainMenu(){
-		cursor = 1;
+	MainMenu(boolean exists){
+		cursor = exists ? 1 : 0;
 		options.add(new MenuOption(8, 2, "New Adventure", Option.NEW));
 		options.add(new MenuOption(8, 2, "Wake Up", Option.CONTINUE));
 	}
@@ -35,6 +35,10 @@ public class MainMenu extends AbstractMenu {
 
 	public static enum Option{
 		NEW, CONTINUE
+	}
+	
+	public void open(){
+		cursor = 1;
 	}
 
 }

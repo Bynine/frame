@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="24" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="313">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="24" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="314">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/underground.tsx"/>
  <tileset firstgid="73" source="tilesets/forest.tsx"/>
@@ -30,8 +30,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,329,330,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,52,0,0,0,337,338,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,52,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46,0,0,0,0,0,0,
 0,0,0,0,0,0,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -157,16 +157,10 @@
     <property name="TYPE" value="NPC"/>
    </properties>
   </object>
-  <object id="311" name="text" gid="1" x="456" y="192" width="48" height="48">
+  <object id="313" name="fall seed" gid="2" x="200" y="248" width="24" height="24">
    <properties>
-    <property name="TEXT" value="Knitted onto this blanket is the phrase Home Sweet Home."/>
-    <property name="TYPE" value="DESC"/>
-   </properties>
-  </object>
-  <object id="312" name="seed" gid="2" x="200" y="248" width="24" height="24">
-   <properties>
-    <property name="FLAG" value="ITEM_SEED2"/>
-    <property name="ID" value="SEED2"/>
+    <property name="FLAG" value="ITEM_SEED5"/>
+    <property name="ID" value="SEED5"/>
     <property name="TYPE" value="ITEM"/>
    </properties>
   </object>

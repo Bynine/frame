@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -19,12 +21,15 @@ public class Walkway extends ImmobileEntity {
 	}
 	
 	public static boolean checkRisen(){
-		return checkFlowerGrown("SEED2") && checkFlowerGrown("SEED3") &&
-				checkFlowerGrown("SEED4") && checkFlowerGrown("SEED5");
-	}
-	
-	private static boolean checkFlowerGrown(String id){
-		return !FrameEngine.getSaveFile().getMapping(Flower.flowerPrefix + id).isEmpty();
+		ArrayList<String> grownSeeds = new ArrayList<>();
+		for (int ii = 1; ii <= 5; ++ii){
+			grownSeeds.add(FrameEngine.getSaveFile().getMapping(Flower.flowerPrefix + "FLOWER" + ii));
+		}
+		if (grownSeeds.contains("SEED2") && grownSeeds.contains("SEED3")
+				&& grownSeeds.contains("SEED4") && grownSeeds.contains("SEED5")){
+			return true;
+		}
+		return false;
 	}
 	
 	@Override

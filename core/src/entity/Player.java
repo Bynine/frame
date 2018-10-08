@@ -35,6 +35,8 @@ public class Player extends Entity{
 			Animator.createAnimation(stepTime, "sprites/player/slope.png", 4, 3);
 	private static final ArrayList<Animation<TextureRegion>> idle_slope = 
 			Animator.createAnimation(30, "sprites/player/idle_slope.png", 2, 3);
+	private static final ArrayList<Animation<TextureRegion>> explain = 
+			Animator.createAnimation(30, "sprites/player/talking.png", 2, 3);
 	private static final TextureRegion get = 
 			new TextureRegion(new Texture(Gdx.files.internal("sprites/player/get.png")));
 	public static final TextureRegion ripple = 
@@ -147,6 +149,9 @@ public class Player extends Entity{
 		} break;
 		case GET:{
 			image = get;
+		} break;
+		case EXPLAIN:{
+			image = explain.get(dir).getKeyFrame(FrameEngine.getTime());
 		} break;
 		default: {
 			image = get;

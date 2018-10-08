@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="55" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="743">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="55" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="745">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/trees.tsx"/>
  <tileset firstgid="130" source="tilesets/forest.tsx"/>
@@ -469,12 +469,12 @@
     <property name="TYPE" value="NPC"/>
    </properties>
   </object>
-  <object id="681" name="cliff guy" gid="1" x="496" y="1104" width="32" height="24">
+  <object id="681" name="cliff" gid="1" x="496" y="1104" width="32" height="24">
    <properties>
     <property name="APPEAR" value="FOUND_GOAL"/>
     <property name="DIALOGUE" value="get_up_spring_cliff"/>
-    <property name="ID" value="CLIFF"/>
-    <property name="IMAGE" value="cliff"/>
+    <property name="ID" value="CLIFFSTAND"/>
+    <property name="IMAGE" value="cliffstand"/>
     <property name="TYPE" value="NPC"/>
    </properties>
   </object>
@@ -482,13 +482,6 @@
    <properties>
     <property name="DEST" value="FOREST,58,1"/>
     <property name="TYPE" value="PORTAL"/>
-   </properties>
-  </object>
-  <object id="687" name="seed" gid="2" x="328" y="568" width="24" height="24">
-   <properties>
-    <property name="FLAG" value="ITEM_SEED5"/>
-    <property name="ID" value="SEED5"/>
-    <property name="TYPE" value="ITEM"/>
    </properties>
   </object>
   <object id="711" name="walkway" gid="1" x="1184" y="736" width="64" height="384">
@@ -515,6 +508,19 @@
   <object id="728" name="bird" gid="4" x="1088" y="248" width="32" height="32">
    <properties>
     <property name="TYPE" value="BIRD"/>
+   </properties>
+  </object>
+  <object id="743" name="winterseed" gid="2" x="328" y="568" width="24" height="24">
+   <properties>
+    <property name="FLAG" value="ITEM_SEED2"/>
+    <property name="ID" value="SEED2"/>
+    <property name="TYPE" value="ITEM"/>
+   </properties>
+  </object>
+  <object id="744" name="flower" gid="1" x="328" y="1184" width="32" height="32">
+   <properties>
+    <property name="ID" value="FLOWER3"/>
+    <property name="TYPE" value="FLOWER"/>
    </properties>
   </object>
  </objectgroup>

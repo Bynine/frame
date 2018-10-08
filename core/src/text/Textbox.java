@@ -8,6 +8,7 @@ import com.badlogic.gdx.audio.Sound;
 import entity.InteractableEntity;
 import entity.NPC;
 import entity.Player;
+import entity.Player.ImageState;
 import main.AudioHandler;
 import main.FrameEngine;
 import timer.Timer;
@@ -156,6 +157,7 @@ public class Textbox {
 			} break;
 			case "TALK":{
 				talking = true;
+				Player.setImageState(ImageState.EXPLAIN);
 			} break;
 			default:{
 				command.progressionActivate();

@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.math.Vector2;
 
 import text.MenuOption;
 
@@ -20,6 +21,12 @@ public class SaveFile {
 	private String inventoryKey = "kindnesses";
 	private String areaKey = "travels";
 	private String mapPrefix = "MAP_";
+	private String positionX = "turnips";
+	private String positionY = "snails";
+	private boolean exists = false;
+	
+	public String startArea = "FOREST";
+	public final Vector2 startPosition = new Vector2();
 
 	private int money = 0;
 	private static final String saveFile = "mrbsv.xml";
@@ -33,6 +40,7 @@ public class SaveFile {
 		}
 		if (!FrameEngine.SAVE) return;
 		Preferences preferences = Gdx.app.getPreferences(saveFile);
+		exists = !preferences.get().isEmpty();
 		money = preferences.getInteger(moneyKey);
 
 		for (String key: preferences.get().keySet()){
@@ -68,24 +76,48 @@ public class SaveFile {
 				map.put(key.substring(4), preferences.get().get(key).toString());
 			}
 		}
+		if (verbose) System.out.println("Map: " + map.toString());
 
 		if (preferences.get().containsKey(areaKey)){
-			if (verbose) System.out.println("Now arriving at: " + areaKey);
-			FrameEngine.startAreaName = preferences.getString(areaKey);
+			if (verbose) System.out.println("Now arriving at: " + preferences.getString(areaKey));
+			startArea = preferences.getString(areaKey);
 		}
+		
+		if (preferences.get().containsKey(positionX) && preferences.get().containsKey(positionY)){
+			startPosition.set(
+					preferences.getFloat(positionX),
+					preferences.getFloat(positionY)
+					);
+			if (verbose) System.out.println(startPosition);
+		}
+		
 	}
 
 	/**
 	 * Puts game state into save file.
 	 */
-	void save(){
+	void save(boolean positionIsSet){
 		if (!FrameEngine.SAVE) return;
 		Preferences preferences = Gdx.app.getPreferences(saveFile);
 		preferences.put(flags);
 		preferences.put(counters);
+		for (String key: map.keySet()){
+			map.put(mapPrefix + key, map.get(key));
+			map.remove(key);
+		}
 		preferences.put(map);
 		preferences.putInteger(moneyKey, money);
+		
+		float x = (FrameEngine.getPlayer().getPosition().x)/FrameEngine.TILE;
+		if (positionIsSet) x = 1;
+		float y = ((FrameEngine.getArea().mapHeight - FrameEngine.getPlayer().getPosition().y)
+				/FrameEngine.TILE);
+		startArea = FrameEngine.getArea().getID();
+		startPosition.set(x, y);
+		if (verbose) System.out.println("Saved player to " + x + " " + y);
 		preferences.putString(areaKey, FrameEngine.getArea().getID());
+		preferences.putFloat(positionX, x);
+		preferences.putFloat(positionY, y);
 
 		StringBuilder builder = new StringBuilder();
 		for (MenuOption menuOption: FrameEngine.getInventory().getList()){
@@ -178,13 +210,16 @@ public class SaveFile {
 	}
 
 	public void setMapping(String key, String value) {
-		map.put(mapPrefix + key, value);
+		map.put(key, value);
 	}
 
 	public String getMapping(String key) {
-		key = mapPrefix.concat(key);
 		if (!map.containsKey(key)) return "";
 		else return map.get(key);
+	}
+
+	public boolean exists() {
+		return exists;
 	}
 
 }

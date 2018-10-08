@@ -19,7 +19,7 @@ public class Goal extends Item {
 	
 	@Override
 	protected void get(){
-		FrameEngine.startDialogueTree(new DialogueTree(this, "found_goal"));
+		FrameEngine.startDialogueTree(new DialogueTree(new NPC("KAMI", "found_goal"), "found_goal"));
 	}
 
 }

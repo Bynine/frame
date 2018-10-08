@@ -27,13 +27,12 @@ public class FrameEngine extends ApplicationAdapter {
 	public static boolean 
 	DRAW 	= false	&& DEBUG,
 	MUTE	= true	&& DEBUG,
-	LOG		= false	&& DEBUG,
+	LOG		= true	&& DEBUG,
 	NOMAIN	= true	&& DEBUG,
 	INVIS	= false	&& DEBUG,
 	MAPS	= false && DEBUG,
 	SAVE	= false	|| !DEBUG;
 
-	public static String startAreaName = DEBUG ? "FOREST" : "FOREST";
 	private static Player player;
 	private static FPSLogger fpsLogger;
 	private static GameState gameState = GameState.OVERWORLD;
@@ -58,7 +57,7 @@ public class FrameEngine extends ApplicationAdapter {
 			time, transition
 			));
 	private static Area newArea = null;
-	private static Vector2 newPosition = new Vector2();
+	public static Vector2 newPosition = new Vector2();
 
 	public static final int TILE = 32;
 	public static final Logger logger = Logger.getLogger("ERROR_LOG");
@@ -75,7 +74,8 @@ public class FrameEngine extends ApplicationAdapter {
 
 		inventory = new Inventory();
 		saveFile = new SaveFile(LOG);
-		mainMenu = new MainMenu();
+		newPosition.set(saveFile.startPosition);
+		mainMenu = new MainMenu(saveFile.exists());
 		shopMenu = new ShopMenu();
 		pauseMenu = new PauseMenu();
 		fpsLogger = new FPSLogger();
@@ -87,7 +87,7 @@ public class FrameEngine extends ApplicationAdapter {
 		progressionHandler = new ProgressionHandler();
 		inputHandler.initialize();
 		if (!NOMAIN) {
-			startMainMenu();
+			startMainMenu(saveFile.exists());
 		}
 		else {
 			continueGame();
@@ -138,17 +138,17 @@ public class FrameEngine extends ApplicationAdapter {
 			updateCredits();
 		} break;
 		}
-		
+
 		if (currArea != null) graphicsHandler.drawOverlay();
 
 		inputHandler.update();
 		if (LOG) fpsLogger.log();
-		if (MAPS && getTime() > 6000){
-			time.reset();
-			if (newArea == null) newArea = new Area("BEACH");
-			initiateAreaChange(newArea.getID().equals("FOREST") ? "BEACH" : "FOREST", new Vector2(8, 8));
-			changeArea();
-		}
+//		if (MAPS && getTime() > 6000){
+//			time.reset();
+//			if (newArea == null) newArea = new Area("BEACH");
+//			initiateAreaChange(newArea.getID().equals("FOREST") ? "BEACH" : "FOREST", new Vector2(8, 8));
+//			changeArea();
+//		}
 	}
 
 	private void updateOverworld(){
@@ -181,7 +181,7 @@ public class FrameEngine extends ApplicationAdapter {
 			}
 		}
 		if (inventoryRequest){
-			graphicsHandler.drawItems(inventory, false);
+			graphicsHandler.drawItems(inventory, false, false);
 			inventory.update();
 		}
 	}
@@ -203,23 +203,23 @@ public class FrameEngine extends ApplicationAdapter {
 		graphicsHandler.drawMenu(mainMenu);
 		mainMenu.update();
 	}
-	
+
 	private void updateShop(){
 		graphicsHandler.drawOverworld();
-		graphicsHandler.drawItems(shopMenu, true);
+		graphicsHandler.drawItems(shopMenu, true, true);
 		shopMenu.update();
 	}
-	
+
 	private void updateInventory(){
 		graphicsHandler.drawOverworld();
-		graphicsHandler.drawItems(inventory, false);
+		graphicsHandler.drawItems(inventory, false, true);
 		inventory.update();
 	}
-	
+
 	private void updateCredits(){
 		graphicsHandler.drawCredits();
 		if (time.getCounter() > 2600){
-			startMainMenu();
+			startMainMenu(true);
 		}
 	}
 
@@ -310,7 +310,7 @@ public class FrameEngine extends ApplicationAdapter {
 	/**
 	 * Spawns player in map's default start location.
 	 */
-	public static void initiateAreaChange(String area_id){
+	public static void debugAreaChange(String area_id){
 		initiateAreaChangeHelper(area_id);
 		newPosition.set(newArea.getStartLocation());
 	}
@@ -345,6 +345,8 @@ public class FrameEngine extends ApplicationAdapter {
 	 */
 	static void newGame(){
 		saveFile.wipeSave();
+		saveFile.startPosition.set(0.5f, 26f);
+		saveFile.startArea = "FOREST";
 		inventory.addItem("KEEPSAKE");
 		player.walkRight(18);
 		contGame();
@@ -356,20 +358,21 @@ public class FrameEngine extends ApplicationAdapter {
 	static void continueGame(){
 		contGame();
 	}
-	
+
 	private static void contGame(){
-		newArea = new Area(startAreaName);
-		newPosition.set(newArea.getStartLocation());
+		newArea = new Area(saveFile.startArea);
+		newPosition.set(saveFile.startPosition.scl(TILE));
 		changeArea();
 		gameState = GameState.OVERWORLD;
 		transition.reset();
 	}
-	
-	public static void startMainMenu() {
+
+	public static void startMainMenu(boolean exists) {
+		if (exists) mainMenu.open();
 		AudioHandler.startNewAudio("music/forest.ogg");
 		gameState = GameState.MAIN;
 	}
-	
+
 	public static void startInventory(){
 		inventory.open();
 		gameState = GameState.INVENTORY;
@@ -380,14 +383,14 @@ public class FrameEngine extends ApplicationAdapter {
 		shopMenu.open();
 		gameState = GameState.SHOP;
 	}
-	
+
 	public static void endShop() {
 		gameState = GameState.OVERWORLD;
 	}
 
 	public static void startCredits(){
 		time.reset();
-		saveFile.save();
+		saveFile.save(true);
 		gameState = GameState.CREDITS;
 	}
 
@@ -447,7 +450,7 @@ public class FrameEngine extends ApplicationAdapter {
 	public static void setRedirect(String string) {
 		dialogueTree.handleAnswer(string);
 	}
-	
+
 	public static void endDialogueTree() {
 		dialogueTree = null;
 	}
@@ -474,7 +477,7 @@ public class FrameEngine extends ApplicationAdapter {
 			return 1.0f;
 		}
 	}
-	
+
 	public static InteractableEntity getCurrentInteractable(){
 		return currInteractable;
 	}
@@ -486,7 +489,7 @@ public class FrameEngine extends ApplicationAdapter {
 	public static boolean canUpdateEntities(){
 		return transition.timeUp();
 	}
-	
+
 	public static boolean canControlPlayer(){
 		return null == getCurrentTextbox() && canUpdateEntities();
 	}
@@ -527,7 +530,7 @@ public class FrameEngine extends ApplicationAdapter {
 	private enum GameState{
 		OVERWORLD, PAUSED, DEBUG, MAIN, SHOP, INVENTORY, CREDITS
 	}
-	
+
 	public static void setGivenItemID(String newItemID){
 		givenItemID = newItemID;
 	}
@@ -535,13 +538,13 @@ public class FrameEngine extends ApplicationAdapter {
 	public static String getGivenItemID() {
 		return givenItemID;
 	}
-	
+
 	public static void setCurrentThing(String thing){
 		if (null != currentThing) currentThing.dispose();
 		currentThing = new ItemDescription(thing);
-		
+
 	}
-	
+
 	public static ItemDescription getCurrentThing(){
 		return currentThing;
 	}

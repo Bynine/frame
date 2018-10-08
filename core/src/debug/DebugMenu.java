@@ -48,7 +48,7 @@ public class DebugMenu extends AbstractMenu{
 
 	@Override
 	protected void selectItem() {
-		FrameEngine.initiateAreaChange(getActiveButton().getOutput().toString());
+		FrameEngine.debugAreaChange(getActiveButton().getOutput().toString());
 	}
 
 	public Vector2 getButtonPosition(int pos) {
