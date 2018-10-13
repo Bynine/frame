@@ -1,25 +1,17 @@
+*TALK_PUMPKIN_EARLY
 Sorry, hon, I'm busy getting ready right now.
 Be sure to come back soon!
 &ENTERED_SHRINE
-[ANIM_2]Howdy, hon! 'Fraid I can't serve anything to you right now, I've got a lot of orders to make!
-Say... You look like a capable kid. How's about you help me out with serving these orders?
-Your pay will be worth the while! Pumpkin's honor!
->YES,NO
-<YES
-*ACCEPTED_CAFE_JOB
-*CAFE_QUEST
-Oh, wonderful! You're a real sweetheart!
-My name's Jackie, by the way. It's a pleasure to meet you.
-[NEWNAME=Jackie]Ok, [GIVE_ORDER1][TOSS_ORDER1]hon, [GIVE_ORDER2][TOSS_ORDER2]here're [GIVE_ORDER3][TOSS_ORDER3]the orders.
-The latte with extra milk goes to the pretty lady over there with the purple coat...
-The spiced pumpkin cider goes to that older gentleman right there...
-And the red-bean coffee goes to Leslie, the one in the cute bat shirt.
-Got all that, hon?
-<NO
-[ANIM_1]Ohhh.
-That's fine, hon. Really. I'll just... 
-stand here working while the cafe goes out of business...
-[SPEED=5]ohhhh......
+*TALK_PUMPKIN
+[ANIM_3]Wh-what?! Sorry, I'm a bit busy here!!
+[ANIM_5]Oh! [PAUSE][ANIM_4]You're new here, aren't you? I'm sorry, how rude of me!
+I'd be happy to serve you, but I'm just so busy with all this prep work...
+... Say... You look like a capable kid. How's about you help me out with serving these orders?
+PUMPKINQUERY
+&TALK_PUMPKIN
+[ANIM_3]Wh-wh-what?! [PAUSE][ANIM_4]Oh, you again! Hi!
+Have you reconsidered taking the job? I'd reeeeeally appreciate it!
+PUMPKINQUERY
 &ACCEPTED_CAFE_JOB
 [ANIM_2]Need to hear it again?
 The latte with extra milk goes to the pretty lady over there with the purple coat...
@@ -28,11 +20,17 @@ And the red-bean coffee goes to Leslie, the one in the cute bat shirt.
 &ACCEPTED_CAFE_JOB,GIVEN_ORDER1,GIVEN_ORDER2,GIVEN_ORDER3
 *!CAFE_QUEST
 *CAFE_REWARD
-[ANIM_2]Well call me a squash and serve me for dinner, you did it!
-Here's your payment for a job well done, hon. Hope you enjoy it - I made it just for you!
+[ANIM_6]Well call me a squash and serve me for dinner, you did it!
+[ANIM_2]Here's your payment for a job well done, hon. Hope you enjoy it - I made it just for you!
 [NOSPEAKER][GIVE_TREASURE4]You received a Pumpkin Cupcake!
-[TALK]What's that, hon? You're looking for something else?
-Sorry, I don't think I've ever heard of that.
-All I know is this... "One good turn deserves another"! You get what I mean, hon?
+[TALK][RELAX]What's that, hon? You're looking for something else?
+Sorry, I don't think I've ever heard of something like that..
+All I know is this. "One good turn deserves another"! You get what I mean, hon?
 &CAFE_REWARD
+[ANIM_2]Thanks again for your help, hon.
+Say, did you see a painter anywhere around? He's a good friend of mine.
+He seems to be very frustrated recently.[ANIM_1]But I can't quite understand why...
+&CAFE_REWARD,WORLD_REWARD
 [ANIM_2]Thanks again for your help, hon. You're a real life saver!
+Now I can relax and get back to running the cafe smoothly.
+And look at that beautiful painting we got! [ANIM_6]My friend did that, you know!

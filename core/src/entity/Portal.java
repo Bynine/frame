@@ -9,11 +9,13 @@ public class Portal extends ImmobileEntity {
 
 	final String destArea;
 	final Vector2 destLocation = new Vector2();
+	final Direction direction;
 
 	public Portal(float x, float y, float width, float height, 
-			String destination, double destX, double destY) {
+			String destination, double destX, double destY, Direction direction) {
 		super(x, y);
 		this.destArea = destination;
+		this.direction = direction;
 		destLocation.set(
 				(int) (destX * FrameEngine.TILE), 
 				(int) ( (destY + 1) * FrameEngine.TILE)
@@ -25,7 +27,7 @@ public class Portal extends ImmobileEntity {
 	public void update(){
 		super.update();
 		if (touchingPlayer(hitbox)){
-			FrameEngine.initiateAreaChange(destArea, destLocation);
+			FrameEngine.initiateAreaChange(destArea, destLocation, direction);
 		}
 	}
 
@@ -37,6 +39,10 @@ public class Portal extends ImmobileEntity {
 	@Override
 	public void dispose() {
 		/**/
+	}
+	
+	public enum Direction{
+		ANY, UP, RIGHT, DOWN, LEFT
 	}
 
 }

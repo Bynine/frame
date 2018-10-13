@@ -2,6 +2,7 @@ package entity;
 
 import java.util.HashMap;
 
+import entity.Portal.Direction;
 import main.EntityHandler;
 import main.FrameEngine;
 import text.DialogueTree;
@@ -11,7 +12,7 @@ public class GrubHole extends PortalHole {
 	private boolean grub1, grub2, grub3 = false;
 
 	public GrubHole(float x, float y, String flag, String destination, double destX, double destY) {
-		super(x, y, flag, destination, destX, destY);
+		super(x, y, flag, destination, destX, destY, Direction.UP);
 		opened = true;
 	}
 

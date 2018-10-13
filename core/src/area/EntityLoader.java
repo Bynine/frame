@@ -33,8 +33,11 @@ import entity.Item;
 import entity.ItemHole;
 import entity.Memorial;
 import entity.NPC;
+import entity.Painting;
 import entity.Portal;
+import entity.Portal.Direction;
 import entity.PortalHole;
+import entity.Pumpkin;
 import entity.ShrineDoor;
 import entity.Stand;
 import entity.SummonObject;
@@ -73,15 +76,23 @@ public class EntityLoader {
 		switch(type){
 		case "portal": {
 			String[] destination = properties.get("DEST", String.class).split(",");
+			Direction dir = Direction.ANY;
+			if (properties.containsKey("DIR")){
+				dir = Direction.valueOf(properties.get("DIR", String.class));
+			}
 			double x_dest = Double.parseDouble(destination[1]);
 			double y_dest = Double.parseDouble(destination[2]);
-			entities.add(new Portal(x, y, width, height, destination[0], x_dest, y_dest));
+			entities.add(new Portal(x, y, width, height, destination[0], x_dest, y_dest, dir));
 		} break;
 		case "grubhole": 
 		case "trapdoor":
 		case "portalhole": {
 			String[] destination = properties.get("DEST", String.class).split(",");
 			String flag = properties.containsKey("FLAG") ? properties.get("FLAG", String.class) : "";
+			Direction dir = Direction.ANY;
+			if (properties.containsKey("DIR")){
+				dir = Direction.valueOf(properties.get("DIR", String.class));
+			}
 			double x_dest = Double.parseDouble(destination[1]);
 			double y_dest = Double.parseDouble(destination[2]);
 			if (type.equals("grubhole")){
@@ -91,7 +102,7 @@ public class EntityLoader {
 				entities.add(new TrapDoor(x, y, destination[0], x_dest, y_dest));
 			}
 			else{
-				entities.add(new PortalHole(x, y, flag, destination[0], x_dest, y_dest));
+				entities.add(new PortalHole(x, y, flag, destination[0], x_dest, y_dest, dir));
 			}
 		} break;
 		case "door": {
@@ -139,6 +150,13 @@ public class EntityLoader {
 						interactXDisp, interactYDisp,
 						width, height
 						));
+			}
+			else if (id.equals("PUMPKIN")){
+				entities.add(new Pumpkin(
+						x, y, 
+						interactXDisp, interactYDisp,
+						width, height,
+						id, imagePath, dialoguePath, layer));
 			}
 			else {
 				entities.add(new NPC(
@@ -235,6 +253,13 @@ public class EntityLoader {
 		} break;
 		case "memorial":{
 			entities.add(new Memorial(x, y, width, height));
+		} break;
+		case "painting":{
+			String id = properties.get("ID", String.class);
+			String text = properties.get("TEXT", String.class);
+			if (FrameEngine.getSaveFile().getFlag("WORLD_REWARD")){
+				entities.add(new Painting(x, y, text, id));
+			}
 		} break;
 		default: {
 			FrameEngine.logger.log( Level.WARNING, 

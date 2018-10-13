@@ -1,7 +1,10 @@
 package entity;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 
+import main.AudioHandler;
 import main.FrameEngine;
 import timer.DurationTimer;
 
@@ -9,9 +12,12 @@ public class Toss extends Item {
 	
 	private final DurationTimer duration;
 	private final Vector2 startPoint, endPoint;
+	private final Sound whistle = Gdx.audio.newSound(Gdx.files.internal("sfx/whistle.wav"));
 	
 	public Toss(float x, float y, String id, int dur, Vector2 endPoint){
 		super(x, y, id, "");
+		endPoint = new Vector2(endPoint.x, endPoint.y - FrameEngine.TILE/2);
+		AudioHandler.playPositionalSound(this, whistle);
 		startPoint = new Vector2(x, y + image.getRegionHeight()/2);
 		this.endPoint = endPoint;
 		duration = new DurationTimer(dur);
@@ -37,6 +43,7 @@ public class Toss extends Item {
 	@Override
 	public void dispose() {
 		image.getTexture().dispose();
+		whistle.dispose();
 	}
 
 }

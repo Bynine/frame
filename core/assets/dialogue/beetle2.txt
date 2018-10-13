@@ -1,5 +1,7 @@
 *TALK_BEETLE2
 You know, even if you've talked to someone once, they might have more to say later.
 It's always a good idea to check back on your friends on occasion.
+Since I'm a beetle, I'm full of wisdom.
 &TALK_BEETLE2
 Wow, you're a good listener, huh?
+Since I'm a beetle, you must love hearing my wisdom.

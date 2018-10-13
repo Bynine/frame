@@ -1,12 +1,12 @@
 *TALK_ARTIST
-What?! What do you want?!
+[ANIM_3]What?! What do you want?!
 I have no time for little people in funny clothes! I am frustrated!
-In the past beautiful tall flowers bloomed all around here. Now there are none! None at all!
+[ANIM_0]In the past beautiful tall flowers bloomed all around Wabika. Now there are none! None at all!
 What am I to do without my muse?! 
-Are you still here?! Leave me in my sorrow, interloper!
+[ANIM_3]Are you still here?! Leave me in my sorrow, interloper!
 &TALK_ARTIST
 I miss those tall, gorgeous flowers... With all my heart, I miss them.
-How can a painter paint without their muse? Tell me, is it possible? No!
+How can a painter paint without their muse? [ANIM_3]Tell me, is it possible? No!
 &GROWN_ENOUGH_FLOWERS
 *WORLD_REWARD
 My friend... THANKS_LINE.

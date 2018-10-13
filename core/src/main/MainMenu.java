@@ -3,6 +3,8 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.math.Vector2;
+
 import text.MenuOption;
 
 public class MainMenu extends AbstractMenu {
@@ -31,6 +33,12 @@ public class MainMenu extends AbstractMenu {
 			FrameEngine.continueGame();
 		} break;
 		}
+	}
+	
+	public Vector2 getButtonPosition(int pos) {
+		Vector2 position = super.getButtonPosition(pos);
+		position.sub(0, FrameEngine.TILE * 5.5f);
+		return position;
 	}
 
 	public static enum Option{

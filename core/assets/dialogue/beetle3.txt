@@ -1,9 +1,9 @@
 *TALK_BEETLE3
-You know, there are hidden paths all through this forest.
+You know, there are hidden paths all through this forest. As I beetle, I know this well.
 Sometimes, following the trail isn't enough! Be adventurous, my little friend!
 &TALK_BEETLE3
-Have you been looking for hidden paths, my little friend?
-I definitely saw one somewhere in the northwestern part of the woods...
+Have you been looking for hidden paths, my little friend? I definitely saw one somewhere in the northwestern part of the woods...
+And as a beetle, you can trust my eyesight.
 &ENTERED_SHRINE
-Keep looking for hidden paths, my little friend!
-I suspect there's one close by...
+Keep looking for hidden paths, my little friend! I suspect there's one close by... 
+And as a beetle, you can trust my intuition.

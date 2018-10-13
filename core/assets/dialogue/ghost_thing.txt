@@ -14,11 +14,12 @@ I think ... they really liked red coffee?
 That sounds weird, doesn't it. Maybe I'm remembering wrong?
 &GHOST_LESLIE
 *GHOST_REWARD
-[SPEED=3]Leslie...
+[PAUSE]Leslie...
 [NSPEED]That's right. I remember. Everything that happened, and...
-[SPEED=3]I... I miss them all, very much. [NSPEED]But at least my memories of good times have returned.
+[SPEED=2]I...[PAUSE] I miss them all, very much. [NSPEED]But at least my memories of good times have returned.
 I think, with that, I finally feel at ease. Thank you so much, stranger.
 [GIVE_TREASURE6]It's not much, but take this, at least.
+That thing you're searching for... If you're as good of a person as I think you are, you'll find it.
+I can only hope it meets your expectations.
 Now it's time for me to go to the Kami. Best of luck to you, stranger!
-I hope whatever it is that you're searching for[SPEED=3]... [NSPEED]you find it!
 [GHOST_EVENT][DESTROY]

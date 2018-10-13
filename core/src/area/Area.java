@@ -28,7 +28,7 @@ public class Area {
 	public final TiledMap map;
 	public final int mapWidth;
 	public final int mapHeight;
-	public final boolean cameraFixed;
+	public final boolean cameraFixed, sky;
 	public final String overlayString, id;
 
 	public Area(String id){
@@ -38,6 +38,7 @@ public class Area {
 		cameraFixed = Boolean.parseBoolean(data[3].toLowerCase());
 		overlayString = data[4].toLowerCase();
 		String[] locationData = data[5].split("&");
+		sky = Boolean.parseBoolean(data[6].toLowerCase());
 		startLocation.set(
 				Float.parseFloat(locationData[0]) * FrameEngine.TILE,
 				Float.parseFloat(locationData[1]) * FrameEngine.TILE

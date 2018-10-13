@@ -15,6 +15,7 @@ import area.Area;
 import debug.DebugMenu;
 import entity.InteractableEntity;
 import entity.Player;
+import entity.Portal.Direction;
 import text.MenuOption;
 import text.DialogueTree;
 import text.Textbox;
@@ -27,7 +28,7 @@ public class FrameEngine extends ApplicationAdapter {
 	public static boolean 
 	DRAW 	= false	&& DEBUG,
 	MUTE	= true	&& DEBUG,
-	LOG		= true	&& DEBUG,
+	LOG		= false	&& DEBUG,
 	NOMAIN	= true	&& DEBUG,
 	INVIS	= false	&& DEBUG,
 	MAPS	= false && DEBUG,
@@ -35,7 +36,7 @@ public class FrameEngine extends ApplicationAdapter {
 
 	private static Player player;
 	private static FPSLogger fpsLogger;
-	private static GameState gameState = GameState.OVERWORLD;
+	public static GameState gameState = GameState.OVERWORLD;
 	private static InputHandler inputHandler;
 	private static Area currArea = null;
 	private static InteractableEntity currInteractable;
@@ -57,7 +58,6 @@ public class FrameEngine extends ApplicationAdapter {
 			time, transition
 			));
 	private static Area newArea = null;
-	public static Vector2 newPosition = new Vector2();
 
 	public static final int TILE = 32;
 	public static final Logger logger = Logger.getLogger("ERROR_LOG");
@@ -65,6 +65,7 @@ public class FrameEngine extends ApplicationAdapter {
 	public static GraphicsHandler graphicsHandler;
 
 	public static final Vector2 resolution = new Vector2(TILE * 36, TILE * 24);
+	public static final Vector2 newPosition = new Vector2(TILE * 32, TILE * 32);
 	public static float elapsedTime = 0;
 
 	@Override
@@ -87,18 +88,18 @@ public class FrameEngine extends ApplicationAdapter {
 		progressionHandler = new ProgressionHandler();
 		inputHandler.initialize();
 		if (!NOMAIN) {
+			EntityHandler.addEntity(player);
 			startMainMenu(saveFile.exists());
 		}
 		else {
 			continueGame();
 		}
-		//gameState = GameState.CREDITS;
 	}
 
 	@Override
 	public void render() {
 		elapsedTime = 60.0f * getGameSpeed() * (Gdx.graphics.getDeltaTime());
-		// Don't compensate for less than 6 FPS
+		// Don't compensate for less than 6 FPS. At that point, well...
 		final float maxTime = 10;
 		if (elapsedTime/getGameSpeed() > maxTime) {
 			elapsedTime = maxTime;
@@ -143,12 +144,12 @@ public class FrameEngine extends ApplicationAdapter {
 
 		inputHandler.update();
 		if (LOG) fpsLogger.log();
-//		if (MAPS && getTime() > 6000){
-//			time.reset();
-//			if (newArea == null) newArea = new Area("BEACH");
-//			initiateAreaChange(newArea.getID().equals("FOREST") ? "BEACH" : "FOREST", new Vector2(8, 8));
-//			changeArea();
-//		}
+		//		if (MAPS && getTime() > 6000){
+		//			time.reset();
+		//			if (newArea == null) newArea = new Area("BEACH");
+		//			initiateAreaChange(newArea.getID().equals("FOREST") ? "BEACH" : "FOREST", new Vector2(8, 8));
+		//			changeArea();
+		//		}
 	}
 
 	private void updateOverworld(){
@@ -200,6 +201,7 @@ public class FrameEngine extends ApplicationAdapter {
 
 	private void updateMain(){
 		graphicsHandler.drawMainMenu();
+		playerWalk(true);
 		graphicsHandler.drawMenu(mainMenu);
 		mainMenu.update();
 	}
@@ -215,12 +217,25 @@ public class FrameEngine extends ApplicationAdapter {
 		graphicsHandler.drawItems(inventory, false, true);
 		inventory.update();
 	}
+	
+	public static final int CREDITS_END_TIME = 3000;
 
 	private void updateCredits(){
 		graphicsHandler.drawCredits();
-		if (time.getCounter() > 2600){
+		playerWalk(false);
+		if (time.getCounter() > CREDITS_END_TIME){
 			startMainMenu(true);
 		}
+	}
+
+	private void playerWalk(boolean right){
+		EntityHandler.update();
+		float positionX;
+		if (right) positionX = 
+				currArea.mapWidth/4 + ((2 * time.getCounter()) % currArea.mapWidth/2);
+		else positionX = 
+				(3*currArea.mapWidth/4) - ((2 * time.getCounter()) % currArea.mapWidth/2);
+		player.getPosition().set(positionX, TILE * 4.5f);
 	}
 
 	/**
@@ -302,8 +317,9 @@ public class FrameEngine extends ApplicationAdapter {
 	/**
 	 * Takes in a position to put the player in.
 	 */
-	public static void initiateAreaChange(String area_id, Vector2 position) {
+	public static void initiateAreaChange(String area_id, Vector2 position, Direction direction) {
 		initiateAreaChangeHelper(area_id);
+		player.setDirection(direction);
 		newPosition.set(position);
 	}
 
@@ -360,17 +376,23 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	private static void contGame(){
-		newArea = new Area(saveFile.startArea);
-		newPosition.set(saveFile.startPosition.scl(TILE));
-		changeArea();
 		gameState = GameState.OVERWORLD;
+		newArea = new Area(saveFile.startArea);
+		if (saveFile.startPosition.isZero() && DEBUG){
+			newPosition.set(61 * TILE, 41 * TILE);
+		}
+		else{
+			newPosition.set(saveFile.startPosition.scl(TILE));
+		}
+		changeArea();
 		transition.reset();
 	}
 
 	public static void startMainMenu(boolean exists) {
 		if (exists) mainMenu.open();
-		AudioHandler.startNewAudio("music/forest.ogg");
 		gameState = GameState.MAIN;
+		newArea = new Area("PATH");
+		changeArea();
 	}
 
 	public static void startInventory(){
@@ -389,8 +411,11 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	public static void startCredits(){
+		dialogueTree = null;
 		time.reset();
 		saveFile.save(true);
+		newArea = new Area("PATH");
+		changeArea();
 		gameState = GameState.CREDITS;
 	}
 
@@ -456,6 +481,16 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	// GET
+
+	public static Vector2 playerInput() {
+		if (gameState == GameState.CREDITS){
+			return new Vector2(-1, 0);
+		}
+		else if (gameState == GameState.MAIN){
+			return new Vector2(1, 0);
+		}
+		return Vector2.Zero;
+	}
 
 	public static InputHandler getInputHandler(){
 		return inputHandler;
@@ -527,7 +562,7 @@ public class FrameEngine extends ApplicationAdapter {
 		return shopMenu;
 	}
 
-	private enum GameState{
+	public enum GameState{
 		OVERWORLD, PAUSED, DEBUG, MAIN, SHOP, INVENTORY, CREDITS
 	}
 

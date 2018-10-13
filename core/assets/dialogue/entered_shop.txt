@@ -1,0 +1,5 @@
+[SPEAKER=SHOPKEEPER][ANIM_1]Howdy there, stranger![ANIM_0]
+&INTRO_SHOPKEEPER
+[SPEAKER=SHOPKEEPER][ANIM_1]Howdy again, stranger![ANIM_0]
+&ENTERED_SHRINE
+[SPEAKER=SHOPKEEPER][ANIM_1]Howdy there, my friend![ANIM_0]

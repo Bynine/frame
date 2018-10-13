@@ -4,3 +4,14 @@ Heck if I know what they're for, though. I'm just a beetle!
 &TALK_BEETLE4
 I wish I knew more about those little statues. 
 But it's a miracle I can even speak. After all, I'm just a beetle!
+&ENTERED_SHRINE
+*TALK_BEETLE4_2
+Say, did you figure out what those little statues do?
+I don't think I ever will. After all, I'm just a beetle!
+And that's okay.
+&TALK_BEETLE4_2
+Being a beetle is nice, actually.
+You get to do fun things, like wonder what little statues are, but never actually care to investigate.
+It's enough to keep the mystery alive. Makes it feel more magical, you know?
+Ahhh... Yes. That wonderful feeling of not knowing something. It's what makes people want to explore.
+But not us. We're just beetles!

@@ -3,29 +3,29 @@ PLACEHOLDER	Placeholder	bup	TRUE	1	45
 SHOPKEEPER	Shopkeeper	bup	TRUE	1	30
 FREB	Freb	croak	TRUE	1	30
 WESTERN	Tall Stranger	bup	TRUE	2	30
-BEETLE	Friendly Bug	meoh	FALSE	1	30
+BEETLE	Friendly Bug	what	FALSE	1	30
 LIBRARIAN	Book Seller	bwep	TRUE	2	30
-KAMI	???	bup	TRUE	1	30
+KAMI	???	echo	TRUE	1	30
 GUITARIST	Musician	bup	TRUE	1	30
 CAT	Fancy Lady	mih	FALSE	1	30
 WATER	Water Bug	bup	FALSE	1	30
-FREBKING	Really Big Freb	heavy	FALSE	1	60
-PUMPKIN	Cafe Owner	mih	TRUE	1	30
-FRIEND	Fancy Lady's Partner	mih	FALSE	1	30
-CUSTOMER2	Really Old Guy	bwep	FALSE	1	30
-CUSTOMER3	Reading Person	meoh	FALSE	1	30
+FREBKING	Really Big Freb	deep	FALSE	1	60
+PUMPKIN	Cafe Owner	chipper	TRUE	1	30
+FRIEND	Fancy Lady's Partner	what	FALSE	1	30
+CUSTOMER2	Really Old Guy	bup	FALSE	1	30
+CUSTOMER3	Reading Person	subtle	FALSE	1	30
 GRUBMOM	Grub Mom	mih	FALSE	1	45
 GRUB1	Chubby Grub	bwep	FALSE	1	30
 GRUB2	Nubby Grub	bwep	FALSE	1	30
 GRUB3	Grubby Grub	bwep	FALSE	1	30
 VILLAGER	Villager	bwep	TRUE	1	30
-GHOST	Restless Spirit	bwep	TRUE	1	45
-ARTIST	Passionate Artist	bup	FALSE	1	45
+GHOST	Restless Spirit	chipper	TRUE	1	45
+ARTIST	Passionate Artist	bup	FALSE	1	30
 COFFEE	Complaining Guy	meoh	TRUE	1	45
-CLIFF	Adventurous Girl	meoh	FALSE	1	30
-CLIFFSTAND	Adventurous Girl	meoh	TRUE	2	30
+CLIFF	Adventurous Girl	chipper	FALSE	1	30
+CLIFFSTAND	Adventurous Girl	chipper	TRUE	2	30
 ADVENTURER	Adventurer	mih	TRUE	1	30
-WARRIOR	Ragged Warrior	bup	TRUE	1	21
+WARRIOR	Ragged Warrior	subtle	TRUE	1	21
 
 WITCH	Witch	mih	TRUE	1	30
 SKULL	Ground Head	bup	TRUE	1	45

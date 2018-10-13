@@ -20,32 +20,43 @@ public class Emitter extends ImmobileEntity{
 	private final DurationTimer intervalTimer;
 	private final int duration;
 	private final HashSet<Graphic> graphics = new HashSet<>();
+	private final String graphicName;
 
 	public Emitter(float x, float y, int interval, int duration, String graphicPath) {
 		super(x, y);
 		graphicImage = new TextureRegion(new Texture(Gdx.files.internal(
 				"sprites/graphics/" + graphicPath + ".png"
 				)));
+		graphicName = graphicPath;
 		this.duration = duration;
 		intervalTimer = new DurationTimer(interval);
 		timerList.add(intervalTimer);
+		intervalTimer.reset((int) (Math.random() * intervalTimer.getEndTime()));
 	}
 	
 	@Override
 	public void update(){
 		super.update();
 		if (intervalTimer.timeUp()){
-			intervalTimer.reset(-(int)(Math.random() * 15));
+			intervalTimer.reset(-(int)(Math.random() * intervalTimer.getEndTime())/5);
 			graphics.add(new Graphic(this, duration));
 		}
 		Iterator<Graphic> graphicIter = graphics.iterator();
 		while (graphicIter.hasNext()){
 			Graphic graphic = graphicIter.next();
 			graphic.life.countUp();
-			graphic.position.x += 
-					Math.cos( (FrameEngine.getTime() + graphic.life.getCounter())/20.0f) 
-					* FrameEngine.elapsedTime;
-			graphic.position.y += 1 * FrameEngine.elapsedTime;
+			if (graphicName.equals("smoke")){
+				graphic.position.x += 
+						Math.cos( (FrameEngine.getTime() + graphic.life.getCounter())/20.0f) 
+						* 2 * Math.random() * FrameEngine.elapsedTime;
+				graphic.position.y += 1 * FrameEngine.elapsedTime;
+			}
+			else if (graphicName.equalsIgnoreCase("leaf")){
+				graphic.position.x -= 
+						2 + (2 * Math.cos( (FrameEngine.getTime() + graphic.life.getCounter())/20.0f)) 
+						* FrameEngine.elapsedTime * Math.random();
+				graphic.position.y -= 0.5f * FrameEngine.elapsedTime;
+			}
 			if (graphic.life.timeUp()){
 				graphicIter.remove();
 			}

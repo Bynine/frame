@@ -61,7 +61,15 @@ public class Player extends Entity{
 
 	@Override
 	public void update(){
-		if (!walkRightTimer.timeUp()){
+		updateInputs();
+		super.update();
+	}
+
+	private void updateInputs(){
+		if (!FrameEngine.playerInput().isZero()){
+			input.set(FrameEngine.playerInput());
+		}
+		else if (!walkRightTimer.timeUp()){
 			input.set(1, 0);
 		}
 		else if (FrameEngine.canControlPlayer()){
@@ -70,7 +78,6 @@ public class Player extends Entity{
 		else{
 			input.setZero();
 		}
-		super.update();
 	}
 
 	@Override
@@ -200,7 +207,7 @@ public class Player extends Entity{
 	public static ImageState getImageState(){
 		return imageState;
 	}
-	
+
 	public static void setImageState(ImageState is){
 		imageState = is;
 	}

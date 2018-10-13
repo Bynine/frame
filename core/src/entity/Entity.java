@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+import entity.Portal.Direction;
 import main.FrameEngine;
 import main.GraphicsHandler;
 import timer.Timer;
@@ -275,6 +276,16 @@ public abstract class Entity {
 	protected final void setDown(){
 		flipped = false;
 		dir = DOWN;
+	}
+	
+	public void setDirection(Direction dir){
+		switch(dir){
+		case LEFT: setLeft(); break;
+		case RIGHT: setRight(); break;
+		case UP: setUp(); break;
+		case DOWN: setDown(); break;
+		case ANY: break;
+		}
 	}
 
 	public boolean isFlipped(){

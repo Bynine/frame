@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
+import entity.Portal.Direction;
 import main.FrameEngine;
 import text.DialogueTree;
 
@@ -15,12 +16,15 @@ public class PortalHole extends InteractableEntity {
 	final String destArea;
 	final Vector2 destLocation = new Vector2();
 	final String flag;
+	private final Direction direction;
 
-	public PortalHole(float x, float y, String flag, String destination, double destX, double destY) {
+	public PortalHole(float x, float y, String flag, String destination, 
+			double destX, double destY, Direction direction) {
 		super(x, y, "");
 		opened = FrameEngine.getSaveFile().getFlag(flag);
 		updateImage();
 		this.destArea = destination;
+		this.direction = direction;
 		this.flag = flag;
 		destLocation.set(
 				(int) (destX * FrameEngine.TILE), 
@@ -59,7 +63,7 @@ public class PortalHole extends InteractableEntity {
 		}
 		if (message.equals("ENTER")){
 			FrameEngine.endDialogueTree();
-			FrameEngine.initiateAreaChange(destArea, destLocation);
+			FrameEngine.initiateAreaChange(destArea, destLocation, direction);
 		}
 	}
 

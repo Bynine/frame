@@ -10,12 +10,13 @@ import entity.NPC;
 import entity.Player;
 import entity.Player.ImageState;
 import main.AudioHandler;
+import main.EntityHandler;
 import main.FrameEngine;
 import timer.Timer;
 
 public class Textbox {
 
-	private Timer text_timer = new Timer(0);
+	private Timer textTimer = new Timer(0);
 	private int textPos = 0;
 	private final ArrayList<Object> characters = new ArrayList<>();
 	private Sound text_sound;
@@ -95,14 +96,20 @@ public class Textbox {
 	 * Change many characters are drawn to screen and play voice clip.
 	 */
 	public void update(){
-		text_timer.countUp();
-		if (!isFinished() && text_timer.getCounter()/TEXT_SPEED > textPos){ 
+		textTimer.countUp();
+		if (!isFinished() && textTimer.getCounter()/TEXT_SPEED > textPos){ 
 			Object currChar = characters.get(textPos);
 			if (currChar instanceof Command){
 				handleCommand(((Command)characters.get(textPos)));
 			}
 			else{
 				Character c = (Character)currChar;
+				if (c == ',' || c == '-'){
+					textTimer.change(-4);
+				}
+				if (c == '.' || c == '?' || c == '!'){
+					textTimer.change(-2);
+				}
 				if (!Character.isWhitespace(c)){
 					talkTime ++;
 				}
@@ -119,7 +126,15 @@ public class Textbox {
 		if (null != speaker){
 			speaker.getMessage(command.getID());
 		}
-		if (command.getID().startsWith("SPEED")){
+		if (command.getID().equals("PAUSE")){
+			textTimer.change(-24);
+		}
+		else if (command.getID().startsWith("SPEAKER")){
+			String[] speakerData = command.getID().split("=");
+			speaker = EntityHandler.getNPC(speakerData[1]);
+			text_sound = Gdx.audio.newSound(Gdx.files.internal("sfx/speech/" + speaker.getVoiceUrl() + ".wav"));
+		}
+		else if (command.getID().startsWith("SPEED")){
 			String[] speedData = command.getID().split("=");
 			TEXT_SPEED = Float.parseFloat(speedData[1]);
 		}
@@ -165,14 +180,6 @@ public class Textbox {
 			}
 		}
 	}
-
-	/**
-	 * The entire string will now be drawn.
-	 */
-//	public void complete(){
-////		textPos = characters.size();
-////		AudioHandler.playSound(text_sound);
-//	}
 
 	/**
 	 * Whether this textbox is displaying all of its text.

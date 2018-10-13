@@ -1,20 +1,22 @@
-FOREST	?	forest	FALSE	dim	61&41
-SHOP	?	crackling	TRUE	bright	12&10
-SPRING	?	forest	FALSE	bright	9&33
-BOOKSTORE	?	inside	TRUE	dim	12&10
+PATH	?	forest	FALSE	bright	8&8	TRUE
 
-BEACH	?	beach	FALSE	soft	18&18
-SHELL	?	cove	TRUE	pretty	12&9
-CAVERN	?	cove	FALSE	twilit	12&13
+FOREST	?	forest	FALSE	dim	61&41	TRUE
+SHOP	?	crackling	TRUE	bright	12&10	TRUE
+SPRING	?	forest	FALSE	bright	9&33	TRUE
+BOOKSTORE	?	inside	TRUE	dim	12&10	TRUE
 
-ORCHARD	?	night	FALSE	twilit	32&55
-CAFE	?	nightinside	TRUE	bright	14&8
-GRUBHOLE	?	hole	TRUE	dim	8&8
+BEACH	?	beach	FALSE	soft	18&18	TRUE
+SHELL	?	cove	TRUE	pretty	12&9	FALSE
+CAVERN	?	cove	FALSE	twilit	12&13	TRUE
 
-FORT	?	inside	TRUE	dim	8&8
-FORTTOP	?	high	TRUE	dim	8&8
-SHRINE	?	inside	TRUE	dim	10&10
-UNDERSHRINE	?	hole	FALSE	cool	8&8
-DEPTHS	?	hole	FALSE	cool	9&39
+ORCHARD	?	night	FALSE	twilit	32&55	TRUE
+CAFE	?	nightinside	TRUE	bright	14&8	TRUE
+GRUBHOLE	?	hole	TRUE	dim	8&8	TRUE
 
-TEST	?	nothing	TRUE	paper	11&10
+FORT	?	inside	TRUE	dim	8&8	TRUE
+FORTTOP	?	high	TRUE	dim	8&8	TRUE
+SHRINE	?	inside	TRUE	dim	10&10	TRUE
+UNDERSHRINE	?	hole	FALSE	cool	8&8	TRUE
+DEPTHS	?	depths	FALSE	cool	9&39	FALSE
+
+TEST	?	nothing	TRUE	paper	11&10	TRUE

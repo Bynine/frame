@@ -7,6 +7,7 @@ import area.EntityLoader;
 import entity.AudioLocation;
 import entity.Entity;
 import entity.ImmobileEntity;
+import entity.NPC;
 
 /**
  * Controls and updates overworld entities.
@@ -79,5 +80,17 @@ public class EntityHandler {
 	
 	public static ArrayList<Entity> getEntities(){
 		return entities;
+	}
+
+	public static NPC getNPC(String string) {
+		for (Entity entity: entities){
+			if (entity instanceof NPC){
+				NPC npc = (NPC) entity;
+				if (npc.getID().equals(string)){
+					return npc;
+				}
+			}
+		}
+		return null;
 	}
 }

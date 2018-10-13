@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="352">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="354">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/shop.tsx"/>
  <tileset firstgid="265" source="tilesets/shell.tsx"/>
+ <layer id="9" name="Tile Layer 5" width="25" height="16">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
  <layer id="1" name="FLOOR" width="25" height="16">
   <data encoding="csv">
 265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,
@@ -85,7 +105,7 @@
  </layer>
  <objectgroup id="5" name="SLOPES" visible="0"/>
  <objectgroup color="#32e3c6" id="6" name="TERRAIN">
-  <object id="224" name="stone" x="0" y="0" width="800" height="512"/>
+  <object id="224" name="water" x="0" y="0" width="800" height="512"/>
  </objectgroup>
  <objectgroup color="#50734a" id="7" name="COLLISION" opacity="0.5">
   <object id="279" x="0" y="0" width="192" height="512"/>
@@ -167,6 +187,19 @@
    <properties>
     <property name="DEST" value="BEACH,61.5,17"/>
     <property name="TYPE" value="PORTAL"/>
+   </properties>
+  </object>
+  <object id="352" name="entered trigger" gid="1" x="360" y="384" width="80" height="32">
+   <properties>
+    <property name="DIALOGUE" value="entered_shell"/>
+    <property name="TYPE" value="DIALOGUE_TRIGGER"/>
+   </properties>
+  </object>
+  <object id="353" name="waterfall audio" gid="5" x="376" y="184" width="32" height="32">
+   <properties>
+    <property name="AUDIO" value="waterfall"/>
+    <property name="ID" value="WATERFALL"/>
+    <property name="TYPE" value="AUDIO"/>
    </properties>
   </object>
  </objectgroup>

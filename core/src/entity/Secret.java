@@ -29,7 +29,7 @@ public class Secret extends Currency {
 	public void updateImage(){
 		if (
 				FrameEngine.getTime() % 60 >= 15 ||
-				position.dst(FrameEngine.getPlayer().getPosition()) > FrameEngine.TILE * 5
+				position.dst(FrameEngine.getPlayer().getPosition()) > FrameEngine.TILE * 4
 				) image = null;
 		else image = anim.get(0).getKeyFrame(FrameEngine.getTime());
 	}

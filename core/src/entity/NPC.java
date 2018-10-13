@@ -14,7 +14,7 @@ import main.FrameEngine;
 public class NPC extends InteractableEntity{
 
 	protected final ArrayList<ArrayList<Animation<TextureRegion>>> anims;
-	private final String name, dialoguePath;
+	private final String name, dialoguePath, id;
 	protected int defaultAnim, currentAnim = 0;
 
 	public NPC(float x, float y, 
@@ -37,6 +37,8 @@ public class NPC extends InteractableEntity{
 		this.interactYDisp = interactYDisp;
 		this.dialoguePath = dialoguePath;
 		this.layer = layer;
+		this.id = id;
+		
 		collides = (!id.equals("GHOST"));
 	}
 
@@ -49,6 +51,7 @@ public class NPC extends InteractableEntity{
 		name = data[1];
 		voiceUrl = data[2];
 		this.dialoguePath = dialoguePath;
+		this.id = id;
 		anims = new ArrayList<>();
 	}
 
@@ -120,6 +123,10 @@ public class NPC extends InteractableEntity{
 			return FrameEngine.getSaveFile().getMapping(name);
 		}
 		return name;
+	}
+
+	public String getID() {
+		return id;
 	}
 
 }

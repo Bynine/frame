@@ -1,5 +1,5 @@
 [NOSPEAKER][GIVE_GOAL]You obtained the Seed of Hope!
 Congratulations, traveller.
-What will you do now? Will you stay here in Wabika, or return to your home and use what you've found here?
+What will you do now? Will you remain in Wabika, or return to your home and use what you've found?
 Whatever the case... you are welcome to stay here whenever you like.
-Thank you for all you've done.
+[PAUSE]Thank you for all you've done.

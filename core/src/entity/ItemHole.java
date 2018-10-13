@@ -15,6 +15,9 @@ public class ItemHole extends Item {
 		image = marker;
 		collides = false;
 		layer = Layer.BACK;
+		interactHitbox.setSize(16);
+		interactXDisp = 8;
+		interactYDisp = 8;
 	}
 	
 	public void interact(){

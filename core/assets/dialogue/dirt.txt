@@ -6,9 +6,9 @@ The ground is soft here. Plant something?
 Unfortunately, shells don't grow on trees, nor do they grow into them.
 <ADJ_TREASURE
 That's kind of rude, isn't it?
+<ADJ_GRUB
+It'd probably much prefer to be back home!
 <GOAL
 You ought to save that.
-<GRUB
-It'd probably much prefer to be back home.
 <OTHER
 That... probably isn't going to work.

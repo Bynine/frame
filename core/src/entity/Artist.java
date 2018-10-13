@@ -12,12 +12,15 @@ public class Artist extends NPC {
 		if (FrameEngine.getSaveFile().getCounter(Flower.grownFlowers) > 0){
 			FrameEngine.getSaveFile().setFlag("GROWN_ENOUGH_FLOWERS", true);
 		}
-		currentAnim = FrameEngine.getSaveFile().getFlag("GROWN_ENOUGH_FLOWERS") ? 1 : 0;
+		boolean happy = FrameEngine.getSaveFile().getFlag("GROWN_ENOUGH_FLOWERS");
+		currentAnim = happy ? 1 : 0;
 		defaultAnim = currentAnim;
+		if (!happy){
+			voiceUrl = "dip";
+		}
 	}
 	
 	public void interact(){
-		//I am so sorry for my outburst from before
 		FrameEngine.startDialogueTree(
 				new DialogueTree(this, "artist", new HashMap<String, String>(){{
 					put("THANKS_LINE", 

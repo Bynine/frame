@@ -46,8 +46,10 @@ public class GraphicsHandler {
 	WIPE_COLOR = new Color(0.05f, 0.07f, 0.12f, 1);
 
 	protected SpriteBatch batch;
-	protected final OrthographicCamera worldCam = new OrthographicCamera();
-	protected final OrthographicCamera centerCam = new OrthographicCamera();
+	protected final OrthographicCamera 
+	worldCam = new OrthographicCamera(),
+	reflectionCam = new OrthographicCamera(),
+	centerCam = new OrthographicCamera();
 	protected OrthogonalTiledMapRenderer renderer;
 	protected BitmapFont font, debugFont, warningFont, textFont;
 	protected ShapeRenderer shapeRenderer;
@@ -58,6 +60,7 @@ public class GraphicsHandler {
 	arrowDown = new TextureRegion(new Texture("sprites/gui/arrow_down.png")),
 	heart = new TextureRegion(new Texture("sprites/gui/heart.png")),
 	acorn = new TextureRegion(new Texture("sprites/items/acorn.png")),
+	title = new TextureRegion(new Texture("sprites/gui/title.png")),
 	interactBubble = new TextureRegion(new Texture("sprites/player/interact.png")),
 	surpriseBubble = new TextureRegion(new Texture("sprites/player/surprise.png")),
 	talkingBubble = new TextureRegion(new Texture("sprites/player/talk.png")),
@@ -70,7 +73,6 @@ public class GraphicsHandler {
 	private final String credits;
 
 	private static TextureRegion overlay = new TextureRegion(new Texture("sprites/gui/watercolor_dim.png"));
-	private static TextureRegion splash = new TextureRegion(new Texture("sprites/gui/splashsmall.png"));
 	private static TextureRegion water = new TextureRegion(new Texture("sprites/graphics/water.png"));
 
 	GraphicsHandler(){
@@ -79,6 +81,8 @@ public class GraphicsHandler {
 		worldCam.zoom = ZOOM;
 		centerCam.zoom = ZOOM;
 		centerCam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		reflectionCam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		reflectionCam.zoom = ZOOM;
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/lato.ttf"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		parameter.size = 18;
@@ -139,13 +143,19 @@ public class GraphicsHandler {
 
 		batch.setColor(DEFAULT_COLOR);
 		drawWater();
+		renderer.getBatch().setColor(getReflectionColor(DEFAULT_COLOR, 0.6f));
+		renderer.setView(reflectionCam);
+		renderer.render(new int[]{0, 4});	// Reflection tiles
+		renderer.getBatch().setColor(DEFAULT_COLOR);
+		batch.setColor(DEFAULT_COLOR);
 		if (!FrameEngine.INVIS) drawWaterEntities(EntityHandler.getEntities());
-		renderer.render(new int[]{0, 1});	// Render background tiles.
+		renderer.setView(worldCam);
+		renderer.render(new int[]{1, 2});	// Background tiles.
 
 		if (!FrameEngine.INVIS) drawEntities(backEntities);
 		if (!FrameEngine.INVIS) drawShadows(EntityHandler.getEntities());
 		if (!FrameEngine.INVIS) drawEntities(normalEntities);
-		renderer.render(new int[]{2, 3}); 	// Render foreground tiles.
+		renderer.render(new int[]{3, 4}); 	// Foreground tiles.
 		if (!FrameEngine.INVIS) drawEntities(frontEntities);
 		handleEmitters();
 
@@ -190,7 +200,7 @@ public class GraphicsHandler {
 
 	private void drawWater(){
 		batch.begin();
-		drawByTiles(water, true);
+		if (FrameEngine.getArea().sky) drawByTiles(water, true);
 		batch.draw(Player.ripple,
 				FrameEngine.getPlayer().getPosition().x,
 				FrameEngine.getPlayer().getPosition().y
@@ -271,19 +281,26 @@ public class GraphicsHandler {
 	private void drawWaterEntity(Entity en){
 		final float maxDistance = 960.0f;
 		float sizeReduction = Math.max((maxDistance - en.getZPosition()), 0)/maxDistance;
-		batch.setColor(en.getColor().r, en.getColor().g, en.getColor().b, 
-				(sizeReduction * en.getColor().a) / 1.8F);
+		batch.setColor(getReflectionColor(en.getColor(), sizeReduction));
 		if (en.isFlipped() ^ en.getImage().isFlipX()) en.getImage().flip(true, false);
 		en.getImage().flip(false, true);
 		batch.draw(
 				en.getImage(), 
 				en.getPosition().x, 
-				en.getPosition().y - en.getZPosition()/12 - en.getImage().getRegionHeight() + 4,
+				en.getPosition().y - en.getZPosition()/12 - (en.getImage().getRegionHeight()*0.9f),
 				en.getImage().getRegionWidth() * sizeReduction,
 				en.getImage().getRegionHeight() * sizeReduction
 				);
 		batch.setColor(DEFAULT_COLOR);
 		en.getImage().flip(false, true);
+	}
+	
+	/**
+	 * The color of given character's reflection in the water.
+	 */
+	private Color getReflectionColor(Color color, float sizeReduction){
+		return new Color(color.r - 0.2f, color.g - 0.1f, color.b, 
+				(sizeReduction * color.a) / 1.8F);
 	}
 
 	/**
@@ -348,7 +365,10 @@ public class GraphicsHandler {
 	public void drawOverlay(){
 		beginOverlay();
 		batch.setProjectionMatrix(worldCam.combined);
-		drawByTiles(overlay, false);
+		final int overlayMultiplier = 1;
+		for (int ii = 0; ii < overlayMultiplier; ++ii){
+			drawByTiles(overlay, false);
+		}
 		endOverlay();
 	}
 
@@ -506,6 +526,9 @@ public class GraphicsHandler {
 		worldCam.position.x = Math.round(worldCam.position.x * roundTo)/roundTo;
 		worldCam.position.y = Math.round(worldCam.position.y * roundTo)/roundTo;
 		worldCam.update();
+		reflectionCam.position.x = worldCam.position.x;
+		reflectionCam.position.y = worldCam.position.y + FrameEngine.TILE * 3;
+		reflectionCam.update();
 	}
 
 	/**
@@ -537,7 +560,7 @@ public class GraphicsHandler {
 		drawTextboxTiles((int)position.x, (int)position.y, (int)size.x, (int)size.y, 0);
 		batch.setColor(DEFAULT_COLOR);
 		batch.begin();
-		GlyphLayout glyph = new GlyphLayout(font, text);
+		GlyphLayout glyph = new GlyphLayout(textFont, text);
 		String spacedText = getSpacedText(
 				(Math.max((size.x - 2), 4) * FrameEngine.TILE), 
 				text, fullText
@@ -572,8 +595,9 @@ public class GraphicsHandler {
 		for (int ii = 0; ii < num; ++ii){
 			String word = words[ii];
 			String testTextFuture = testText.concat(fullWords[ii]);
-			GlyphLayout futureCheck = new GlyphLayout(font, testTextFuture);
-			if (futureCheck.width >= (width - FrameEngine.TILE/8) || word.equals("~")){
+			GlyphLayout futureCheck = new GlyphLayout(textFont, testTextFuture);
+			int distance = width > FrameEngine.TILE * 6 ? FrameEngine.TILE/2 : FrameEngine.TILE/8;
+			if (futureCheck.width >= (width - distance) || word.equals("~")){
 				spacedText += "\n";
 				testText += "\n";
 				width += FrameEngine.TILE/2;
@@ -718,10 +742,14 @@ public class GraphicsHandler {
 	}
 
 	public void drawMainMenu() {
-		wipeScreen();
-		batch.setProjectionMatrix(centerCam.combined);
+		drawOverworld();
 		batch.begin();
-		batch.draw(splash, 0, 0);
+		batch.draw(title, 
+				FrameEngine.getPlayer().getPosition().x - (FrameEngine.TILE * 4.5f),
+				FrameEngine.getPlayer().getPosition().y + (FrameEngine.TILE * 2),
+				title.getRegionWidth() * 2,
+				title.getRegionHeight() * 2
+				);
 		batch.end();
 	}
 
@@ -756,11 +784,11 @@ public class GraphicsHandler {
 
 	final float creditSpeed = 0.5f;
 	public void drawCredits() {
-		wipeScreen();
+		drawOverworld();
 		batch.setProjectionMatrix(centerCam.combined);
 		batch.begin();
 		final float posX = FrameEngine.TILE/2;
-		final float posY = (FrameEngine.getTime() * creditSpeed);
+		final float posY = (Math.min(FrameEngine.getTime(), FrameEngine.CREDITS_END_TIME-600) * creditSpeed);
 		debugFont.draw(batch, credits, posX, posY);
 		batch.end();
 	}

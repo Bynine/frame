@@ -8,9 +8,15 @@ And so I -
 *GIVEN_ORDER1
 [REMOVE_ITEM][ANIM_1]Thanks! [ANIM_0]Anyhow, as I was saying...
 I tried touching that statue in the garden... And I heard a spooky voice!
+[SPEAKER=FRIEND]Whoa, really, really?
 No lie! It told me something about a traveller from another land being here.
+[SPEAKER=FRIEND]Whoa, cool, cool...
 Mmhmm, I thought so too. We haven't seen many travellers lately, have we?
+[SPEAKER=FRIEND]No way, not at all...
 <OTHER
 [ANIM_1]Umm, this isn't what I asked for...
+[SPEAKER=FRIEND]Totally not what she asked for! Come on! Gosh!
 &GIVEN_ORDER1
-[ANIM_1]Thanks again for the drink, it's glorious! Jackie always makes it just how I want it.
+[ANIM_1]Thanks again for the drink, it's fantastic! Jackie always makes it just how I want it.
+[SPEAKER=JACKIE][ANIM_6]You know it, hon!
+[SPEAKER=JACKIE][ANIM_4]Not sure how she can taste the coffee with all that milk, though...[DEFAULT_ANIM]

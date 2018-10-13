@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import entity.Portal.Direction;
 import main.AudioHandler;
 import main.FrameEngine;
 
@@ -13,7 +14,7 @@ public class TrapDoor extends PortalHole {
 	private final Sound open = Gdx.audio.newSound(Gdx.files.internal("sfx/door_open.wav"));
 
 	public TrapDoor(float x, float y, String destination, double destX, double destY) {
-		super(x, y, "", destination, destX, destY);
+		super(x, y, "", destination, destX, destY, Direction.DOWN);
 		marker = null;
 		canInteract = false;
 		hole = new TextureRegion(new Texture("sprites/objects/trapdoor.png"));

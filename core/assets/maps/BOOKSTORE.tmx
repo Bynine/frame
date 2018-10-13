@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="282">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="282">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/shop.tsx"/>
  <tileset firstgid="265" source="tilesets/bookstore.tsx"/>
+ <layer id="9" name="Tile Layer 5" width="25" height="16">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
  <layer id="1" name="FLOOR" width="25" height="16">
   <data encoding="csv">
 27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0,
@@ -29,8 +49,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,273,274,275,318,276,277,278,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,266,267,268,289,290,291,334,292,293,294,0,73,74,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,273,274,275,0,276,277,278,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,266,267,268,289,290,291,0,292,293,294,0,73,74,0,0,0,0,0,0,
 0,0,0,0,0,0,282,283,284,305,306,307,0,308,309,310,0,89,90,0,0,0,0,0,0,
 0,0,0,0,0,0,298,299,300,0,0,0,0,0,0,0,329,330,160,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,331,332,333,0,0,0,0,160,0,0,0,0,0,0,
@@ -167,11 +187,12 @@ Take note, those who enter - your actions are being judged.&quot;</property>
     <property name="TYPE" value="DIALOGUEDESC"/>
    </properties>
   </object>
-  <object id="269" name="painting" gid="1" x="384" y="192" width="32" height="48">
+  <object id="269" name="fish painting" gid="1" x="384" y="192" width="32" height="48">
    <properties>
+    <property name="ID" value="fish"/>
     <property name="TEXT">A resplendant portrait of a very handsome man.
 His cravat is slightly damp.</property>
-    <property name="TYPE" value="DESC"/>
+    <property name="TYPE" value="PAINTING"/>
    </properties>
   </object>
   <object id="270" name="book" gid="1" x="368" y="272" width="32" height="24">

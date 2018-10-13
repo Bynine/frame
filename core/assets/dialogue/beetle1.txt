@@ -1,7 +1,7 @@
 *TALK_BEETLE1
-Oh, hello there. I'm a talking beetle, as you can hear.
+Oh, hello there. Yes, I can talk! Even though I'm just a beetle.
 Say, where did you come from, anyway? Your clothes are weird.
 Oops - I mean... they're... a nice kind of weird. Hehe.
 &TALK_BEETLE1
-Maybe I should try getting myself a new outfit.
+Maybe I should try getting myself a new outfit. Even though I'm just a beetle.
 What do you think, stranger?
