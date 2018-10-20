@@ -1,19 +1,25 @@
 *TALK_ARTIST
+Siiigh...
 [ANIM_3]What?! What do you want?!
-I have no time for little people in funny clothes! I am frustrated!
-[ANIM_0]In the past beautiful tall flowers bloomed all around Wabika. Now there are none! None at all!
-What am I to do without my muse?! 
+[ANIM_3]I have no time for little people in funny clothes! I am frustrated!
+[ANIM_0]In the past beautiful tall flowers bloomed all around Wabika. [ANIM_3]Now there are none! None at all!
+[ANIM_0]What am I to do without my muse?...
 [ANIM_3]Are you still here?! Leave me in my sorrow, interloper!
 &TALK_ARTIST
-I miss those tall, gorgeous flowers... With all my heart, I miss them.
-How can a painter paint without their muse? [ANIM_3]Tell me, is it possible? No!
+[ANIM_0]I miss those tall, gorgeous flowers... With all my heart, I miss them.
+[ANIM_0]How can a painter paint without their muse? [ANIM_3]Tell me, is it possible? No![ANIM_0]
 &GROWN_ENOUGH_FLOWERS
 *WORLD_REWARD
 My friend... THANKS_LINE.
-You are truly kind to grow flowers in this forest. As I walked, I saw you doing so.
+You are truly kind to grow flowers in this forest. As I walked around in frustration, I saw you doing so.
 I was so touched by this gesture that I painted you tending to one of the flowers.
 Please, accept it. It is the least I can do.
 [NOSPEAKER][GIVE_TREASURE5]You received a painting!
 &WORLD_REWARD
+I am so inspired... I will paint all the time!
+[ANIM_5]However, something still sours my mood. My good friend Jackie, who runs the cafe in the village...
+She is so busy lately that we haven't had the chance to talk.
+I hope she can get some time off soon. She works very hard, you know.
+&WORLD_REWARD,CAFE_REWARD
 Now that I am inspired... I will paint, paint, paint!
 I will never stop! Hahahaha!

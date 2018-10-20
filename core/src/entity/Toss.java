@@ -12,7 +12,7 @@ public class Toss extends Item {
 	
 	private final DurationTimer duration;
 	private final Vector2 startPoint, endPoint;
-	private final Sound whistle = Gdx.audio.newSound(Gdx.files.internal("sfx/whistle.wav"));
+	private final Sound whistle = Gdx.audio.newSound(Gdx.files.internal("sfx/toss.wav"));
 	
 	public Toss(float x, float y, String id, int dur, Vector2 endPoint){
 		super(x, y, id, "");

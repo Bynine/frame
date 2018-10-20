@@ -3,7 +3,7 @@ The seed you buried is nestled here.
 The seed you buried is nestled here. Water it with your watering can?
 >YES,NO
 <YES
-Here you go, little guy.
+[WATER_ANIM]Here you go, little guy.
 [WATER][DESTROY]
 <NO
 Seemingly against all reason, you refrain.

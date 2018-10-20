@@ -1,9 +1,12 @@
 package entity;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import main.AudioHandler;
 import main.FrameEngine;
 import text.DialogueTree;
 
@@ -24,6 +27,7 @@ public class Flower extends InteractableEntity {
 	seedPrefix = "SEED_",
 	grownFlowers = "GROWN_FLOWERS";
 	private FlowerType flowerType;
+	private final Sound whistle = Gdx.audio.newSound(Gdx.files.internal("sfx/whistle.wav"));
 
 
 	public Flower(float x, float y, String id) {
@@ -111,6 +115,9 @@ public class Flower extends InteractableEntity {
 					FrameEngine.getSaveFile().getMapping(seedPrefix + id));
 			FrameEngine.getSaveFile().addToCounter(1, grownFlowers);
 			setFlower();
+			if (flowerType.equals(FlowerType.ONE)) {
+				AudioHandler.playSound(whistle);
+			}
 		}
 	}
 
@@ -156,6 +163,7 @@ public class Flower extends InteractableEntity {
 		flower3.getTexture().dispose();
 		flower4.getTexture().dispose();
 		flower5.getTexture().dispose();
+		whistle.dispose();
 	}
 	
 	private enum FlowerType{

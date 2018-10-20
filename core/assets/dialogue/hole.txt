@@ -3,7 +3,7 @@ The ground looks cracked up here.
 The ground looks cracked up here. Dig with your shovel?
 >YES,NO
 <YES
-Dig, dig...
+[DIG_ANIM]Dig, dig...
 [DIG]
 <NO
 You decide to leave well enough alone.

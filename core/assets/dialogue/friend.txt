@@ -1,1 +1,8 @@
-Ohhh, is that so... Cool!
+*TALK_FRIEND
+[NOSPEAKER]She seems to be mumbling quietly to herself.
+[SOFT](Don't be nervous... Don't be nervous... Even if she is really cute...)
+[ANIM_1]Oops! Pretend you didn't hear anything...[ANIM_0]
+&TALK_FRIEND
+[NOSPEAKER]She still seems to be mumbling quietly to herself.
+[SOFT](Don't be nervous... Don't be nervous...)
+[SOFT](Man, I love her coat... So fashionable...)

@@ -1,0 +1,5 @@
+[SPEAKER=GRUBMOM]Oh, thank the Kami s-someone came!
+&TALK_GRUBMOM
+[SPEAKER=GRUBMOM]Oh... I'm so worried sick...
+&GRUB_REWARD
+You hear the sound of grubs snoring softly.

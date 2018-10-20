@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -35,7 +36,7 @@ import text.Textbox;
 import timer.Timer;
 
 /**
- * Handles drawing overworld.
+ * Handles drawing everything.
  */
 public class GraphicsHandler {
 	public static final Color 
@@ -44,6 +45,8 @@ public class GraphicsHandler {
 	SELECT_COLOR2 = new Color(0.85f, 0.85f, 0.85f, 1.0f),
 	INVALID_COLOR = new Color(0.5f, 0.65f, 0.7f, 1.0f),
 	WIPE_COLOR = new Color(0.05f, 0.07f, 0.12f, 1);
+	private static Vector2 offsetTarget = new Vector2();
+	private static Vector2 offset = new Vector2();
 
 	protected SpriteBatch batch;
 	protected final OrthographicCamera 
@@ -61,16 +64,23 @@ public class GraphicsHandler {
 	heart = new TextureRegion(new Texture("sprites/gui/heart.png")),
 	acorn = new TextureRegion(new Texture("sprites/items/acorn.png")),
 	title = new TextureRegion(new Texture("sprites/gui/title.png")),
+	logo = new TextureRegion(new Texture("sprites/gui/logo.png")),
 	interactBubble = new TextureRegion(new Texture("sprites/player/interact.png")),
 	surpriseBubble = new TextureRegion(new Texture("sprites/player/surprise.png")),
 	talkingBubble = new TextureRegion(new Texture("sprites/player/talk.png")),
 	textboxOverlay = new TextureRegion(new Texture("sprites/gui/textbox_overlay.png")),
+	textboxBegin = new TextureRegion(new Texture("sprites/gui/textbox_begin.png")),
+	textboxMid = new TextureRegion(new Texture("sprites/gui/textbox_mid.png")),
 	textboxCorner = new TextureRegion(new Texture("sprites/gui/textbox_corner.png")),
+	selectedTextboxCorner = new TextureRegion(new Texture("sprites/gui/textbox_corner_selected.png")),
 	textboxTop = new TextureRegion(new Texture("sprites/gui/textbox_top.png")),
 	textboxSide = new TextureRegion(new Texture("sprites/gui/textbox_side.png")),
 	textboxCenter = new TextureRegion(new Texture("sprites/gui/textbox_center.png"));
 	Timer selectTimer = new Timer(10);
 	private final String credits;
+	final float blackR = 26.0f/255.0f;
+	final float blackG = 29.0f/255.0f;
+	final float blackB = 39.0f/255.0f;
 
 	private static TextureRegion overlay = new TextureRegion(new Texture("sprites/gui/watercolor_dim.png"));
 	private static TextureRegion water = new TextureRegion(new Texture("sprites/graphics/water.png"));
@@ -87,11 +97,7 @@ public class GraphicsHandler {
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		parameter.size = 18;
 		parameter.spaceY = 2;
-		parameter.color = new Color(
-				26.0f/255.0f, 
-				29.0f/255.0f, 
-				39.0f/255.0f, 
-				1);
+		parameter.color = new Color(blackR, blackG, blackB, 1);
 		parameter.mono = true;
 		font = generator.generateFont(parameter);
 		parameter.color = new Color(1, 1, 1, 1);
@@ -145,17 +151,22 @@ public class GraphicsHandler {
 		drawWater();
 		renderer.getBatch().setColor(getReflectionColor(DEFAULT_COLOR, 0.6f));
 		renderer.setView(reflectionCam);
-		renderer.render(new int[]{0, 4});	// Reflection tiles
+		renderer.render(new int[]{4});	// Reflection tiles
 		renderer.getBatch().setColor(DEFAULT_COLOR);
 		batch.setColor(DEFAULT_COLOR);
 		if (!FrameEngine.INVIS) drawWaterEntities(EntityHandler.getEntities());
 		renderer.setView(worldCam);
-		renderer.render(new int[]{1, 2});	// Background tiles.
+		renderer.render(new int[]{0, 1});	// Background tiles.
 
 		if (!FrameEngine.INVIS) drawEntities(backEntities);
 		if (!FrameEngine.INVIS) drawShadows(EntityHandler.getEntities());
 		if (!FrameEngine.INVIS) drawEntities(normalEntities);
-		renderer.render(new int[]{3, 4}); 	// Foreground tiles.
+		renderer.render(new int[]{2}); 	// Foreground tiles.
+		renderer.getBatch().setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
+		renderer.getBatch().setColor(FrameEngine.getArea().lightColor);
+		renderer.render(new int[]{3});		// Light tiles.
+		endOverlay(renderer.getBatch(), false);
+		renderer.render(new int[]{4}); 	// Foreground tiles.
 		if (!FrameEngine.INVIS) drawEntities(frontEntities);
 		handleEmitters();
 
@@ -196,6 +207,7 @@ public class GraphicsHandler {
 	 */
 	void drawTransition(){
 		wipeScreen();
+		drawOverlay();
 	}
 
 	private void drawWater(){
@@ -294,7 +306,7 @@ public class GraphicsHandler {
 		batch.setColor(DEFAULT_COLOR);
 		en.getImage().flip(false, true);
 	}
-	
+
 	/**
 	 * The color of given character's reflection in the water.
 	 */
@@ -363,13 +375,13 @@ public class GraphicsHandler {
 	 * Draws watercolor overlay on top of map.
 	 */
 	public void drawOverlay(){
-		beginOverlay();
+		beginOverlay(0.0f);
 		batch.setProjectionMatrix(worldCam.combined);
 		final int overlayMultiplier = 1;
 		for (int ii = 0; ii < overlayMultiplier; ++ii){
 			drawByTiles(overlay, false);
 		}
-		endOverlay();
+		endOverlay(batch, true);
 	}
 
 	/**
@@ -396,7 +408,7 @@ public class GraphicsHandler {
 	/**
 	 * Draws an item menu in a bunch of nice little boxes.
 	 */
-	void drawItems(AbstractMenu menu, boolean price, boolean enterToFinish){
+	void drawItems(AbstractMenu menu, boolean price){
 		batch.setProjectionMatrix(centerCam.combined);
 		int ii = 0;
 		int cursor = menu.getCursor();
@@ -405,17 +417,18 @@ public class GraphicsHandler {
 		for (MenuOption button: menu.getList()){
 			if (range.x <= ii && range.y > ii){
 				ItemDescription desc = (ItemDescription)button.getOutput();
+				boolean selected = button == menu.getActiveButton();
 				if (price){
 					if (desc.tooExpensive()){
 						batch.setColor(INVALID_COLOR);
 					}
 				}
-				if (button == menu.getActiveButton()){
-					setSelectColor();
-				}
 				final int dim = 2;
 				Vector2 position = menu.getButtonPosition(ii - stipend);
-				drawTextboxTiles((int)position.x, (int)position.y, dim, dim, 0);
+				if (selected){
+					setSelectColor();
+				}
+				drawTextboxTiles((int)position.x, (int)position.y, dim, dim, 0, selected);
 				batch.begin();
 				batch.draw(
 						desc.icon, 
@@ -442,12 +455,10 @@ public class GraphicsHandler {
 			batch.draw(arrowUp, center, FrameEngine.TILE * 8.875f);
 		}
 		batch.end();
-		if (enterToFinish){
-			drawText("Press ENTER to finish.", 
-					new Vector2(Gdx.graphics.getWidth()/(1.8f/ZOOM), FrameEngine.TILE), 
-					new Vector2(8, 2), 
-					true);
-		}
+		drawText("Press ENTER to finish.", 
+				new Vector2(Gdx.graphics.getWidth()/(1.8f/ZOOM), FrameEngine.TILE), 
+				new Vector2(8, 2), 
+				true);
 		drawItemDescription(menu, price);
 	}
 
@@ -510,14 +521,18 @@ public class GraphicsHandler {
 	 * Updates the camera in the overworld to follow the player.
 	 */
 	private void updateWorldCam(){
+		offset = offset.lerp(offsetTarget, 0.06f);
+		final float min = 0.1f;
+		if (Math.abs(offset.x) < min) offset.x = 0;
+		if (Math.abs(offset.y) < min) offset.y = 0;
 		worldCam.position.set(FrameEngine.getPlayer().getCenter(), 0);
 		worldCam.position.x = MathUtils.clamp(
-				worldCam.position.x, 
+				worldCam.position.x + offset.x, 
 				Gdx.graphics.getWidth()/(2/ZOOM), 
 				FrameEngine.getArea().mapWidth - Gdx.graphics.getWidth()/(2/ZOOM)
 				);
 		worldCam.position.y = MathUtils.clamp(
-				worldCam.position.y, 
+				worldCam.position.y + offset.y, 
 				Gdx.graphics.getHeight()/(2/ZOOM), 
 				FrameEngine.getArea().mapHeight - Gdx.graphics.getHeight()/(2/ZOOM)
 				);
@@ -529,6 +544,7 @@ public class GraphicsHandler {
 		reflectionCam.position.x = worldCam.position.x;
 		reflectionCam.position.y = worldCam.position.y + FrameEngine.TILE * 3;
 		reflectionCam.update();
+		offsetTarget.setZero();
 	}
 
 	/**
@@ -557,7 +573,7 @@ public class GraphicsHandler {
 		if (selected) {
 			setSelectColor();
 		}
-		drawTextboxTiles((int)position.x, (int)position.y, (int)size.x, (int)size.y, 0);
+		drawTextboxTiles((int)position.x, (int)position.y, (int)size.x, (int)size.y, 0, selected);
 		batch.setColor(DEFAULT_COLOR);
 		batch.begin();
 		GlyphLayout glyph = new GlyphLayout(textFont, text);
@@ -576,7 +592,7 @@ public class GraphicsHandler {
 			textFont.draw(
 					batch, spacedText, 
 					position.x + FrameEngine.TILE/2, 
-					position.y + (FrameEngine.TILE * (size.y - 0.5f)) 
+					position.y + (FrameEngine.TILE * (size.y - 0.5f)) + 2
 					);
 		}
 		batch.end();
@@ -619,21 +635,35 @@ public class GraphicsHandler {
 		drawText(
 				textbox.getDisplayedText(), 
 				textbox.getAllText(),
-				new Vector2(FrameEngine.TILE/2, FrameEngine.TILE/2),
-				new Vector2(x_tiles, y_tiles),
+				new Vector2(FrameEngine.TILE/2, FrameEngine.TILE/4),
+				new Vector2(.25f + x_tiles, y_tiles),
 				false,
 				false
 				);
+		InteractableEntity speaker = textbox.getSpeaker();
+		if (null != speaker && speaker instanceof NPC){
+			NPC npc = (NPC) speaker;
+			drawText(
+					npc.getName(),
+					npc.getName(),
+					new Vector2(FrameEngine.TILE/2, 3.25f * FrameEngine.TILE),
+					new Vector2(8, 1),
+					true,
+					false
+					);
+		}
 	}
 
 	/**
 	 * Draws the tiles underlying a textbox.
 	 */
-	protected void drawTextboxTiles(int position_x, int position_y, int x_tiles, int y_tiles, int center){
+	protected void drawTextboxTiles(int position_x, int position_y, 
+			int x_tiles, int y_tiles,
+			int center, boolean selected){
 		batch.begin();
 		for(int xx = 0; xx < x_tiles; ++xx){
 			for (int yy = 0; yy < y_tiles; ++yy){
-				TextureRegion tile = getProperTile(x_tiles, y_tiles, xx, yy);
+				TextureRegion tile = getProperTile(x_tiles, y_tiles, xx, yy, selected);
 				batch.draw(tile, 
 						position_x + (xx + center) * FrameEngine.TILE, 
 						position_y + yy * FrameEngine.TILE);
@@ -647,50 +677,71 @@ public class GraphicsHandler {
 	 * Draws texture over textbox.
 	 */
 	private void drawTextOverlay(int position_x, int position_y, int x_tiles, int y_tiles, int center){
-		beginOverlay();
+		beginOverlay(0.5f);
 		batch.draw(textboxOverlay, position_x, position_y, x_tiles * FrameEngine.TILE, y_tiles * FrameEngine.TILE);
-		endOverlay();
+		endOverlay(batch, true);
 	}
 
 	/**
 	 * Prepares batch for drawing an overlay.
 	 */
-	private void beginOverlay(){
+	private void beginOverlay(float trans){
+		//batch.setBlendFunction(GL20.GL_SRC_COLOR, GL20.GL_DST_ALPHA); // 0.5f alpha for best result
 		batch.setBlendFunction(GL20.GL_DST_COLOR, GL20.GL_SRC_ALPHA);
-		batch.setColor(1.0f, 1.0f, 1.0f, 0.25f);
+		float colorMod = 1.0f;
+		if (FrameEngine.inTransition()) colorMod = FrameEngine.getTransitionMod();
+		float r = MathUtils.clamp(colorMod, blackR, 1);
+		float g = MathUtils.clamp(colorMod, blackG, 1);
+		float b = MathUtils.clamp(colorMod, blackB, 1);
+		batch.setColor(r, g, b, trans);
 		batch.begin();
 	}
 
 	/**
 	 * Flushes overlay and returns batch to normal.
 	 */
-	private void endOverlay(){
-		batch.end();
-		batch.setColor(DEFAULT_COLOR);
-		batch.setBlendFunction(770, 771); // Changes blend function back to normal.
+	private void endOverlay(Batch batchToEnd, boolean end){
+		if (end) batchToEnd.end();
+		batchToEnd.setColor(DEFAULT_COLOR);
+		batchToEnd.setBlendFunction(770, 771); // Changes blend function back to normal.
 	}
 
 	/**
 	 * Gets the correct tile for the position in the textbox (e.g. upper right corner, left side...)
 	 */
-	private TextureRegion getProperTile(int x_tiles, int y_tiles, int xx, int yy){
+	private TextureRegion getProperTile(int x_tiles, int y_tiles, int xx, int yy, boolean selected){
 		TextureRegion tile;
-		boolean x_side = (xx == 0 || xx == x_tiles - 1);
-		boolean y_side = (yy == 0 || yy == y_tiles - 1);
-		if (x_side && y_side){
-			tile = textboxCorner;
-			tile.flip(xx != 0 ^ tile.isFlipX(), yy == 0 ^ tile.isFlipY());
-		}
-		else if (x_side){
-			tile = textboxSide;
-			tile.flip(xx != 0 ^ tile.isFlipX(), false);
-		}
-		else if (y_side){
-			tile = textboxTop;
-			tile.flip(false, yy == 0 ^ tile.isFlipY());
+		if (y_tiles == 1){
+			if (xx == 0){
+				tile = textboxBegin;
+				tile.flip(tile.isFlipX(), false);
+			}
+			else if (xx == x_tiles-1){
+				tile = textboxBegin;
+				tile.flip(!tile.isFlipX(), false);
+			}
+			else{
+				tile = textboxMid;
+			}
 		}
 		else{
-			return textboxCenter;
+			boolean x_side = (xx == 0 || xx == x_tiles - 1);
+			boolean y_side = (yy == 0 || yy == y_tiles - 1);
+			if (x_side && y_side){
+				tile = selected ? selectedTextboxCorner : textboxCorner;
+				tile.flip(xx != 0 ^ tile.isFlipX(), yy == 0 ^ tile.isFlipY());
+			}
+			else if (x_side){
+				tile = textboxSide;
+				tile.flip(xx != 0 ^ tile.isFlipX(), false);
+			}
+			else if (y_side){
+				tile = textboxTop;
+				tile.flip(false, yy == 0 ^ tile.isFlipY());
+			}
+			else{
+				return textboxCenter;
+			}
 		}
 		return tile;
 	}
@@ -741,7 +792,7 @@ public class GraphicsHandler {
 		}
 	}
 
-	public void drawMainMenu() {
+	public void drawTitle() {
 		drawOverworld();
 		batch.begin();
 		batch.draw(title, 
@@ -749,6 +800,12 @@ public class GraphicsHandler {
 				FrameEngine.getPlayer().getPosition().y + (FrameEngine.TILE * 2),
 				title.getRegionWidth() * 2,
 				title.getRegionHeight() * 2
+				);
+		batch.draw(logo, 
+				FrameEngine.getPlayer().getPosition().x - (FrameEngine.TILE * 7f),
+				FrameEngine.getPlayer().getPosition().y + (FrameEngine.TILE * 6),
+				logo.getRegionWidth(),
+				logo.getRegionHeight()
 				);
 		batch.end();
 	}
@@ -791,6 +848,10 @@ public class GraphicsHandler {
 		final float posY = (Math.min(FrameEngine.getTime(), FrameEngine.CREDITS_END_TIME-600) * creditSpeed);
 		debugFont.draw(batch, credits, posX, posY);
 		batch.end();
+	}
+
+	public static void setOffset(Vector2 change) {
+		offsetTarget.set(change);
 	}
 
 }

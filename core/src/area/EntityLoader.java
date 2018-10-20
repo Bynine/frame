@@ -8,9 +8,11 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
+import entity.Answer;
 import entity.Artist;
 import entity.AudioLocation;
 import entity.Bird;
+import entity.CameraTrigger;
 import entity.Currency;
 import entity.Description;
 import entity.DialogueDescription;
@@ -38,6 +40,8 @@ import entity.Portal;
 import entity.Portal.Direction;
 import entity.PortalHole;
 import entity.Pumpkin;
+import entity.QuestionTrigger;
+import entity.SaleSign;
 import entity.ShrineDoor;
 import entity.Stand;
 import entity.SummonObject;
@@ -260,6 +264,20 @@ public class EntityLoader {
 			if (FrameEngine.getSaveFile().getFlag("WORLD_REWARD")){
 				entities.add(new Painting(x, y, text, id));
 			}
+		} break;
+		case "camera_trigger":{
+			int yChange = Math.round(Float.parseFloat(properties.get("Y_OFFSET", String.class)));
+			entities.add(new CameraTrigger(x, y, width, height, yChange));
+		} break;
+		case "answer":{
+			String id = properties.get("ID", String.class);
+			entities.add(new Answer(x, y, width, height, id));
+		} break;
+		case "sale_sign":{
+			entities.add(new SaleSign(x, y));
+		} break;
+		case "question_trigger":{
+			entities.add(new QuestionTrigger(x, y, width, height));
 		} break;
 		default: {
 			FrameEngine.logger.log( Level.WARNING, 

@@ -1,13 +1,14 @@
 package entity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
+import main.Animator;
 import main.FrameEngine;
 import timer.DurationTimer;
 
@@ -16,7 +17,7 @@ import timer.DurationTimer;
  */
 public class Emitter extends ImmobileEntity{
 	
-	private final TextureRegion graphicImage;
+	private final ArrayList<Animation<TextureRegion>> graphicAnimation;
 	private final DurationTimer intervalTimer;
 	private final int duration;
 	private final HashSet<Graphic> graphics = new HashSet<>();
@@ -24,9 +25,8 @@ public class Emitter extends ImmobileEntity{
 
 	public Emitter(float x, float y, int interval, int duration, String graphicPath) {
 		super(x, y);
-		graphicImage = new TextureRegion(new Texture(Gdx.files.internal(
-				"sprites/graphics/" + graphicPath + ".png"
-				)));
+		graphicAnimation = 
+				Animator.createAnimation(30, "sprites/graphics/" + graphicPath + ".png", 2, 1);
 		graphicName = graphicPath;
 		this.duration = duration;
 		intervalTimer = new DurationTimer(interval);
@@ -68,7 +68,7 @@ public class Emitter extends ImmobileEntity{
 	}
 	
 	public TextureRegion getGraphicImage(){
-		return graphicImage;
+		return graphicAnimation.get(0).getKeyFrame(FrameEngine.getTime());
 	}
 	
 	@Override
@@ -78,7 +78,7 @@ public class Emitter extends ImmobileEntity{
 
 	@Override
 	public void dispose() {
-		graphicImage.getTexture().dispose();
+		Animator.freeAnimation(graphicAnimation);
 	}
 	
 	/**

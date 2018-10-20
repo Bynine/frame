@@ -37,6 +37,10 @@ public class Player extends Entity{
 			Animator.createAnimation(30, "sprites/player/idle_slope.png", 2, 3);
 	private static final ArrayList<Animation<TextureRegion>> explain = 
 			Animator.createAnimation(30, "sprites/player/talking.png", 2, 3);
+	private static final ArrayList<Animation<TextureRegion>> dig = 
+			Animator.createAnimation(30, "sprites/player/dig.png", 2, 3);
+	private static final ArrayList<Animation<TextureRegion>> water = 
+			Animator.createAnimation(30, "sprites/player/water.png", 2, 3);
 	private static final TextureRegion get = 
 			new TextureRegion(new Texture(Gdx.files.internal("sprites/player/get.png")));
 	public static final TextureRegion ripple = 
@@ -66,7 +70,7 @@ public class Player extends Entity{
 	}
 
 	private void updateInputs(){
-		if (!FrameEngine.playerInput().isZero()){
+		if (null != FrameEngine.playerInput()){
 			input.set(FrameEngine.playerInput());
 		}
 		else if (!walkRightTimer.timeUp()){
@@ -159,6 +163,12 @@ public class Player extends Entity{
 		} break;
 		case EXPLAIN:{
 			image = explain.get(dir).getKeyFrame(FrameEngine.getTime());
+		} break;
+		case DIG:{
+			image = dig.get(dir).getKeyFrame(FrameEngine.getTime()); 
+		} break;
+		case WATER:{
+			image = water.get(dir).getKeyFrame(FrameEngine.getTime()); 
 		} break;
 		default: {
 			image = get;

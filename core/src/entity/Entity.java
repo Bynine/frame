@@ -127,16 +127,16 @@ public abstract class Entity {
 	 * Checks for collision in horizontal, vertical, then diagonal directions.
 	 */
 	protected void handleCollision(){
-		handle_collision_helper(true, false);	// Horizontal
-		handle_collision_helper(false, true);	// Vertical
-		handle_collision_helper(true, true);	// Diagonal
+		handleCollisionHelper(true, false);	// Horizontal
+		handleCollisionHelper(false, true);	// Vertical
+		handleCollisionHelper(true, true);	// Diagonal
 	}
 
 	/**
 	 * Compares all rectangles to future position to see if it collides.
 	 * If it does, stops that velocity.
 	 */
-	private void handle_collision_helper(boolean check_x, boolean check_y){
+	private void handleCollisionHelper(boolean check_x, boolean check_y){
 		Rectangle temp = new Rectangle(hitbox);
 		if (check_x) temp.x += (FrameEngine.elapsedTime) * velocity.x;
 		if (check_y) temp.y += (FrameEngine.elapsedTime) * velocity.y;
@@ -145,12 +145,12 @@ public abstract class Entity {
 				velocity.x *= check_x ? 0 : contact_friction;
 				velocity.y *= check_y ? 0 : contact_friction;
 				if (!check_x && check_y){
-					if (velocity.y <= 0) corner_checker(1, true, temp, collider);
-					if (velocity.y >= 0) corner_checker(-1, true, temp, collider);
+					if (velocity.y <= 0) cornerChecker(1, true, temp, collider);
+					if (velocity.y >= 0) cornerChecker(-1, true, temp, collider);
 				}
 				if (check_x && !check_y){
-					if (velocity.x <= 0) corner_checker(1, false, temp, collider);
-					if (velocity.x >= 0) corner_checker(-1, false, temp, collider);
+					if (velocity.x <= 0) cornerChecker(1, false, temp, collider);
+					if (velocity.x >= 0) cornerChecker(-1, false, temp, collider);
 				}
 			}
 		}
@@ -159,7 +159,7 @@ public abstract class Entity {
 	/**
 	 * Checks a corner. If the player is close enough to it, moves toward it.
 	 */
-	private void corner_checker(int dir, boolean is_x, Rectangle temp, Rectangle collider){
+	private void cornerChecker(int dir, boolean is_x, Rectangle temp, Rectangle collider){
 		final int distance_check = 16;
 		final float speed = dir * corner_acceleration; // Doesn't check for elapsed time on purpose.
 		Rectangle temp2 = new Rectangle(temp);

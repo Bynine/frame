@@ -42,6 +42,11 @@ public class AudioHandler {
 	 * Counts up each sound in sound_disposal.
 	 */
 	public static void update(){
+		if (FrameEngine.inTransition()) {
+			currAudio.setVolume(VOLUME * 
+					MathUtils.clamp(FrameEngine.getTransitionMod(), 0.25f, 1));
+		}
+		else currAudio.setVolume(VOLUME);
 		Iterator<DurationTimer> sound_iter = soundDisposal.keySet().iterator();
 		while (sound_iter.hasNext()){
 			DurationTimer timer = sound_iter.next();
@@ -65,9 +70,10 @@ public class AudioHandler {
 			currAudioName = audioName;
 			if (null != currAudio){
 				currAudio.stop();
+				currAudio.dispose();
 			}
 			currAudio = Gdx.audio.newMusic(Gdx.files.internal(audioName));
-			currAudio.setVolume(VOLUME);
+			currAudio.setVolume(VOLUME * FrameEngine.getTransitionMod());
 			currAudio.setLooping(true);
 			currAudio.play();
 		}
@@ -77,13 +83,17 @@ public class AudioHandler {
 	 * Plays a preloaded sound. The calling class needs to dispose the sound of its own accord.
 	 */
 	public static long playSound(Sound sound){
-		final float pitchDisparity = 20.0f;
+		final float pitchDisparity = 16.0f;
 		float pitch = (1.0f - 0.5f/pitchDisparity) + (float) (Math.random()/pitchDisparity);
-		return playPitchedSound(sound, pitch);
+		return playPitchedSound(sound, pitch, 1);
 	}
 	
-	public static long playPitchedSound(Sound sound, float pitch){
-		return sound.play(VOLUME, pitch, 0);
+	public static long playVolumeSound(Sound sound, float volume){
+		return playPitchedSound(sound, 1, volume);
+	}
+	
+	public static long playPitchedSound(Sound sound, float pitch, float volume){
+		return sound.play(volume * VOLUME, pitch, 0);
 	}
 
 	public static void playPositionalSound(Entity owner, Sound sound) {

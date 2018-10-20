@@ -22,12 +22,12 @@ public class DebugMenu extends AbstractMenu{
 	 * Loads all map names but the headers.
 	 */
 	public DebugMenu(){
-		perColumn = 6;
+		perColumn = 10;
 		String[] mapData = new TSVReader().loadAllData(TSVReader.MAP_URL);
 		for (String data: mapData){	
 			if (!data.split(TSVReader.split)[0].matches("\\s")){
 				mapIDs.add(new MenuOption(
-						4, 2,
+						4, 1,
 						data.split(TSVReader.split)[0],
 						data.split(TSVReader.split)[0]
 						));

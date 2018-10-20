@@ -20,7 +20,8 @@ public class Textbox {
 	private int textPos = 0;
 	private final ArrayList<Object> characters = new ArrayList<>();
 	private Sound text_sound;
-	private InteractableEntity speaker;
+	private InteractableEntity speaker = null;
+	private boolean soft = false;
 	/**
 	 * Whether to animate player talking.
 	 */
@@ -114,7 +115,7 @@ public class Textbox {
 					talkTime ++;
 				}
 				if (talkTime % talkSpeed == (talkSpeed-1)){
-					AudioHandler.playSound(text_sound);
+					AudioHandler.playVolumeSound(text_sound, soft ? 0.25f : 1f);
 					talkTime = 0;
 				}
 			}
@@ -123,11 +124,20 @@ public class Textbox {
 	}
 
 	private void handleCommand(Command command){
+		if (command.getID().equals("DIG_ANIM")){
+			Player.setImageState(Player.ImageState.DIG);
+		}
+		if (command.getID().equals("WATER_ANIM")){
+			Player.setImageState(Player.ImageState.WATER);
+		}
 		if (null != speaker){
 			speaker.getMessage(command.getID());
 		}
 		if (command.getID().equals("PAUSE")){
 			textTimer.change(-24);
+		}
+		else if (command.getID().equals("SOFT")){
+			soft = true;
 		}
 		else if (command.getID().startsWith("SPEAKER")){
 			String[] speakerData = command.getID().split("=");
@@ -212,15 +222,15 @@ public class Textbox {
 
 	private String getText(int length){
 		StringBuilder text = new StringBuilder();
-		if (null != speaker && speaker instanceof NPC) {
-			boolean name = true;
-			Object firstChar = characters.get(0);
-			if (firstChar instanceof Command){
-				Command firstCommand = (Command)firstChar;
-				name = (!firstCommand.getID().equals("NOSPEAKER"));
-			}
-			if (name) text.append(((NPC)speaker).getName() + ": ");
-		}
+//		if (null != speaker && speaker instanceof NPC) {
+//			boolean name = true;
+//			Object firstChar = characters.get(0);
+//			if (firstChar instanceof Command){
+//				Command firstCommand = (Command)firstChar;
+//				name = (!firstCommand.getID().equals("NOSPEAKER"));
+//			}
+//			if (name) text.append(((NPC)speaker).getName() + ": ");
+//		}
 		for (int ii = 0; ii < length; ++ii){
 			Object obj = characters.get(ii);
 			if (obj instanceof Character){
@@ -228,6 +238,10 @@ public class Textbox {
 			}
 		}
 		return text.toString();
+	}
+
+	public InteractableEntity getSpeaker() {
+		return speaker;
 	}
 
 }

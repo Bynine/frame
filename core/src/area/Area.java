@@ -3,6 +3,7 @@ package area;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -13,7 +14,6 @@ import com.badlogic.gdx.math.Vector2;
 import entity.Entity;
 import main.TSVReader;
 import main.FrameEngine;
-import main.AudioHandler;
 
 /**
  * Contains all info about a particular overworld area.
@@ -30,11 +30,13 @@ public class Area {
 	public final int mapHeight;
 	public final boolean cameraFixed, sky;
 	public final String overlayString, id;
+	public final Color lightColor;
+	public final String music;
 
 	public Area(String id){
 		this.id = id;
 		String[] data = new TSVReader().loadDataByID(id, TSVReader.MAP_URL);
-		AudioHandler.startNewAudio("music/" + data[2] + ".ogg");
+		music = "music/" + data[2] + ".ogg";
 		cameraFixed = Boolean.parseBoolean(data[3].toLowerCase());
 		overlayString = data[4].toLowerCase();
 		String[] locationData = data[5].split("&");
@@ -46,10 +48,21 @@ public class Area {
 		map = tmx_map_loader.load("maps/" + id + ".tmx");
 		mapWidth  = getMap().getProperties().get("width",  Integer.class) * FrameEngine.TILE;
 		mapHeight = getMap().getProperties().get("height", Integer.class) * FrameEngine.TILE;
+		lightColor = getColor(data[7]);
 		
 		setCollision();
 		setMapSlopes();
 		setTerrainObjects();
+	}
+	
+	private Color getColor(String name){
+		switch (name){
+		case "WARM": return new Color(243f/255f, 190f/255f, 120f/255f, 0.48f);
+		case "GREY": return new Color(185f/255f, 188f/255f, 189f/255f, 0.54f);
+		case "COLD": return new Color(183f/255f, 229f/255f, 213f/255f, 0.66f);
+		default: return new Color(1, 1, 1, 0.6f);
+		}
+		
 	}
 	
 	/**

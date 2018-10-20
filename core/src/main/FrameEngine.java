@@ -32,6 +32,7 @@ public class FrameEngine extends ApplicationAdapter {
 	NOMAIN	= true	&& DEBUG,
 	INVIS	= false	&& DEBUG,
 	MAPS	= false && DEBUG,
+	TREASURE= false && DEBUG,
 	SAVE	= false	|| !DEBUG;
 
 	private static Player player;
@@ -46,14 +47,18 @@ public class FrameEngine extends ApplicationAdapter {
 	private static ProgressionHandler progressionHandler;
 	private static Inventory inventory;
 	private static MainMenu mainMenu;
+	private static SaveConfirmationMenu saveConfirmationMenu;
 	private static ShopMenu shopMenu;
 	private static PauseMenu pauseMenu;
 	private static AnswersMenu answersMenu;
 	private static ItemDescription currentThing = null;
 	private static String givenItemID = "";
+	public static final float TRANSITION_TIME = 45;
+	public static final float TRANSITION_CHANGE_TIME = 15;
+	public static final float TRANSITION_END_TIME = TRANSITION_TIME - TRANSITION_CHANGE_TIME;
 	private static Timer 
 	time = new Timer(0),
-	transition = new Timer(20);
+	transition = new Timer((int)TRANSITION_TIME);
 	private static ArrayList<Timer> timers = new ArrayList<Timer>(Arrays.asList(
 			time, transition
 			));
@@ -66,6 +71,7 @@ public class FrameEngine extends ApplicationAdapter {
 
 	public static final Vector2 resolution = new Vector2(TILE * 36, TILE * 24);
 	public static final Vector2 newPosition = new Vector2(TILE * 32, TILE * 32);
+	public static Direction newDirection = Direction.ANY;
 	public static float elapsedTime = 0;
 
 	@Override
@@ -77,6 +83,7 @@ public class FrameEngine extends ApplicationAdapter {
 		saveFile = new SaveFile(LOG);
 		newPosition.set(saveFile.startPosition);
 		mainMenu = new MainMenu(saveFile.exists());
+		saveConfirmationMenu = new SaveConfirmationMenu();
 		shopMenu = new ShopMenu();
 		pauseMenu = new PauseMenu();
 		fpsLogger = new FPSLogger();
@@ -88,7 +95,6 @@ public class FrameEngine extends ApplicationAdapter {
 		progressionHandler = new ProgressionHandler();
 		inputHandler.initialize();
 		if (!NOMAIN) {
-			EntityHandler.addEntity(player);
 			startMainMenu(saveFile.exists());
 		}
 		else {
@@ -138,6 +144,9 @@ public class FrameEngine extends ApplicationAdapter {
 		case CREDITS:{
 			updateCredits();
 		} break;
+		case SAVECONFIRM:{
+			updateSaveConfirm();
+		} break;
 		}
 
 		if (currArea != null) graphicsHandler.drawOverlay();
@@ -153,7 +162,7 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	private void updateOverworld(){
-		if (newArea != null) {
+		if (newArea != null && !transitionStart()) {
 			changeArea();
 		}
 		if (canUpdateEntities()){
@@ -163,7 +172,7 @@ public class FrameEngine extends ApplicationAdapter {
 		else{
 			EntityHandler.updateImages();
 		}
-		if (inTransition()){
+		if (!transitionStart() && !transitionEnd() && inTransition()){
 			graphicsHandler.drawTransition();
 		}
 		else{
@@ -182,7 +191,7 @@ public class FrameEngine extends ApplicationAdapter {
 			}
 		}
 		if (inventoryRequest){
-			graphicsHandler.drawItems(inventory, false, false);
+			graphicsHandler.drawItems(inventory, false);
 			inventory.update();
 		}
 	}
@@ -200,42 +209,62 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	private void updateMain(){
-		graphicsHandler.drawMainMenu();
-		playerWalk(true);
+		graphicsHandler.drawTitle();
+		playerWalk(Walk.RIGHT);
 		graphicsHandler.drawMenu(mainMenu);
 		mainMenu.update();
 	}
 
 	private void updateShop(){
 		graphicsHandler.drawOverworld();
-		graphicsHandler.drawItems(shopMenu, true, true);
+		graphicsHandler.drawItems(shopMenu, true);
 		shopMenu.update();
 	}
 
 	private void updateInventory(){
 		graphicsHandler.drawOverworld();
-		graphicsHandler.drawItems(inventory, false, true);
+		graphicsHandler.drawItems(inventory, false);
 		inventory.update();
 	}
-	
+
 	public static final int CREDITS_END_TIME = 3000;
 
 	private void updateCredits(){
 		graphicsHandler.drawCredits();
-		playerWalk(false);
+		playerWalk(Walk.LEFT);
 		if (time.getCounter() > CREDITS_END_TIME){
 			startMainMenu(true);
 		}
 	}
 
-	private void playerWalk(boolean right){
+	private void updateSaveConfirm(){
+		graphicsHandler.drawTitle();
+		playerWalk(Walk.NONE);
+		graphicsHandler.drawMenu(saveConfirmationMenu);
+		saveConfirmationMenu.update();
+	}
+
+	static float positionX = 0;
+
+	private void playerWalk(Walk walk){
 		EntityHandler.update();
-		float positionX;
-		if (right) positionX = 
-				currArea.mapWidth/4 + ((2 * time.getCounter()) % currArea.mapWidth/2);
-		else positionX = 
-				(3*currArea.mapWidth/4) - ((2 * time.getCounter()) % currArea.mapWidth/2);
+		switch(walk){
+		case LEFT: {
+			positionX = (3*currArea.mapWidth/4) - ((2 * time.getCounter()) % currArea.mapWidth/2);
+		} break;
+		case RIGHT: {
+			positionX = currArea.mapWidth/4 + ((2 * time.getCounter()) % currArea.mapWidth/2);
+		} break;
+		case NONE: {
+			time.countDown();
+		}
+		}
+
 		player.getPosition().set(positionX, TILE * 4.5f);
+	}
+
+	enum Walk{
+		LEFT, RIGHT, NONE
 	}
 
 	/**
@@ -246,6 +275,11 @@ public class FrameEngine extends ApplicationAdapter {
 			if (gameState == GameState.PAUSED){
 				gameState = GameState.OVERWORLD;
 				AudioHandler.playSound(AbstractMenu.stopCursor);
+			}
+			else if (inventoryRequest){
+				inventoryRequest = false;
+				dialogueTree = null;
+				gameState = GameState.OVERWORLD;
 			}
 			else if (gameState == GameState.INVENTORY){
 				gameState = GameState.PAUSED;
@@ -319,7 +353,7 @@ public class FrameEngine extends ApplicationAdapter {
 	 */
 	public static void initiateAreaChange(String area_id, Vector2 position, Direction direction) {
 		initiateAreaChangeHelper(area_id);
-		player.setDirection(direction);
+		newDirection = direction;
 		newPosition.set(position);
 	}
 
@@ -337,6 +371,7 @@ public class FrameEngine extends ApplicationAdapter {
 	private static void initiateAreaChangeHelper(String area_id){
 		newArea = new Area(area_id);
 		gameState = GameState.OVERWORLD;
+		transition.reset();
 	}
 
 	/**
@@ -346,14 +381,18 @@ public class FrameEngine extends ApplicationAdapter {
 		if (null != currArea) currArea.dispose();
 		currArea = newArea;
 		newArea = null;
+		QuestionHandler.changeArea(currArea);
+		AudioHandler.startNewAudio(currArea.music);
 		player.getPosition().set(newPosition.x, (currArea.mapHeight) - (newPosition.y));
+		player.update(); // To avoid triggering portals twice
 		player.getVelocity().setZero();
 		EntityHandler.dispose();
 		AudioHandler.clearAudioSources();
 		EntityHandler.initializeAreaEntities(currArea);
 		graphicsHandler.startArea();
-		transition.reset();
 		time.reset();
+		player.setDirection(newDirection);
+		newDirection = Direction.ANY;
 	}
 
 	/**
@@ -389,10 +428,22 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	public static void startMainMenu(boolean exists) {
-		if (exists) mainMenu.open();
-		gameState = GameState.MAIN;
-		newArea = new Area("PATH");
-		changeArea();
+		if (exists) {
+			mainMenu = new MainMenu(true);
+			mainMenu.open();
+		}
+		if (gameState != GameState.SAVECONFIRM){
+			gameState = GameState.MAIN;
+			newArea = new Area("PATH");
+			changeArea();
+		}
+		else{
+			gameState = GameState.MAIN;
+		}
+	}
+
+	public static void startSaveConfirmationMenu() {
+		gameState = GameState.SAVECONFIRM;
 	}
 
 	public static void startInventory(){
@@ -489,7 +540,10 @@ public class FrameEngine extends ApplicationAdapter {
 		else if (gameState == GameState.MAIN){
 			return new Vector2(1, 0);
 		}
-		return Vector2.Zero;
+		else if (gameState == GameState.SAVECONFIRM){
+			return Vector2.Zero;
+		}
+		return null;
 	}
 
 	public static InputHandler getInputHandler(){
@@ -563,7 +617,7 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	public enum GameState{
-		OVERWORLD, PAUSED, DEBUG, MAIN, SHOP, INVENTORY, CREDITS
+		OVERWORLD, PAUSED, DEBUG, MAIN, SHOP, INVENTORY, CREDITS, SAVECONFIRM
 	}
 
 	public static void setGivenItemID(String newItemID){
@@ -577,11 +631,34 @@ public class FrameEngine extends ApplicationAdapter {
 	public static void setCurrentThing(String thing){
 		if (null != currentThing) currentThing.dispose();
 		currentThing = new ItemDescription(thing);
-
 	}
 
 	public static ItemDescription getCurrentThing(){
 		return currentThing;
+	}
+
+	public static boolean transitionStart(){
+		return !transition.timeUp() && 
+				(transition.getCounter() < TRANSITION_CHANGE_TIME);
+	}
+
+	public static boolean transitionEnd(){
+		return !transition.timeUp() && 
+				((transition.getEndTime() - transition.getCounter()) < TRANSITION_CHANGE_TIME);
+	}
+
+	public static int transitionTime(){
+		return transition.getCounter();
+	}
+
+	public static float getTransitionMod(){
+		if (transitionStart()){
+			return 1f - transitionTime() / TRANSITION_CHANGE_TIME;
+		}
+		else if (transitionEnd()){
+			return (transitionTime() - TRANSITION_END_TIME)/TRANSITION_CHANGE_TIME;
+		}
+		return 0;
 	}
 
 }
