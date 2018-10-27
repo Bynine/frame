@@ -11,7 +11,7 @@ CAVERN	?	cove	FALSE	twilit	12&13	TRUE	WARM
 ORCHARD	?	night	FALSE	twilit	32&55	TRUE	WARM
 CAFE	?	nightinside	TRUE	bright	14&8	TRUE	WARM
 TAILOR	?	nightinside	TRUE	bright	14&8	TRUE	WARM
-HOME	?	nightinside	TRUE	bright	14&8	TRUE	WARM
+HOME	?	nightinside	TRUE	bright	9&12	TRUE	WARM
 
 SPRING	?	forest	FALSE	bright	9&53	TRUE	WARM
 FORT	?	inside	TRUE	dim	8&8	TRUE	GREY

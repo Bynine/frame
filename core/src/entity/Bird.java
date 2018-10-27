@@ -48,7 +48,7 @@ public class Bird extends Critter {
 		if (flying){
 			velocity.x += (flightDir * acceleration/1.5f) + (flightDir * 0.6) * FrameEngine.elapsedTime;
 			zPosition += acceleration * Math.pow(reactTimer.getCounter(), 0.45) * FrameEngine.elapsedTime;
-			if (zPosition > 48) layer = Layer.FRONT;
+			if (zPosition > 48) layer = Layer.OVERHEAD;
 		}
 		else{
 			if (wanderTimer.timeUp()){

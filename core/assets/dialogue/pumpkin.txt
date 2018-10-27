@@ -29,8 +29,8 @@ All I know is this. "One good turn deserves another"! You get what I mean, hon?
 &CAFE_REWARD
 [ANIM_2]Thanks again for your help, hon.
 Say, did you see a painter anywhere around? He's a good friend of mine.
-He seems to be very frustrated recently.[ANIM_1]But I can't quite understand why...
+He seems to be very frustrated recently.[ANIM_1] But I can't quite understand why...[DEFAULTANIM]
 &CAFE_REWARD,WORLD_REWARD
 [ANIM_2]Thanks again for your help, hon. You're a real life saver!
 Now I can relax and get back to running the cafe smoothly.
-And look at that beautiful painting we got! [ANIM_6]My friend did that, you know!
+And look at that beautiful painting we got! [ANIM_6]My friend did that, you know![DEFAULTANIM]

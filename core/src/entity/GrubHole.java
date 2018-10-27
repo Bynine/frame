@@ -2,22 +2,20 @@ package entity;
 
 import java.util.HashMap;
 
-import entity.Portal.Direction;
 import main.EntityHandler;
 import main.FrameEngine;
 import text.DialogueTree;
 
-public class GrubHole extends PortalHole {
+public class GrubHole extends Door {
 
 	private boolean grub1, grub2, grub3 = false;
 
 	public GrubHole(float x, float y, String flag, String destination, double destX, double destY) {
-		super(x, y, flag, destination, destX, destY, Direction.UP);
-		opened = true;
+		super(x, y, destination, destX, destY);
 	}
 
 	@Override
-	protected void enter(){
+	public void interact(){
 		grub1 = checkGrub(1);
 		grub2 = checkGrub(2);
 		grub3 = checkGrub(3);
@@ -36,7 +34,7 @@ public class GrubHole extends PortalHole {
 			}}));
 		}
 		else{
-			super.enter();
+			super.interact();
 		}
 	}
 
@@ -52,6 +50,9 @@ public class GrubHole extends PortalHole {
 	@Override
 	public void getMessage(String message){
 		super.getMessage(message);
+		if (message.equalsIgnoreCase("ENTER")){
+			super.interact();
+		}
 		if (message.startsWith("JUMPIN")){
 			String daGrub = message.split("_")[1];
 			int dur = 30;

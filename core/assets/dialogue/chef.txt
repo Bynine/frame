@@ -1,0 +1,15 @@
+*TALK_CHEF
+Oh, I'm so sorry this place is such a mess... Those little rapscallions, you know...
+Please, make yourself at home! The stew is on, it should be done before too long.
+&TALK_CHEF
+Feel free to stay here. Our home is your home.
+Say, your clothes look kind of like those of that tall person's who's staying with us. Are you two related?
+&FOUND_GOAL
+*TALK_CHEF_FOUND_GOAL
+It came out great, don't you think? I feel like something happened while it was cooking...
+Like the world became a little better.
+&TALK_CHEF_FOUND_GOAL
+By the way, that tall person who was staying with us left.
+They said something about returning home.
+I hope their travels go well... and I hope staying here helped them out, even if just a bit.
+My stew has that effect on people, you know! Haha!

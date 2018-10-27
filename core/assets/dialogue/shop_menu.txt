@@ -10,7 +10,7 @@ Oh, just taking a look around? Well, feel free to stop by again any time!
 Care to buy -[TALK][PAUSE]...[NSPEED]Oh? What's that?
 Yokey... [PAUSE]now there's a name I haven't heard in a while. She was one of my best friends as a kid.
 I remember I would pretend to run a shop, selling stuff like pine cones and oak leaves...
-And she would always come over and pretend to buy things. Kids are silly, huh? Haha.
+And she would always come over and pretend to buy things. [ANIM_3]Kids are silly, huh? Haha.
 [ANIM_2][PAUSE]... I really miss her. She disappeared a while back. I never found out what happened.
 I hope wherever she is, she's doing all right.
 [ANIM_0]Oh! Sorry. Didn't mean to talk your ear off. Have a great day, my friend!

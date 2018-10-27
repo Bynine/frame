@@ -52,6 +52,7 @@ public class GraphicsHandler {
 	protected final OrthographicCamera 
 	worldCam = new OrthographicCamera(),
 	reflectionCam = new OrthographicCamera(),
+	lightReflectionCam = new OrthographicCamera(),
 	centerCam = new OrthographicCamera();
 	protected OrthogonalTiledMapRenderer renderer;
 	protected BitmapFont font, debugFont, warningFont, textFont;
@@ -59,6 +60,13 @@ public class GraphicsHandler {
 	public static final float ZOOM = 1.0f/2.0f;
 	private final EntityDepthSorter sorter = new EntityDepthSorter();
 	private static final TextureRegion 
+	treasure1Art = new TextureRegion(new Texture("art/treasure1.png")),
+	treasure2Art = new TextureRegion(new Texture("art/treasure2.png")),
+	treasure3Art = new TextureRegion(new Texture("art/treasure3.png")),
+	treasure4Art = new TextureRegion(new Texture("art/treasure4.png")),
+	treasure5Art = new TextureRegion(new Texture("art/treasure5.png")),
+	treasure6Art = new TextureRegion(new Texture("art/treasure5.png")),
+	secretArt = new TextureRegion(new Texture("art/secret.png")),
 	arrowUp = new TextureRegion(new Texture("sprites/gui/arrow_up.png")),
 	arrowDown = new TextureRegion(new Texture("sprites/gui/arrow_down.png")),
 	heart = new TextureRegion(new Texture("sprites/gui/heart.png")),
@@ -93,6 +101,8 @@ public class GraphicsHandler {
 		centerCam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		reflectionCam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		reflectionCam.zoom = ZOOM;
+		lightReflectionCam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		lightReflectionCam.zoom = ZOOM;
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/lato.ttf"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		parameter.size = 18;
@@ -133,10 +143,12 @@ public class GraphicsHandler {
 		ArrayList<Entity> backEntities = new ArrayList<Entity>();
 		ArrayList<Entity> normalEntities = new ArrayList<Entity>();
 		ArrayList<Entity> frontEntities = new ArrayList<Entity>();
+		ArrayList<Entity> overheadEntities = new ArrayList<Entity>();
 		for (Entity entity: EntityHandler.getEntities()){
 			if (entity.getLayer() == Entity.Layer.BACK) backEntities.add(entity);
 			if (entity.getLayer() == Entity.Layer.NORMAL) normalEntities.add(entity);
 			if (entity.getLayer() == Entity.Layer.FRONT) frontEntities.add(entity);
+			if (entity.getLayer() == Entity.Layer.OVERHEAD) frontEntities.add(entity);
 		}
 		if (FrameEngine.getArea().cameraFixed){
 			updateCameraFixed();
@@ -150,8 +162,10 @@ public class GraphicsHandler {
 		batch.setColor(DEFAULT_COLOR);
 		drawWater();
 		renderer.getBatch().setColor(getReflectionColor(DEFAULT_COLOR, 0.6f));
+		renderer.setView(lightReflectionCam);
+		renderer.render(new int[]{3});	// Reflection tiles
 		renderer.setView(reflectionCam);
-		renderer.render(new int[]{4});	// Reflection tiles
+		renderer.render(new int[]{4});
 		renderer.getBatch().setColor(DEFAULT_COLOR);
 		batch.setColor(DEFAULT_COLOR);
 		if (!FrameEngine.INVIS) drawWaterEntities(EntityHandler.getEntities());
@@ -162,14 +176,14 @@ public class GraphicsHandler {
 		if (!FrameEngine.INVIS) drawShadows(EntityHandler.getEntities());
 		if (!FrameEngine.INVIS) drawEntities(normalEntities);
 		renderer.render(new int[]{2}); 	// Foreground tiles.
+		if (!FrameEngine.INVIS) drawEntities(frontEntities);
 		renderer.getBatch().setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
 		renderer.getBatch().setColor(FrameEngine.getArea().lightColor);
 		renderer.render(new int[]{3});		// Light tiles.
 		endOverlay(renderer.getBatch(), false);
-		renderer.render(new int[]{4}); 	// Foreground tiles.
-		if (!FrameEngine.INVIS) drawEntities(frontEntities);
+		renderer.render(new int[]{4}); 	// Overhead tiles.
+		if (!FrameEngine.INVIS) drawEntities(overheadEntities);
 		handleEmitters();
-
 		if (FrameEngine.canControlPlayer() && FrameEngine.canInteract()) {
 			InteractableEntity ien = FrameEngine.getCurrentInteractable();
 			if (ien instanceof NPC) drawAbovePlayer(talkingBubble);
@@ -544,6 +558,9 @@ public class GraphicsHandler {
 		reflectionCam.position.x = worldCam.position.x;
 		reflectionCam.position.y = worldCam.position.y + FrameEngine.TILE * 3;
 		reflectionCam.update();
+		lightReflectionCam.position.x = worldCam.position.x;
+		lightReflectionCam.position.y = worldCam.position.y + FrameEngine.TILE * 1;
+		lightReflectionCam.update();
 		offsetTarget.setZero();
 	}
 
@@ -591,7 +608,7 @@ public class GraphicsHandler {
 		else{
 			textFont.draw(
 					batch, spacedText, 
-					position.x + FrameEngine.TILE/2, 
+					position.x + FrameEngine.TILE/2.8f, 
 					position.y + (FrameEngine.TILE * (size.y - 0.5f)) + 2
 					);
 		}
@@ -690,9 +707,9 @@ public class GraphicsHandler {
 		batch.setBlendFunction(GL20.GL_DST_COLOR, GL20.GL_SRC_ALPHA);
 		float colorMod = 1.0f;
 		if (FrameEngine.inTransition()) colorMod = FrameEngine.getTransitionMod();
-		float r = MathUtils.clamp(colorMod, blackR, 1);
-		float g = MathUtils.clamp(colorMod, blackG, 1);
-		float b = MathUtils.clamp(colorMod, blackB, 1);
+		float r = MathUtils.clamp(colorMod, 0, 1);
+		float g = MathUtils.clamp(colorMod, 0, 1);
+		float b = MathUtils.clamp(colorMod, 0, 1);
 		batch.setColor(r, g, b, trans);
 		batch.begin();
 	}
@@ -843,10 +860,30 @@ public class GraphicsHandler {
 	public void drawCredits() {
 		drawOverworld();
 		batch.setProjectionMatrix(centerCam.combined);
-		batch.begin();
+	
 		final float posX = FrameEngine.TILE/2;
 		final float posY = (Math.min(FrameEngine.getTime(), FrameEngine.CREDITS_END_TIME-600) * creditSpeed);
+		drawArt(0, posX, posY, treasure1Art, "FREBKING_REWARD");
+		drawArt(1, posX, posY, treasure3Art, "GRUB_REWARD");
+		drawArt(2, posX, posY, treasure4Art, "CAFE_REWARD");
+		drawArt(3, posX, posY, treasure5Art, "WORLD_REWARD");
+		drawArt(4, posX, posY, treasure6Art, "GHOST_REWARD");
+		drawArt(5, posX, posY, treasure2Art, "CURSE_REWARD");
+		drawArt(6, posX, posY, secretArt, "FOUND_GOAL");
+		batch.begin();
 		debugFont.draw(batch, credits, posX, posY);
+		batch.end();
+	}
+	
+	private void drawArt(int offset, float posX, float posY, TextureRegion art, String flag){
+		batch.begin();
+		if (!FrameEngine.getSaveFile().getFlag(flag)) {
+			batch.setColor(0.1f, 0.1f, 0.1f, 0.1f);
+		}
+		batch.draw(art, 
+				posX - FrameEngine.TILE/2, 
+				posY + ((offset+1) * -FrameEngine.TILE * 13.7f) - (FrameEngine.TILE * 10));
+		batch.setColor(DEFAULT_COLOR);
 		batch.end();
 	}
 

@@ -33,6 +33,7 @@ public class FrameEngine extends ApplicationAdapter {
 	INVIS	= false	&& DEBUG,
 	MAPS	= false && DEBUG,
 	TREASURE= false && DEBUG,
+	GHOST	= false	&& DEBUG,
 	SAVE	= false	|| !DEBUG;
 
 	private static Player player;
@@ -53,9 +54,9 @@ public class FrameEngine extends ApplicationAdapter {
 	private static AnswersMenu answersMenu;
 	private static ItemDescription currentThing = null;
 	private static String givenItemID = "";
-	public static final float TRANSITION_TIME = 45;
-	public static final float TRANSITION_CHANGE_TIME = 15;
-	public static final float TRANSITION_END_TIME = TRANSITION_TIME - TRANSITION_CHANGE_TIME;
+	private static final float TRANSITION_TIME = 45;
+	private static final float TRANSITION_CHANGE_TIME = 15;
+	private static final float TRANSITION_END_TIME = TRANSITION_TIME - TRANSITION_CHANGE_TIME;
 	private static Timer 
 	time = new Timer(0),
 	transition = new Timer((int)TRANSITION_TIME);
@@ -227,7 +228,7 @@ public class FrameEngine extends ApplicationAdapter {
 		inventory.update();
 	}
 
-	public static final int CREDITS_END_TIME = 3000;
+	public static final int CREDITS_END_TIME = 7400;
 
 	private void updateCredits(){
 		graphicsHandler.drawCredits();
@@ -424,7 +425,7 @@ public class FrameEngine extends ApplicationAdapter {
 			newPosition.set(saveFile.startPosition.scl(TILE));
 		}
 		changeArea();
-		transition.reset();
+		if (!DEBUG) transition.reset();
 	}
 
 	public static void startMainMenu(boolean exists) {

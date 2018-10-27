@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="323">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="324">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/shop.tsx"/>
  <tileset firstgid="265" source="tilesets/bookstore.tsx"/>
@@ -70,9 +70,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,524,525,526,527,528,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,532,533,534,535,536,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,540,541,542,543,544,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -130,7 +130,7 @@
   <object id="310" x="528" y="256" width="32" height="32"/>
   <object id="318" x="448" y="280" width="32" height="32"/>
  </objectgroup>
- <objectgroup id="8" name="ENTITIES" visible="0" opacity="0.64">
+ <objectgroup id="8" name="ENTITIES" opacity="0.64">
   <object id="290" name="portal" gid="6" x="448" y="416" width="32" height="32">
    <properties>
     <property name="DEST" value="ORCHARD,38,49"/>
@@ -277,6 +277,15 @@ You feel more awake just being near it.</property>
 She seems to be depicted a fair bit younger here...
 You decide to not bring that up.</property>
     <property name="TYPE" value="PAINTING"/>
+   </properties>
+  </object>
+  <object id="323" name="villager" gid="1" x="312" y="224" width="32" height="24">
+   <properties>
+    <property name="APPEAR" value="FOUND_GOAL,TALK_VILLAGER_SHY2"/>
+    <property name="DIALOGUE" value="villager_shy"/>
+    <property name="ID" value="VILLAGER"/>
+    <property name="IMAGE" value="villager"/>
+    <property name="TYPE" value="NPC"/>
    </properties>
   </object>
  </objectgroup>

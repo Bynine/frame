@@ -8,7 +8,7 @@ I'll bet you anything they've got some old books on what you're looking for.
 &INTRO_SHOPKEEPER
 Have you headed up northeast to the bookstore yet? I definitely recommend it.
 Unfortunately, I don't have anything to sell right now, but feel free to look around.
-And be sure to check back soon! I get new stuff in stock pretty often.
+[ANIM_3]And be sure to check back soon! [ANIM_0]I get new stuff in stock pretty often.
 &TALK_LIBRARIAN
 I don't have anything to sell right now, but feel free to look around.
-And be sure to check back soon! I get new stuff in stock pretty often.
+[ANIM_3]And be sure to check back soon! [ANIM_0]I get new stuff in stock pretty often.

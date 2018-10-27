@@ -1,0 +1,10 @@
+*TALK_KID1_BEFORE_SHRINE
+I've never seen you before! You smell weird! Hi!
+Everyone else is sleeping upstairs... I'm so bored...
+&TALK_KID1_BEFORE_SHRINE
+I hope they wake up soon...
+&ENTERED_SHRINE
+Oh man, I'm so hungry!
+Sooooo hungry!
+&FOUND_GOAL
+Yaaaaay! Stew!

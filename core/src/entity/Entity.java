@@ -55,7 +55,7 @@ public abstract class Entity {
 		updateVelocity();
 		setDirection();
 		limitVelocity();
-		if (collides) handleCollision();
+		if (collides && !FrameEngine.GHOST) handleCollision();
 		updatePosition();
 	}
 
@@ -313,7 +313,7 @@ public abstract class Entity {
 	}
 	
 	public static enum Layer{
-		BACK, NORMAL, FRONT
+		BACK, NORMAL, FRONT, OVERHEAD
 	}
 
 	public TextureRegion getShadow() {

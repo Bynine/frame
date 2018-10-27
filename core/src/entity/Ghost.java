@@ -16,7 +16,7 @@ public class Ghost extends ImmobileEntity {
 	public Ghost() {
 		super(FrameEngine.getPlayer().getPosition().x, FrameEngine.getPlayer().getPosition().y + 20);
 		collides = false;
-		layer = Layer.FRONT;
+		layer = Layer.OVERHEAD;
 	}
 	
 	@Override

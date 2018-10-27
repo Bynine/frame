@@ -40,13 +40,16 @@ public class Textbox {
 
 	public Textbox(String text, InteractableEntity speaker){
 		parseText(text);
-		if (speaker instanceof NPC){
-			text_sound = Gdx.audio.newSound(Gdx.files.internal("sfx/speech/" + speaker.getVoiceUrl() + ".wav"));
+		if (!text.startsWith("[NOSPEAKER]")){
+			if (speaker instanceof NPC){
+				text_sound = Gdx.audio.newSound(Gdx.files.internal("sfx/speech/" + speaker.getVoiceUrl() + ".wav"));
+			}
+			else{
+				text_sound = Gdx.audio.newSound(Gdx.files.internal("sfx/speech/blip.wav"));
+			}
+
+			this.speaker = speaker;
 		}
-		else{
-			text_sound = Gdx.audio.newSound(Gdx.files.internal("sfx/speech/blip.wav"));
-		}
-		this.speaker = speaker;
 	}
 
 	/**
@@ -89,7 +92,7 @@ public class Textbox {
 	private Object parseCommand(String commandID){
 		return new Command(commandID);
 	}
-	
+
 	private int talkTime = 0;
 	private final int talkSpeed = 6;
 
@@ -222,15 +225,15 @@ public class Textbox {
 
 	private String getText(int length){
 		StringBuilder text = new StringBuilder();
-//		if (null != speaker && speaker instanceof NPC) {
-//			boolean name = true;
-//			Object firstChar = characters.get(0);
-//			if (firstChar instanceof Command){
-//				Command firstCommand = (Command)firstChar;
-//				name = (!firstCommand.getID().equals("NOSPEAKER"));
-//			}
-//			if (name) text.append(((NPC)speaker).getName() + ": ");
-//		}
+		//		if (null != speaker && speaker instanceof NPC) {
+		//			boolean name = true;
+		//			Object firstChar = characters.get(0);
+		//			if (firstChar instanceof Command){
+		//				Command firstCommand = (Command)firstChar;
+		//				name = (!firstCommand.getID().equals("NOSPEAKER"));
+		//			}
+		//			if (name) text.append(((NPC)speaker).getName() + ": ");
+		//		}
 		for (int ii = 0; ii < length; ++ii){
 			Object obj = characters.get(ii);
 			if (obj instanceof Character){

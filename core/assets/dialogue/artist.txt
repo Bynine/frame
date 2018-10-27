@@ -3,6 +3,7 @@ Siiigh...
 [ANIM_3]What?! What do you want?!
 [ANIM_3]I have no time for little people in funny clothes! I am frustrated!
 [ANIM_0]In the past beautiful tall flowers bloomed all around Wabika. [ANIM_3]Now there are none! None at all!
+[ANIM_0]I thought the beach would be a good change of pace, but even the sea does not inspire me...
 [ANIM_0]What am I to do without my muse?...
 [ANIM_3]Are you still here?! Leave me in my sorrow, interloper!
 &TALK_ARTIST
@@ -15,6 +16,10 @@ You are truly kind to grow flowers in this forest. As I walked around in frustra
 I was so touched by this gesture that I painted you tending to one of the flowers.
 Please, accept it. It is the least I can do.
 [NOSPEAKER][GIVE_TREASURE5]You received a painting!
+I would paint closer to your flowers, but... my easel got caught in the sand! Hahaha!
+[TALK]Ah? [PAUSE]You are looking for something, my friend?
+That... sounds very important indeed. Clearly it has inspired you.
+Go forth! Seize the things that make you feel passionate! That is my advice to you.
 &WORLD_REWARD
 I am so inspired... I will paint all the time!
 [ANIM_5]However, something still sours my mood. My good friend Jackie, who runs the cafe in the village...

@@ -15,7 +15,7 @@ public class DesktopLauncher {
 		config.height	= (int)FrameEngine.resolution.y;
 		config.vSyncEnabled = false;
 		config.resizable = false;
-		config.title = "Marble";
+		config.title = "Forest's Secret";
 		new LwjglApplication(new FrameEngine(), config);
 	}
 	

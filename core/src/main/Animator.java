@@ -16,21 +16,31 @@ import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 public class Animator {
 
 	/**
-	 * Create a list of animations.
+	 * Create a list of animations that loop.
 	 */
 	public static ArrayList<Animation<TextureRegion>> createAnimation(
 			float frame, String path, int cols, int rows){
+		return createAnimation(frame, path, cols, rows, PlayMode.LOOP);
+	}
+	
+	/**
+	 * Create a list of animations.
+	 */
+	public static ArrayList<Animation<TextureRegion>> createAnimation(
+			float frame, String path, int cols, int rows, PlayMode playMode){
 		ArrayList<Animation<TextureRegion>> lst = new ArrayList<Animation<TextureRegion>>();
 		TextureRegion sheet = new TextureRegion(new Texture(path));
 		TextureRegion[][] frames = 
 				sheet.split(sheet.getRegionWidth()/cols, sheet.getRegionHeight()/rows);
 		for (int row = 0; row < rows; ++row){
 			Animation<TextureRegion> anim = new Animation<TextureRegion>(frame, frames[row]);
-			anim.setPlayMode(PlayMode.LOOP);
+			anim.setPlayMode(playMode);
 			lst.add(anim);
 		}
 		return lst;
 	}
+	
+	
 
 	/**
 	 * Disposes all frames of animation list.

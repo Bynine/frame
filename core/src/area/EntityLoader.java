@@ -13,6 +13,7 @@ import entity.Artist;
 import entity.AudioLocation;
 import entity.Bird;
 import entity.CameraTrigger;
+import entity.Cat;
 import entity.Currency;
 import entity.Description;
 import entity.DialogueDescription;
@@ -29,6 +30,7 @@ import entity.Glimmer;
 import entity.Goal;
 import entity.GrubHole;
 import entity.GrubMom;
+import entity.Instrument;
 import entity.Secret;
 import entity.Shopkeeper;
 import entity.Item;
@@ -278,6 +280,13 @@ public class EntityLoader {
 		} break;
 		case "question_trigger":{
 			entities.add(new QuestionTrigger(x, y, width, height));
+		} break;
+		case "cat":{
+			entities.add(new Cat(x, y));
+		} break;
+		case "instrument":{
+			String sfx = properties.get("SFX", String.class);
+			entities.add(new Instrument(x, y, sfx));
 		} break;
 		default: {
 			FrameEngine.logger.log( Level.WARNING, 

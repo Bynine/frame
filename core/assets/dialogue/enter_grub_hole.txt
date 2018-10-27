@@ -1,7 +1,2 @@
-Enter the hole?
->YES,NO
-<YES
-The CHECK_GRUB1 grubs CHECK_GRUB2 in CHECK_GRUB3 your backpack jump into the hole!
+The CHECK_GRUB1 grubs CHECK_GRUB2 in CHECK_GRUB3 your backpack run inside before you!
 [ENTER]
-<NO
-That's fair, it is pretty dark.

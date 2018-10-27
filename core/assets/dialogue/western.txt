@@ -5,3 +5,13 @@ Take my advice; never go back.
 &TALK_WESTERN
 Never go back West... Only a fool would.
 I'm lucky that I managed to escape. Wabika is a far gentler place.
+&ENTERED_SHRINE
+*TALK_WESTERN_AFTER_SHRINE
+The people here... They're very hospitable.
+It is certainly much better here than the West. Much kinder.
+Yet... I can't help but feel a certain guilt.
+Perhaps I should return home and try to take care of those I knew, the best I can...
+&TALK_WESTERN_AFTER_SHRINE
+It is a dilemma, to be sure...
+Do you have people that you love?
+Make sure you talk to them when you can. It's so easy to lose contact.

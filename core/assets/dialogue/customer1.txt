@@ -18,5 +18,11 @@ Mmhmm, I thought so too. We haven't seen many travellers lately, have we?
 [SPEAKER=FRIEND][ANIM_1]Totally not what she asked for! Come on! Gosh![ANIM_0]
 &GIVEN_ORDER1
 [ANIM_1]Thanks again for the drink, it's fantastic! Jackie always makes it just how I want it.
-[SPEAKER=JACKIE][ANIM_6]You know it, hon!
-[SPEAKER=JACKIE][ANIM_4]Not sure how she can taste the coffee with all that milk, though...[DEFAULT_ANIM]
+[SPEAKER=PUMPKIN][ANIM_6]You know it, hon!
+[SPEAKER=PUMPKIN][ANIM_4]Not sure how she can taste the coffee with all that milk, though...[DEFAULT_ANIM]
+&GIVEN_ORDER1,FOUND_GOAL
+So, I was wondering...
+Do you want to go out on another date some time? Since this went so well...
+[SPEAKER=FRIEND][ANIM_1]...
+What's up? Is something wrong?
+[SPEAKER=FRIEND][ANIM_1]...[ANIM_0]Oh no, nothing! I'd love to! Yeah!

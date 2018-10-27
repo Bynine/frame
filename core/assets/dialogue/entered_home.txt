@@ -1,0 +1,9 @@
+[SPEAKER=KID1]Whoa, who're you?!
+&ENTERED_SHRINE
+[SPEAKER=CHEF][ANIM_1]Oh! Welcome, stranger![ANIM_0]
+&TALK_CHEF
+[SPEAKER=CHEF][ANIM_1]Oh, hello again! [ANIM_0]Stew's still cooking, I'm afraid.
+&FOUND_GOAL
+[SPEAKER=CHEF][ANIM_1]Hello there! [ANIM_0]You're just in time; the stew's finished and it's mighty tasty!
+&TALK_CHEF_FOUND_GOAL
+[SPEAKER=CHEF][ANIM_1]Back for seconds? [ANIM_0]Hehehe, my stew has that effect on people...

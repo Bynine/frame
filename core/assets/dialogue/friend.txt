@@ -6,3 +6,7 @@
 [NOSPEAKER]She still seems to be mumbling quietly to herself.
 [SOFT](Don't be nervous... Don't be nervous...)
 [SOFT](Man, I love her coat... So fashionable...)
+&GIVEN_ORDER1,FOUND_GOAL
+[NOSPEAKER]She still seems to be mumbling quietly to herself.
+[SOFT](Oh my gosh, she wants to go on another date!)
+[SOFT](That means she likes me... Right? Oh, I'm so nervous...)

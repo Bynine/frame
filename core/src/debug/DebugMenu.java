@@ -53,7 +53,7 @@ public class DebugMenu extends AbstractMenu{
 
 	public Vector2 getButtonPosition(int pos) {
 		Vector2 superPosition = super.getButtonPosition(pos);
-		superPosition.add(-FrameEngine.TILE*7, FrameEngine.TILE*2);
+		superPosition.add(-FrameEngine.TILE*7, FrameEngine.TILE*1);
 		return superPosition;
 	}
 

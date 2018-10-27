@@ -32,6 +32,8 @@ public class Inventory extends AbstractMenu{
 			items.add("SEED3");
 			items.add("SEED4");
 			items.add("WATERINGCAN");
+			items.add("GRUB2");
+			items.add("GRUB3");
 		}
 	}
 

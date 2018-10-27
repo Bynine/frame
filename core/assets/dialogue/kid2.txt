@@ -1,0 +1,6 @@
+&ENTERED_SHRINE
+[SPEED=6]...[NSPEED]
+i hungry.
+&FOUND_GOAL
+[SPEED=6]...[NSPEED]
+food good.
