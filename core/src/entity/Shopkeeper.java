@@ -9,16 +9,19 @@ public class Shopkeeper extends NPC {
 			String imagePath, String dialoguePath) {
 		super(x, y, interactXDisp, interactYDisp, width, height, id, imagePath, dialoguePath, Layer.NORMAL);
 	}
-	
+
 	@Override
 	public void interact(){
 		FrameEngine.getShopMenu().open();
-		if (FrameEngine.getSaveFile().getFlag("ENTERED_SHRINE") && !FrameEngine.getShopMenu().outOfStock()){
+		if (FrameEngine.getSaveFile().getFlag("ENTERED_SHRINE")){
+			if (FrameEngine.getShopMenu().outOfStock()){
+				FrameEngine.getSaveFile().setFlag("OUT_OF_STOCK", true);
+			}
 			FrameEngine.startDialogueTree(new DialogueTree(this, "shop_menu"));
 		}
 		else super.interact();
 	}
-	
+
 	@Override
 	public void getMessage(String message){
 		super.getMessage(message);

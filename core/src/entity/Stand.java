@@ -1,5 +1,9 @@
 package entity;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
+
+import main.AudioHandler;
 import main.FrameEngine;
 import main.ItemDescription;
 import text.DialogueTree;
@@ -8,6 +12,7 @@ public class Stand extends InteractableEntity {
 
 	private final String id;
 	private ItemDescription placedItem = null;
+	private final Sound ignite = Gdx.audio.newSound(Gdx.files.internal("sfx/ignite.wav"));
 
 	public Stand(float x, float y, String id) {
 		super(x, y, "");
@@ -45,6 +50,7 @@ public class Stand extends InteractableEntity {
 	public void getMessage(String message){
 		super.getMessage(message);
 		if (message.equals("PLACED")){
+			AudioHandler.playSound(ignite);
 			placedItem = new ItemDescription(FrameEngine.getGivenItemID());
 			FrameEngine.getSaveFile().setMapping(id, FrameEngine.getGivenItemID());
 		}
@@ -64,6 +70,7 @@ public class Stand extends InteractableEntity {
 		if (hasItem()){
 			placedItem.dispose();
 		}
+		ignite.dispose();
 	}
 
 }

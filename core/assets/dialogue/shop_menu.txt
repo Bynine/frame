@@ -5,6 +5,14 @@ Great! I accept any and all acorns as trade for my wares.
 [BUY]
 <NO
 Oh, just taking a look around? Well, feel free to stop by again any time!
+&OUT_OF_STOCK
+*TALK_OUT_OF_STOCK
+You know... you've bought everything I had for sale! I'm fresh out.
+[ANIM_3]I can't thank you enough for your patronage.
+Please, feel free to come here any time, even if it's just to enjoy some tea.
+&TALK_OUT_OF_STOCK
+Sorry! I'm afraid I still don't have anything in stock.
+[ANIM_3]Still, feel free to come here any time! Even if it's just to enjoy some tea.
 &ITEM_GHOST,!GHOST_SHOPKEEPER
 *GHOST_SHOPKEEPER
 Care to buy -[TALK][PAUSE]...[NSPEED]Oh? What's that?

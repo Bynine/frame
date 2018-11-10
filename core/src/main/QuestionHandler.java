@@ -11,8 +11,6 @@ public class QuestionHandler {
 	private static int pos = 0;
 	private static ArrayList<Question> questions = new ArrayList<>();
 
-	// TODO: Reset when player leaves trials.
-
 	public static boolean isCorrect(AnswerDirection dir){
 		return dir.equals(questions.get(pos).ad);
 	}

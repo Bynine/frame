@@ -144,11 +144,13 @@ public class GraphicsHandler {
 		ArrayList<Entity> normalEntities = new ArrayList<Entity>();
 		ArrayList<Entity> frontEntities = new ArrayList<Entity>();
 		ArrayList<Entity> overheadEntities = new ArrayList<Entity>();
+		ArrayList<Entity> lightEntities = new ArrayList<Entity>();
 		for (Entity entity: EntityHandler.getEntities()){
 			if (entity.getLayer() == Entity.Layer.BACK) backEntities.add(entity);
 			if (entity.getLayer() == Entity.Layer.NORMAL) normalEntities.add(entity);
 			if (entity.getLayer() == Entity.Layer.FRONT) frontEntities.add(entity);
-			if (entity.getLayer() == Entity.Layer.OVERHEAD) frontEntities.add(entity);
+			if (entity.getLayer() == Entity.Layer.OVERHEAD) overheadEntities.add(entity);
+			if (entity.getLayer() == Entity.Layer.LIGHT) lightEntities.add(entity);
 		}
 		if (FrameEngine.getArea().cameraFixed){
 			updateCameraFixed();
@@ -180,6 +182,8 @@ public class GraphicsHandler {
 		renderer.getBatch().setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
 		renderer.getBatch().setColor(FrameEngine.getArea().lightColor);
 		renderer.render(new int[]{3});		// Light tiles.
+		renderer.getBatch().setColor(DEFAULT_COLOR);
+		if (!FrameEngine.INVIS) drawEntities(lightEntities);
 		endOverlay(renderer.getBatch(), false);
 		renderer.render(new int[]{4}); 	// Overhead tiles.
 		if (!FrameEngine.INVIS) drawEntities(overheadEntities);
@@ -389,7 +393,7 @@ public class GraphicsHandler {
 	 * Draws watercolor overlay on top of map.
 	 */
 	public void drawOverlay(){
-		beginOverlay(0.0f);
+		beginOverlay(0.1f);
 		batch.setProjectionMatrix(worldCam.combined);
 		final int overlayMultiplier = 1;
 		for (int ii = 0; ii < overlayMultiplier; ++ii){
@@ -469,8 +473,11 @@ public class GraphicsHandler {
 			batch.draw(arrowUp, center, FrameEngine.TILE * 8.875f);
 		}
 		batch.end();
-		drawText("Press ENTER to finish.", 
-				new Vector2(Gdx.graphics.getWidth()/(1.8f/ZOOM), FrameEngine.TILE), 
+		drawText("Press ENTER to exit.", 
+				new Vector2(
+						Gdx.graphics.getWidth()/(1.8f/ZOOM), 
+						Gdx.graphics.getHeight()*ZOOM - (FrameEngine.TILE*2)
+						), 
 				new Vector2(8, 2), 
 				true);
 		drawItemDescription(menu, price);
@@ -814,15 +821,11 @@ public class GraphicsHandler {
 		batch.begin();
 		batch.draw(title, 
 				FrameEngine.getPlayer().getPosition().x - (FrameEngine.TILE * 4.5f),
-				FrameEngine.getPlayer().getPosition().y + (FrameEngine.TILE * 2),
-				title.getRegionWidth() * 2,
-				title.getRegionHeight() * 2
+				FrameEngine.getPlayer().getPosition().y + (FrameEngine.TILE * 2)
 				);
 		batch.draw(logo, 
 				FrameEngine.getPlayer().getPosition().x - (FrameEngine.TILE * 7f),
-				FrameEngine.getPlayer().getPosition().y + (FrameEngine.TILE * 6),
-				logo.getRegionWidth(),
-				logo.getRegionHeight()
+				FrameEngine.getPlayer().getPosition().y + (FrameEngine.TILE * 6)
 				);
 		batch.end();
 	}

@@ -1,4 +1,4 @@
-Hello there! You wouldn't happen to know how long my drink will take, do you?
+Hello there! You wouldn't happen to know how long my drink will take, would you?
 I might turn into dust if I don't drink soon! [ANIM_1]Hahaha!
 &ACCEPTED_CAFE_JOB
 Oh, hello there, dear. Is that my drink you have there?

@@ -3,5 +3,10 @@ You know, even if you've talked to someone once, they might have more to say lat
 It's always a good idea to check back on your friends on occasion.
 Since I'm a beetle, I'm full of wisdom.
 &TALK_BEETLE2
-Wow, you're a good listener, huh?
+*TALK_BEETLE2_2
+Wow, you're a good listener, huh? Here's an acorn.
+[NOSPEAKER][CURRENCY_1]You were handed an acorn!
 Since I'm a beetle, you must love hearing my wisdom.
+&TALK_BEETLE2_2
+Beetles are all full of wisdom.
+As a beetle, I am especially full of wisdom.

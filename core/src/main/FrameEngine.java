@@ -34,7 +34,7 @@ public class FrameEngine extends ApplicationAdapter {
 	MAPS	= false && DEBUG,
 	TREASURE= false && DEBUG,
 	GHOST	= false	&& DEBUG,
-	SAVE	= false	|| !DEBUG;
+	SAVE	= true	|| !DEBUG;
 
 	private static Player player;
 	private static FPSLogger fpsLogger;
@@ -117,37 +117,47 @@ public class FrameEngine extends ApplicationAdapter {
 		for (Timer timer: timers){
 			timer.countUp();
 		}
+		if (DEBUG && getTime() % 60 == 0){
+			saveFile.addMoney(1);
+		}
 
 		AudioHandler.update();
 		graphicsHandler.update();
 		assessInputs();
 		currInteractable = null;
 
-		switch(gameState){
-		case OVERWORLD:{
-			updateOverworld();
-		} break;
-		case PAUSED:{
-			updatePause();
-		} break;
-		case DEBUG:{
-			updateDebug();
-		} break;
-		case MAIN:{
-			updateMain();
-		} break;
-		case SHOP:{
-			updateShop();
-		} break;
-		case INVENTORY: {
-			updateInventory();
-		} break;
-		case CREDITS:{
-			updateCredits();
-		} break;
-		case SAVECONFIRM:{
-			updateSaveConfirm();
-		} break;
+		try{
+			switch(gameState){
+			case OVERWORLD:{
+				updateOverworld();
+			} break;
+			case PAUSED:{
+				updatePause();
+			} break;
+			case DEBUG:{
+				updateDebug();
+			} break;
+			case MAIN:{
+				updateMain();
+			} break;
+			case SHOP:{
+				updateShop();
+			} break;
+			case INVENTORY: {
+				updateInventory();
+			} break;
+			case CREDITS:{
+				updateCredits();
+			} break;
+			case SAVECONFIRM:{
+				updateSaveConfirm();
+			} break;
+			}
+		}
+		catch (Exception e){
+			logger.warning(e.getClass().toString());
+			logger.warning(e.getMessage());
+			logger.warning(Arrays.toString(e.getStackTrace()));
 		}
 
 		if (currArea != null) graphicsHandler.drawOverlay();
@@ -363,7 +373,7 @@ public class FrameEngine extends ApplicationAdapter {
 	 */
 	public static void debugAreaChange(String area_id){
 		initiateAreaChangeHelper(area_id);
-		newPosition.set(newArea.getStartLocation());
+		newPosition.set(newArea.getDefaultLocation());
 	}
 
 	/**
@@ -384,9 +394,8 @@ public class FrameEngine extends ApplicationAdapter {
 		newArea = null;
 		QuestionHandler.changeArea(currArea);
 		AudioHandler.startNewAudio(currArea.music);
-		player.getPosition().set(newPosition.x, (currArea.mapHeight) - (newPosition.y));
-		player.update(); // To avoid triggering portals twice
-		player.getVelocity().setZero();
+		setNewPlayerPosition();
+		//player.getVelocity().setZero();
 		EntityHandler.dispose();
 		AudioHandler.clearAudioSources();
 		EntityHandler.initializeAreaEntities(currArea);
@@ -396,36 +405,49 @@ public class FrameEngine extends ApplicationAdapter {
 		newDirection = Direction.ANY;
 	}
 
+	private static void setNewPlayerPosition(){
+		player.getPosition().set(newPosition.x, (currArea.mapHeight) - (newPosition.y));
+		player.update(); // To avoid triggering portals twice
+	}
+
 	/**
 	 * Begin a new game.
 	 */
 	static void newGame(){
+		inventory.wipe();
 		saveFile.wipeSave();
 		saveFile.startPosition.set(0.5f, 26f);
 		saveFile.startArea = "FOREST";
 		inventory.addItem("KEEPSAKE");
 		player.walkRight(18);
-		contGame();
+		beginGame();
 	}
 
 	/**
 	 * Continues from established save file.
 	 */
 	static void continueGame(){
-		contGame();
+		beginGame();
 	}
 
-	private static void contGame(){
+	private static void beginGame(){
 		gameState = GameState.OVERWORLD;
 		newArea = new Area(saveFile.startArea);
-		if (saveFile.startPosition.isZero() && DEBUG){
+		if (saveFile.startPosition.isZero() && !SAVE){
 			newPosition.set(61 * TILE, 41 * TILE);
 		}
 		else{
 			newPosition.set(saveFile.startPosition.scl(TILE));
 		}
 		changeArea();
-		if (!DEBUG) transition.reset();
+		if (player.isColliding()){
+			logger.warning("Player was spawned inside collision at: " + newPosition.toString());
+			newPosition.set(currArea.getDefaultLocation());
+			setNewPlayerPosition();
+		}
+		if (!DEBUG) {
+			transition.reset();
+		}
 	}
 
 	public static void startMainMenu(boolean exists) {
@@ -469,6 +491,7 @@ public class FrameEngine extends ApplicationAdapter {
 		newArea = new Area("PATH");
 		changeArea();
 		gameState = GameState.CREDITS;
+		AudioHandler.startNewAudio("music/johnnoodle.ogg", false);
 	}
 
 	/**

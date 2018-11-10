@@ -1,0 +1,6 @@
+*PLAY_LUTE_LOTS
+[SPEAKER=SHOPKEEPER]I appreciate that you like that lute...
+[SPEAKER=SHOPKEEPER][ANIM_3]But... maybe you could... play a little less? Please?[ANIM_0]
+&PLAY_LUTE_LOTS
+[SPEAKER=SHOPKEEPER][ANIM_2]...
+[SPEAKER=SHOPKEEPER][ANIM_2][PAUSE][SOFT](Maybe the lute was a bad idea...)

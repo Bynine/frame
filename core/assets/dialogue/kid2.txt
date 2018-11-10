@@ -1,6 +1,11 @@
 &ENTERED_SHRINE
+*TALK_KID2
 [SPEED=6]...[NSPEED]
-i hungry.
-&FOUND_GOAL
+i saw ghost near here.
+nobody believe me. but i saw.
+&TALK_KID2
+i know i saw. was scary.
+&GHOST_REWARD
 [SPEED=6]...[NSPEED]
-food good.
+you saw ghost too?
+[PAUSE]hope ghost is ok.

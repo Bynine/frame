@@ -222,4 +222,13 @@ public class Player extends Entity{
 		imageState = is;
 	}
 
-}
+	public boolean isColliding() {
+		for(Rectangle collider: FrameEngine.getArea().getCollision()){
+			if (hitbox.overlaps(collider)){ // Contact, he shouts
+				return true;
+			}
+		}
+		return false;
+	}
+
+	}

@@ -13,7 +13,7 @@ import entity.Artist;
 import entity.AudioLocation;
 import entity.Bird;
 import entity.CameraTrigger;
-import entity.Cat;
+import entity.WildCat;
 import entity.Currency;
 import entity.Description;
 import entity.DialogueDescription;
@@ -23,11 +23,13 @@ import entity.Emitter;
 import entity.Entity;
 import entity.Entity.Layer;
 import entity.Finish;
+import entity.Fire;
 import entity.Flower;
 import entity.Freb;
 import entity.FrebKing;
 import entity.Glimmer;
 import entity.Goal;
+import entity.Grass;
 import entity.GrubHole;
 import entity.GrubMom;
 import entity.Instrument;
@@ -35,6 +37,7 @@ import entity.Secret;
 import entity.Shopkeeper;
 import entity.Item;
 import entity.ItemHole;
+import entity.Koi;
 import entity.Memorial;
 import entity.NPC;
 import entity.Painting;
@@ -42,6 +45,7 @@ import entity.Portal;
 import entity.Portal.Direction;
 import entity.PortalHole;
 import entity.Pumpkin;
+import entity.PumpkinCarve;
 import entity.QuestionTrigger;
 import entity.SaleSign;
 import entity.ShrineDoor;
@@ -88,7 +92,8 @@ public class EntityLoader {
 			}
 			double x_dest = Double.parseDouble(destination[1]);
 			double y_dest = Double.parseDouble(destination[2]);
-			entities.add(new Portal(x, y, width, height, destination[0], x_dest, y_dest, dir));
+			boolean isDoor = properties.containsKey("DOOR");
+			entities.add(new Portal(x, y, width, height, destination[0], x_dest, y_dest, dir, isDoor));
 		} break;
 		case "grubhole": 
 		case "trapdoor":
@@ -282,11 +287,24 @@ public class EntityLoader {
 			entities.add(new QuestionTrigger(x, y, width, height));
 		} break;
 		case "cat":{
-			entities.add(new Cat(x, y));
+			entities.add(new WildCat(x, y));
 		} break;
 		case "instrument":{
 			String sfx = properties.get("SFX", String.class);
 			entities.add(new Instrument(x, y, sfx));
+		} break;
+		case "fire":{
+			String id = properties.get("ID", String.class);
+			entities.add(new Fire(x, y, id));
+		} break;
+		case "pumpkin":{
+			entities.add(new PumpkinCarve(x, y));
+		} break;
+		case "grass":{
+			entities.add(new Grass(x, y));
+		} break;
+		case "koi":{
+			entities.add(new Koi(x, y));
 		} break;
 		default: {
 			FrameEngine.logger.log( Level.WARNING, 

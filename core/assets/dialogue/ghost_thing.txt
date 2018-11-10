@@ -16,9 +16,10 @@ That sounds weird, doesn't it. Maybe I'm remembering wrong?
 *GHOST_REWARD
 [PAUSE]Leslie...
 [NSPEED]That's right. I remember. Everything that happened, and...
-[SPEED=2]I...[PAUSE] I miss them all, very much. [NSPEED]But at least my memories of good times have returned.
+[SPEED=2]I...[PAUSE] I miss them all, very much. [NSPEED]But at least my memories of good times have returned!
 I think, with that, I finally feel at ease. Thank you so much, stranger.
-[GIVE_TREASURE6]It's not much, but take this, at least.
+It's not much, but take this, at least.
+[NOSPEAKER][GIVE_TREASURE6]You were somehow handed an old plush doll!
 That thing you're searching for... If you're as good of a person as I think you are, you'll find it.
 I can only hope it meets your expectations.
 Now it's time for me to go to the Kami. Best of luck to you, stranger!

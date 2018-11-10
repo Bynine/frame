@@ -112,7 +112,6 @@
   <object id="279" x="0" y="0" width="192" height="512"/>
   <object id="280" x="192" y="0" width="408" height="136"/>
   <object id="282" x="600" y="0" width="200" height="512"/>
-  <object id="283" x="192" y="392" width="168" height="120"/>
   <object id="286" x="192" y="376" width="120" height="8"/>
   <object id="287" x="192" y="368" width="96" height="8"/>
   <object id="288" x="192" y="360" width="80" height="8"/>
@@ -161,8 +160,6 @@
   <object id="335" x="480" y="376" width="120" height="8"/>
   <object id="336" x="192" y="384" width="160" height="8"/>
   <object id="337" x="448" y="384" width="152" height="8"/>
-  <object id="338" x="440" y="392" width="160" height="120"/>
-  <object id="339" x="360" y="400" width="80" height="112"/>
   <object id="342" x="232" y="184" width="88" height="8"/>
   <object id="343" x="240" y="192" width="72" height="8"/>
   <object id="344" x="248" y="200" width="48" height="8"/>
@@ -184,7 +181,7 @@
     <property name="TYPE" value="NPC"/>
    </properties>
   </object>
-  <object id="341" name="portal" gid="6" x="360" y="400" width="80" height="16">
+  <object id="341" name="portal" gid="6" x="360" y="408" width="80" height="16">
    <properties>
     <property name="DEST" value="BEACH,61.5,17"/>
     <property name="TYPE" value="PORTAL"/>

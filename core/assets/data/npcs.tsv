@@ -18,7 +18,7 @@ GRUBMOM	Grub Mom	mih	FALSE	1	45
 GRUB1	Chubby Grub	bwep	FALSE	1	60
 GRUB2	Nubby Grub	bwep	FALSE	1	60
 GRUB3	Grubby Grub	bwep	FALSE	1	60
-VILLAGER	Shy Mushroom	bwep	TRUE	1	30
+VILLAGER	Shy Mushroom	bwep	TRUE	2	30
 GHOST	Restless Spirit	chipper	TRUE	1	45
 ARTIST	Passionate Artist	bup	FALSE	1	30
 COFFEE	Complaining Guy	meoh	TRUE	1	45
@@ -29,7 +29,12 @@ WARRIOR	Ragged Warrior	subtle	TRUE	1	21
 CHEF	Culinary Savant	chipper	TRUE	1	30
 KID1	Precocious Kid	what	FALSE	1	30
 KID2	Quiet Kid	subtle	FALSE	1	30
+DOG	Dog	bwep	TRUE	2	20
+KITTY	Kitty	mih	FALSE	1	45
+FREBLOVE ???	bup	TRUE	1	30
+GRUBLOVE ???	bup	TRUE	1	30
+DANCER	Strange Statue	subtle	TRUE	1	30
+DEMON	Cavern Dweller	what	TRUE	1	60
 
 WITCH	Witch	mih	TRUE	1	30
 SKULL	Ground Head	bup	TRUE	1	45
-DEMON	Cavern Dweller	what	TRUE	1	60

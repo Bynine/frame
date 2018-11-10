@@ -1,28 +1,43 @@
 package entity;
 
-import com.badlogic.gdx.graphics.Texture;
+import java.util.ArrayList;
+
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import main.Animator;
 import main.FrameEngine;
 import text.DialogueTree;
 
 public class SaleSign extends InteractableEntity {
-	
-	private final TextureRegion sign = new TextureRegion(new Texture("sprites/objects/sale_sign.png"));
+
+	private final ArrayList<Animation<TextureRegion>> sign = 
+			Animator.createAnimation(15, "sprites/objects/sale_sign.png", 2, 1);
 
 	public SaleSign(float x, float y) {
 		super(x, y, "");
-		image = sign;
+		image = sign.get(0).getKeyFrame(0);
+		hitbox.setWidth(36);
 	}
-	
+
+	@Override
+	public void updateImage(){
+		image = sign.get(0).getKeyFrame(FrameEngine.getTime());
+	}
+
 	@Override
 	public void interact(){
-		FrameEngine.startDialogueTree(new DialogueTree(this, "sale_sign"));
+		if (FrameEngine.getPlayer().getPosition().y > position.y){
+			FrameEngine.startDialogueTree(new DialogueTree(this, "sale_sign_back"));
+		}
+		else{
+			FrameEngine.startDialogueTree(new DialogueTree(this, "sale_sign"));
+		}
 	}
 
 	@Override
 	public void dispose() {
-		sign.getTexture().dispose();
+		Animator.freeAnimation(sign);
 	}
 
 }

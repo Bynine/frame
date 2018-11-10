@@ -26,11 +26,11 @@
 Yokey... yeah, I knew her. Very well. One day, in fact...
 I remember seeing some person in armor, wearing a cape, walking toward that shrine that she was always around.
 I thought it was weird, but I didn't bother following them.
-[PAUSE]...That was a mistake.
+[PAUSE][ANIM_3]...That was a mistake.
 [NSPEED]Nobody ever saw that warrior or Yokey ever again. They've disappeared to time.
 And I could have stopped it.
-...[PAUSE] Ha. To be honest, it feels good to get that off my chest. I've been holding that in for a while.
-Thanks, little guy. You're a good listener and a good waiter too.[ANIM_0]
+...[PAUSE][ANIM_2]Ha. To be honest, it feels good to get that off my chest. I've been holding that in for a while.
+[ANIM_2]Thanks, little guy. You're a good listener and a good waiter too.[ANIM_0]
 [GHOST_THING][DESTROY]
 &GIVEN_ORDER3
 ...
@@ -42,9 +42,9 @@ Hey, little dude. Sorry, but I'm in the middle of this book, so - [TALK]...[PAUS
 Yokey... yeah, I knew her. Very well. One day, in fact...
 I remember seeing some person in armor, wearing a cape, walking toward that shrine that she was always around.
 I thought it was weird, but I didn't bother following them.
-[PAUSE]...That was a mistake.
+[PAUSE][ANIM_3]...That was a mistake.
 [NSPEED]Nobody ever saw that warrior or Yokey ever again. They've disappeared to time.
 And I could have stopped it.
-...[PAUSE] Ha. To be honest, it feels good to get that off my chest. I've been holding that in for a while.
-Thanks, little guy. You're a good listener and a good waiter too.[ANIM_0]
+...[PAUSE][ANIM_2]Ha. To be honest, it feels good to get that off my chest. I've been holding that in for a while.
+[ANIM_2]Thanks, little guy. You're a good listener and a good waiter too.[ANIM_0]
 [GHOST_THING][DESTROY]

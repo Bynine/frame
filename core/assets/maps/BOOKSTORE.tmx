@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="282">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="284">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/shop.tsx"/>
  <tileset firstgid="265" source="tilesets/bookstore.tsx"/>
@@ -33,7 +33,7 @@
 0,0,0,0,0,0,0,0,0,273,274,275,0,276,277,278,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,266,267,268,289,290,291,0,292,293,294,0,73,74,0,0,0,0,0,0,
 0,0,0,0,0,0,282,283,284,305,306,307,0,308,309,310,0,89,90,0,0,0,0,0,0,
-0,0,0,0,0,0,298,299,300,0,0,0,0,0,0,0,329,330,144,0,0,0,0,0,0,
+0,0,0,0,0,0,298,299,300,0,0,0,0,0,0,0,329,330,288,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,331,332,333,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,160,0,0,0,0,27,0,27,0,0,0,0,0,0,0,0,0,0,0,
@@ -121,10 +121,10 @@
   <object id="266" x="384" y="384" width="32" height="128"/>
   <object id="267" x="256" y="344" width="96" height="8"/>
   <object id="268" x="448" y="344" width="96" height="8"/>
-  <object id="273" x="576" y="224" width="32" height="64"/>
+  <object id="273" x="576" y="224" width="32" height="32"/>
   <object id="276" x="192" y="320" width="32" height="32"/>
  </objectgroup>
- <objectgroup color="#32e3c6" id="7" name="TERRAIN">
+ <objectgroup color="#32e3c6" id="7" name="TERRAIN" visible="0">
   <object id="224" name="wood" x="0" y="0" width="224" height="512"/>
   <object id="278" name="wood" x="224" y="0" width="384" height="224"/>
   <object id="279" name="wood" x="224" y="320" width="384" height="192"/>
@@ -134,6 +134,7 @@
   <object id="172" name="portal" gid="6" x="384" y="384" width="32" height="32">
    <properties>
     <property name="DEST" value="FOREST,74.5,19"/>
+    <property name="DOOR" value=""/>
     <property name="TYPE" value="PORTAL"/>
    </properties>
   </object>
@@ -226,6 +227,12 @@ There's a detailed anatomical diagram of a small green creature wearing a shell.
     <property name="IMAGE" value="librarian"/>
     <property name="INTERACTXDISP" value="8"/>
     <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="283" name="instrument" gid="5" x="576" y="256" width="32" height="32">
+   <properties>
+    <property name="SFX" value="weird"/>
+    <property name="TYPE" value="INSTRUMENT"/>
    </properties>
   </object>
  </objectgroup>

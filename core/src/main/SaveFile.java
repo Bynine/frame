@@ -1,6 +1,7 @@
 package main;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
@@ -101,11 +102,12 @@ public class SaveFile {
 		Preferences preferences = Gdx.app.getPreferences(saveFile);
 		preferences.put(flags);
 		preferences.put(counters);
-		for (String key: map.keySet()){
-			map.put(mapPrefix + key, map.get(key));
-			map.remove(key);
+		Iterator<String> iter = map.keySet().iterator();
+		while (iter.hasNext()){
+			String key = iter.next();
+			preferences.putString(mapPrefix + key, map.get(key));
+			if (verbose) System.out.println("Mapped " + (mapPrefix + key) + " to " + map.get(key));
 		}
-		preferences.put(map);
 		preferences.putInteger(moneyKey, money);
 		
 		float x = (FrameEngine.getPlayer().getPosition().x)/FrameEngine.TILE;

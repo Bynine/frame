@@ -1,11 +1,11 @@
 *TALK_PUMPKIN_EARLY
-Sorry, hon, I'm busy getting ready right now.
-Be sure to come back soon!
+[ANIM_1]Sorry, hon, I'm busy getting ready right now.
+Be sure to come back soon![ANIM_0]
 &ENTERED_SHRINE
 *TALK_PUMPKIN
 [ANIM_3]Wh-what?! Sorry, I'm a bit busy here!!
 [ANIM_5]Oh! [PAUSE][ANIM_4]You're new here, aren't you? I'm sorry, how rude of me!
-I'd be happy to serve you, but I'm just so busy with all this prep work...
+I'd be happy to serve you, but I've just got so much work to do right now and -
 ... Say... You look like a capable kid. How's about you help me out with serving these orders?
 PUMPKINQUERY
 &TALK_PUMPKIN

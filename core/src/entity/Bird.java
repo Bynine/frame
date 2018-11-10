@@ -74,7 +74,7 @@ public class Bird extends Critter {
 		flightDir = (int) Math.signum(position.x - FrameEngine.getPlayer().position.x);
 		flying = true;
 		collides = false;
-		AudioHandler.playSound(startled);
+		AudioHandler.playPositionalSound(this, startled);
 	}
 
 	@Override

@@ -61,11 +61,12 @@ public class AudioHandler {
 			audioSource.audio.play();
 		}
 	}
+	
 
 	/**
 	 * Stops the current Music, then plays the Music specified by the path.
 	 */
-	public static void startNewAudio(String audioName){
+	public static void startNewAudio(String audioName, boolean looping) {
 		if (!currAudioName.equals(audioName)){ // Only change music if it's different
 			currAudioName = audioName;
 			if (null != currAudio){
@@ -74,9 +75,13 @@ public class AudioHandler {
 			}
 			currAudio = Gdx.audio.newMusic(Gdx.files.internal(audioName));
 			currAudio.setVolume(VOLUME * FrameEngine.getTransitionMod());
-			currAudio.setLooping(true);
+			currAudio.setLooping(looping);
 			currAudio.play();
 		}
+	}
+
+	public static void startNewAudio(String audioName){
+		startNewAudio(audioName, true);
 	}
 
 	/**

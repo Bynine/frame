@@ -34,6 +34,10 @@ public class Inventory extends AbstractMenu{
 			items.add("WATERINGCAN");
 			items.add("GRUB2");
 			items.add("GRUB3");
+			
+//			items.add("SHELL3");
+//			items.add("SEED2");
+//			items.add("SHOVEL");
 		}
 	}
 
@@ -109,6 +113,11 @@ public class Inventory extends AbstractMenu{
 		float x = ((posX * FrameEngine.TILE) * 2);
 		float y = Gdx.graphics.getHeight()/2 - FrameEngine.TILE - (posY * FrameEngine.TILE * 2);
 		return new Vector2(x, y);
+	}
+
+	public void wipe() {
+		items.clear();
+		descs.clear();
 	}
 
 }

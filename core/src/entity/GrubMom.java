@@ -40,7 +40,7 @@ public class GrubMom extends NPC {
 	public void interact(){
 		FrameEngine.startDialogueTree(
 			new DialogueTree(this, "grubmom", new HashMap<String, String>(){{
-				put("NUM_GRUBS_STILL_LOST", Integer.toString(NUM_GRUBS_STILL_LOST));
+				put("NUM_GRUBS_STILL_LOST", numToWordMap.get(NUM_GRUBS_STILL_LOST));
 				put("AREIS", NUM_GRUBS_STILL_LOST == 1 ? "is" : "are");
 			}})
 		);

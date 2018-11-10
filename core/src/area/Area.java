@@ -147,7 +147,7 @@ public class Area {
 		return slopes;
 	}
 	
-	public Vector2 getStartLocation(){
+	public Vector2 getDefaultLocation(){
 		return startLocation;
 	}
 	

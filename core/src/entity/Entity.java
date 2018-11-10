@@ -1,6 +1,7 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -20,10 +21,19 @@ public abstract class Entity {
 	protected final TextureRegion sample = new TextureRegion(new Texture("sprites/npcs/dummy.png"));
 	protected final Rectangle hitbox = new Rectangle(0, 0, 28, 18);
 	protected final ArrayList<Timer> timerList = new ArrayList<Timer>();
-	protected float acceleration = 1.0f;
+	protected float acceleration = 1.02f;
 	protected float corner_acceleration = 0.35f;
 	protected float friction = 0.69f;
 	protected float contact_friction = 0.92f;
+	
+	protected final HashMap<Integer, String> numToWordMap = new HashMap<Integer, String>(){{
+		put(0, "None");
+		put(1, "One");
+		put(2, "Two");
+		put(3, "Three");
+		put(4, "Four");
+		put(4, "Five");
+	}};
 
 	/**
 	 * Directions.
@@ -104,7 +114,7 @@ public abstract class Entity {
 		final float limit = 0.5f;
 		velocity.scl(getFrameFriction(friction));
 		if (Math.abs(velocity.x) > limit && Math.abs(velocity.y) > limit) {
-			final float diagonalFriction = 0.91f;
+			final float diagonalFriction = 0.86f;
 			velocity.scl(getFrameFriction(diagonalFriction));
 		}
 	}
@@ -313,7 +323,7 @@ public abstract class Entity {
 	}
 	
 	public static enum Layer{
-		BACK, NORMAL, FRONT, OVERHEAD
+		BACK, NORMAL, FRONT, OVERHEAD, LIGHT
 	}
 
 	public TextureRegion getShadow() {

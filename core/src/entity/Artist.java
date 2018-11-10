@@ -2,21 +2,36 @@ package entity;
 
 import java.util.HashMap;
 
+import main.EntityHandler;
 import main.FrameEngine;
 import text.DialogueTree;
+import timer.Timer;
 
 public class Artist extends NPC {
+	
+	private final Timer whistleTimer = new Timer(45);
+	private boolean happy;
 
 	public Artist(float x, float y, int interactXDisp, int interactYDisp, int width, int height) {
 		super(x, y, interactXDisp, interactYDisp, width, height, "ARTIST", "artist", "artist", Layer.NORMAL);
 		if (FrameEngine.getSaveFile().getCounter(Flower.grownFlowers) > 0){
 			FrameEngine.getSaveFile().setFlag("GROWN_ENOUGH_FLOWERS", true);
 		}
-		boolean happy = FrameEngine.getSaveFile().getFlag("GROWN_ENOUGH_FLOWERS");
+		happy = FrameEngine.getSaveFile().getFlag("GROWN_ENOUGH_FLOWERS");
 		currentAnim = happy ? 1 : 0;
 		defaultAnim = currentAnim;
 		if (!happy){
 			voiceUrl = "dip";
+		}
+		timerList.add(whistleTimer);
+	}
+	
+	@Override
+	public void update(){
+		super.update();
+		if (whistleTimer.timeUp() && happy){
+			whistleTimer.reset();
+			EntityHandler.addEntity(new Note(position.x + 16, position.y + 40, 30));
 		}
 	}
 	

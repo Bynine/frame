@@ -31,15 +31,15 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,52,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,46,0,0,0,0,0,0,
-0,0,0,0,0,0,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,52,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,29,30,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
@@ -50,11 +50,11 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,44,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,44,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,44,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -122,66 +122,12 @@
   <object id="304" x="288" y="0" width="160" height="160"/>
   <object id="305" x="448" y="0" width="96" height="192"/>
   <object id="306" x="544" y="0" width="32" height="232"/>
-  <object id="307" x="368" y="160" width="40" height="8"/>
-  <object id="308" x="416" y="288" width="32" height="32"/>
-  <object id="309" x="192" y="256" width="32" height="32"/>
-  <object id="310" x="320" y="160" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="8" name="ENTITIES" opacity="0.64">
   <object id="277" name="portal" gid="6" x="304" y="504" width="96" height="64">
    <properties>
     <property name="DEST" value="ORCHARD,12,60"/>
     <property name="TYPE" value="PORTAL"/>
-   </properties>
-  </object>
-  <object id="282" name="grub reward" gid="2" x="376" y="200" width="24" height="24">
-   <properties>
-    <property name="APPEAR" value="GRUB_REWARD"/>
-    <property name="FLAG" value="ITEM_TREASURE3"/>
-    <property name="ID" value="TREASURE3"/>
-    <property name="TYPE" value="ITEM"/>
-   </properties>
-  </object>
-  <object id="283" name="grubmom" gid="1" x="360" y="160" width="56" height="32">
-   <properties>
-    <property name="DIALOGUE" value="grubmom"/>
-    <property name="ID" value="GRUBMOM"/>
-    <property name="IMAGE" value="grubmom"/>
-    <property name="TYPE" value="NPC"/>
-   </properties>
-  </object>
-  <object id="284" name="grub1" gid="1" x="232" y="280" width="24" height="24">
-   <properties>
-    <property name="APPEAR" value="RETURNED_GRUB1"/>
-    <property name="DIALOGUE" value="grub1"/>
-    <property name="ID" value="GRUB1"/>
-    <property name="IMAGE" value="grub1"/>
-    <property name="TYPE" value="NPC"/>
-   </properties>
-  </object>
-  <object id="285" name="grub2" gid="1" x="440" y="248" width="24" height="24">
-   <properties>
-    <property name="APPEAR" value="RETURNED_GRUB2"/>
-    <property name="DIALOGUE" value="grub2"/>
-    <property name="ID" value="GRUB2"/>
-    <property name="IMAGE" value="grub2"/>
-    <property name="TYPE" value="NPC"/>
-   </properties>
-  </object>
-  <object id="286" name="grub3" gid="1" x="400" y="352" width="24" height="24">
-   <properties>
-    <property name="APPEAR" value="RETURNED_GRUB3"/>
-    <property name="DIALOGUE" value="grub3"/>
-    <property name="ID" value="GRUB3"/>
-    <property name="IMAGE" value="grub3"/>
-    <property name="TYPE" value="NPC"/>
-   </properties>
-  </object>
-  <object id="313" name="fall seed" gid="2" x="200" y="248" width="24" height="24">
-   <properties>
-    <property name="FLAG" value="ITEM_SEED5"/>
-    <property name="ID" value="SEED5"/>
-    <property name="TYPE" value="ITEM"/>
    </properties>
   </object>
  </objectgroup>

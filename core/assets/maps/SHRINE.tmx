@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="308">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="312">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/shop.tsx"/>
  <tileset firstgid="265" source="tilesets/shrine_interior.tsx"/>
@@ -116,10 +116,10 @@
   <object id="281" x="576" y="0" width="224" height="512"/>
   <object id="282" x="224" y="0" width="352" height="192"/>
   <object id="295" x="384" y="184" width="32" height="32"/>
-  <object id="300" x="288" y="224" width="32" height="32"/>
-  <object id="301" x="256" y="320" width="32" height="32"/>
-  <object id="302" x="480" y="224" width="32" height="32"/>
-  <object id="303" x="512" y="320" width="32" height="32"/>
+  <object id="300" x="288" y="224" width="32" height="24"/>
+  <object id="301" x="256" y="320" width="32" height="24"/>
+  <object id="302" x="480" y="224" width="32" height="24"/>
+  <object id="303" x="512" y="320" width="32" height="24"/>
   <object id="306" x="261" y="192" width="22" height="16"/>
   <object id="307" x="517" y="192" width="22" height="16"/>
  </objectgroup>
@@ -152,28 +152,52 @@ Then you may find what you are searching for.&quot;</property>
     <property name="TYPE" value="DIALOGUE_TRIGGER"/>
    </properties>
   </object>
-  <object id="296" name="stand2" gid="1" x="256" y="320" width="32" height="16">
+  <object id="296" name="stand2" gid="1" x="256" y="312" width="32" height="16">
    <properties>
     <property name="ID" value="STAND2"/>
     <property name="TYPE" value="STAND"/>
    </properties>
   </object>
-  <object id="297" name="stand1" gid="1" x="288" y="224" width="32" height="16">
+  <object id="297" name="stand1" gid="1" x="288" y="216" width="32" height="16">
    <properties>
     <property name="ID" value="STAND1"/>
     <property name="TYPE" value="STAND"/>
    </properties>
   </object>
-  <object id="298" name="stand3" gid="1" x="480" y="224" width="32" height="16">
+  <object id="298" name="stand3" gid="1" x="480" y="216" width="32" height="16">
    <properties>
     <property name="ID" value="STAND3"/>
     <property name="TYPE" value="STAND"/>
    </properties>
   </object>
-  <object id="299" name="stand4" gid="1" x="512" y="320" width="32" height="16">
+  <object id="299" name="stand4" gid="1" x="512" y="312" width="32" height="16">
    <properties>
     <property name="ID" value="STAND4"/>
     <property name="TYPE" value="STAND"/>
+   </properties>
+  </object>
+  <object id="308" name="fire" gid="1" x="192" y="400" width="160" height="160">
+   <properties>
+    <property name="ID" value="STAND2"/>
+    <property name="TYPE" value="FIRE"/>
+   </properties>
+  </object>
+  <object id="309" name="fire" gid="1" x="224" y="310" width="160" height="160">
+   <properties>
+    <property name="ID" value="STAND1"/>
+    <property name="TYPE" value="FIRE"/>
+   </properties>
+  </object>
+  <object id="310" name="fire" gid="1" x="416" y="310" width="160" height="160">
+   <properties>
+    <property name="ID" value="STAND3"/>
+    <property name="TYPE" value="FIRE"/>
+   </properties>
+  </object>
+  <object id="311" name="fire" gid="1" x="448" y="400" width="160" height="160">
+   <properties>
+    <property name="ID" value="STAND4"/>
+    <property name="TYPE" value="FIRE"/>
    </properties>
   </object>
  </objectgroup>

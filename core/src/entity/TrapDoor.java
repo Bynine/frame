@@ -18,13 +18,13 @@ public class TrapDoor extends PortalHole {
 		marker = null;
 		canInteract = false;
 		hole = new TextureRegion(new Texture("sprites/objects/trapdoor.png"));
-		checkOpened();
+		checkOpened(false);
 	}
 	
 	@Override
 	public void update(){
 		super.update();
-		checkOpened();
+		checkOpened(true);
 	}
 	
 	@Override
@@ -32,7 +32,7 @@ public class TrapDoor extends PortalHole {
 		if (opened) super.interact();
 	}
 	
-	private void checkOpened(){
+	private void checkOpened(boolean b){
 		boolean toOpen = 
 				!FrameEngine.getSaveFile().getMapping("STAND1").isEmpty() &&
 				!FrameEngine.getSaveFile().getMapping("STAND2").isEmpty() &&
@@ -40,7 +40,7 @@ public class TrapDoor extends PortalHole {
 				!FrameEngine.getSaveFile().getMapping("STAND4").isEmpty()
 				;
 		if (!opened && toOpen){
-			AudioHandler.playSound(open);
+			if (b) AudioHandler.playSound(open);
 			canInteract = true;
 		}
 		opened = toOpen;

@@ -15,7 +15,7 @@ public class MainMenu extends AbstractMenu {
 	MainMenu(boolean exists){
 		cursor = exists ? 1 : 0;
 		options.add(new MenuOption(8, 2, "New Adventure", Option.NEW));
-		options.add(new MenuOption(8, 2, "Wake Up", Option.CONTINUE));
+		options.add(new MenuOption(8, 2, "Continue", Option.CONTINUE));
 		this.exists = exists;
 	}
 
@@ -37,7 +37,12 @@ public class MainMenu extends AbstractMenu {
 			}
 		} break;
 		case CONTINUE:{
-			FrameEngine.continueGame();
+			if (exists){
+				FrameEngine.continueGame();
+			}
+			else{
+				AudioHandler.playSound(error);
+			}
 		} break;
 		}
 	}

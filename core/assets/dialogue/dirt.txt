@@ -9,6 +9,8 @@ That's kind of rude, isn't it?
 <ADJ_GRUB
 It'd probably much prefer to be back home!
 <GOAL
-You ought to save that.
+You ought to save that for wherever you're returning to.
+<GHOST
+[SPEAKER=GHOST_DIRT]P-p-please don't do that, okay?!
 <OTHER
 That... probably isn't going to work.

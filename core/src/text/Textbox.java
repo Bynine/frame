@@ -144,7 +144,15 @@ public class Textbox {
 		}
 		else if (command.getID().startsWith("SPEAKER")){
 			String[] speakerData = command.getID().split("=");
-			speaker = EntityHandler.getNPC(speakerData[1]);
+			if (speakerData[1].equals("KAMI")){
+				speaker = new NPC("KAMI", "");
+			}
+			else if (speakerData[1].equals("GHOST_DIRT")){
+				speaker = new NPC("GHOST", "");
+			}
+			else{
+				speaker = EntityHandler.getNPC(speakerData[1]);
+			}
 			text_sound = Gdx.audio.newSound(Gdx.files.internal("sfx/speech/" + speaker.getVoiceUrl() + ".wav"));
 		}
 		else if (command.getID().startsWith("SPEED")){

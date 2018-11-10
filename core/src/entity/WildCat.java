@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import main.Animator;
 import main.FrameEngine;
 
-public class Cat extends Critter {
+public class WildCat extends Critter {
 	
 	private final ArrayList<Animation<TextureRegion>> watch = 
 			Animator.createAnimation(45, "sprites/critters/cat.png", 2, 1);
@@ -23,7 +23,7 @@ public class Cat extends Critter {
 			FrameEngine.TILE * 5
 		);
 
-	public Cat(float x, float y) {
+	public WildCat(float x, float y) {
 		super(x, y);
 		reactTimer.setEndTime(30);
 		collides = false;

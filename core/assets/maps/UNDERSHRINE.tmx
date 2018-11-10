@@ -229,6 +229,7 @@
   <object id="277" name="portal" gid="6" x="192" y="88" width="96" height="64">
    <properties>
     <property name="DEST" value="SHRINE,12,7"/>
+    <property name="DIR" value="DOWN"/>
     <property name="TYPE" value="PORTAL"/>
    </properties>
   </object>
