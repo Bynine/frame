@@ -195,7 +195,7 @@ public class Player extends Entity{
 		case NORMAL:
 		default: step = stepGrass;
 		}
-		AudioHandler.playSound(step);
+		AudioHandler.playSoundVariedPitch(step);
 		stepTimer.reset();
 	}
 

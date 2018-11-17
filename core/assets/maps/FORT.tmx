@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="299">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="300">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/fort_interior.tsx"/>
  <tileset firstgid="73" source="tilesets/light.tsx"/>
@@ -132,7 +132,7 @@
  <objectgroup id="8" name="ENTITIES" opacity="0.64">
   <object id="278" name="portal" gid="6" x="360" y="144" width="48" height="40">
    <properties>
-    <property name="DEST" value="FORTTOP,11.5,12"/>
+    <property name="DEST" value="FORTMAZE,17,20.5"/>
     <property name="TYPE" value="PORTAL"/>
    </properties>
   </object>

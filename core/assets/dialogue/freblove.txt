@@ -1,0 +1,15 @@
+*TALK_FREBLOVE
+...[PAUSE]little thing sound sad.
+little thing... missing something.
+&TALK_FREBLOVE
+me not like little thing sound sad.
+it make me sad.
+&FREB_SHELL_1
+*TALK_FREBLOVE_HAPPY
+[ANIM_1]...thing is happy.
+you did good. thank you.
+take treasure.
+[NOSPEAKER][CURRENCY_1]You were given an acorn!
+&TALK_FREBLOVE_HAPPY
+...
+...[PAUSE][ANIM_1]thing sound good.

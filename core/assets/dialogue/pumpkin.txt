@@ -28,9 +28,9 @@ Sorry, I don't think I've ever heard of something like that..
 All I know is this. "One good turn deserves another"! You get what I mean, hon?
 &CAFE_REWARD
 [ANIM_2]Thanks again for your help, hon.
-Say, did you see a painter anywhere around? He's a good friend of mine.
-He seems to be very frustrated recently.[ANIM_1] But I can't quite understand why...[DEFAULTANIM]
+Say, did you see a painter anywhere around? [ANIM_6]He's a good ...[PAUSE] uh, friend of mine.
+[ANIM_1]He's very frustrated lately. But I've just been too busy to help...[DEFAULTANIM]
 &CAFE_REWARD,WORLD_REWARD
 [ANIM_2]Thanks again for your help, hon. You're a real life saver!
 Now I can relax and get back to running the cafe smoothly.
-And look at that beautiful painting we got! [ANIM_6]My friend did that, you know![DEFAULTANIM]
+And look at that beautiful painting we got! [ANIM_6]My ...[PAUSE]uh, friend painted it, you know![DEFAULTANIM]

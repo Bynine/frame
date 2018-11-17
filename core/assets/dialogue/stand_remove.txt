@@ -1,6 +1,6 @@
-Remove item from here?
+Remove the item from the stand?
 >YES,NO
 <YES
 [RETRIEVE_ITEM]You pick the item back up and put it in your backpack.
 <NO
-You keep it where it is.
+You decide to keep it where it is.

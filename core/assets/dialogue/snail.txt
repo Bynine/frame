@@ -1,0 +1,6 @@
+*SNAIL_TALK
+My snail senses are tingling... I believe there ARE_IS NUM_SECRETS itemDO_THE_MARIO hidden around here!
+By the way... if you want me to stop talking, just poke me in your inventory.
+I'll be as quiet as a mouse who is also a mime!
+&SNAIL_TALK
+My snail senses are tingling... I believe there ARE_IS NUM_SECRETS itemDO_THE_MARIO hidden around here!

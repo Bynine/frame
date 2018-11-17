@@ -116,7 +116,7 @@ public class Flower extends InteractableEntity {
 			FrameEngine.getSaveFile().addToCounter(1, grownFlowers);
 			setFlower();
 			if (flowerType.equals(FlowerType.ONE)) {
-				AudioHandler.playSound(whistle);
+				AudioHandler.playSoundVariedPitch(whistle);
 			}
 		}
 	}

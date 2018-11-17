@@ -35,7 +35,7 @@ public class Portal extends ImmobileEntity {
 		super.update();
 		if (touchingPlayer(hitbox)){
 			FrameEngine.initiateAreaChange(destArea, destLocation, direction);
-			if (doorSound) AudioHandler.playSound(close);
+			if (doorSound) AudioHandler.playSoundVariedPitch(close);
 		}
 	}
 

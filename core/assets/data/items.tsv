@@ -7,7 +7,7 @@ TREASURE2	Ancient Shield	TREASURE	Cracked and scarred. It's about to fall apart.
 TREASURE3	Knitted Sweater	TREASURE	Just your size and very warm	1
 TREASURE4	Pumpkin Cupcake	TREASURE	Pumpkin frosted muffin with a gooey chocolate center	1
 TREASURE5	Nice Painting	TREASURE	A painting of you, planting a flower!	1
-TREASURE6	Ragged Doll	TREASURE	Well loved plush bird doll	1
+TREASURE6	Ragged Doll	TREASURE	Well loved plush doll with a familiar design	1
 
 SHOVEL	shovel	NONE	Unsurprisingly good at digging	3
 WATERINGCAN	watering can	NONE	Give seeds a nice drink	3
@@ -18,9 +18,9 @@ SHELL3	rad shell	SHELL	The blue color is elegant	2
 
 SEED1	silly seed	SEED	It's hard not to smile just looking at it	1
 SEED2	snow seed	SEED	Seems to exude a gentleness	1
-SEED3	sun seed	SEED	Warm to the touch	1
-SEED4	bright seed	SEED	Shines under direct light	1
-SEED5	color seed	SEED	Very soft	1
+SEED3	sunny seed	SEED	Oddly warm to the touch	1
+SEED4	shiny seed	SEED	Shines many colors under direct light	1
+SEED5	soft seed	SEED	The fuzzy exterior is pleasant	1
 
 GRUB1	Chubby Grub	GRUB	This grub loves to eat	1
 GRUB2	Nubby Grub	GRUB	This grub has little bumps	1
@@ -31,8 +31,9 @@ ORDER2	spiced pumpkin cider	NONE	Smells unbelievably good	1
 ORDER3	red-bean coffee	NONE	What a striking color!	1
 
 GHOST	Ghost	NONE	GHOST	0
+SNAIL	Helpful Snail	NONE	Tells you about items you've missed	1
 
-APPLE	apple	FOOD,SWEET	Pleasantly juicy	1
+APPLE	apple	FOOD,SWEET	Yummy and juicy	1
 MUSHROOM	mushroom	NATURAL	Pleasantly shaped toadstool	1
 BAIT	bait	NONE	Attracts fish	4
 PUMPKIN	pumpkin	FOOD	Great for pies	1

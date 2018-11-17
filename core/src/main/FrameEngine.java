@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,6 +15,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import area.Area;
 import debug.DebugMenu;
 import entity.InteractableEntity;
+import entity.NPC;
 import entity.Player;
 import entity.Portal.Direction;
 import text.MenuOption;
@@ -28,13 +30,13 @@ public class FrameEngine extends ApplicationAdapter {
 	public static boolean 
 	DRAW 	= false	&& DEBUG,
 	MUTE	= true	&& DEBUG,
-	LOG		= false	&& DEBUG,
+	LOG		= true	&& DEBUG,
 	NOMAIN	= true	&& DEBUG,
 	INVIS	= false	&& DEBUG,
 	MAPS	= false && DEBUG,
 	TREASURE= false && DEBUG,
 	GHOST	= false	&& DEBUG,
-	SAVE	= true	|| !DEBUG;
+	SAVE	= false	|| !DEBUG;
 
 	private static Player player;
 	private static FPSLogger fpsLogger;
@@ -42,8 +44,8 @@ public class FrameEngine extends ApplicationAdapter {
 	private static InputHandler inputHandler;
 	private static Area currArea = null;
 	private static InteractableEntity currInteractable;
-	private static DialogueTree dialogueTree = null;
-	private static boolean inventoryRequest = false;
+	private static ArrayList<DialogueTree> dialogueTrees = new ArrayList<DialogueTree>();
+	static boolean inventoryRequest = false;
 	private static SaveFile saveFile;
 	private static ProgressionHandler progressionHandler;
 	private static Inventory inventory;
@@ -69,6 +71,7 @@ public class FrameEngine extends ApplicationAdapter {
 	public static final Logger logger = Logger.getLogger("ERROR_LOG");
 	public static DebugMenu debugMenu;
 	public static GraphicsHandler graphicsHandler;
+	public static boolean snailActive = true;
 
 	public static final Vector2 resolution = new Vector2(TILE * 36, TILE * 24);
 	public static final Vector2 newPosition = new Vector2(TILE * 32, TILE * 32);
@@ -100,6 +103,7 @@ public class FrameEngine extends ApplicationAdapter {
 		}
 		else {
 			continueGame();
+			saveFile.setRandomFlags();
 		}
 	}
 
@@ -193,12 +197,12 @@ public class FrameEngine extends ApplicationAdapter {
 			graphicsHandler.drawMenu(answersMenu);
 			answersMenu.update();
 		}
-		if (null != dialogueTree){
-			if (dialogueTree.terminated() || null == dialogueTree.getTextbox()){
-				dialogueTree = null;
+		if (null != getDialogueTree()){
+			if (getDialogueTree().terminated() || null == getDialogueTree().getTextbox()){
+				endDialogueTree();
 			}
 			else{
-				dialogueTree.getTextbox().update();
+				getDialogueTree().getTextbox().update();
 			}
 		}
 		if (inventoryRequest){
@@ -285,24 +289,24 @@ public class FrameEngine extends ApplicationAdapter {
 		if (inputHandler.getPauseJustPressed()){
 			if (gameState == GameState.PAUSED){
 				gameState = GameState.OVERWORLD;
-				AudioHandler.playSound(AbstractMenu.stopCursor);
+				AudioHandler.playSoundVariedPitch(AbstractMenu.stopCursor);
 			}
 			else if (inventoryRequest){
 				inventoryRequest = false;
-				dialogueTree = null;
+				endDialogueTree();
 				gameState = GameState.OVERWORLD;
 			}
 			else if (gameState == GameState.INVENTORY){
 				gameState = GameState.PAUSED;
-				AudioHandler.playSound(AbstractMenu.stopCursor);
+				AudioHandler.playSoundVariedPitch(AbstractMenu.stopCursor);
 			}
 			else if (gameState == GameState.SHOP){
 				endShop();
-				AudioHandler.playSound(AbstractMenu.stopCursor);
+				AudioHandler.playSoundVariedPitch(AbstractMenu.stopCursor);
 			}
 			else if (gameState == GameState.OVERWORLD && canControlPlayer()){
 				handlePause();
-				AudioHandler.playSound(AbstractMenu.moveCursor);
+				AudioHandler.playSoundVariedPitch(AbstractMenu.moveCursor);
 			}
 		}
 		if (inputHandler.getActionJustPressed()) {
@@ -322,25 +326,25 @@ public class FrameEngine extends ApplicationAdapter {
 	 * Performs actions when player hits Action.
 	 */
 	private void handleActionPressed(){
-		if (null != dialogueTree){
-			Textbox textbox = dialogueTree.getTextbox();
+		if (null != getDialogueTree()){
+			Textbox textbox = getDialogueTree().getTextbox();
 			if (textbox.isFinished()){
 				if (null != answersMenu){
-					dialogueTree.handleAnswer(answersMenu.getActiveButton().getOutput().toString());
+					getDialogueTree().handleAnswer(answersMenu.getActiveButton().getOutput().toString());
 					answersMenu = null;
 				}
 				else if (inventoryRequest){
-					dialogueTree.handleItemChoice((ItemDescription)inventory.getActiveButton().getOutput());
+					getDialogueTree().handleItemChoice((ItemDescription)inventory.getActiveButton().getOutput());
 					inventoryRequest = false;
 				}
-				else if (dialogueTree.finished()){
+				else if (getDialogueTree().finished()){
 					Player.setImageState(Player.ImageState.NORMAL);
-					dialogueTree.messageSpeaker();
-					dialogueTree = null;
+					getDialogueTree().messageSpeaker();
+					endDialogueTree();
 				}
 				else{
 					Player.setImageState(Player.ImageState.NORMAL);
-					dialogueTree.advanceBranch();
+					getDialogueTree().advanceBranch();
 				}
 			}
 			else{
@@ -348,6 +352,7 @@ public class FrameEngine extends ApplicationAdapter {
 			}
 		}
 		else if (canControlPlayer() && null != currInteractable){
+			player.getVelocity().setZero();
 			currInteractable.interact();
 		}
 	}
@@ -395,7 +400,6 @@ public class FrameEngine extends ApplicationAdapter {
 		QuestionHandler.changeArea(currArea);
 		AudioHandler.startNewAudio(currArea.music);
 		setNewPlayerPosition();
-		//player.getVelocity().setZero();
 		EntityHandler.dispose();
 		AudioHandler.clearAudioSources();
 		EntityHandler.initializeAreaEntities(currArea);
@@ -403,6 +407,23 @@ public class FrameEngine extends ApplicationAdapter {
 		time.reset();
 		player.setDirection(newDirection);
 		newDirection = Direction.ANY;
+		if (inventory.hasItem("SNAIL") && snailActive){
+			activeSnail();
+		}
+	}
+
+	private static void activeSnail(){
+		int numSecrets = EntityHandler.getNumSecrets();
+		if (numSecrets > 0){
+			startDialogueTree(
+					new DialogueTree(new NPC("SNAIL", ""),
+							"snail", new HashMap<String, String>(){{
+								put("ARE_IS", numSecrets != 1 ? "are" : "is");
+								put("NUM_SECRETS", Integer.toString(numSecrets));
+								put("DO_THE_MARIO", numSecrets != 1 ? "s" : "");
+							}})
+					);
+		}
 	}
 
 	private static void setNewPlayerPosition(){
@@ -431,6 +452,7 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	private static void beginGame(){
+		saveFile = new SaveFile(LOG);
 		gameState = GameState.OVERWORLD;
 		newArea = new Area(saveFile.startArea);
 		if (saveFile.startPosition.isZero() && !SAVE){
@@ -485,7 +507,7 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	public static void startCredits(){
-		dialogueTree = null;
+		dialogueTrees.clear();
 		time.reset();
 		saveFile.save(true);
 		newArea = new Area("PATH");
@@ -505,14 +527,14 @@ public class FrameEngine extends ApplicationAdapter {
 	 * Starts a textbox.
 	 */
 	public static void putTextbox(Textbox textbox){
-		dialogueTree = new DialogueTree((textbox));
+		dialogueTrees.add(new DialogueTree((textbox)));
 	}
 
 	/**
 	 * Runs through Dialogue until finished.
 	 */
 	public static void startDialogueTree(DialogueTree dialogue) {
-		dialogueTree = dialogue;
+		dialogueTrees.add(dialogue);
 	}
 
 	/**
@@ -532,7 +554,7 @@ public class FrameEngine extends ApplicationAdapter {
 	public static void setInventoryRequest(String string) {
 		inventory.open();
 		if (inventory.getList().isEmpty()){
-			dialogueTree = new DialogueTree("But you don't have anything to give!");
+			dialogueTrees.add(0, new DialogueTree("But you don't have anything to give!"));
 		}
 		else{
 			ArrayMap<String, String> options = new ArrayMap<>();
@@ -548,11 +570,11 @@ public class FrameEngine extends ApplicationAdapter {
 	 * Redirects dialogue tree to a different branch.
 	 */
 	public static void setRedirect(String string) {
-		dialogueTree.handleAnswer(string);
+		getDialogueTree().handleAnswer(string);
 	}
 
 	public static void endDialogueTree() {
-		dialogueTree = null;
+		dialogueTrees.remove(0);
 	}
 
 	// GET
@@ -612,8 +634,13 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	public static Textbox getCurrentTextbox(){
-		if (null == dialogueTree) return null;
-		return dialogueTree.getTextbox();
+		if (null == getDialogueTree()) return null;
+		return getDialogueTree().getTextbox();
+	}
+
+	private static DialogueTree getDialogueTree(){
+		if (dialogueTrees.isEmpty()) return null;
+		else return dialogueTrees.get(0);
 	}
 
 	public static float getTime() {

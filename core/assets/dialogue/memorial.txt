@@ -1,3 +1,6 @@
 Written on this stone tablet is the following...
 "Flowers borne of seasons four ~ Must grow in these woods before
 You can walk this water's path ~ To see the god's cold stony wrath."
+&CURSE_REWARD
+The writing from before has disappeared.
+Now all that is written is "Rest in Peace".

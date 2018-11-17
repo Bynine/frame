@@ -26,7 +26,7 @@ public class MainMenu extends AbstractMenu {
 
 	@Override
 	protected void selectItem() {
-		AudioHandler.playSound(select);
+		AudioHandler.playSoundVariedPitch(select);
 		switch ((Option)getList().get(cursor).getOutput()){
 		case NEW:{
 			if (exists){
@@ -41,7 +41,7 @@ public class MainMenu extends AbstractMenu {
 				FrameEngine.continueGame();
 			}
 			else{
-				AudioHandler.playSound(error);
+				AudioHandler.playSoundVariedPitch(error);
 			}
 		} break;
 		}

@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import area.Area;
 import area.EntityLoader;
 import entity.AudioLocation;
+import entity.Currency;
 import entity.Entity;
 import entity.ImmobileEntity;
+import entity.Item;
 import entity.NPC;
+import entity.Secret;
 
 /**
  * Controls and updates overworld entities.
@@ -16,6 +19,7 @@ public class EntityHandler {
 
 	protected static final ArrayList<Entity> entities = new ArrayList<Entity>();
 	protected static final ArrayList<Entity> entitiesToAdd = new ArrayList<Entity>();
+	private static int numSecrets = 0;
 	
 	public static void update() {
 		ArrayList<Entity> entities_to_remove = new ArrayList<Entity>();
@@ -52,6 +56,7 @@ public class EntityHandler {
 	
 	public static void initializeAreaEntities(Area area){
 		entities.clear();
+		numSecrets = 0;
 		if (!entities.contains(FrameEngine.getPlayer())){
 			entities.add(FrameEngine.getPlayer());
 		}
@@ -64,6 +69,9 @@ public class EntityHandler {
 			if (en instanceof ImmobileEntity && en.collides()){
 				en.update();
 				area.addToCollision(en);
+			}
+			if (en instanceof Item || en instanceof Secret || en instanceof Currency){
+				numSecrets++;
 			}
 		}
 		AudioHandler.addAudioSources(audioSources);
@@ -92,5 +100,9 @@ public class EntityHandler {
 			}
 		}
 		return null;
+	}
+
+	public static int getNumSecrets() {
+		return numSecrets;
 	}
 }

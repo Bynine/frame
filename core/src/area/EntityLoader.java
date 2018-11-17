@@ -30,7 +30,7 @@ import entity.FrebKing;
 import entity.Glimmer;
 import entity.Goal;
 import entity.Grass;
-import entity.GrubHole;
+import entity.GrubDoor;
 import entity.GrubMom;
 import entity.Instrument;
 import entity.Secret;
@@ -39,6 +39,7 @@ import entity.Item;
 import entity.ItemHole;
 import entity.Koi;
 import entity.Memorial;
+import entity.MoveLight;
 import entity.NPC;
 import entity.Painting;
 import entity.Portal;
@@ -107,7 +108,7 @@ public class EntityLoader {
 			double x_dest = Double.parseDouble(destination[1]);
 			double y_dest = Double.parseDouble(destination[2]);
 			if (type.equals("grubhole")){
-				entities.add(new GrubHole(x, y, flag, destination[0], x_dest, y_dest));
+				entities.add(new GrubDoor(x, y, flag, destination[0], x_dest, y_dest));
 			}
 			else if (type.equals("trapdoor")){
 				entities.add(new TrapDoor(x, y, destination[0], x_dest, y_dest));
@@ -305,6 +306,9 @@ public class EntityLoader {
 		} break;
 		case "koi":{
 			entities.add(new Koi(x, y));
+		} break;
+		case "movelight":{
+			entities.add(new MoveLight(x, y));
 		} break;
 		default: {
 			FrameEngine.logger.log( Level.WARNING, 

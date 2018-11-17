@@ -50,7 +50,7 @@ public class Stand extends InteractableEntity {
 	public void getMessage(String message){
 		super.getMessage(message);
 		if (message.equals("PLACED")){
-			AudioHandler.playSound(ignite);
+			AudioHandler.playSoundVariedPitch(ignite);
 			placedItem = new ItemDescription(FrameEngine.getGivenItemID());
 			FrameEngine.getSaveFile().setMapping(id, FrameEngine.getGivenItemID());
 		}

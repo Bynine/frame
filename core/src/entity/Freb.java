@@ -90,6 +90,7 @@ public class Freb extends NPC {
 	private void setShell(String item, int num){
 		shell = num;
 		FrameEngine.getSaveFile().addToCounter(num, flag);
+		FrameEngine.getSaveFile().setFlag(flag, true);
 	}
 	
 	private boolean hasShell(){

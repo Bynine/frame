@@ -31,10 +31,11 @@ KID1	Precocious Kid	what	FALSE	1	30
 KID2	Quiet Kid	subtle	FALSE	1	30
 DOG	Dog	bwep	TRUE	2	20
 KITTY	Kitty	mih	FALSE	1	45
-FREBLOVE ???	bup	TRUE	1	30
-GRUBLOVE ???	bup	TRUE	1	30
+FREBLOVE	Intense Statue	subtle	TRUE	1	30
+GRUBLOVE	GRUBLOVE	bup	TRUE	1	30
 DANCER	Strange Statue	subtle	TRUE	1	30
 DEMON	Cavern Dweller	what	TRUE	1	60
+SNAIL	Helpful Snail	bup	TRUE	1	30
 
 WITCH	Witch	mih	TRUE	1	30
 SKULL	Ground Head	bup	TRUE	1	45

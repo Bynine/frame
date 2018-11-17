@@ -25,7 +25,7 @@ public class SaveFile {
 	private String positionX = "turnips";
 	private String positionY = "snails";
 	private boolean exists = false;
-	
+
 	public String startArea = "FOREST";
 	public final Vector2 startPosition = new Vector2();
 
@@ -78,20 +78,33 @@ public class SaveFile {
 			}
 		}
 		if (verbose) System.out.println("Map: " + map.toString());
+		boolean savedInTrials = false;
 
 		if (preferences.get().containsKey(areaKey)){
-			if (verbose) System.out.println("Now arriving at: " + preferences.getString(areaKey));
-			startArea = preferences.getString(areaKey);
+			String area = preferences.getString(areaKey);
+			// If player saves during trials, then loads, they're booted back to start
+			if (area.startsWith("DEPTHSQ")){
+				if (verbose) System.out.println("Naughty player saved in " + area);
+				startArea = "UNDERSHRINE";
+				startPosition.set(18, 22);
+				savedInTrials = true;
+			}
+			else{
+				if (verbose) System.out.println("Now arriving at: " + area);
+				startArea = area;
+			}
 		}
-		
-		if (preferences.get().containsKey(positionX) && preferences.get().containsKey(positionY)){
-			startPosition.set(
-					preferences.getFloat(positionX),
-					preferences.getFloat(positionY)
-					);
-			if (verbose) System.out.println(startPosition);
+
+		if (!savedInTrials){
+			if (preferences.get().containsKey(positionX) && preferences.get().containsKey(positionY)){
+				startPosition.set(
+						preferences.getFloat(positionX),
+						preferences.getFloat(positionY)
+						);
+				if (verbose) System.out.println(startPosition);
+			}
 		}
-		
+
 	}
 
 	/**
@@ -109,7 +122,7 @@ public class SaveFile {
 			if (verbose) System.out.println("Mapped " + (mapPrefix + key) + " to " + map.get(key));
 		}
 		preferences.putInteger(moneyKey, money);
-		
+
 		float x = (FrameEngine.getPlayer().getPosition().x)/FrameEngine.TILE;
 		if (positionIsSet) x = 1;
 		float y = ((FrameEngine.getArea().mapHeight - FrameEngine.getPlayer().getPosition().y)
@@ -209,6 +222,24 @@ public class SaveFile {
 		counters.clear();
 		map.clear();
 		money = 0;
+		setRandomFlags();
+	}
+
+	public void setRandomFlags(){
+		setRandomFlag("RAND1");
+		setRandomFlag("RAND2");
+		setRandomFlag("RAND3");
+		setRandomFlag("RAND4");
+	}
+
+	private void setRandomFlag(String flag){
+		if (coinFlip()){
+			setFlag(flag, true);
+		}
+	}
+
+	private boolean coinFlip(){
+		return Math.random() > 0.5f;
 	}
 
 	public void setMapping(String key, String value) {

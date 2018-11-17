@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="263">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="266">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/shop.tsx"/>
  <tileset firstgid="265" source="tilesets/cafe.tsx"/>
@@ -214,6 +214,30 @@
     <property name="TEXT">A basket of balls of silk.
 You wonder idly where it came from, then decide it might be better to leave some stones unturned.</property>
     <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="263" name="snore1" gid="5" x="224" y="184" width="24" height="32">
+   <properties>
+    <property name="APPEAR" value="RETURNED_GRUB1"/>
+    <property name="AUDIO" value="snore"/>
+    <property name="ID" value="SNORE"/>
+    <property name="TYPE" value="AUDIO"/>
+   </properties>
+  </object>
+  <object id="264" name="snore2" gid="5" x="256" y="184" width="24" height="32">
+   <properties>
+    <property name="APPEAR" value="RETURNED_GRUB2"/>
+    <property name="AUDIO" value="snore"/>
+    <property name="ID" value="SNORE"/>
+    <property name="TYPE" value="AUDIO"/>
+   </properties>
+  </object>
+  <object id="265" name="snore3" gid="5" x="288" y="184" width="24" height="32">
+   <properties>
+    <property name="APPEAR" value="RETURNED_GRUB3"/>
+    <property name="AUDIO" value="snore"/>
+    <property name="ID" value="SNORE"/>
+    <property name="TYPE" value="AUDIO"/>
    </properties>
   </object>
  </objectgroup>

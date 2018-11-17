@@ -40,7 +40,7 @@ public class TrapDoor extends PortalHole {
 				!FrameEngine.getSaveFile().getMapping("STAND4").isEmpty()
 				;
 		if (!opened && toOpen){
-			if (b) AudioHandler.playSound(open);
+			if (b) AudioHandler.playSoundVariedPitch(open);
 			canInteract = true;
 		}
 		opened = toOpen;

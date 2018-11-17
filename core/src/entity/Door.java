@@ -26,7 +26,7 @@ public class Door extends InteractableEntity {
 	}
 	
 	public void interact() {
-		AudioHandler.playSound(open);
+		AudioHandler.playSoundVariedPitch(open);
 		FrameEngine.initiateAreaChange(destArea, destLocation, Direction.UP);
 	}
 

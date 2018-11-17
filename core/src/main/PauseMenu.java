@@ -25,7 +25,7 @@ public class PauseMenu extends AbstractMenu{
 
 	@Override
 	protected void selectItem() {
-		AudioHandler.playSound(select);
+		AudioHandler.playSoundVariedPitch(select);
 		switch ((Option)getList().get(cursor).getOutput()){
 		case INVENTORY:{
 			FrameEngine.startInventory();

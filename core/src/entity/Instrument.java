@@ -36,7 +36,7 @@ public class Instrument extends InteractableEntity {
 			int keyRange = 11;
 			int key = (int) ((keyRange/2) - (Math.random() * (keyRange)));
 			float pitch = (float)Math.pow(1.1091f,key);
-			AudioHandler.playPitchedSound(sound, pitch, 1.0f);
+			AudioHandler.playPitchedSound(sound, pitch, 1.0f, false);
 			playTimer.reset();
 			EntityHandler.addEntity(new Note(position.x + 16, position.y + 24, 20));
 			timesPlayed++;

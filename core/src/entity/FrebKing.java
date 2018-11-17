@@ -51,7 +51,7 @@ public class FrebKing extends NPC {
 			singTimer.countDown();
 			float pitch = 0.5f + (0.2f * 
 					((singCounter >= 4) ? (singCounter * 0.66f) : singCounter) - (singCounterB * 0.125f));
-			AudioHandler.playPitchedSound(croak, pitch, 1);
+			AudioHandler.playPitchedSound(croak, pitch, 1, false);
 			croakTimer.reset();
 			singCounter++;
 			if (singCounter >= 8) {

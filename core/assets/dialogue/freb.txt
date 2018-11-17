@@ -4,5 +4,7 @@
 *SHELL_FREB_FLAG
 [NOSPEAKER][REMOVE_ITEM]It gladly accepts the shell!
 Fribbit! Fribbit!
+<GHOST
+[SPEAKER=GHOST_DIRT]I hate to ask, but... [PAUSE]Please don't pawn me off to a freb?
 <OTHER
 [NOSPEAKER]Unfortunately, it just doesn't seem interested.

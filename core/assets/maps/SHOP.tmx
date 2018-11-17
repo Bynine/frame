@@ -158,9 +158,8 @@ They're weirdly shaped but smell nice and fresh.</property>
   </object>
   <object id="214" name="text" gid="1" x="352" y="280" width="32" height="24">
    <properties>
-    <property name="TEXT">Some green tea that's been put out for customers.
-It's warm!</property>
-    <property name="TYPE" value="DESC"/>
+    <property name="DIALOGUE" value="tea"/>
+    <property name="TYPE" value="DIALOGUEDESC"/>
    </properties>
   </object>
   <object id="215" name="text" gid="1" x="544" y="296" width="32" height="64">

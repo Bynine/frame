@@ -9,14 +9,10 @@ import text.DialogueTree;
 public class Memorial extends InteractableEntity {
 	
 	private TextureRegion texture = new TextureRegion(new Texture("sprites/objects/memorial.png"));
-	private final boolean risen;
+	private TextureRegion bouquet = new TextureRegion(new Texture("sprites/objects/memorial_bouquet.png"));
 
 	public Memorial(float x, float y, float width, float height) {
 		super(x, y, "");
-		risen = Walkway.checkRisen();
-		if (risen){
-			setRemove();
-		}
 		hitbox.setSize(width, height);
 	}
 	
@@ -27,7 +23,7 @@ public class Memorial extends InteractableEntity {
 	
 	@Override
 	public void updateImage(){
-		image = risen ? null : texture;
+		image = FrameEngine.getSaveFile().getFlag("CURSE_REWARD") ? bouquet : texture;
 	}
 
 	@Override

@@ -23,11 +23,11 @@ public class AudioHandler {
 	/**
 	 * A certain period after a newly created sound is played, it gets disposed.
 	 */
-	private static HashMap<DurationTimer, Sound> soundDisposal = new HashMap<>();
+	private static HashMap<DurationTimer, Sound> reverb = new HashMap<>();
 	private static HashSet<AudioSource> audioSources = new HashSet<>();
 	private static Music currAudio = null;
 	private static String currAudioName = "";
-	public static float VOLUME = 0.4f;
+	public static float VOLUME = 1.0f;
 
 	/**
 	 * Any start-up calls.
@@ -47,13 +47,19 @@ public class AudioHandler {
 					MathUtils.clamp(FrameEngine.getTransitionMod(), 0.25f, 1));
 		}
 		else currAudio.setVolume(VOLUME);
-		Iterator<DurationTimer> sound_iter = soundDisposal.keySet().iterator();
-		while (sound_iter.hasNext()){
-			DurationTimer timer = sound_iter.next();
-			timer.countUp();
-			if (timer.timeUp()){
-				soundDisposal.get(timer).dispose();
-				sound_iter.remove();
+		Iterator<DurationTimer> iter = reverb.keySet().iterator();
+		while(iter.hasNext()){
+			DurationTimer dt = iter.next();
+			Sound sound = reverb.get(dt);
+			dt.countUp();
+			if (dt.timeUp()){
+				try{
+					playPitchedSound(sound, 1, 0.3f, true);
+				}
+				catch(Exception e){
+					System.out.println(e);
+				}
+				iter.remove();
 			}
 		}
 		for (AudioSource audioSource: audioSources){
@@ -61,7 +67,7 @@ public class AudioHandler {
 			audioSource.audio.play();
 		}
 	}
-	
+
 
 	/**
 	 * Stops the current Music, then plays the Music specified by the path.
@@ -87,25 +93,28 @@ public class AudioHandler {
 	/**
 	 * Plays a preloaded sound. The calling class needs to dispose the sound of its own accord.
 	 */
-	public static long playSound(Sound sound){
+	public static long playSoundVariedPitch(Sound sound){
 		final float pitchDisparity = 16.0f;
 		float pitch = (1.0f - 0.5f/pitchDisparity) + (float) (Math.random()/pitchDisparity);
-		return playPitchedSound(sound, pitch, 1);
+		return playPitchedSound(sound, pitch, 1, false);
 	}
-	
+
 	public static long playVolumeSound(Sound sound, float volume){
-		return playPitchedSound(sound, 1, volume);
+		return playPitchedSound(sound, 1, volume, false);
 	}
-	
-	public static long playPitchedSound(Sound sound, float pitch, float volume){
+
+	public static long playPitchedSound(Sound sound, float pitch, float volume,boolean isReverb){
+		if (!isReverb && FrameEngine.getArea().reverb){
+			reverb.put(new DurationTimer(10), sound);
+		}
 		return sound.play(volume * VOLUME, pitch, 0);
 	}
 
 	public static void playPositionalSound(Entity owner, Sound sound) {
-		long id = playSound(sound);
+		long id = playSoundVariedPitch(sound);
 		sound.setVolume(id, VOLUME * getVolume(owner.getPosition()));
 	}
-	
+
 	/**
 	 * Takes AudioLocations from EntityHandler and puts them into AudioSources.
 	 */
@@ -136,7 +145,7 @@ public class AudioHandler {
 		}
 		audioSources.clear();
 	}
-	
+
 	/**
 	 * Calculates volume as distance between position and player.
 	 */
@@ -159,7 +168,7 @@ public class AudioHandler {
 			audio = Gdx.audio.newMusic(Gdx.files.internal("music/" + audioFileName + ".ogg"));
 			this.id = id;
 		}
-		
+
 		float getVolume(){
 			float volume = 0.0f;
 			for (AudioLocation sourcelet: sourcelets){
@@ -172,7 +181,7 @@ public class AudioHandler {
 		void addLocation(AudioLocation sourcelet){
 			sourcelets.add(sourcelet);
 		}
-		
+
 		void dispose(){
 			for (AudioLocation sourcelet: sourcelets){
 				sourcelet.dispose();

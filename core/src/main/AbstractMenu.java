@@ -85,10 +85,10 @@ public abstract class AbstractMenu {
 	protected final void playCursorSound(int i){
 		int newPosition = cursor + i;
 		if (newPosition >= 0 && newPosition < (getList().size())){
-			AudioHandler.playSound(moveCursor);
+			AudioHandler.playSoundVariedPitch(moveCursor);
 		}
 		else{
-			AudioHandler.playSound(stopCursor);
+			AudioHandler.playSoundVariedPitch(stopCursor);
 		}
 	}
 

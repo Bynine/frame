@@ -73,6 +73,8 @@ public class GraphicsHandler {
 	acorn = new TextureRegion(new Texture("sprites/items/acorn.png")),
 	title = new TextureRegion(new Texture("sprites/gui/title.png")),
 	logo = new TextureRegion(new Texture("sprites/gui/logo.png")),
+	snailOn = new TextureRegion(new Texture("sprites/gui/snail_on.png")),
+	snailOff = new TextureRegion(new Texture("sprites/gui/snail_off.png")),
 	interactBubble = new TextureRegion(new Texture("sprites/player/interact.png")),
 	surpriseBubble = new TextureRegion(new Texture("sprites/player/surprise.png")),
 	talkingBubble = new TextureRegion(new Texture("sprites/player/talk.png")),
@@ -205,7 +207,8 @@ public class GraphicsHandler {
 			drawAbovePlayer(FrameEngine.getCurrentThing().icon);
 		}
 
-		if (null != FrameEngine.getCurrentTextbox()) {
+		if (null != FrameEngine.getCurrentTextbox()
+				&& !FrameEngine.inventoryRequest) {
 			drawDefaultTextbox(FrameEngine.getCurrentTextbox());
 		}
 
@@ -393,7 +396,7 @@ public class GraphicsHandler {
 	 * Draws watercolor overlay on top of map.
 	 */
 	public void drawOverlay(){
-		beginOverlay(0.1f);
+		beginOverlay(0.0f);
 		batch.setProjectionMatrix(worldCam.combined);
 		final int overlayMultiplier = 1;
 		for (int ii = 0; ii < overlayMultiplier; ++ii){
@@ -453,12 +456,15 @@ public class GraphicsHandler {
 						position.x + FrameEngine.TILE - desc.icon.getRegionWidth()/2, 
 						position.y + FrameEngine.TILE - desc.icon.getRegionHeight()/2
 						);
-				if (desc.hasAttribute("TREASURE")){
-					batch.draw(
-							heart, 
-							position.x + FrameEngine.TILE + 8, 
-							position.y + FrameEngine.TILE + 8
-							);
+				if (!price){
+					float iconX = position.x + FrameEngine.TILE + 8;
+					float iconY = position.y + FrameEngine.TILE + 8;
+					if (desc.hasAttribute("TREASURE")){
+						batch.draw(heart, iconX, iconY);
+					}
+					if (desc.id.equals("SNAIL")){
+						batch.draw(FrameEngine.snailActive ? snailOn : snailOff, iconX, iconY);
+					}
 				}
 				batch.end();
 			}
@@ -509,7 +515,7 @@ public class GraphicsHandler {
 			drawText(desc.name, 
 					new Vector2(
 							x, 
-							Gdx.graphics.getHeight()/(2/ZOOM) + FrameEngine.TILE * 2
+							Gdx.graphics.getHeight()/(2/ZOOM) + FrameEngine.TILE * 1
 							),
 					new Vector2(width, 2),
 					true
@@ -517,7 +523,7 @@ public class GraphicsHandler {
 			drawText(desc.description, 
 					new Vector2(
 							x, 
-							Gdx.graphics.getHeight()/(2/ZOOM) - FrameEngine.TILE
+							Gdx.graphics.getHeight()/(2/ZOOM) - FrameEngine.TILE * 2
 							),
 					new Vector2(width, 3),
 					false
@@ -529,7 +535,7 @@ public class GraphicsHandler {
 				drawText("COST: " + desc.price + " ACORN(S)", 
 						new Vector2(
 								x, 
-								Gdx.graphics.getHeight()/(2/ZOOM) - FrameEngine.TILE * 3
+								Gdx.graphics.getHeight()/(2/ZOOM) - FrameEngine.TILE * 4
 								),
 						new Vector2(width, 2),
 						false
@@ -863,7 +869,7 @@ public class GraphicsHandler {
 	public void drawCredits() {
 		drawOverworld();
 		batch.setProjectionMatrix(centerCam.combined);
-	
+
 		final float posX = FrameEngine.TILE/2;
 		final float posY = (Math.min(FrameEngine.getTime(), FrameEngine.CREDITS_END_TIME-600) * creditSpeed);
 		drawArt(0, posX, posY, treasure1Art, "FREBKING_REWARD");
@@ -877,7 +883,7 @@ public class GraphicsHandler {
 		debugFont.draw(batch, credits, posX, posY);
 		batch.end();
 	}
-	
+
 	private void drawArt(int offset, float posX, float posY, TextureRegion art, String flag){
 		batch.begin();
 		if (!FrameEngine.getSaveFile().getFlag(flag)) {

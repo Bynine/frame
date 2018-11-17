@@ -21,7 +21,7 @@ public class SaveConfirmationMenu extends AbstractMenu {
 
 	@Override
 	protected void selectItem() {
-		AudioHandler.playSound(select);
+		AudioHandler.playSoundVariedPitch(select);
 		switch ((Option)getList().get(cursor).getOutput()){
 		case RETURN:{
 			FrameEngine.startMainMenu(true);

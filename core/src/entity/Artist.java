@@ -29,7 +29,7 @@ public class Artist extends NPC {
 	@Override
 	public void update(){
 		super.update();
-		if (whistleTimer.timeUp() && happy){
+		if (whistleTimer.timeUp() && happy && currentAnim == 1){
 			whistleTimer.reset();
 			EntityHandler.addEntity(new Note(position.x + 16, position.y + 40, 30));
 		}

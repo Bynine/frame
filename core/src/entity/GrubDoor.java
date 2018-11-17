@@ -6,11 +6,11 @@ import main.EntityHandler;
 import main.FrameEngine;
 import text.DialogueTree;
 
-public class GrubHole extends Door {
+public class GrubDoor extends Door {
 
 	private boolean grub1, grub2, grub3 = false;
 
-	public GrubHole(float x, float y, String flag, String destination, double destX, double destY) {
+	public GrubDoor(float x, float y, String flag, String destination, double destX, double destY) {
 		super(x, y, destination, destX, destY);
 	}
 

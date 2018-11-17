@@ -28,7 +28,7 @@ public class Area {
 	public final TiledMap map;
 	public final int mapWidth;
 	public final int mapHeight;
-	public final boolean cameraFixed, sky;
+	public final boolean cameraFixed, sky, reverb;
 	public final String overlayString, id;
 	public final Color lightColor;
 	public final String music;
@@ -49,6 +49,7 @@ public class Area {
 		mapWidth  = getMap().getProperties().get("width",  Integer.class) * FrameEngine.TILE;
 		mapHeight = getMap().getProperties().get("height", Integer.class) * FrameEngine.TILE;
 		lightColor = getColor(data[7]);
+		reverb = Boolean.parseBoolean(data[8]);
 		
 		setCollision();
 		setMapSlopes();
@@ -60,6 +61,7 @@ public class Area {
 		case "WARM": return new Color(243f/255f, 190f/255f, 120f/255f, 0.48f);
 		case "GREY": return new Color(185f/255f, 188f/255f, 189f/255f, 0.54f);
 		case "COLD": return new Color(183f/255f, 229f/255f, 213f/255f, 0.66f);
+		case "BRIGHT": return new Color(203f/255f, 219f/255f, 213f/255f, 0.88f);
 		default: return new Color(1, 1, 1, 0.6f);
 		}
 		

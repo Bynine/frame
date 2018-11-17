@@ -12,9 +12,10 @@ public class ShopMenu extends Inventory {
 		items.clear();
 		descs.clear();
 		addIfNotPurchased("SHOVEL");
-		addIfNotPurchased("SHELL3");
+		addIfNotPurchased("SHELL1");
 		addIfNotPurchased("WATERINGCAN");
 		addIfNotPurchased("SEED4");
+		addIfNotPurchased("SNAIL");
 		super.open();
 	}
 	
@@ -31,10 +32,10 @@ public class ShopMenu extends Inventory {
 	protected void selectItem() {
 		ItemDescription desc = (ItemDescription)getActiveButton().getOutput();
 		if (desc.tooExpensive()){
-			AudioHandler.playSound(error);
+			AudioHandler.playSoundVariedPitch(error);
 		}
 		else{
-			AudioHandler.playSound(select);
+			AudioHandler.playSoundVariedPitch(select);
 			FrameEngine.getSaveFile().addMoney(-desc.price);
 			String id = desc.id;
 			FrameEngine.getSaveFile().setFlag(shopPrefix + id, true);

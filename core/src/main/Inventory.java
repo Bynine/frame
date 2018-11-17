@@ -21,7 +21,7 @@ public class Inventory extends AbstractMenu{
 	Inventory(){
 		if (FrameEngine.DEBUG){
 			items.add("SHOVEL");
-			items.add("GHOST");
+			//items.add("GHOST");
 			items.add("TREASURE1");
 			items.add("TREASURE2");
 			items.add("TREASURE3");
@@ -33,7 +33,6 @@ public class Inventory extends AbstractMenu{
 			items.add("SEED4");
 			items.add("WATERINGCAN");
 			items.add("GRUB2");
-			items.add("GRUB3");
 			
 //			items.add("SHELL3");
 //			items.add("SEED2");
@@ -83,10 +82,10 @@ public class Inventory extends AbstractMenu{
 		int newPosition = cursor - (i * 5);
 		if ((newPosition >= 0) && (newPosition < getList().size())){
 			cursor = newPosition;
-			AudioHandler.playSound(moveCursor);
+			AudioHandler.playSoundVariedPitch(moveCursor);
 		}
 		else{
-			AudioHandler.playSound(stopCursor);
+			AudioHandler.playSoundVariedPitch(stopCursor);
 		}
 	}
 
@@ -103,7 +102,10 @@ public class Inventory extends AbstractMenu{
 
 	@Override
 	protected void selectItem() {
-		//
+		ItemDescription desc = (ItemDescription)(getActiveButton().getOutput());
+		if (desc.id.equals("SNAIL")){
+			FrameEngine.snailActive = !FrameEngine.snailActive;
+		}
 	}
 
 	public Vector2 getButtonPosition(int pos) {

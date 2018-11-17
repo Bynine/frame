@@ -16,15 +16,16 @@ You are truly kind to grow flowers in this forest. As I walked around in frustra
 I was so touched by this gesture that I painted you tending to one of the flowers.
 Please, accept it. It is the least I can do.
 [NOSPEAKER][GIVE_TREASURE5]You received a painting!
-I would paint closer to your flowers, but... my easel got caught in the sand! Hahaha!
-[TALK]Ah? [PAUSE]You are looking for something, my friend?
+I would paint closer to your flowers, but... [PAUSE][ANIM_6]my easel got caught in the sand! Hahaha!
+[TALK][ANIM_1]Ah? [PAUSE]You are looking for something, my friend?
 That... sounds very important indeed. Clearly it has inspired you.
-Go forth! Seize the things that make you feel passionate! That is my advice to you.
+[ANIM_6]Go forth! Seize the things that make you feel passionate! [ANIM_1]That is my advice to you.
 &WORLD_REWARD
-I am so inspired... I will paint all the time!
-[ANIM_5]However, something still sours my mood. My good friend Jackie, who runs the cafe in the village...
-She is so busy lately that we haven't had the chance to talk.
+I am so inspired... [ANIM_6]I will paint all the time!
+[ANIM_5]However, something still sours my mood. My ...[ANIM_6][PAUSE] uh, friend, Jackie, who runs the cafe in the village...
+[ANIM_5]She is so busy lately that we haven't had the chance to talk.
 I hope she can get some time off soon. She works very hard, you know.
 &WORLD_REWARD,CAFE_REWARD
 Now that I am inspired... I will paint, paint, paint!
-I will never stop! Hahahaha!
+[ANIM_6]I will never stop! Hahahaha!
+[ANIM_1]I hope you will see my paintings around Wabika. I am quite proud of them.
