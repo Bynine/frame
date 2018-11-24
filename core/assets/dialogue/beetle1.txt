@@ -3,5 +3,11 @@ Oh, hello there. Yes, I can talk! Even though I'm just a beetle.
 Say, where did you come from, anyway? Your clothes are weird.
 Oops - I mean... they're... a nice kind of weird. Hehe.
 &TALK_BEETLE1
+*TALK_BEETLE1_2
 Maybe I should try getting myself a new outfit. Even though I'm just a beetle.
 What do you think, stranger?
+&TALK_BEETLE1_2,FOUND_GOAL
+Well? What do you think of my new outfit, stranger?
+[TALK][PAUSE]...
+What do you mean you can't see it?!
+Oh, yeah... I forgot to put it on. Oh well.

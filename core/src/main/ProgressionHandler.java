@@ -22,48 +22,21 @@ public class ProgressionHandler {
 	foundStatuette = "FOUND_STATUETTE",
 	checkStatuette = "CHECK_STATUETTE";
 	
-	SaveFile sf;
-	
 	ProgressionHandler(){
-		sf = FrameEngine.getSaveFile();
 	}
 
 	void update(){
-		statuetteFoundHelper(1);
-		statuetteFoundHelper(2);
-		statuetteFoundHelper(3);
-		statuetteFoundHelper(4);
-		checkStatuetteHelper();
 		checkOutOfWoodsBeforeEnteredShrine();
-	}
-	
-	/**
-	 * If statuette is discovered for first time,
-	 * increments number of statuettes found.
-	 */
-	private void statuetteFoundHelper(int n){
-		if (sf.getCounter(foundStatuette) == n && !sf.getFlag(foundStatuette+"_"+n)){
-			checkStatuetteDialog();
-			sf.setFlag(foundStatuette+"_"+n, true);
-		}
-	}
-	
-	/**
-	 * Displays check statuette dialog once.
-	 */
-	private void checkStatuetteHelper(){
-		if (sf.getFlag(checkStatuette)){
-			checkStatuetteDialog();
-			sf.setFlag(checkStatuette, false);
-		}
 	}
 
 	/**
 	 * Provides dialog for checking statuette based on
 	 * number of statuettes found.
 	 */
-	private void checkStatuetteDialog() {
-		switch (sf.getCounter(foundStatuette)){
+	public void startStatuetteDialog() {
+		int counter = FrameEngine.getSaveFile().getCounter(foundStatuette);
+		if (FrameEngine.LOG) System.out.println("Starting statuette dialog: " + counter);
+		switch (counter){
 		case 1:{
 			FrameEngine.startDialogueTree(new DialogueTree(
 					"A mysterious voice echoes...\n"
@@ -91,10 +64,10 @@ public class ProgressionHandler {
 		if (
 				(FrameEngine.getArea().getID().equals("BEACH") || 
 				FrameEngine.getArea().getID().equals("ORCHARD")) &&
-				!sf.getFlag("ENTERED_SHRINE") &&
-				!sf.getFlag(beforeShrineWarning)
+				!FrameEngine.getSaveFile().getFlag("ENTERED_SHRINE") &&
+				!FrameEngine.getSaveFile().getFlag(beforeShrineWarning)
 				){
-			sf.setFlag(beforeShrineWarning, true);
+			FrameEngine.getSaveFile().setFlag(beforeShrineWarning, true);
 			FrameEngine.startDialogueTree(
 					new DialogueTree(
 							new NPC("KAMI", "before_shrine_warning"),

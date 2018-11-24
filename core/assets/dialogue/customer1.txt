@@ -4,6 +4,9 @@ Yeah, it was really strange... And then...
 And so I - 
 [ANIM_1]Oh, do you have my drink?
 {
+<ADJ_ORDER
+[ANIM_1]Umm, this isn't what I asked for...
+[SPEAKER=FRIEND][ANIM_1]Totally not what she asked for! Come on! Gosh!![ANIM_0]
 <ORDER1
 *GIVEN_ORDER1
 [REMOVE_ITEM][ANIM_1]Thanks! [ANIM_0]Anyhow, as I was saying...
@@ -13,9 +16,14 @@ No lie! It told me something about a traveller from another land being here.
 [SPEAKER=FRIEND][ANIM_1]Whoa, cool, cool...[ANIM_0]
 Mmhmm, I thought so too. We haven't seen many travellers lately, have we?
 [SPEAKER=FRIEND][ANIM_1]No way, not at all...[ANIM_0]
+<GHOST
+[SPEAKER=GHOST_DIRT]...
+... Ummmmm, there's nothing in your hands...
+[SPEAKER=FRIEND][ANIM_1]Like, nothing at all...[ANIM_0]
+[SPEAKER=GHOST_DIRT][SOFT]I'm so embarrassed...
 <OTHER
-[ANIM_1]Umm, this isn't what I asked for...
-[SPEAKER=FRIEND][ANIM_1]Totally not what she asked for! Come on! Gosh![ANIM_0]
+[ANIM_1]Umm, this isn't even a drink...
+[SPEAKER=FRIEND][ANIM_1]Like, you can't trick us with your lies! Come on! Gosh!![ANIM_0]
 &GIVEN_ORDER1
 [ANIM_1]Thanks again for the drink, it's fantastic! Jackie always makes it just how I want it.
 [SPEAKER=PUMPKIN][ANIM_6]You know it, hon!

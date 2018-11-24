@@ -3,9 +3,9 @@
 [ANIM_1]Oh! Oh my goodness! Can you see me?!
 [TALK][ANIM_0][SPEED=6]... [ANIM_1][NSPEED]You CAN?!
 Wow!! This is so exciting!! I haven't talked to anyone in years!
-How's it going? [SPEED=1]What's your favorite food? Do you like playing cards? 
-[SPEED=0.5][ANIM_3]Do you prefer green or black tea? Sunshine or rain? Gasp - do you like acoustic guitar? I love acoustic guitar!
-[NSPEED][ANIM_0]Whew... Sorry... [ANIM_5]Hi! My name is Yokey.
+How's it going? [SPEED=1]What's your favorite food? Do you like playing cards?[GO]
+[SPEED=0.5][ANIM_3]Do you prefer green or black tea? Sunshine or rain? Gasp - do you like acoustic guitar? I love acoustic guitar![GO]
+[NSPEED][ANIM_0]Whew... Sorry... I've had a lot to think about. [ANIM_5]Hi! My name is Yokey.
 [NEWNAME=Yokey][ANIM_4]Before I became a spirit, I used to have a lot of friends here. But it's been so long by now I've forgotten what they look like.
 [ANIM_4]The only person I can remember... it was someone who wanted to open a shop someday, I think...
 [ANIM_1]Hey, is there any chance I could tag along with you? [ANIM_5]Maybe you can figure out who they are! I'd really appreciate that.
@@ -14,7 +14,7 @@ How's it going? [SPEED=1]What's your favorite food? Do you like playing cards?
 <YES
 *GOT_GHOST
 [ANIM_1]Oh, thank you so much! Let's waste no time!
-If you want me to tell you what I remember, just check on me in your backpack!
+[ANIM_5]If you want me to tell you what I remember, just check on me in your backpack!
 [SET_REMOVE][NOSPEAKER][GIVE_GHOST]You obtained... a ghost.
 <NO
 [ANIM_2]...

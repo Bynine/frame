@@ -5,12 +5,20 @@ By the way... Are you related to the tall gentleman who's staying with us? Your 
 &TALK_CHEF
 [ANIM_1]Feel free to stay here. Our home is your home.
 By the way... did you know my apron was made by the tailor here in town? Pretty neat, huh?
+&TALK_CHEF,!GRUB_REWARD
+[ANIM_1]Feel free to stay here. Our home is your home.
+By the way... Have you met the tailor? Is she doing okay? I haven't seen her around in a while.
+Hope she's all right. [ANIM_0]I'll check up on her as soon as I'm done with this soup...
 &FOUND_GOAL
 *TALK_CHEF_FOUND_GOAL
 It came out great, don't you think? I feel like something happened while it was cooking...
 Like the world became a little better.
+[PAUSE]Or maybe I'm just crazy. [ANIM_3]Haha! Enjoy the stew!
 &TALK_CHEF_FOUND_GOAL
 By the way, that tall person who was staying with us left.
 They said something about returning home.
 I hope their travels go well... and I hope staying here helped them out, even if just a bit.
-My stew has that effect on people, you know! Haha!
+[ANIM_3]My stew has that effect on people, you know! Haha!
+&FOUND_GOAL,!GRUB_REWARD
+It came out pretty well, I think. But, still...
+[ANIM_2]I hope the tailor's doing okay. I think I saw her kids running out West earlier.

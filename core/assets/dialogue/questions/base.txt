@@ -1,0 +1,4 @@
+QUESTION
+If ANSWER, go west.
+If ANSWER, go east.
+If ANSWER, go north.

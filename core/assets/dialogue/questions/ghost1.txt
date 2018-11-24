@@ -1,4 +1,4 @@
-Which direction is north?
-If you think it's west, go west.
-If you think it's east, go east.
-If you think it's north, go north.
+Which person among these was a childhood friend of the ghost you helped?
+If you think the Freb King was a friend of hers, go west.
+If you think the cafe owner was a friend of hers, go east.
+If you think the shopkeeper was a friend of hers, go north.

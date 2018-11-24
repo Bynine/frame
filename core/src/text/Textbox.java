@@ -22,6 +22,7 @@ public class Textbox {
 	private Sound text_sound;
 	private InteractableEntity speaker = null;
 	private boolean soft = false;
+	private static final Sound rip = Gdx.audio.newSound(Gdx.files.internal("sfx/rip.wav"));
 	/**
 	 * Whether to animate player talking.
 	 */
@@ -138,6 +139,12 @@ public class Textbox {
 		}
 		if (command.getID().equals("PAUSE")){
 			textTimer.change(-24);
+		}
+		else if (command.getID().equals("RIP")){
+			AudioHandler.playSoundVariedPitch(rip);
+		}
+		else if (command.getID().equals("GO")){
+			FrameEngine.getDialogueTree().advanceBranch();
 		}
 		else if (command.getID().equals("SOFT")){
 			soft = true;

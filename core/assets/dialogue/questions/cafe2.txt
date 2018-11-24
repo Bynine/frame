@@ -1,0 +1,4 @@
+What does Jackie not serve at her cafe?
+If you think she does not serve green tea, go west.
+If you think she does not serve cider, go east.
+If you think she does not serve coffee, go north.

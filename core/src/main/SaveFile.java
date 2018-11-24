@@ -31,12 +31,13 @@ public class SaveFile {
 
 	private int money = 0;
 	private static final String saveFile = "mrbsv.xml";
+	public static final String CREDITS = "CREDITS";
 
 	private boolean verbose = false;
 
 	SaveFile(boolean verbose){
 		this.verbose = verbose;
-		if (FrameEngine.DEBUG){
+		if (FrameEngine.SHRINE){
 			flags.put("ENTERED_SHRINE", true);
 		}
 		if (!FrameEngine.SAVE) return;
@@ -110,11 +111,14 @@ public class SaveFile {
 	/**
 	 * Puts game state into save file.
 	 */
-	void save(boolean positionIsSet){
+	void save(boolean credits){
 		if (!FrameEngine.SAVE) return;
 		Preferences preferences = Gdx.app.getPreferences(saveFile);
 		preferences.put(flags);
 		preferences.put(counters);
+		if (credits){
+			preferences.putString(CREDITS, "true");
+		}
 		Iterator<String> iter = map.keySet().iterator();
 		while (iter.hasNext()){
 			String key = iter.next();
@@ -124,7 +128,7 @@ public class SaveFile {
 		preferences.putInteger(moneyKey, money);
 
 		float x = (FrameEngine.getPlayer().getPosition().x)/FrameEngine.TILE;
-		if (positionIsSet) x = 1;
+		if (credits) x = 0.5f;
 		float y = ((FrameEngine.getArea().mapHeight - FrameEngine.getPlayer().getPosition().y)
 				/FrameEngine.TILE);
 		startArea = FrameEngine.getArea().getID();
@@ -190,9 +194,11 @@ public class SaveFile {
 	 */
 	public void addToCounter(int n, String counter){
 		if (counters.containsKey(counter)){
+			if (verbose) System.out.println("Added " + n + " to counter " + counter);
 			counters.put(counter, counters.get(counter) + n);
 		}
 		else{
+			if (verbose) System.out.println("Added new counter " + counter + " with value " + n);
 			counters.put(counter, n);
 		}
 	}

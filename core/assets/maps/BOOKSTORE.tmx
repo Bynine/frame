@@ -200,7 +200,7 @@ His cravat is slightly damp.</property>
   <object id="270" name="book" gid="1" x="368" y="272" width="32" height="24">
    <properties>
     <property name="TEXT">This hefty book is full of words you don't understand.
-There's a detailed anatomical diagram of a small green creature wearing a shell.</property>
+Something about... travelling through time?</property>
     <property name="TYPE" value="DESC"/>
    </properties>
   </object>
@@ -219,7 +219,7 @@ There's a detailed anatomical diagram of a small green creature wearing a shell.
     <property name="TYPE" value="NPC"/>
    </properties>
   </object>
-  <object id="281" name="librarian" gid="1" x="296" y="240" width="40" height="24">
+  <object id="281" name="librarian" gid="1" x="288" y="240" width="40" height="24">
    <properties>
     <property name="APPEAR" value="ENTERED_SHRINE"/>
     <property name="DIALOGUE" value="librarian"/>

@@ -26,9 +26,9 @@ GRUB1	Chubby Grub	GRUB	This grub loves to eat	1
 GRUB2	Nubby Grub	GRUB	This grub has little bumps	1
 GRUB3	Grubby Grub	GRUB	This grub is a bit dirty	1
 
-ORDER1	extra-milk latte	NONE	Delicious, but barely coffee	1
-ORDER2	spiced pumpkin cider	NONE	Smells unbelievably good	1
-ORDER3	red-bean coffee	NONE	What a striking color!	1
+ORDER1	extra-milk latte	ORDER	Delicious, but barely coffee	1
+ORDER2	spiced pumpkin cider	ORDER	Smells unbelievably good	1
+ORDER3	red-bean coffee	ORDER	What a striking color!	1
 
 GHOST	Ghost	NONE	GHOST	0
 SNAIL	Helpful Snail	NONE	Tells you about items you've missed	1

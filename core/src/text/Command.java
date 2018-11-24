@@ -25,9 +25,10 @@ public class Command {
 		switch(ID){
 		case ProgressionHandler.foundStatuette:{
 			FrameEngine.getSaveFile().addToCounter(1, ProgressionHandler.foundStatuette);
+			FrameEngine.getProgressionHandler().startStatuetteDialog();
 		} break;
 		case ProgressionHandler.checkStatuette:{
-			FrameEngine.getSaveFile().setFlag(ProgressionHandler.checkStatuette, true);
+			FrameEngine.getProgressionHandler().startStatuetteDialog();
 		} break;
 		case ProgressionHandler.shellFreb:{
 			FrameEngine.getSaveFile().addToCounter(1, ProgressionHandler.shellFreb);

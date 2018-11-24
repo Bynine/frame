@@ -16,7 +16,7 @@ public class ShrineDoor extends InteractableEntity {
 				"This strange door is completely shut. It won't budge!"
 				+ "\nSomething's written on it... \"Find the four effigies to open the way.\""
 				);
-		opened = FrameEngine.getSaveFile().getFlag(ProgressionHandler.foundStatuette+"_4");
+		opened = FrameEngine.getSaveFile().getCounter(ProgressionHandler.foundStatuette) > 3;
 		image = closed;
 		if (opened) setOpenedState();
 	}

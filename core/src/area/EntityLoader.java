@@ -38,6 +38,7 @@ import entity.Shopkeeper;
 import entity.Item;
 import entity.ItemHole;
 import entity.Koi;
+import entity.Leslie;
 import entity.Memorial;
 import entity.MoveLight;
 import entity.NPC;
@@ -165,6 +166,13 @@ public class EntityLoader {
 			}
 			else if (id.equals("PUMPKIN")){
 				entities.add(new Pumpkin(
+						x, y, 
+						interactXDisp, interactYDisp,
+						width, height,
+						id, imagePath, dialoguePath, layer));
+			}
+			else if (id.equals("CUSTOMER3")){
+				entities.add(new Leslie(
 						x, y, 
 						interactXDisp, interactYDisp,
 						width, height,

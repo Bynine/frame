@@ -4,7 +4,7 @@ SHOPKEEPER	Shopkeeper	bup	TRUE	1	30
 FREB	Freb	croak	TRUE	1	30
 WESTERN	Tall Stranger	bup	TRUE	2	30
 BEETLE	Friendly Bug	what	FALSE	1	30
-LIBRARIAN	Book Seller	bwep	TRUE	2	30
+LIBRARIAN	Book Seller	bwep	TRUE	1	30
 KAMI	???	echo	TRUE	1	30
 GUITARIST	Wandering Musician	bup	TRUE	1	30
 CAT	Fancy Lady	mih	FALSE	1	30
@@ -32,7 +32,7 @@ KID2	Quiet Kid	subtle	FALSE	1	30
 DOG	Dog	bwep	TRUE	2	20
 KITTY	Kitty	mih	FALSE	1	45
 FREBLOVE	Intense Statue	subtle	TRUE	1	30
-GRUBLOVE	GRUBLOVE	bup	TRUE	1	30
+GRUBLOVE	Patchwork Doll	chipper	TRUE	1	30
 DANCER	Strange Statue	subtle	TRUE	1	30
 DEMON	Cavern Dweller	what	TRUE	1	60
 SNAIL	Helpful Snail	bup	TRUE	1	30

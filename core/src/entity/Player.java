@@ -43,6 +43,8 @@ public class Player extends Entity{
 			Animator.createAnimation(30, "sprites/player/water.png", 2, 3);
 	private static final TextureRegion get = 
 			new TextureRegion(new Texture(Gdx.files.internal("sprites/player/get.png")));
+	private static final TextureRegion sleep = 
+			new TextureRegion(new Texture(Gdx.files.internal("sprites/player/sleep.png")));
 	public static final TextureRegion ripple = 
 			new TextureRegion(new Texture(Gdx.files.internal("sprites/graphics/ripple.png")));
 
@@ -170,6 +172,9 @@ public class Player extends Entity{
 		case WATER:{
 			image = water.get(dir).getKeyFrame(FrameEngine.getTime()); 
 		} break;
+		case SLEEP:{
+			image = sleep;
+		} break;
 		default: {
 			image = get;
 		} break;
@@ -211,7 +216,7 @@ public class Player extends Entity{
 	}
 
 	public static enum ImageState{
-		NORMAL, GET, DIG, WATER, EXPLAIN
+		NORMAL, GET, DIG, WATER, EXPLAIN, SLEEP
 	}
 
 	public static ImageState getImageState(){

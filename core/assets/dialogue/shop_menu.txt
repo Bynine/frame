@@ -24,3 +24,16 @@ I hope wherever she is, she's doing all right.
 [ANIM_0]Oh! Sorry. Didn't mean to talk your ear off. Have a great day, my friend!
 [ANIM_2]...
 [ANIM_0][NEWNAME=Barley][GHOST_THING][DESTROY]
+&OUT_OF_STOCK,FOUND_GOAL
+*TALK_SHOPKEEPER_END
+So... It looks like you found what you were looking for.
+Don't ask how I know. [ANIM_3]I can just see it in your eyes!
+[ANIM_0]Still, you're always welcome here. You've done so much to make this place a better one.
+[ANIM_3]Thank you... my friend.
+&TALK_SHOPKEEPER_END
+How's it going? Sorry, I've still got nothing more to sell.
+[ANIM_3]You really cleaned me out!
+Say, you know that lady who was in here earlier, in the pink coat?
+She and I had an adventure, a long time ago, far away from here. Back when I was just a kid!
+We were all alone, at night. It was some scary stuff. You really should've seen it.
+Ahh, memories...

@@ -7,3 +7,7 @@ And as a beetle, you can trust my eyesight.
 &ENTERED_SHRINE
 Keep looking for hidden paths, my little friend! I suspect there's one close by... 
 And as a beetle, you can trust my intuition.
+&FOUND_GOAL
+Ahh, I can see you have been following many secret paths.
+Was your curiosity rewarded? Have you found what you are looking for?
+Always keep looking for new directions to search in. You are never stuck on one path.

@@ -1,19 +1,28 @@
 Hello there! You wouldn't happen to know how long my drink will take, would you?
-I might turn into dust if I don't drink soon! [ANIM_1]Hahaha!
+I might turn into dust if I don't drink soon! [ANIM_1]Hohoho!
 &ACCEPTED_CAFE_JOB
 Oh, hello there, dear. Is that my drink you have there?
 {
+<ADJ_ORDER
+Hrmm... I don't recall ordering that. Am I having a senior moment? [ANIM_1]Hohoho!
 <ORDER2
 *GIVEN_ORDER2
 [REMOVE_ITEM]Thank you, dearie.
-You know, your outfit... It reminds me of the clothing of the people of a country I saw when I was young.
-[ANIM_1]Yes, that was a long time ago! Hahaha!
-[ANIM_0]Back when I used to travel, I visited a country far to the west.
+You know, your outfit... It reminds me of the clothing people wore in a country I saw when I was young.
+[ANIM_1]Yes, that was a long time ago! Hohoho!
+[ANIM_0]Back when I used to travel, I visited a place far to the west.
 It was very beautiful... You should have seen it.
 But these days, I hear it's destitute. I'm not sure what happened. It's a real pity...
-Either way, sorry to bore you with this old man's ramblings. [ANIM_1]Hahaha!
+Either way, sorry to bore you with this old man's ramblings. [ANIM_1]Hohoho!
+<GHOST
+[SPEAKER=GHOST_DIRT]...[PAUSE]Dude, he's old, not dead...
+Hm? Something wrong? What's with that expression? [ANIM_1]Hohoho!
 <OTHER
-Hrmm... I don't recall ordering that. Am I having a senior moment? [ANIM_1]Hahaha!
+Hrmm... Why, I don't even think that's a drink! Are you playing a prank on me? Good one! [ANIM_1]Hohoho!
 &GIVEN_ORDER2
 Thank you again for the drink, dearie!
-With those serving skills, you should work here full time! [ANIM_1]Hahaha!
+With those serving skills, you should work here full time! [ANIM_1]Hohoho!
+&GIVEN_ORDER2,FOUND_GOAL
+Say... you have a bit of a different look about you.
+Like you've gained a bit of experience. [ANIM_1]Good for you! Hohoho!
+Just don't get too experienced or you'll turn into an old crone like me! [ANIM_1]Hohoho!

@@ -32,7 +32,9 @@ public class Inventory extends AbstractMenu{
 			items.add("SEED3");
 			items.add("SEED4");
 			items.add("WATERINGCAN");
+			items.add("GRUB1");
 			items.add("GRUB2");
+			items.add("GRUB3");
 			
 //			items.add("SHELL3");
 //			items.add("SEED2");
@@ -79,7 +81,7 @@ public class Inventory extends AbstractMenu{
 	
 	@Override
 	protected void moveCursorVertical(int i){
-		int newPosition = cursor - (i * 5);
+		int newPosition = cursor - (i * 4);
 		if ((newPosition >= 0) && (newPosition < getList().size())){
 			cursor = newPosition;
 			AudioHandler.playSoundVariedPitch(moveCursor);
@@ -105,14 +107,15 @@ public class Inventory extends AbstractMenu{
 		ItemDescription desc = (ItemDescription)(getActiveButton().getOutput());
 		if (desc.id.equals("SNAIL")){
 			FrameEngine.snailActive = !FrameEngine.snailActive;
+			AudioHandler.playSoundVariedPitch(FrameEngine.snailActive ? moveCursor : stopCursor);
 		}
 	}
 
 	public Vector2 getButtonPosition(int pos) {
-		int onScreen = 5;
+		int onScreen = 4;
 		int posX = (pos % onScreen);
 		int posY = 2 + (int) pos/onScreen;
-		float x = ((posX * FrameEngine.TILE) * 2);
+		float x = (((posX + 0.5f) * FrameEngine.TILE) * 2);
 		float y = Gdx.graphics.getHeight()/2 - FrameEngine.TILE - (posY * FrameEngine.TILE * 2);
 		return new Vector2(x, y);
 	}

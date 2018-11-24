@@ -31,11 +31,13 @@ public class FrameEngine extends ApplicationAdapter {
 	DRAW 	= false	&& DEBUG,
 	MUTE	= true	&& DEBUG,
 	LOG		= true	&& DEBUG,
+	FPS		= false && DEBUG,
 	NOMAIN	= true	&& DEBUG,
 	INVIS	= false	&& DEBUG,
 	MAPS	= false && DEBUG,
 	TREASURE= false && DEBUG,
 	GHOST	= false	&& DEBUG,
+	SHRINE  = true  && DEBUG,
 	SAVE	= false	|| !DEBUG;
 
 	private static Player player;
@@ -167,13 +169,7 @@ public class FrameEngine extends ApplicationAdapter {
 		if (currArea != null) graphicsHandler.drawOverlay();
 
 		inputHandler.update();
-		if (LOG) fpsLogger.log();
-		//		if (MAPS && getTime() > 6000){
-		//			time.reset();
-		//			if (newArea == null) newArea = new Area("BEACH");
-		//			initiateAreaChange(newArea.getID().equals("FOREST") ? "BEACH" : "FOREST", new Vector2(8, 8));
-		//			changeArea();
-		//		}
+		if (FPS) fpsLogger.log();
 	}
 
 	private void updateOverworld(){
@@ -181,8 +177,8 @@ public class FrameEngine extends ApplicationAdapter {
 			changeArea();
 		}
 		if (canUpdateEntities()){
-			EntityHandler.update();
 			progressionHandler.update();
+			EntityHandler.update();
 		}
 		else{
 			EntityHandler.updateImages();
@@ -408,11 +404,11 @@ public class FrameEngine extends ApplicationAdapter {
 		player.setDirection(newDirection);
 		newDirection = Direction.ANY;
 		if (inventory.hasItem("SNAIL") && snailActive){
-			activeSnail();
+			activateSnail();
 		}
 	}
 
-	private static void activeSnail(){
+	private static void activateSnail(){
 		int numSecrets = EntityHandler.getNumSecrets();
 		if (numSecrets > 0){
 			startDialogueTree(
@@ -439,9 +435,9 @@ public class FrameEngine extends ApplicationAdapter {
 		saveFile.wipeSave();
 		saveFile.startPosition.set(0.5f, 26f);
 		saveFile.startArea = "FOREST";
-		inventory.addItem("KEEPSAKE");
 		player.walkRight(18);
 		beginGame();
+		inventory.addItem("KEEPSAKE");
 	}
 
 	/**
@@ -452,14 +448,25 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	private static void beginGame(){
+		if (!DEBUG) inventory.wipe();
 		saveFile = new SaveFile(LOG);
+		if (saveFile.getFlag(SaveFile.CREDITS)){
+			saveFile.setFlag("CREDITS", false);
+			player.walkRight(18);
+		}
 		gameState = GameState.OVERWORLD;
 		newArea = new Area(saveFile.startArea);
-		if (saveFile.startPosition.isZero() && !SAVE){
-			newPosition.set(61 * TILE, 41 * TILE);
+		if (saveFile.startPosition.isZero()){
+			if (!SAVE){
+				newPosition.set(61 * TILE, 41 * TILE);
+			}
+			else{
+				newPosition.set(0, 25.5f * TILE);
+			}
 		}
 		else{
 			newPosition.set(saveFile.startPosition.scl(TILE));
+			System.out.println(newPosition);
 		}
 		changeArea();
 		if (player.isColliding()){
@@ -527,13 +534,14 @@ public class FrameEngine extends ApplicationAdapter {
 	 * Starts a textbox.
 	 */
 	public static void putTextbox(Textbox textbox){
-		dialogueTrees.add(new DialogueTree((textbox)));
+		startDialogueTree(new DialogueTree((textbox)));
 	}
 
 	/**
 	 * Runs through Dialogue until finished.
 	 */
 	public static void startDialogueTree(DialogueTree dialogue) {
+		if (LOG) logger.info("Added dialogue tree " + dialogue.getTextbox().getAllText());
 		dialogueTrees.add(dialogue);
 	}
 
@@ -638,7 +646,7 @@ public class FrameEngine extends ApplicationAdapter {
 		return getDialogueTree().getTextbox();
 	}
 
-	private static DialogueTree getDialogueTree(){
+	public static DialogueTree getDialogueTree(){
 		if (dialogueTrees.isEmpty()) return null;
 		else return dialogueTrees.get(0);
 	}

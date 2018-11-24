@@ -433,8 +433,8 @@ public class GraphicsHandler {
 		batch.setProjectionMatrix(centerCam.combined);
 		int ii = 0;
 		int cursor = menu.getCursor();
-		int stipend = Math.max( 0, (5 * ((int)(cursor/5))) - 15 );
-		Vector2 range = new Vector2(stipend, stipend+20);
+		int stipend = Math.max( 0, (4 * ((int)(cursor/4))) - 12 );
+		Vector2 range = new Vector2(stipend, stipend+16);
 		for (MenuOption button: menu.getList()){
 			if (range.x <= ii && range.y > ii){
 				ItemDescription desc = (ItemDescription)button.getOutput();

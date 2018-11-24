@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="24" height="18" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="322">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="24" height="18" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="327">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/depths.tsx"/>
  <layer id="15" name="FLOOR" width="24" height="18">
   <data encoding="csv">
-9,9,9,9,9,9,9,9,9,9,9,19,19,9,9,9,9,9,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,9,9,9,19,19,9,9,9,9,9,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,9,9,9,19,19,9,9,9,9,9,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,9,9,9,19,19,9,9,9,9,9,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,9,9,9,19,19,9,9,9,9,9,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,9,9,9,19,19,9,9,9,9,9,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,9,9,9,19,19,9,9,9,9,9,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,9,9,9,19,19,9,9,9,9,9,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,9,9,9,19,19,9,9,9,9,9,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,9,9,9,19,19,9,9,9,9,9,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,9,9,9,19,19,9,9,9,9,9,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,9,9,9,19,19,9,9,9,9,9,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,9,9,9,19,19,9,9,9,9,9,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,9,9,9,19,19,9,9,9,9,9,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,9,9,9,19,19,9,9,9,9,9,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,9,9,9,19,19,9,9,9,9,9,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,9,9,9,19,19,9,9,9,9,9,9,9,9,9,9,9,
-9,9,9,9,9,9,9,9,9,9,9,19,19,9,9,9,9,9,9,9,9,9,9,9
+9,9,9,9,9,9,9,9,9,9,9,18,20,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,18,20,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,18,20,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,18,20,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,18,20,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,18,20,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,18,20,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,18,20,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,18,20,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,18,20,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,18,20,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,18,20,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,18,20,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,18,20,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,18,20,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,18,20,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,18,20,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,18,20,9,9,9,9,9,9,9,9,9,9,9
 </data>
  </layer>
  <layer id="16" name="MIDDLE" width="24" height="18">
@@ -113,7 +113,9 @@
 </data>
  </layer>
  <objectgroup id="5" name="SLOPES"/>
- <objectgroup color="#32e3c6" id="6" name="TERRAIN"/>
+ <objectgroup color="#32e3c6" id="6" name="TERRAIN">
+  <object id="326" name="stone" x="0" y="0" width="768" height="576"/>
+ </objectgroup>
  <objectgroup color="#50734a" id="7" name="COLLISION" opacity="0.5">
   <object id="316" x="0" y="0" width="352" height="576"/>
   <object id="317" x="416" y="0" width="352" height="576"/>
@@ -135,6 +137,38 @@
    <properties>
     <property name="DIALOGUE" value="q4"/>
     <property name="TYPE" value="DIALOGUE_TRIGGER"/>
+   </properties>
+  </object>
+  <object id="322" name="mote" gid="5" x="-40" y="72" width="32" height="32">
+   <properties>
+    <property name="DURATION" value="2000"/>
+    <property name="GRAPHIC" value="mote"/>
+    <property name="INTERVAL" value="300"/>
+    <property name="TYPE" value="emitter"/>
+   </properties>
+  </object>
+  <object id="323" name="mote" gid="5" x="168" y="-16" width="32" height="32">
+   <properties>
+    <property name="DURATION" value="2000"/>
+    <property name="GRAPHIC" value="mote"/>
+    <property name="INTERVAL" value="500"/>
+    <property name="TYPE" value="emitter"/>
+   </properties>
+  </object>
+  <object id="324" name="mote" gid="5" x="-40" y="232" width="32" height="32">
+   <properties>
+    <property name="DURATION" value="2000"/>
+    <property name="GRAPHIC" value="mote"/>
+    <property name="INTERVAL" value="400"/>
+    <property name="TYPE" value="emitter"/>
+   </properties>
+  </object>
+  <object id="325" name="mote" gid="5" x="-48" y="440" width="32" height="32">
+   <properties>
+    <property name="DURATION" value="2000"/>
+    <property name="GRAPHIC" value="mote"/>
+    <property name="INTERVAL" value="300"/>
+    <property name="TYPE" value="emitter"/>
    </properties>
   </object>
  </objectgroup>

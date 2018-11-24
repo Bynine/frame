@@ -57,6 +57,12 @@ public class Emitter extends ImmobileEntity{
 						* FrameEngine.elapsedTime * Math.random();
 				graphic.position.y -= 0.75f * FrameEngine.elapsedTime;
 			}
+			else if (graphicName.equalsIgnoreCase("mote")){
+				graphic.position.x += 
+						2 + (2 * Math.cos( (FrameEngine.getTime() + graphic.life.getCounter())/20.0f)) 
+						* FrameEngine.elapsedTime * Math.random();
+				graphic.position.y -= 0.75f * FrameEngine.elapsedTime;
+			}
 			if (graphic.life.timeUp()){
 				graphicIter.remove();
 			}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="18" height="48" tilewidth="32" tileheight="32" infinite="0" nextlayerid="22" nextobjectid="317">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="18" height="48" tilewidth="32" tileheight="32" infinite="0" nextlayerid="22" nextobjectid="323">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/depths.tsx"/>
  <tileset firstgid="73" source="tilesets/cavern.tsx"/>
@@ -318,6 +318,54 @@
    <properties>
     <property name="FLAG" value="ITEM_GOAL"/>
     <property name="TYPE" value="GOAL"/>
+   </properties>
+  </object>
+  <object id="317" name="mote" gid="5" x="-48" y="344" width="32" height="32">
+   <properties>
+    <property name="DURATION" value="2000"/>
+    <property name="GRAPHIC" value="mote"/>
+    <property name="INTERVAL" value="800"/>
+    <property name="TYPE" value="emitter"/>
+   </properties>
+  </object>
+  <object id="318" name="mote" gid="5" x="-48" y="504" width="32" height="32">
+   <properties>
+    <property name="DURATION" value="2000"/>
+    <property name="GRAPHIC" value="mote"/>
+    <property name="INTERVAL" value="900"/>
+    <property name="TYPE" value="emitter"/>
+   </properties>
+  </object>
+  <object id="319" name="mote" gid="5" x="-48" y="696" width="32" height="32">
+   <properties>
+    <property name="DURATION" value="2000"/>
+    <property name="GRAPHIC" value="mote"/>
+    <property name="INTERVAL" value="600"/>
+    <property name="TYPE" value="emitter"/>
+   </properties>
+  </object>
+  <object id="320" name="mote" gid="5" x="-56" y="1112" width="32" height="32">
+   <properties>
+    <property name="DURATION" value="2000"/>
+    <property name="GRAPHIC" value="mote"/>
+    <property name="INTERVAL" value="1000"/>
+    <property name="TYPE" value="emitter"/>
+   </properties>
+  </object>
+  <object id="321" name="mote" gid="5" x="-40" y="176" width="32" height="32">
+   <properties>
+    <property name="DURATION" value="2000"/>
+    <property name="GRAPHIC" value="mote"/>
+    <property name="INTERVAL" value="600"/>
+    <property name="TYPE" value="emitter"/>
+   </properties>
+  </object>
+  <object id="322" name="mote" gid="5" x="-48" y="888" width="32" height="32">
+   <properties>
+    <property name="DURATION" value="2000"/>
+    <property name="GRAPHIC" value="mote"/>
+    <property name="INTERVAL" value="500"/>
+    <property name="TYPE" value="emitter"/>
    </properties>
   </object>
  </objectgroup>

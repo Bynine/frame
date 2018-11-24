@@ -1,4 +1,4 @@
-Do you wish to leave the forest and return to where you came from? Though you can come back, it will be a long trip...
+Do you wish to leave the forest and return to where you came from?
 >YES,NO
 <YES
 [FINISHGAME][DESTROY]

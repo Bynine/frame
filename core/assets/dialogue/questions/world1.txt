@@ -1,4 +1,4 @@
-Which direction is north?
-If you think it's west, go west.
-If you think it's east, go east.
-If you think it's north, go north.
+What picture did the artist paint for you?
+If you think it was a painting of you, planting a flower, go west.
+If you think it was a painting of a beautiful field, go east.
+If you think it was a painting of a gorgeous model, go north.
