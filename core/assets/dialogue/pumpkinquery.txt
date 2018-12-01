@@ -3,8 +3,8 @@ Your pay will be worth the while! Gourd's honor!
 <YES
 *ACCEPTED_CAFE_JOB
 *CAFE_QUEST
-[ANIM_5]Oh, wonderful! [ANIM_2]You're a real sweetheart!
-My name's Jackie, by the way. It's a pleasure to meet you.
+[ANIM_6]Oh, wonderful! You're a real sweetheart!
+[ANIM_2]My name's Jackie, by the way. It's a pleasure to meet you.
 [NEWNAME=Jackie]Ok, [GIVE_ORDER1][TOSS_ORDER1]hon, [GIVE_ORDER2][TOSS_ORDER2]here're [GIVE_ORDER3][TOSS_ORDER3]the orders.
 The latte with extra milk goes to the pretty lady over there with the purple coat...
 The spiced pumpkin cider goes to that older gentleman right there...

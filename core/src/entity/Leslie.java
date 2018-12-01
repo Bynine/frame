@@ -18,7 +18,8 @@ public class Leslie extends NPC {
 	public void interact(){
 		FrameEngine.startDialogueTree(
 				new DialogueTree(this, "customer3", new HashMap<String, String>(){{
-					put("STORY", Gdx.files.internal("dialogue/customer3_story.txt").readString());
+					put("CUST_3_STORY", Gdx.files.internal("dialogue/customer3_story.txt").readString());
+					put("CUST_3_ORDER", Gdx.files.internal("dialogue/customer3_order.txt").readString());
 				}})
 			);
 	}

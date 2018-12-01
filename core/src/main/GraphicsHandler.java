@@ -871,7 +871,7 @@ public class GraphicsHandler {
 		batch.setProjectionMatrix(centerCam.combined);
 
 		final float posX = FrameEngine.TILE/2;
-		final float posY = (Math.min(FrameEngine.getTime(), FrameEngine.CREDITS_END_TIME-600) * creditSpeed);
+		final float posY = 200 + (Math.min(FrameEngine.getTime(), FrameEngine.CREDITS_END_TIME-1000) * creditSpeed);
 		drawArt(0, posX, posY, treasure1Art, "FREBKING_REWARD");
 		drawArt(1, posX, posY, treasure3Art, "GRUB_REWARD");
 		drawArt(2, posX, posY, treasure4Art, "CAFE_REWARD");
@@ -887,11 +887,15 @@ public class GraphicsHandler {
 	private void drawArt(int offset, float posX, float posY, TextureRegion art, String flag){
 		batch.begin();
 		if (!FrameEngine.getSaveFile().getFlag(flag)) {
-			batch.setColor(0.1f, 0.1f, 0.1f, 0.1f);
+			batch.setColor(0.08f, 0.06f, 0.1f, 0.12f);
+		}
+		else{
+			batch.setColor(DEFAULT_COLOR);
 		}
 		batch.draw(art, 
 				posX - FrameEngine.TILE/2, 
-				posY + ((offset+1) * -FrameEngine.TILE * 13.7f) - (FrameEngine.TILE * 10));
+				posY + ((offset+1) * -FrameEngine.TILE * 13.7f) - (FrameEngine.TILE * 10),
+				544, 320);
 		batch.setColor(DEFAULT_COLOR);
 		batch.end();
 	}

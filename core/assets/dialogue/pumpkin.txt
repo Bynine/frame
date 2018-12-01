@@ -6,7 +6,7 @@ Be sure to come back soon![ANIM_0]
 [ANIM_3]Wh-what?! Sorry, I'm a bit busy here!!
 [ANIM_5]Oh! [PAUSE][ANIM_4]You're new here, aren't you? I'm sorry, how rude of me!
 I'd be happy to serve you, but I've just got so much work to do right now and -
-... Say... You look like a capable kid. How's about you help me out with serving these orders?
+... [PAUSE][ANIM_2]Say... You look like a capable kid. How's about you help me out with serving these orders?
 PUMPKINQUERY
 &TALK_PUMPKIN
 [ANIM_3]Wh-wh-what?! [PAUSE][ANIM_4]Oh, you again! Hi!
@@ -29,8 +29,8 @@ All I know is this. "One good turn deserves another"! You get what I mean, hon?
 &CAFE_REWARD
 [ANIM_2]Thanks again for your help, hon.
 Say, did you see a painter anywhere around? [ANIM_6]He's a good ...[PAUSE] uh, friend of mine.
-[ANIM_1]He's very frustrated lately. But I've just been too busy to help...[DEFAULTANIM]
+[ANIM_1]He's been very frustrated lately. But I've just been too busy to help...[DEFAULTANIM]
 &CAFE_REWARD,WORLD_REWARD
 [ANIM_2]Thanks again for your help, hon. You're a real life saver!
 Now I can relax and get back to running the cafe smoothly.
-And look at that beautiful painting we got! [ANIM_6]My ...[PAUSE]uh, friend painted it, you know![DEFAULTANIM]
+And look at that beautiful painting we got! [ANIM_6]My ...[PAUSE][ANIM_5]uh, [ANIM_6]friend painted it, you know![DEFAULTANIM]

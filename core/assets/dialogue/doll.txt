@@ -1,7 +1,7 @@
 *TALK_DOLL
 Hey, wanna see something cool?
-[PAUSE][RIP][ANIM_1][PAUSE]Tada!
-...[PAUSE][ANIM_2]Seriously though, this really, really hurts.
+[PAUSE][RIP][ANIM_3][PAUSE]Tada!
+[ANIM_1]...[PAUSE][ANIM_2]Seriously though, this really, really hurts.
 See, I was running in the forest when my hair got caught in a tree branch, and, well... You can see what happened.
 Say, do you suppose you could help out the tailor? I wanted to see her to get this fixed up, but she's got problems too.
 Something about missing children? I'd head on over and help her myself, but, uh...
@@ -15,14 +15,14 @@ No rush or anything. I'll just stand here, praying a strong gust of wind doesn't
 [ANIM_2][SOFT]Please hurry...
 &GRUB_REWARD
 *TALK_DOLL_HAPPY
-[ANIM_3]Hey, look at me! Good as new, huh? The tailor fixed me right up!
+[ANIM_1]Hey, look at me! Good as new, huh? The tailor fixed me right up!
 [ANIM_0]Weren't you the one who brought back her kids? Good for you! Here, maybe this'll help you get a-head too!
 [NOSPEAKER][CURRENCY_1]You were given an acorn!
-[ANIM_3]Don't spend it all in one place! Or do, I'm not your boss.
+[ANIM_1]Don't spend it all in one place! Or do, I'm not your boss.
 &TALK_DOLL_HAPPY
 Howdy, ol' buddy ol' pal! 
-[ANIM_3]I gotta say, it's great to be able to move without worrying about spontaneous decapitation! This is the life!
+[ANIM_1]I gotta say, it's great to be able to move without worrying about spontaneous decapitation! This is the life!
 &TALK_DOLL_HAPPY,FOUND_GOAL
 Hi again, ol' buddy ol' pal! 
 So, what're your plans? Are you head-ing off, or will you stay around?
-[ANIM_3]Don't go too far, now... Who am I going to rely on if I lose my head again? Hahaha!...
+[ANIM_1]Don't go too far, now... Who am I going to rely on if I lose my head again? Hahaha!...

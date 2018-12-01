@@ -3,3 +3,5 @@
 [SPEAKER=SHOPKEEPER][ANIM_1]Howdy again, stranger![ANIM_0]
 &ENTERED_SHRINE
 [SPEAKER=SHOPKEEPER][ANIM_1]Howdy there, my friend![ANIM_0]
+&OUT_OF_STOCK,FOUND_GOAL
+[SPEAKER=SHOPKEEPER][ANIM_1]Why, hello, my friend! Here for some tea, or just to chat?[ANIM_0]

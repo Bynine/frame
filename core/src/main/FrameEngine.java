@@ -75,7 +75,7 @@ public class FrameEngine extends ApplicationAdapter {
 	public static GraphicsHandler graphicsHandler;
 	public static boolean snailActive = true;
 
-	public static final Vector2 resolution = new Vector2(TILE * 36, TILE * 24);
+	public static final Vector2 resolution = new Vector2(TILE * 18/GraphicsHandler.ZOOM, TILE * 12/GraphicsHandler.ZOOM);
 	public static final Vector2 newPosition = new Vector2(TILE * 32, TILE * 32);
 	public static Direction newDirection = Direction.ANY;
 	public static float elapsedTime = 0;
@@ -221,7 +221,9 @@ public class FrameEngine extends ApplicationAdapter {
 
 	private void updateMain(){
 		graphicsHandler.drawTitle();
-		playerWalk(Walk.RIGHT);
+		if (currArea.id.equals("PATH")) {
+			playerWalk(Walk.RIGHT);
+		}
 		graphicsHandler.drawMenu(mainMenu);
 		mainMenu.update();
 	}
@@ -344,7 +346,9 @@ public class FrameEngine extends ApplicationAdapter {
 				}
 			}
 			else{
-				//textbox.complete();
+				if (DEBUG && inputHandler.getDebugSpeedUpHeld()){
+					textbox.complete();
+				}
 			}
 		}
 		else if (canControlPlayer() && null != currInteractable){
@@ -433,10 +437,7 @@ public class FrameEngine extends ApplicationAdapter {
 	static void newGame(){
 		inventory.wipe();
 		saveFile.wipeSave();
-		saveFile.startPosition.set(0.5f, 26f);
-		saveFile.startArea = "FOREST";
-		player.walkRight(18);
-		beginGame();
+		mainMenuToGame();
 		inventory.addItem("KEEPSAKE");
 	}
 
@@ -444,30 +445,25 @@ public class FrameEngine extends ApplicationAdapter {
 	 * Continues from established save file.
 	 */
 	static void continueGame(){
-		beginGame();
+		mainMenuToGame();
 	}
 
-	private static void beginGame(){
+	private static void mainMenuToGame(){
 		if (!DEBUG) inventory.wipe();
 		saveFile = new SaveFile(LOG);
 		if (saveFile.getFlag(SaveFile.CREDITS)){
 			saveFile.setFlag("CREDITS", false);
 			player.walkRight(18);
 		}
+		if (!saveFile.exists()){
+			saveFile.startPosition.set(0.5f, 26f);
+			saveFile.startArea = "FOREST";
+			player.walkRight(18);
+		}
 		gameState = GameState.OVERWORLD;
 		newArea = new Area(saveFile.startArea);
-		if (saveFile.startPosition.isZero()){
-			if (!SAVE){
-				newPosition.set(61 * TILE, 41 * TILE);
-			}
-			else{
-				newPosition.set(0, 25.5f * TILE);
-			}
-		}
-		else{
-			newPosition.set(saveFile.startPosition.scl(TILE));
-			System.out.println(newPosition);
-		}
+		newPosition.set(saveFile.startPosition.scl(TILE));
+		System.out.println("Start position is: " + newPosition);
 		changeArea();
 		if (player.isColliding()){
 			logger.warning("Player was spawned inside collision at: " + newPosition.toString());
@@ -479,14 +475,21 @@ public class FrameEngine extends ApplicationAdapter {
 		}
 	}
 
-	public static void startMainMenu(boolean exists) {
-		if (exists) {
+	public static void startMainMenu(boolean saveFileExists) {
+		if (saveFileExists) {
 			mainMenu = new MainMenu(true);
 			mainMenu.open();
 		}
 		if (gameState != GameState.SAVECONFIRM){
 			gameState = GameState.MAIN;
-			newArea = new Area("PATH");
+			String newAreaId = saveFile.exists() ? "VOID" : "PATH";
+			newArea = new Area(newAreaId);
+			if (!SAVE){
+				newPosition.set(61 * TILE, 41 * TILE);
+			}
+			else{
+				newPosition.set(0, 25.5f * TILE);
+			}
 			changeArea();
 		}
 		else{
@@ -614,7 +617,7 @@ public class FrameEngine extends ApplicationAdapter {
 
 	public static float getGameSpeed(){
 		if (DEBUG && inputHandler.getDebugSpeedUpHeld()) {
-			return 8.0f;
+			return 8.5f;
 		}
 		else{
 			return 1.0f;

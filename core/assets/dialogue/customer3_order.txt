@@ -1,0 +1,17 @@
+[NEWNAME=Leslie][SPEED=2][ANIM_1]Hey man... you got my drink?
+{
+<ADJ_ORDER
+[ANIM_1][SPEED=2]Uhhh... That's not my drink, dude.
+<GHOST
+[SPEAKER=GHOST_DIRT]... Huh. Why does she seem... so familiar...?
+[ANIM_1][SPEED=2]... Tch.
+[ANIM_0][SPEED=2]Keep your pranks to yourself.
+<OTHER
+[ANIM_1][SPEED=2]Dude, that's... Not even a drink. Do you just walk up to people and show them random stuff?
+[ANIM_0][SPEED=2]Weirdo...
+<ORDER3
+*GIVEN_ORDER3
+[REMOVE_ITEM][ANIM_1][SPEED=2]Thanks, little guy...
+[SPEED=2][ANIM_0]...
+[SPEED=2]...
+[SPEED=2]...[PAUSE][ANIM_1]Sorry, did you need something?

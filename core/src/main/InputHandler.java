@@ -31,4 +31,6 @@ public interface InputHandler {
 
 	abstract boolean getSaveJustPressed();
 
+	abstract boolean getSuperDebugSpeedUpHeld();
+
 }

@@ -1,2 +1,2 @@
 The CHECK_GRUB1grubs CHECK_GRUB2in CHECK_GRUB3your backpack run inside before you!
-[ENTER]
+[ENTER][DESTROY]

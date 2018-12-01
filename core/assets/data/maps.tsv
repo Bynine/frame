@@ -1,4 +1,5 @@
 PATH	?	forest	FALSE	bright	8&8	TRUE	WARM	FALSE
+VOID	?	forest	FALSE	dark	8&8	TRUE	WARM	FALSE
 
 FOREST	?	forest	FALSE	dim	61&41	TRUE	WARM	FALSE
 SHOP	?	inside	TRUE	bright	12&10	TRUE	WARM	FALSE

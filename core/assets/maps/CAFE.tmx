@@ -220,7 +220,8 @@ You feel more awake just being near it.</property>
   </object>
   <object id="312" name="text" gid="1" x="584" y="176" width="32" height="32">
    <properties>
-    <property name="TEXT" value="You feel like encouraging this plant to do its best."/>
+    <property name="TEXT">Even though it's sitting in a corner, you feel as if this plant has a commanding presence.
+Good job, plant.</property>
     <property name="TYPE" value="DESC"/>
    </properties>
   </object>

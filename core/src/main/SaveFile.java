@@ -26,7 +26,7 @@ public class SaveFile {
 	private String positionY = "snails";
 	private boolean exists = false;
 
-	public String startArea = "FOREST";
+	public String startArea = "";
 	public final Vector2 startPosition = new Vector2();
 
 	private int money = 0;
@@ -39,6 +39,7 @@ public class SaveFile {
 		this.verbose = verbose;
 		if (FrameEngine.SHRINE){
 			flags.put("ENTERED_SHRINE", true);
+			//flags.put("CAFE_REWARD", true);
 		}
 		if (!FrameEngine.SAVE) return;
 		Preferences preferences = Gdx.app.getPreferences(saveFile);
@@ -229,6 +230,7 @@ public class SaveFile {
 		map.clear();
 		money = 0;
 		setRandomFlags();
+		exists = false;
 	}
 
 	public void setRandomFlags(){

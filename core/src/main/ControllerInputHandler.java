@@ -150,4 +150,10 @@ public class ControllerInputHandler implements InputHandler, ControllerListener{
 		return false;
 	}
 
+	@Override
+	public boolean getSuperDebugSpeedUpHeld() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

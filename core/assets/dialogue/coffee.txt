@@ -10,9 +10,18 @@ Maaaan... I want a cup of that smooth java...
 Maaaan, I sure do wish I could have a cup of delectable coffee...
 [TALK]Huh? Whassat? [PAUSE]You helped out Jackie and now she's free?
 ... [PAUSE][SPEED=2][ANIM_1]I have a confession to make.
-[NSPEED]I don't actually like coffee. I just thought I'd sound cool if I complained a lot.
+[NSPEED]I don't actually like drinking coffee. I just thought I'd sound cool if I complained a lot.
 [ANIM_0]Well, either way, thanks for letting me know. Here's something for being a good kid.
 [NOSPEAKER][CURRENCY_1]You were given an acorn!
 &TALK_WANTCOFFEE
 Hmm... I've been standing here complaining for so long my legs have fallen asleep.
 Maaaan, I really wish I could go for a walk...
+&FOUND_GOAL,TALK_WANTCOFFEE
+*TALK_WANTCOFFEE_2
+... Okay, I'm sure you're wondering why I'm still here.
+... [PAUSE][SPEED=2][ANIM_1]I have another, even more confession to make.
+I like the smell of the coffee, but not the taste. But if I go inside she might kick me out for not buying anything...
+&TALK_WANTCOFFEE_2
+Keep this a secret, okay? Just between us two.
+And, uh... if you buy a coffee in there... [ANIM_1]Maybe waft a bit of the scent towards me?
+[ANIM_0]I'd appreciate that.

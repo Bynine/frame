@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import main.Animator;
 import main.AudioHandler;
+import main.EntityHandler;
 import main.FrameEngine;
 import text.DialogueTree;
 import timer.Timer;
@@ -61,6 +62,7 @@ public class Freb extends NPC {
 	public void updateImage(){
 		if (hasShell()) {
 			if (chirpTimer.timeUp()){
+				EntityHandler.addEntity(new Note(position.x, position.y, 20));
 				AudioHandler.playPositionalSound(this, chirp);
 				chirpTimer.reset();
 			}

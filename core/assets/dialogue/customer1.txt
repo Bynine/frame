@@ -14,8 +14,8 @@ I tried touching that statue in the garden... And I heard a spooky voice!
 [SPEAKER=FRIEND][ANIM_1]Whoa, really, really?[ANIM_0]
 No lie! It told me something about a traveller from another land being here.
 [SPEAKER=FRIEND][ANIM_1]Whoa, cool, cool...[ANIM_0]
-Mmhmm, I thought so too. We haven't seen many travellers lately, have we?
-[SPEAKER=FRIEND][ANIM_1]No way, not at all...[ANIM_0]
+Mmhmm, I thought so too. I wonder what they came here for?
+[SPEAKER=FRIEND][ANIM_1]I dunno, dunno...[ANIM_0]
 <GHOST
 [SPEAKER=GHOST_DIRT]...
 ... Ummmmm, there's nothing in your hands...
@@ -27,7 +27,9 @@ Mmhmm, I thought so too. We haven't seen many travellers lately, have we?
 &GIVEN_ORDER1
 [ANIM_1]Thanks again for the drink, it's fantastic! Jackie always makes it just how I want it.
 [SPEAKER=PUMPKIN][ANIM_6]You know it, hon!
-[SPEAKER=PUMPKIN][ANIM_4]Not sure how she can taste the coffee with all that milk, though...[DEFAULT_ANIM]
+[SPEAKER=PUMPKIN][ANIM_4]Not sure how she can taste the coffee with all that milk, though...
+[SPEAKER=FRIEND][ANIM_1]Like, hey! Don't make fun of her! Jeez![ANIM_0]
+[SPEAKER=PUMPKIN][ANIM_5]Oops! [ANIM_2]Hahaha... Sorry, didn't mean to offend![DEFAULT_ANIM]
 &GIVEN_ORDER1,FOUND_GOAL
 So, I was wondering...
 Do you want to go out on another date some time? Since this went so well...

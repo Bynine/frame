@@ -10,7 +10,7 @@ import text.DialogueTree;
  *
  */
 public class ProgressionHandler {
-	
+
 	public static final String 
 	ghostShopkeeper = "GHOST_SHOPKEEPER",
 	ghostLibrarian = "GHOST_LIBRARIAN",
@@ -21,12 +21,13 @@ public class ProgressionHandler {
 	shellFreb = "SHELL_FREB",
 	foundStatuette = "FOUND_STATUETTE",
 	checkStatuette = "CHECK_STATUETTE";
-	
+
 	ProgressionHandler(){
 	}
 
 	void update(){
 		checkOutOfWoodsBeforeEnteredShrine();
+		checkGotAllTreasures();
 	}
 
 	/**
@@ -40,30 +41,30 @@ public class ProgressionHandler {
 		case 1:{
 			FrameEngine.startDialogueTree(new DialogueTree(
 					"A mysterious voice echoes...\n"
-					+ "\"Three of us... remain...\""));
+							+ "\"Three of us... remain...\""));
 		} break;
 		case 2:{
 			FrameEngine.startDialogueTree(new DialogueTree(
 					"A mysterious voice echoes...\n"
-					+ "\"Two of us... remain...\""));
+							+ "\"Two of us... remain...\""));
 		} break;
 		case 3:{
 			FrameEngine.startDialogueTree(new DialogueTree(
 					"A mysterious voice echoes...\n"
-					+ "\"One of us... remains...\""));
+							+ "\"One of us... remains...\""));
 		} break;
 		case 4:{
 			FrameEngine.startDialogueTree(new DialogueTree(
 					"A mysterious voice echoes...\n"
-					+ "\"I can see your resolve... The Shrine has opened. Come North, traveller.\""));
+							+ "\"I can see your resolve... The Shrine has opened. Come North, traveller.\""));
 		} break;
 		}
 	}
-	
+
 	private void checkOutOfWoodsBeforeEnteredShrine(){
 		if (
 				(FrameEngine.getArea().getID().equals("BEACH") || 
-				FrameEngine.getArea().getID().equals("ORCHARD")) &&
+						FrameEngine.getArea().getID().equals("ORCHARD")) &&
 				!FrameEngine.getSaveFile().getFlag("ENTERED_SHRINE") &&
 				!FrameEngine.getSaveFile().getFlag(beforeShrineWarning)
 				){
@@ -72,8 +73,32 @@ public class ProgressionHandler {
 					new DialogueTree(
 							new NPC("KAMI", "before_shrine_warning"),
 							"before_shrine_warning"
-					));
+							));
 		}
 	}
-	
+
+	private void checkGotAllTreasures(){
+		final String gotAllTreasures = "GOT_ALL_TREASURES";
+		if (!FrameEngine.getSaveFile().getFlag(gotAllTreasures)){
+			if (
+					FrameEngine.getSaveFile().getFlag("FREBKING_REWARD") &&
+					FrameEngine.getSaveFile().getFlag("GRUB_REWARD") &&
+					FrameEngine.getSaveFile().getFlag("CAFE_REWARD") &&
+					FrameEngine.getSaveFile().getFlag("WORLD_REWARD") &&
+					FrameEngine.getSaveFile().getFlag("GHOST_REWARD") &&
+					FrameEngine.getSaveFile().getFlag("CURSE_REWARD")
+					){
+				FrameEngine.getSaveFile().setFlag(gotAllTreasures, true);
+				String dialogue = FrameEngine.getSaveFile().getFlag("FOUND_GOAL") ?
+						"got_all_treasures_goal" : "got_all_treasures";
+				FrameEngine.startDialogueTree(
+						new DialogueTree(
+								new NPC("KAMI", dialogue),
+								dialogue
+								));
+			}
+		}
+	}
+
+
 }

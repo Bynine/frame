@@ -13,6 +13,7 @@ public class Pumpkin extends NPC {
 			String imagePath, String dialoguePath, Layer layer) {
 		super(x, y, interactXDisp, interactYDisp, width, height, id, imagePath, dialoguePath, layer);
 		currentAnim = FrameEngine.getSaveFile().getFlag("CAFE_REWARD") ? 2 : 0;
+		defaultAnim = currentAnim;
 	}
 	
 	@Override
@@ -26,7 +27,6 @@ public class Pumpkin extends NPC {
 	
 	@Override
 	public void getMessage(String message){
-		System.out.println(message);
 		super.getMessage(message);
 		if (message.equals("RELAX")){
 			defaultAnim = 2;

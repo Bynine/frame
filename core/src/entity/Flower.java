@@ -1,11 +1,15 @@
 package entity;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import main.Animator;
 import main.AudioHandler;
 import main.FrameEngine;
 import text.DialogueTree;
@@ -16,12 +20,13 @@ public class Flower extends InteractableEntity {
 	private State state;
 	private final TextureRegion 
 	dirt = new TextureRegion(new Texture("sprites/objects/dirt.png")),
-	seed = new TextureRegion(new Texture("sprites/objects/seed.png")),
-	flower1 = new TextureRegion(new Texture("sprites/objects/flower1.png")),
-	flower2 = new TextureRegion(new Texture("sprites/objects/flower2.png")),
-	flower3 = new TextureRegion(new Texture("sprites/objects/flower3.png")),
-	flower4 = new TextureRegion(new Texture("sprites/objects/flower4.png")),
-	flower5 = new TextureRegion(new Texture("sprites/objects/flower5.png"));
+	seed = new TextureRegion(new Texture("sprites/objects/seed.png"));
+	private final ArrayList<Animation<TextureRegion>> 
+	flower1 = Animator.createAnimation(30, "sprites/objects/flower1.png", 2, 1),
+	flower2 = Animator.createAnimation(30, "sprites/objects/flower2.png", 2, 1),
+	flower3 = Animator.createAnimation(30, "sprites/objects/flower3.png", 2, 1),
+	flower4 = Animator.createAnimation(30, "sprites/objects/flower4.png", 2, 1),
+	flower5 = Animator.createAnimation(30, "sprites/objects/flower5.png", 2, 1);
 	public static final String
 	flowerPrefix = "FLOWER_",
 	seedPrefix = "SEED_",
@@ -129,19 +134,19 @@ public class Flower extends InteractableEntity {
 		case FLOWER: {
 			switch (flowerType){
 			case ONE:	{
-				image = flower1; break;
+				image = flower1.get(0).getKeyFrame(FrameEngine.getTime()); break;
 			}
 			case TWO:	{
-				image = flower2; break;
+				image = flower2.get(0).getKeyFrame(FrameEngine.getTime()); break;
 			}
 			case THREE:	{
-				image = flower3; break;
+				image = flower3.get(0).getKeyFrame(FrameEngine.getTime()); break;
 			}
 			case FOUR:	{
-				image = flower4; break;
+				image = flower4.get(0).getKeyFrame(FrameEngine.getTime()); break;
 			}
 			case FIVE:	{
-				image = flower5; break;
+				image = flower5.get(0).getKeyFrame(FrameEngine.getTime()); break;
 			}
 			}
 			break;
@@ -158,11 +163,11 @@ public class Flower extends InteractableEntity {
 	public void dispose() {
 		dirt.getTexture().dispose();
 		seed.getTexture().dispose();
-		flower1.getTexture().dispose();
-		flower2.getTexture().dispose();
-		flower3.getTexture().dispose();
-		flower4.getTexture().dispose();
-		flower5.getTexture().dispose();
+		Animator.freeAnimation(flower1);
+		Animator.freeAnimation(flower2);
+		Animator.freeAnimation(flower3);
+		Animator.freeAnimation(flower4);
+		Animator.freeAnimation(flower5);
 		whistle.dispose();
 	}
 	

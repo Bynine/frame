@@ -93,10 +93,10 @@ public class AudioHandler {
 	/**
 	 * Plays a preloaded sound. The calling class needs to dispose the sound of its own accord.
 	 */
-	public static long playSoundVariedPitch(Sound sound){
-		final float pitchDisparity = 16.0f;
+	public static long playSoundVariedPitch(Sound sound, float... volume){
+		final float pitchDisparity = 14.0f;
 		float pitch = (1.0f - 0.5f/pitchDisparity) + (float) (Math.random()/pitchDisparity);
-		return playPitchedSound(sound, pitch, 1, false);
+		return playPitchedSound(sound, pitch, (volume.length > 0) ? volume[0] : 1, false);
 	}
 
 	public static long playVolumeSound(Sound sound, float volume){

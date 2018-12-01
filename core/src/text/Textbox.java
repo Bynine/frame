@@ -140,6 +140,9 @@ public class Textbox {
 		if (command.getID().equals("PAUSE")){
 			textTimer.change(-24);
 		}
+		else if (command.getID().equals("GHOST_LESLIE")){
+			FrameEngine.getSaveFile().setFlag("GHOST_LESLIE", true);
+		}
 		else if (command.getID().equals("RIP")){
 			AudioHandler.playSoundVariedPitch(rip);
 		}
@@ -260,6 +263,10 @@ public class Textbox {
 
 	public InteractableEntity getSpeaker() {
 		return speaker;
+	}
+
+	public void complete() {
+		textPos = characters.size();
 	}
 
 }

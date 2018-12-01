@@ -95,6 +95,11 @@ public class KeyboardInputHandler implements InputHandler, InputProcessor {
 	public boolean getSaveJustPressed() {
 		return Gdx.input.isKeyJustPressed(Keys.E);
 	}
+	
+	@Override
+	public boolean getSuperDebugSpeedUpHeld() {
+		return Gdx.input.isKeyPressed(Keys.SHIFT_RIGHT);
+	}
 
 	@Override
 	public boolean getDebugSpeedUpHeld() {

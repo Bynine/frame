@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="271">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="273">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/shop.tsx"/>
  <tileset firstgid="265" source="tilesets/cafe.tsx"/>
@@ -230,13 +230,6 @@
     <property name="TYPE" value="SUMMONOBJECT"/>
    </properties>
   </object>
-  <object id="250" name="SECRET" gid="2" x="352" y="200" width="16" height="16">
-   <properties>
-    <property name="AMOUNT" value="1"/>
-    <property name="FLAG" value="SECRET_HOME"/>
-    <property name="TYPE" value="SECRET"/>
-   </properties>
-  </object>
   <object id="253" name="smoke" gid="3" x="488" y="168" width="32" height="32">
    <properties>
     <property name="APPEAR" value="ENTERED_SHRINE,!FOUND_GOAL"/>
@@ -293,6 +286,20 @@ You decide touching it would be a bad idea.</property>
     <property name="TEXT">You see some recipe books up on this shelf.
 They look well-used.</property>
     <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="271" name="text" gid="1" x="344" y="208" width="24" height="24">
+   <properties>
+    <property name="TEXT">This plant is soaking up some light from the setting sun.
+Ahhh.</property>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="272" name="SECRET" gid="2" x="344" y="208" width="24" height="24">
+   <properties>
+    <property name="AMOUNT" value="1"/>
+    <property name="FLAG" value="SECRET_HOME"/>
+    <property name="TYPE" value="SECRET"/>
    </properties>
   </object>
  </objectgroup>

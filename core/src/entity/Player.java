@@ -107,7 +107,7 @@ public class Player extends Entity{
 			temp.setPosition(position.x + temp.width*2, position.y);
 		}
 		else if (dir == UP){
-			temp.setPosition(position.x + temp.width/2, position.y + temp.height*1.5f);
+			temp.setPosition(position.x + temp.width/2, position.y + temp.height*1.55f);
 		}
 		else if (dir == DOWN){
 			temp.setPosition(position.x + temp.width/2, position.y - temp.height);
@@ -200,7 +200,8 @@ public class Player extends Entity{
 		case NORMAL:
 		default: step = stepGrass;
 		}
-		AudioHandler.playSoundVariedPitch(step);
+		final float stepVolumeDebuff = 0.8f;
+		AudioHandler.playSoundVariedPitch(step, stepVolumeDebuff);
 		stepTimer.reset();
 	}
 
