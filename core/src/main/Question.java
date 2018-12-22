@@ -16,7 +16,7 @@ public class Question {
 	}
 	
 	public void ask(){
-		FrameEngine.startDialogueTree(new DialogueTree(new NPC("KAMI", ""), "questions/" + path));
+		FrameEngine.startDialogueTree(new DialogueTree(new NPC("KAMI", ""), "questions/" + path.toLowerCase()));
 	}
 	
 	public static enum AnswerDirection{

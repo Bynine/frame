@@ -323,7 +323,7 @@ public abstract class Entity {
 	}
 	
 	public static enum Layer{
-		BACK, NORMAL, FRONT, OVERHEAD, LIGHT
+		WAYBACK, BACK, NORMAL, FRONT, OVERHEAD, LIGHT
 	}
 
 	public TextureRegion getShadow() {

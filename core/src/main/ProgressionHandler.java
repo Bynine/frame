@@ -40,23 +40,19 @@ public class ProgressionHandler {
 		switch (counter){
 		case 1:{
 			FrameEngine.startDialogueTree(new DialogueTree(
-					"A mysterious voice echoes...\n"
-							+ "\"Three of us... remain...\""));
+					"[SPEAKER=KAMI]Three of us... remain..."));
 		} break;
 		case 2:{
 			FrameEngine.startDialogueTree(new DialogueTree(
-					"A mysterious voice echoes...\n"
-							+ "\"Two of us... remain...\""));
+					"[SPEAKER=KAMI]Two of us... remain..."));
 		} break;
 		case 3:{
 			FrameEngine.startDialogueTree(new DialogueTree(
-					"A mysterious voice echoes...\n"
-							+ "\"One of us... remains...\""));
+					"[SPEAKER=KAMI]One of us... remains..."));
 		} break;
 		case 4:{
 			FrameEngine.startDialogueTree(new DialogueTree(
-					"A mysterious voice echoes...\n"
-							+ "\"I can see your resolve... The Shrine has opened. Come North, traveller.\""));
+					"[SPEAKER=KAMI]I can see your resolve... The Shrine has opened. Come North, traveller."));
 		} break;
 		}
 	}

@@ -1,0 +1,4 @@
+
+[TALK][ANIM_1]Ah? [PAUSE]You are looking for something else, my friend?
+That... sounds very important indeed. Clearly it has inspired you.
+[ANIM_6]Go forth! Seize the things that make you feel passionate! [ANIM_1]That is my advice to you.

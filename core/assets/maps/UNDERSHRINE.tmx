@@ -187,7 +187,7 @@
  </layer>
  <objectgroup id="5" name="SLOPES"/>
  <objectgroup color="#32e3c6" id="6" name="TERRAIN" visible="0"/>
- <objectgroup color="#50734a" id="7" name="COLLISION" visible="0" opacity="0.5">
+ <objectgroup color="#50734a" id="7" name="COLLISION" opacity="0.5">
   <object id="312" x="256" y="160" width="32" height="32"/>
   <object id="313" x="128" y="224" width="32" height="32"/>
   <object id="314" x="256" y="352" width="32" height="32"/>

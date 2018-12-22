@@ -1,9 +1,9 @@
 *INTRO_SHOPKEEPER
-Welcome to Wabika. Looking for something in particular?
+[ANIM_3]Welcome to Wabika, stranger! [ANIM_0]Looking for something in particular?
 [TALK][PAUSE]...Oh, is that so...
 Interesting. I gotta admit, I don't know much about that sort of thing.
-But tell you what - try visiting my friend up northeast. They run a little book store.
-I'll bet you anything they've got some old books on what you're looking for.
+But tell you what - try visiting my friend up northeast. He runs a little book store.
+I'll bet you anything he's got some old books on what you're looking for.
 [ANIM_1]Good luck! Come again soon![ANIM_0]
 &INTRO_SHOPKEEPER
 Have you headed up northeast to the bookstore yet? I definitely recommend it.

@@ -1,2 +1,6 @@
+*TALK_DOG
 wef wef.
 [NOSPEAKER]In all your life, you have never before seen a creature so blissfully content.
+&TALK_DOG
+wef wef.
+[NOSPEAKER]You're not sure how you can tell, but it seems overjoyed to see you again.

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset name="forest" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+<tileset version="1.2" tiledversion="1.2.0" name="forest" tilewidth="32" tileheight="32" tilecount="256" columns="16">
  <image source="forest.png" width="512" height="512"/>
  <tile id="5">
   <animation>
@@ -155,6 +155,12 @@
   <animation>
    <frame tileid="103" duration="500"/>
    <frame tileid="231" duration="500"/>
+  </animation>
+ </tile>
+ <tile id="112">
+  <animation>
+   <frame tileid="112" duration="500"/>
+   <frame tileid="22" duration="500"/>
   </animation>
  </tile>
  <tile id="117">

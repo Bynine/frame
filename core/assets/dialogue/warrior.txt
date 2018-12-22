@@ -7,12 +7,12 @@ Traveller, you no doubt seek what I once did. To enter the Shrine's inner depths
 Do not make the mistake I did.
 I came seeking the treasure at any cost. I was violent. Mindless.
 And so I have been trapped here as penance for my crimes.
-...[PAUSE] However.
+...[PAUSE][ANIM_1] However.
 Even now, as I stand here in your presence, I can tell your intentions are good.
 [GIVE_TREASURE2]Here. Take my last possession, my beloved and wartorn shield.
-Perhaps you can make better use of it than I.
+[ANIM_0]Perhaps you can make better use of it than I.
 &TALK_WARRIOR
-...[PAUSE] You still seek to speak to this old warrior?
+[ANIM_1]You still seek to speak to this old warrior?
 Do not waste your time with me, child. You are young yet.
 Go and experience the fullness of this world. Appreciate its beauty.
-I have done enough.
+[PAUSE][ANIM_0]I have done enough.

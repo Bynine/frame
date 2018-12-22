@@ -3,4 +3,4 @@ Some green tea that's been put out for customers. Drink some?
 <YES
 Mmmm... It's warm!
 <NO
-You decide to leave it for other customers. ~ [PAUSE]Or you just don't like green tea.
+You decide you'd best leave it for other customers. ~ [PAUSE]Or you just don't like green tea.

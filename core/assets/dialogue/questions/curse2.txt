@@ -1,0 +1,4 @@
+What design is fashioned on the shield of the cursed warrior?
+If you think it is a hawk, go west.
+If you think it is a wolf, go east.
+If you think it is a bass, go north.

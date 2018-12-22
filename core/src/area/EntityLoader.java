@@ -37,7 +37,7 @@ import entity.Secret;
 import entity.Shopkeeper;
 import entity.Item;
 import entity.ItemHole;
-import entity.Koi;
+import entity.Fish;
 import entity.Leslie;
 import entity.Memorial;
 import entity.MoveLight;
@@ -72,7 +72,8 @@ public class EntityLoader {
 			MapObject entity = map_entities.get(ii);
 			MapProperties properties = entity.getProperties();
 			String appear = properties.containsKey("APPEAR") ? properties.get("APPEAR", String.class) : "";
-			if (!(appear != "" && !FrameEngine.getSaveFile().getFlag(appear))){
+			if (FrameEngine.OMNI || 
+					(!(appear != "" && !FrameEngine.getSaveFile().getFlag(appear)))){
 				loadEntity(properties, entity, entities);
 			}
 		}
@@ -312,8 +313,10 @@ public class EntityLoader {
 		case "grass":{
 			entities.add(new Grass(x, y));
 		} break;
-		case "koi":{
-			entities.add(new Koi(x, y));
+		case "fish":{
+			Fish.Species species = properties.containsKey("SPECIES") ? 
+					Fish.Species.valueOf(properties.get("SPECIES", String.class)) : Fish.Species.MEDIUM;
+			entities.add(new Fish(x, y, species));
 		} break;
 		case "movelight":{
 			entities.add(new MoveLight(x, y));

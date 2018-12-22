@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="328">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="335">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/shop.tsx"/>
  <tileset firstgid="265" source="tilesets/bookstore.tsx"/>
@@ -130,6 +130,9 @@
   <object id="310" x="528" y="256" width="32" height="32"/>
   <object id="318" x="448" y="280" width="32" height="32"/>
   <object id="327" x="192" y="216" width="32" height="32"/>
+  <object id="331" x="320" y="376" width="88" height="8"/>
+  <object id="332" x="520" y="376" width="88" height="8"/>
+  <object id="333" x="192" y="312" width="120" height="8"/>
  </objectgroup>
  <objectgroup id="8" name="ENTITIES" opacity="0.64">
   <object id="290" name="portal" gid="6" x="448" y="416" width="32" height="32">
@@ -139,7 +142,7 @@
     <property name="TYPE" value="PORTAL"/>
    </properties>
   </object>
-  <object id="291" name="pumpkin cleaning up" gid="1" x="480" y="240" width="32" height="24">
+  <object id="291" name="pumpkin cleaning up" gid="1" x="480" y="232" width="32" height="24">
    <properties>
     <property name="APPEAR" value="!ENTERED_SHRINE"/>
     <property name="DIALOGUE" value="pumpkin"/>
@@ -232,21 +235,21 @@ Good job, plant.</property>
     <property name="TYPE" value="SECRET"/>
    </properties>
   </object>
-  <object id="315" name="order2" gid="1" x="392" y="279" width="16" height="8">
+  <object id="315" name="order2" gid="1" x="391" y="279" width="16" height="8">
    <properties>
     <property name="FLAG" value="GIVEN_ORDER2"/>
     <property name="IMAGE" value="order2"/>
     <property name="TYPE" value="SUMMONOBJECT"/>
    </properties>
   </object>
-  <object id="316" name="order1" gid="1" x="424" y="181" width="16" height="8">
+  <object id="316" name="order1" gid="1" x="423" y="181" width="16" height="8">
    <properties>
     <property name="FLAG" value="GIVEN_ORDER1"/>
     <property name="IMAGE" value="order1"/>
     <property name="TYPE" value="SUMMONOBJECT"/>
    </properties>
   </object>
-  <object id="317" name="order3" gid="1" x="545" y="283" width="16" height="8">
+  <object id="317" name="order3" gid="1" x="544" y="283" width="16" height="8">
    <properties>
     <property name="FLAG" value="GIVEN_ORDER3"/>
     <property name="IMAGE" value="order3"/>
@@ -304,6 +307,36 @@ How droll.</property>
     <property name="GRAPHIC" value="smoke"/>
     <property name="INTERVAL" value="66"/>
     <property name="TYPE" value="emitter"/>
+   </properties>
+  </object>
+  <object id="328" name="bubbling audio" gid="5" x="200" y="216" width="16" height="16">
+   <properties>
+    <property name="AUDIO" value="bubbling"/>
+    <property name="ID" value="BUBBLING"/>
+    <property name="TYPE" value="AUDIO"/>
+   </properties>
+  </object>
+  <object id="329" name="text" gid="1" x="192" y="232" width="24" height="32">
+   <properties>
+    <property name="TEXT">This coffee is just about ready.
+The aroma reminds you of pumpkins, or maybe apple strudel.</property>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="330" name="text" gid="1" x="240" y="240" width="32" height="24">
+   <properties>
+    <property name="APPEAR" value="ENTERED_SHRINE"/>
+    <property name="TEXT" value="(Psst... you're supposed to stand in front of the counter.)"/>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="334" name="text" gid="1" x="192" y="280" width="120" height="32">
+   <properties>
+    <property name="APPEAR" value="!ENTERED_SHRINE"/>
+    <property name="TEXT">Delicious, freshly baked pastries crowd this counter.
+Maybe she wouldn't notice if you took just one...
+On second thought, maybe not.</property>
+    <property name="TYPE" value="DESC"/>
    </properties>
   </object>
  </objectgroup>

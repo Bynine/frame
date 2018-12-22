@@ -8,6 +8,7 @@ import text.DialogueTree;
 public class DialogueTrigger extends ImmobileEntity {
 	
 	private final DialogueTree dialogueTree;
+	private final boolean entrance;
 
 	public DialogueTrigger(float x, float y, float width, float height, String dialoguePath) {
 		super(x, y);
@@ -18,12 +19,13 @@ public class DialogueTrigger extends ImmobileEntity {
 		else{
 			dialogueTree = new DialogueTree(null, dialoguePath);
 		}
+		entrance = dialoguePath.startsWith("entered") || dialoguePath.startsWith("left_with");
 	}
 	
 	@Override
 	public void update(){
 		super.update();
-		if (touchingPlayer(hitbox)){
+		if (touchingPlayer(hitbox) && (!entrance || FrameEngine.getPlayer().dir == UP)){
 			FrameEngine.startDialogueTree(dialogueTree);
 			setRemove();
 		}

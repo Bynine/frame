@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="70" height="90" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="661">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="70" height="90" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="669">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/forest.tsx"/>
  <tileset firstgid="265" source="tilesets/trees.tsx"/>
@@ -518,11 +518,11 @@
   <object id="268" x="280" y="600" width="80" height="264"/>
   <object id="269" x="256" y="600" width="24" height="120"/>
   <object id="271" x="360" y="600" width="32" height="136"/>
-  <object id="273" x="280" y="1440" width="104" height="296"/>
+  <object id="273" x="376" y="1440" width="8" height="296"/>
   <object id="274" x="248" y="1720" width="32" height="16"/>
   <object id="275" x="248" y="1736" width="112" height="128"/>
   <object id="276" x="224" y="864" width="32" height="32"/>
-  <object id="278" x="0" y="2464" width="2240" height="416"/>
+  <object id="278" x="0" y="2464" width="2240" height="128"/>
   <object id="285" x="1512" y="920" width="16" height="32"/>
   <object id="286" x="832" y="1440" width="160" height="88"/>
   <object id="287" x="736" y="1856" width="160" height="96"/>
@@ -707,6 +707,8 @@
   <object id="655" x="608" y="1656" width="256" height="32"/>
   <object id="657" x="416" y="1344" width="128" height="24"/>
   <object id="658" x="448" y="1432" width="96" height="40"/>
+  <object id="665" x="280" y="1440" width="8" height="296"/>
+  <object id="667" x="360" y="1720" width="16" height="16"/>
  </objectgroup>
  <objectgroup color="#32e3c6" id="7" name="TERRAIN" visible="0">
   <object id="280" name="wood" x="256" y="904" width="160" height="80"/>
@@ -892,7 +894,7 @@ You can't see any entrances to nefarious places, which is good.</property>
     <property name="TYPE" value="ITEM"/>
    </properties>
   </object>
-  <object id="537" name="smoke" gid="3" x="848" y="1408" width="32" height="32">
+  <object id="537" name="smoke" gid="3" x="850" y="1408" width="32" height="32">
    <properties>
     <property name="DURATION" value="60"/>
     <property name="GRAPHIC" value="smoke"/>
@@ -900,7 +902,7 @@ You can't see any entrances to nefarious places, which is good.</property>
     <property name="TYPE" value="emitter"/>
    </properties>
   </object>
-  <object id="538" name="smoke" gid="3" x="1576" y="1536" width="32" height="32">
+  <object id="538" name="smoke" gid="3" x="1580" y="1504" width="32" height="32">
    <properties>
     <property name="DURATION" value="60"/>
     <property name="GRAPHIC" value="smoke"/>
@@ -1203,11 +1205,13 @@ You can't see any entrances to nefarious places, which is good.</property>
   </object>
   <object id="631" name="cat" gid="4" x="808" y="1624" width="32" height="32">
    <properties>
+    <property name="APPEAR" value="CAFE_REWARD"/>
     <property name="TYPE" value="CAT"/>
    </properties>
   </object>
   <object id="632" name="cat" gid="4" x="1480" y="1464" width="32" height="32">
    <properties>
+    <property name="APPEAR" value="GHOST_REWARD"/>
     <property name="TYPE" value="CAT"/>
    </properties>
   </object>
@@ -1284,6 +1288,46 @@ You suddenly become self aware and hope nobody was watching from inside.</proper
     <property name="ID" value="GRUBLOVE"/>
     <property name="IMAGE" value="doll_fixed"/>
     <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="661" name="fish" gid="4" x="784" y="2704" width="32" height="32">
+   <properties>
+    <property name="APPEAR" value="WORLD_REWARD"/>
+    <property name="SPECIES" value="LARGE"/>
+    <property name="TYPE" value="FISH"/>
+   </properties>
+  </object>
+  <object id="662" name="fish" gid="4" x="1280" y="2664" width="32" height="32">
+   <properties>
+    <property name="APPEAR" value="GHOST_REWARD"/>
+    <property name="SPECIES" value="LARGE"/>
+    <property name="TYPE" value="FISH"/>
+   </properties>
+  </object>
+  <object id="663" name="fish" gid="4" x="1048" y="2728" width="32" height="32">
+   <properties>
+    <property name="APPEAR" value="GRUB_REWARD"/>
+    <property name="TYPE" value="FISH"/>
+   </properties>
+  </object>
+  <object id="664" name="fish" gid="4" x="456" y="2680" width="32" height="32">
+   <properties>
+    <property name="APPEAR" value="WORLD_REWARD"/>
+    <property name="TYPE" value="FISH"/>
+   </properties>
+  </object>
+  <object id="666" name="fish" gid="4" x="304" y="1520" width="32" height="32">
+   <properties>
+    <property name="APPEAR" value="CAFE_REWARD"/>
+    <property name="SPECIES" value="SMALL"/>
+    <property name="TYPE" value="FISH"/>
+   </properties>
+  </object>
+  <object id="668" name="currency" gid="2" x="184" y="1792" width="24" height="24">
+   <properties>
+    <property name="AMOUNT" value="1"/>
+    <property name="FLAG" value="CURRENCY_ORCHARD_SHORE"/>
+    <property name="TYPE" value="CURRENCY"/>
    </properties>
   </object>
  </objectgroup>

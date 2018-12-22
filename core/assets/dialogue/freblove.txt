@@ -4,7 +4,7 @@ little thing... missing something.
 &TALK_FREBLOVE
 me not like little thing sound sad.
 it make me sad.
-&FREB_SHELL_1
+&FREB_SHELL_1_HAS
 *TALK_FREBLOVE_HAPPY
 [ANIM_1]...thing is happy.
 you did good. thank you.

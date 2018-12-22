@@ -7,8 +7,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.math.Vector2;
 
-import text.MenuOption;
-
 /**
  * Keeps track of all recorded game variables.
  */
@@ -69,7 +67,7 @@ public class SaveFile {
 			for (String item: items){
 				if (!item.isEmpty()){
 					if (verbose) System.out.println("Added item: " + item);
-					FrameEngine.getInventory().addItem(item);
+					FrameEngine.getInventory().addItemConditional(item);
 				}
 			}
 		}
@@ -115,11 +113,13 @@ public class SaveFile {
 	void save(boolean credits){
 		if (!FrameEngine.SAVE) return;
 		Preferences preferences = Gdx.app.getPreferences(saveFile);
-		preferences.put(flags);
-		preferences.put(counters);
 		if (credits){
 			preferences.putString(CREDITS, "true");
 		}
+		
+		preferences.put(flags);
+		preferences.put(counters);
+		
 		Iterator<String> iter = map.keySet().iterator();
 		while (iter.hasNext()){
 			String key = iter.next();
@@ -135,14 +135,15 @@ public class SaveFile {
 		startArea = FrameEngine.getArea().getID();
 		startPosition.set(x, y);
 		if (verbose) System.out.println("Saved player to " + x + " " + y);
+		
 		preferences.putString(areaKey, FrameEngine.getArea().getID());
 		preferences.putFloat(positionX, x);
 		preferences.putFloat(positionY, y);
 
 		StringBuilder builder = new StringBuilder();
-		for (MenuOption menuOption: FrameEngine.getInventory().getList()){
-			ItemDescription desc = (ItemDescription) menuOption.getOutput();
-			builder.append(desc.id + ",");
+		for (String itemId: FrameEngine.getInventory().getItems()){
+			if (verbose) System.out.println(itemId);
+			builder.append(itemId + ",");
 		}
 		preferences.putString(inventoryKey, builder.toString());
 

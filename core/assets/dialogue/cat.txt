@@ -1,8 +1,7 @@
 *TALK_CAT_SHOP
 Hm-hmm... These veggies are nice and fresh.
-You know, I was checking out the garden outside and I saw something weird in the dirt.
+You know, I was looking at the garden outside and I saw something weird in the dirt.
 I would've picked it up, but I'm not the type to get my claws dirty...
 &TALK_CAT_SHOP
 Hmm, maybe I'll take another look at that weird thing in the garden later.
-Then I've got my date today...
-Maybe I shouldn't... I don't want to get this coat dirty.
+Buuuut, maybe I shouldn't... I don't want to get this coat dirty before my date today.

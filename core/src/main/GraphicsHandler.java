@@ -65,7 +65,7 @@ public class GraphicsHandler {
 	treasure3Art = new TextureRegion(new Texture("art/treasure3.png")),
 	treasure4Art = new TextureRegion(new Texture("art/treasure4.png")),
 	treasure5Art = new TextureRegion(new Texture("art/treasure5.png")),
-	treasure6Art = new TextureRegion(new Texture("art/treasure5.png")),
+	treasure6Art = new TextureRegion(new Texture("art/treasure6.png")),
 	secretArt = new TextureRegion(new Texture("art/secret.png")),
 	arrowUp = new TextureRegion(new Texture("sprites/gui/arrow_up.png")),
 	arrowDown = new TextureRegion(new Texture("sprites/gui/arrow_down.png")),
@@ -142,12 +142,14 @@ public class GraphicsHandler {
 	 */
 	void drawOverworld(){
 		wipeScreen();
+		ArrayList<Entity> wayBackEntities = new ArrayList<Entity>();
 		ArrayList<Entity> backEntities = new ArrayList<Entity>();
 		ArrayList<Entity> normalEntities = new ArrayList<Entity>();
 		ArrayList<Entity> frontEntities = new ArrayList<Entity>();
 		ArrayList<Entity> overheadEntities = new ArrayList<Entity>();
 		ArrayList<Entity> lightEntities = new ArrayList<Entity>();
 		for (Entity entity: EntityHandler.getEntities()){
+			if (entity.getLayer() == Entity.Layer.WAYBACK) wayBackEntities.add(entity);
 			if (entity.getLayer() == Entity.Layer.BACK) backEntities.add(entity);
 			if (entity.getLayer() == Entity.Layer.NORMAL) normalEntities.add(entity);
 			if (entity.getLayer() == Entity.Layer.FRONT) frontEntities.add(entity);
@@ -172,23 +174,25 @@ public class GraphicsHandler {
 		renderer.render(new int[]{4});
 		renderer.getBatch().setColor(DEFAULT_COLOR);
 		batch.setColor(DEFAULT_COLOR);
-		if (!FrameEngine.INVIS) drawWaterEntities(EntityHandler.getEntities());
+		drawEntities(wayBackEntities);
+		drawWaterEntities(EntityHandler.getEntities());
 		renderer.setView(worldCam);
-		renderer.render(new int[]{0, 1});	// Background tiles.
+		renderer.render(new int[]{0});	// Background tiles.
 
-		if (!FrameEngine.INVIS) drawEntities(backEntities);
+		drawEntities(backEntities);
+		renderer.render(new int[]{1});
 		if (!FrameEngine.INVIS) drawShadows(EntityHandler.getEntities());
-		if (!FrameEngine.INVIS) drawEntities(normalEntities);
+		drawEntities(normalEntities);
 		renderer.render(new int[]{2}); 	// Foreground tiles.
-		if (!FrameEngine.INVIS) drawEntities(frontEntities);
+		drawEntities(frontEntities);
 		renderer.getBatch().setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
 		renderer.getBatch().setColor(FrameEngine.getArea().lightColor);
 		renderer.render(new int[]{3});		// Light tiles.
 		renderer.getBatch().setColor(DEFAULT_COLOR);
-		if (!FrameEngine.INVIS) drawEntities(lightEntities);
+		drawEntities(lightEntities);
 		endOverlay(renderer.getBatch(), false);
 		renderer.render(new int[]{4}); 	// Overhead tiles.
-		if (!FrameEngine.INVIS) drawEntities(overheadEntities);
+		drawEntities(overheadEntities);
 		handleEmitters();
 		if (FrameEngine.canControlPlayer() && FrameEngine.canInteract()) {
 			InteractableEntity ien = FrameEngine.getCurrentInteractable();
@@ -263,7 +267,9 @@ public class GraphicsHandler {
 		shapeRenderer.begin();
 		entities.sort(sorter);
 		for (Entity en: entities){
-			drawEntity(en);
+			if (!(en.equals(FrameEngine.getPlayer()) && FrameEngine.INVIS)){
+				drawEntity(en);
+			}
 		}
 		batch.end();
 		shapeRenderer.end();
@@ -300,7 +306,8 @@ public class GraphicsHandler {
 		shapeRenderer.begin();
 		entities.sort(sorter);
 		for (Entity en: entities){
-			if (null != en.getImage() && !en.shouldDelete() && en.getLayer() != Entity.Layer.BACK){
+			if (null != en.getImage() && !en.shouldDelete() && 
+					en.getLayer() != Entity.Layer.BACK && en.getLayer() != Entity.Layer.WAYBACK){
 				drawWaterEntity(en);
 			}
 		}
@@ -332,7 +339,10 @@ public class GraphicsHandler {
 	 * The color of given character's reflection in the water.
 	 */
 	private Color getReflectionColor(Color color, float sizeReduction){
-		return new Color(color.r - 0.2f, color.g - 0.1f, color.b, 
+		return new Color(
+				color.r*sizeReduction + blackR*(1-sizeReduction),
+				color.g*sizeReduction + blackG*(1-sizeReduction),
+				color.b*sizeReduction + blackB*(1-sizeReduction), 
 				(sizeReduction * color.a) / 1.8F);
 	}
 
@@ -871,7 +881,8 @@ public class GraphicsHandler {
 		batch.setProjectionMatrix(centerCam.combined);
 
 		final float posX = FrameEngine.TILE/2;
-		final float posY = 200 + (Math.min(FrameEngine.getTime(), FrameEngine.CREDITS_END_TIME-1000) * creditSpeed);
+		final float posY = 200 + (Math.min(FrameEngine.getTime(), 
+				FrameEngine.getCreditsTime() - 1000) * creditSpeed);
 		drawArt(0, posX, posY, treasure1Art, "FREBKING_REWARD");
 		drawArt(1, posX, posY, treasure3Art, "GRUB_REWARD");
 		drawArt(2, posX, posY, treasure4Art, "CAFE_REWARD");
@@ -887,10 +898,10 @@ public class GraphicsHandler {
 	private void drawArt(int offset, float posX, float posY, TextureRegion art, String flag){
 		batch.begin();
 		if (!FrameEngine.getSaveFile().getFlag(flag)) {
-			batch.setColor(0.08f, 0.06f, 0.1f, 0.12f);
+			batch.setColor(0.06f, 0.08f, 0.1f, 0.08f);
 		}
 		else{
-			batch.setColor(DEFAULT_COLOR);
+			batch.setColor(1.00f, 1.00f, 1.00f, 1.00f);
 		}
 		batch.draw(art, 
 				posX - FrameEngine.TILE/2, 

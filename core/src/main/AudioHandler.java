@@ -23,7 +23,7 @@ public class AudioHandler {
 	/**
 	 * A certain period after a newly created sound is played, it gets disposed.
 	 */
-	private static HashMap<DurationTimer, Sound> reverb = new HashMap<>();
+	private static HashMap<DurationTimer, PitchedSound> reverb = new HashMap<>();
 	private static HashSet<AudioSource> audioSources = new HashSet<>();
 	private static Music currAudio = null;
 	private static String currAudioName = "";
@@ -50,11 +50,11 @@ public class AudioHandler {
 		Iterator<DurationTimer> iter = reverb.keySet().iterator();
 		while(iter.hasNext()){
 			DurationTimer dt = iter.next();
-			Sound sound = reverb.get(dt);
+			PitchedSound pSound = reverb.get(dt);
 			dt.countUp();
 			if (dt.timeUp()){
 				try{
-					playPitchedSound(sound, 1, 0.3f, true);
+					playPitchedSound(pSound.sound, pSound.pitch, 0.3f, true);
 				}
 				catch(Exception e){
 					System.out.println(e);
@@ -105,7 +105,7 @@ public class AudioHandler {
 
 	public static long playPitchedSound(Sound sound, float pitch, float volume,boolean isReverb){
 		if (!isReverb && FrameEngine.getArea().reverb){
-			reverb.put(new DurationTimer(10), sound);
+			reverb.put(new DurationTimer(10), new PitchedSound(sound, pitch));
 		}
 		return sound.play(volume * VOLUME, pitch, 0);
 	}
@@ -191,6 +191,15 @@ public class AudioHandler {
 			audio.dispose();
 		}
 
+	}
+	
+	private static class PitchedSound{
+		private final Sound sound;
+		private final float pitch;
+		private PitchedSound(Sound sound, float pitch){
+			this.sound = sound;
+			this.pitch = pitch;
+		}
 	}
 
 }

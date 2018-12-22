@@ -17,15 +17,15 @@ PUMPKINQUERY
 The latte with extra milk goes to the pretty lady over there with the purple coat...
 The spiced pumpkin cider goes to that older gentleman right there...
 And the red-bean coffee goes to Leslie, the one in the cute bat shirt.
+[ANIM_0]Busy, busy!
 &ACCEPTED_CAFE_JOB,GIVEN_ORDER1,GIVEN_ORDER2,GIVEN_ORDER3
 *!CAFE_QUEST
 *CAFE_REWARD
+[ANIM_3]H-huh? [ANIM_5]Oh!
 [ANIM_6]Well call me a squash and serve me for dinner, you did it!
 [ANIM_2]Here's your payment for a job well done, hon. Hope you enjoy it - I made it just for you!
 [NOSPEAKER][GIVE_TREASURE4]You received a Pumpkin Cupcake!
-[TALK][RELAX]What's that, hon? You're looking for something else?
-Sorry, I don't think I've ever heard of something like that..
-All I know is this. "One good turn deserves another"! You get what I mean, hon?
+[ANIM_6][RELAX]Have a fabulous day, hon!PUMPKIN_TREASURE
 &CAFE_REWARD
 [ANIM_2]Thanks again for your help, hon.
 Say, did you see a painter anywhere around? [ANIM_6]He's a good ...[PAUSE] uh, friend of mine.

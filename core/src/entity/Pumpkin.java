@@ -21,6 +21,9 @@ public class Pumpkin extends NPC {
 		FrameEngine.startDialogueTree(
 				new DialogueTree(this, "pumpkin", new HashMap<String, String>(){{
 					put("PUMPKINQUERY", Gdx.files.internal("dialogue/pumpkinquery.txt").readString());
+					put("PUMPKIN_TREASURE", (!FrameEngine.getSaveFile().getFlag("FOUND_GOAL") ?
+							Gdx.files.internal("dialogue/pumpkin_treasure.txt").readString() :
+							""));
 				}})
 			);
 	}

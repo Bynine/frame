@@ -12,7 +12,7 @@ WATER	Water Bug	bup	FALSE	1	30
 FREBKING	Really Big Freb	deep	FALSE	1	60
 PUMPKIN	Cafe Owner	chipper	TRUE	1	30
 FRIEND	Nervous Dog	what	FALSE	1	30
-CUSTOMER2	Extremely Old Man	bup	FALSE	1	30
+CUSTOMER2	Elderly Fellow	bup	FALSE	1	30
 CUSTOMER3	Reading Person	subtle	FALSE	1	30
 GRUBMOM	Grub Mom	mih	FALSE	1	45
 GRUB1	Chubby Grub	bwep	FALSE	1	60
@@ -33,9 +33,4 @@ DOG	Dog	bwep	TRUE	2	20
 KITTY	Kitty	mih	FALSE	1	45
 FREBLOVE	Intense Statue	subtle	TRUE	1	30
 GRUBLOVE	Patchwork Doll	chipper	TRUE	1	30
-DANCER	Strange Statue	subtle	TRUE	1	30
-DEMON	Cavern Dweller	what	TRUE	1	60
 SNAIL	Helpful Snail	bup	TRUE	1	30
-
-WITCH	Witch	mih	TRUE	1	30
-SKULL	Ground Head	bup	TRUE	1	45

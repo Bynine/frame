@@ -24,7 +24,7 @@ import text.Textbox;
 import timer.Timer;
 
 public class FrameEngine extends ApplicationAdapter {
-	public static boolean DEBUG	= true;
+	private static boolean DEBUG = false;
 
 	@SuppressWarnings("unused")
 	public static boolean 
@@ -32,13 +32,16 @@ public class FrameEngine extends ApplicationAdapter {
 	MUTE	= true	&& DEBUG,
 	LOG		= true	&& DEBUG,
 	FPS		= false && DEBUG,
-	NOMAIN	= true	&& DEBUG,
+	NOMAIN	= false	&& DEBUG,
 	INVIS	= false	&& DEBUG,
 	MAPS	= false && DEBUG,
 	TREASURE= false && DEBUG,
 	GHOST	= false	&& DEBUG,
-	SHRINE  = true  && DEBUG,
-	SAVE	= false	|| !DEBUG;
+	SHRINE  = false  && DEBUG,
+	FULLINV = false	&& DEBUG,
+	CASH	= false && DEBUG,
+	OMNI	= false	&& DEBUG, // Toggles whether everything appears
+	SAVE	= true	|| !DEBUG;
 
 	private static Player player;
 	private static FPSLogger fpsLogger;
@@ -123,7 +126,7 @@ public class FrameEngine extends ApplicationAdapter {
 		for (Timer timer: timers){
 			timer.countUp();
 		}
-		if (DEBUG && getTime() % 60 == 0){
+		if (CASH && getTime() % 60 == 0){
 			saveFile.addMoney(1);
 		}
 
@@ -240,12 +243,17 @@ public class FrameEngine extends ApplicationAdapter {
 		inventory.update();
 	}
 
-	public static final int CREDITS_END_TIME = 7400;
+	private static final int CREDITS_END_TIME = 7400;
+	private static final int CREDITS_END_TIME_EARLY = CREDITS_END_TIME - 700;
+	
+	public static int getCreditsTime(){
+		return saveFile.getFlag("FOUND_GOAL") ? CREDITS_END_TIME : CREDITS_END_TIME_EARLY;
+	}
 
 	private void updateCredits(){
 		graphicsHandler.drawCredits();
 		playerWalk(Walk.LEFT);
-		if (time.getCounter() > CREDITS_END_TIME){
+		if (time.getCounter() > getCreditsTime()){
 			startMainMenu(true);
 		}
 	}
@@ -310,7 +318,7 @@ public class FrameEngine extends ApplicationAdapter {
 		if (inputHandler.getActionJustPressed()) {
 			handleActionPressed();
 		}
-		if (inputHandler.getDebugJustPressed()){ // TODO: Disable for final release
+		if (DEBUG && inputHandler.getDebugJustPressed()){ // TODO: Disable for final release
 			gameState = GameState.DEBUG;
 		}
 	}
@@ -346,9 +354,9 @@ public class FrameEngine extends ApplicationAdapter {
 				}
 			}
 			else{
-				if (DEBUG && inputHandler.getDebugSpeedUpHeld()){
-					textbox.complete();
-				}
+//				if (DEBUG && inputHandler.getDebugSpeedUpHeld()){
+//					textbox.complete();
+//				}
 			}
 		}
 		else if (canControlPlayer() && null != currInteractable){
@@ -394,6 +402,7 @@ public class FrameEngine extends ApplicationAdapter {
 	 * Cleans out the old area and initializes the new one.
 	 */
 	private static void changeArea(){
+		player.getVelocity().setZero();
 		if (null != currArea) currArea.dispose();
 		currArea = newArea;
 		newArea = null;
@@ -449,7 +458,6 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	private static void mainMenuToGame(){
-		if (!DEBUG) inventory.wipe();
 		saveFile = new SaveFile(LOG);
 		if (saveFile.getFlag(SaveFile.CREDITS)){
 			saveFile.setFlag("CREDITS", false);
@@ -463,7 +471,7 @@ public class FrameEngine extends ApplicationAdapter {
 		gameState = GameState.OVERWORLD;
 		newArea = new Area(saveFile.startArea);
 		newPosition.set(saveFile.startPosition.scl(TILE));
-		System.out.println("Start position is: " + newPosition);
+		if (LOG) System.out.println("Start position is: " + newPosition);
 		changeArea();
 		if (player.isColliding()){
 			logger.warning("Player was spawned inside collision at: " + newPosition.toString());
@@ -482,7 +490,7 @@ public class FrameEngine extends ApplicationAdapter {
 		}
 		if (gameState != GameState.SAVECONFIRM){
 			gameState = GameState.MAIN;
-			String newAreaId = saveFile.exists() ? "VOID" : "PATH";
+			String newAreaId = "PATH"; //saveFile.exists() ? "VOID" : "PATH";
 			newArea = new Area(newAreaId);
 			if (!SAVE){
 				newPosition.set(61 * TILE, 41 * TILE);
@@ -565,7 +573,8 @@ public class FrameEngine extends ApplicationAdapter {
 	public static void setInventoryRequest(String string) {
 		inventory.open();
 		if (inventory.getList().isEmpty()){
-			dialogueTrees.add(0, new DialogueTree("But you don't have anything to give!"));
+			dialogueTrees.clear();
+			dialogueTrees.add(0, new DialogueTree("But you don't have anything on you!"));
 		}
 		else{
 			ArrayMap<String, String> options = new ArrayMap<>();

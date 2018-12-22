@@ -16,10 +16,7 @@ You are truly kind to grow flowers in this forest. As I walked around in frustra
 I was so touched by this gesture that I painted you tending to one of the flowers.
 Please, accept it. It is the least I can do.
 [NOSPEAKER][GIVE_TREASURE5]You received a painting!
-I would paint closer to your flowers, but... [PAUSE][ANIM_6]my easel got caught in the sand! Hahaha!
-[TALK][ANIM_1]Ah? [PAUSE]You are looking for something, my friend?
-That... sounds very important indeed. Clearly it has inspired you.
-[ANIM_6]Go forth! Seize the things that make you feel passionate! [ANIM_1]That is my advice to you.
+I would paint closer to your flowers, but... [PAUSE][ANIM_6]my easel got caught in the sand! Hahaha!ARTIST_TREASURE
 &WORLD_REWARD
 I am so inspired... [ANIM_6]I will paint all the time!
 [ANIM_5]However, something still sours my mood. My ...[ANIM_6][PAUSE] uh, friend, Jackie, who runs the cafe in the village...
@@ -29,3 +26,6 @@ I hope she can get some time off soon. She works very hard, you know.
 Now that I am inspired... I will paint, paint, paint!
 [ANIM_6]I will never stop! Hahahaha!
 [ANIM_1]I hope you will see my paintings around Wabika. I am quite proud of them.
+&WORLD_REWARD,FOUND_GOAL
+Ah, I see a glint in your eyes! You have made some great progress, haven't you?
+[ANIM_6]Wonderful! I figured you would! Hahaha!

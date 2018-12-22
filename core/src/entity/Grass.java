@@ -18,6 +18,7 @@ public class Grass extends ImmobileEntity {
 	public Grass(float x, float y) {
 		super(x, y);
 		collides = false;
+		hitbox.height = 12;
 	}
 	
 	@Override

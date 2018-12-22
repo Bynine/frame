@@ -12,3 +12,8 @@ CUST_3_STORY
 &ITEM_GHOST,!GHOST_LESLIE,GIVEN_ORDER3,GHOST_LIBRARIAN
 Hey, little dude. Sorry, but I'm in the middle of this book, so - [TALK]...[PAUSE][NSPEED]Yokey...
 CUST_3_STORY
+&GHOST_LESLIE,FOUND_GOAL
+[ANIM_1]Sup, little guy?
+I've been thinking some more about what we talked about earlier.
+[ANIM_2]It's important to try and live without regrets. I can't think of something scarier than never doing what I've always wanted.
+[ANIM_0]... That was a little embarassing to say out loud.

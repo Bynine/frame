@@ -21,12 +21,13 @@ public class Flower extends InteractableEntity {
 	private final TextureRegion 
 	dirt = new TextureRegion(new Texture("sprites/objects/dirt.png")),
 	seed = new TextureRegion(new Texture("sprites/objects/seed.png"));
+	private static final int flowerSpeed = 60;
 	private final ArrayList<Animation<TextureRegion>> 
-	flower1 = Animator.createAnimation(30, "sprites/objects/flower1.png", 2, 1),
-	flower2 = Animator.createAnimation(30, "sprites/objects/flower2.png", 2, 1),
-	flower3 = Animator.createAnimation(30, "sprites/objects/flower3.png", 2, 1),
-	flower4 = Animator.createAnimation(30, "sprites/objects/flower4.png", 2, 1),
-	flower5 = Animator.createAnimation(30, "sprites/objects/flower5.png", 2, 1);
+	flower1 = Animator.createAnimation(flowerSpeed, "sprites/objects/flower1.png", 2, 1),
+	flower2 = Animator.createAnimation(flowerSpeed, "sprites/objects/flower2.png", 2, 1),
+	flower3 = Animator.createAnimation(flowerSpeed, "sprites/objects/flower3.png", 2, 1),
+	flower4 = Animator.createAnimation(flowerSpeed, "sprites/objects/flower4.png", 2, 1),
+	flower5 = Animator.createAnimation(flowerSpeed, "sprites/objects/flower5.png", 2, 1);
 	public static final String
 	flowerPrefix = "FLOWER_",
 	seedPrefix = "SEED_",
@@ -54,7 +55,7 @@ public class Flower extends InteractableEntity {
 	}
 	
 	private void setFlowerType(String prefix){
-		System.out.println(FrameEngine.getSaveFile().getMapping(prefix + id));
+		if (FrameEngine.LOG) System.out.println(FrameEngine.getSaveFile().getMapping(prefix + id));
 		int type = Integer.parseInt(
 				FrameEngine.getSaveFile().getMapping(prefix + id).substring(4)
 						);

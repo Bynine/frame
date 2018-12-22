@@ -9,3 +9,6 @@ i know i saw. was scary.
 [SPEED=6]...[NSPEED]
 you saw ghost too?
 [PAUSE]hope ghost is ok.
+&GHOST_REWARD,FOUND_GOAL
+when i grow up...
+i want to be just like you.

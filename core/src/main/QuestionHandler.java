@@ -67,9 +67,9 @@ public class QuestionHandler {
 				potentialQuestions.add(data[0]);
 			}
 		}
-		return potentialQuestions.get(
-				(int)(Math.random() * potentialQuestions.size())
-				);
+		int questionPosition = (int)(Math.random() * potentialQuestions.size());
+		FrameEngine.logger.info("Picked question " + questionPosition);
+		return potentialQuestions.get(questionPosition);
 	}
 
 	public static void askQuestion() {

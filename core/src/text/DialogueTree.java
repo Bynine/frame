@@ -25,13 +25,13 @@ public class DialogueTree{
 	@SafeVarargs
 	public DialogueTree(InteractableEntity npc, String path, Map<String, String>... vars){
 		this.speaker = npc;
-		FileHandle handle = Gdx.files.internal("dialogue/" + path + ".txt");
+		FileHandle handle = Gdx.files.internal("dialogue/" + path.toLowerCase() + ".txt");
 		String dialogue;
 		try{
 			dialogue =  "DEFAULT\n" + handle.readString();
 		}
 		catch(Exception e){
-			FrameEngine.logger.warning("Couldn't load dialogue: " + path);
+			FrameEngine.logger.warning("Couldn't load dialogue: " + path.toLowerCase());
 			dialogue = "Sorry, I've forgotten what I'm supposed to say!";
 		}
 		for (Map<String, String> map: vars){

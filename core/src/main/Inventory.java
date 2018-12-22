@@ -19,7 +19,7 @@ public class Inventory extends AbstractMenu{
 	protected final ArrayList<MenuOption> descs = new ArrayList<MenuOption>();
 
 	Inventory(){
-		if (FrameEngine.DEBUG){
+		if (FrameEngine.FULLINV){
 			items.add("SHOVEL");
 			//items.add("GHOST");
 			items.add("TREASURE1");
@@ -44,6 +44,12 @@ public class Inventory extends AbstractMenu{
 
 	public void addItem(String item){
 		items.add(0, item);
+	}
+	
+	public void addItemConditional(String item){
+		if (!items.contains(item)){
+			addItem(item);
+		}
 	}
 
 	public void removeItem(String item){
@@ -119,6 +125,10 @@ public class Inventory extends AbstractMenu{
 	public void wipe() {
 		items.clear();
 		descs.clear();
+	}
+
+	public List<String> getItems() {
+		return items;
 	}
 
 }

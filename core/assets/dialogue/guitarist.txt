@@ -1,5 +1,5 @@
 *TALK_GUITARIST
 Hey, man... Digging the music?
-&TALK_GUITARIST,ENTERED_SHRINE
+&TALK_GUITARIST
 Hey, man...
 [ANIM_1]Thanks for listening to my music. It means a lot to me.

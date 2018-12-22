@@ -242,6 +242,7 @@ You wonder idly where it came from, then decide it might be better to leave some
   </object>
   <object id="266" name="glimmer" gid="4" x="408" y="200" width="24" height="24">
    <properties>
+    <property name="APPEAR" value="GRUB_REWARD"/>
     <property name="FLAG" value="ITEM_TREASURE3"/>
     <property name="TYPE" value="GLIMMER"/>
    </properties>

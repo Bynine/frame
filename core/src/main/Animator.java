@@ -40,8 +40,6 @@ public class Animator {
 		return lst;
 	}
 	
-	
-
 	/**
 	 * Disposes all frames of animation list.
 	 */

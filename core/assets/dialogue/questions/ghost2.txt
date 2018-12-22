@@ -1,0 +1,4 @@
+What is the name of the ghost you helped?
+If you think her name is Spiretta, go west.
+If you think her name is Yokey, go east.
+If you think her name is Ghosty, go north.

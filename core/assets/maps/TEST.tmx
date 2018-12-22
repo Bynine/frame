@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="235">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="240">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/shop.tsx"/>
  <layer id="1" name="FLOOR" width="25" height="16">
@@ -166,6 +166,41 @@
     <property name="FLAG" value="TREASURE6"/>
     <property name="ID" value="TREASURE6"/>
     <property name="TYPE" value="ITEM"/>
+   </properties>
+  </object>
+  <object id="235" name="fish" gid="4" x="336" y="128" width="32" height="32">
+   <properties>
+    <property name="APPEAR" value="CAFE_REWARD"/>
+    <property name="SPECIES" value="SMALL"/>
+    <property name="TYPE" value="FISH"/>
+   </properties>
+  </object>
+  <object id="236" name="fish" gid="4" x="336" y="160" width="32" height="32">
+   <properties>
+    <property name="APPEAR" value="CAFE_REWARD"/>
+    <property name="SPECIES" value="MEDIUM"/>
+    <property name="TYPE" value="FISH"/>
+   </properties>
+  </object>
+  <object id="237" name="fish" gid="4" x="336" y="192" width="32" height="32">
+   <properties>
+    <property name="APPEAR" value="CAFE_REWARD"/>
+    <property name="SPECIES" value="LARGE"/>
+    <property name="TYPE" value="FISH"/>
+   </properties>
+  </object>
+  <object id="238" name="fish" gid="4" x="336" y="224" width="32" height="32">
+   <properties>
+    <property name="APPEAR" value="CAFE_REWARD"/>
+    <property name="SPECIES" value="KOI"/>
+    <property name="TYPE" value="FISH"/>
+   </properties>
+  </object>
+  <object id="239" name="fish" gid="4" x="336" y="296" width="32" height="32">
+   <properties>
+    <property name="APPEAR" value="CAFE_REWARD"/>
+    <property name="SPECIES" value="GIANT"/>
+    <property name="TYPE" value="FISH"/>
    </properties>
   </object>
  </objectgroup>

@@ -1,11 +1,11 @@
 *TALK_DOLL
 Hey, wanna see something cool?
 [PAUSE][RIP][ANIM_3][PAUSE]Tada!
-[ANIM_1]...[PAUSE][ANIM_2]Seriously though, this really, really hurts.
+...[PAUSE][ANIM_2]Seriously though, this really, really hurts.
 See, I was running in the forest when my hair got caught in a tree branch, and, well... You can see what happened.
 Say, do you suppose you could help out the tailor? I wanted to see her to get this fixed up, but she's got problems too.
-Something about missing children? I'd head on over and help her myself, but, uh...
-if I take any unnecessary steps I'm pretty sure this thing is falling right off.
+Something about missing children? [ANIM_1]I'd head on over and help her myself, but, uh...
+[ANIM_2]if I take any unnecessary steps I'm pretty sure this thing is falling right off.
 [ANIM_1]And you really don't want me to lose my head! Hahaha... ha...
 [ANIM_2][SOFT]Help...
 &TALK_DOLL
@@ -25,4 +25,4 @@ Howdy, ol' buddy ol' pal!
 &TALK_DOLL_HAPPY,FOUND_GOAL
 Hi again, ol' buddy ol' pal! 
 So, what're your plans? Are you head-ing off, or will you stay around?
-[ANIM_1]Don't go too far, now... Who am I going to rely on if I lose my head again? Hahaha!...
+[ANIM_1]Don't go too far, now... Who am I going to rely on if I lose my head again? Hahaha!

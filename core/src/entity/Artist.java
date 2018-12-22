@@ -2,6 +2,8 @@ package entity;
 
 import java.util.HashMap;
 
+import com.badlogic.gdx.Gdx;
+
 import main.EntityHandler;
 import main.FrameEngine;
 import text.DialogueTree;
@@ -42,6 +44,9 @@ public class Artist extends NPC {
 							FrameEngine.getSaveFile().getFlag("TALK_ARTIST") ?
 							"I am so sorry for my outburst from before" :
 								"Thank you for what you've done");
+					put("ARTIST_TREASURE", (!FrameEngine.getSaveFile().getFlag("FOUND_GOAL") ?
+							Gdx.files.internal("dialogue/artist_treasure.txt").readString() :
+							""));
 				}})
 			);
 	}

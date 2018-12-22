@@ -16,8 +16,8 @@ SHELL1	nice shell	SHELL	The red color is charming	2
 SHELL2	cool shell	SHELL	The yellow color is soothing	2
 SHELL3	rad shell	SHELL	The blue color is elegant	2
 
-SEED1	silly seed	SEED	It's hard not to smile just looking at it	1
-SEED2	snow seed	SEED	Seems to exude a gentleness	1
+SEED1	silly seed	SEED	Just looking at it makes you smile	1
+SEED2	snow seed	SEED	Has a soothing coolness	1
 SEED3	sunny seed	SEED	Oddly warm to the touch	1
 SEED4	shiny seed	SEED	Shines many colors under direct light	1
 SEED5	soft seed	SEED	The fuzzy exterior is pleasant	1
@@ -31,7 +31,7 @@ ORDER2	spiced pumpkin cider	ORDER	Smells unbelievably good	1
 ORDER3	red-bean coffee	ORDER	What a striking color!	1
 
 GHOST	Ghost	NONE	GHOST	0
-SNAIL	Helpful Snail	NONE	Tells you about items you've missed	1
+SNAIL	Helpful Snail	NONE	Tells you about items you've missed. Press to toggle	1
 
 APPLE	apple	FOOD,SWEET	Yummy and juicy	1
 MUSHROOM	mushroom	NATURAL	Pleasantly shaped toadstool	1
