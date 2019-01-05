@@ -37,8 +37,8 @@ public class FrameEngine extends ApplicationAdapter {
 	MAPS	= false && DEBUG,
 	TREASURE= false && DEBUG,
 	GHOST	= false	&& DEBUG,
-	SHRINE  = false  && DEBUG,
-	FULLINV = false	&& DEBUG,
+	SHRINE  = true  && DEBUG,
+	FULLINV = true	&& DEBUG,
 	CASH	= false && DEBUG,
 	OMNI	= false	&& DEBUG, // Toggles whether everything appears
 	SAVE	= true	|| !DEBUG;

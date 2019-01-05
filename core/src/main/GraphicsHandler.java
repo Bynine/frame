@@ -57,7 +57,7 @@ public class GraphicsHandler {
 	protected OrthogonalTiledMapRenderer renderer;
 	protected BitmapFont font, debugFont, warningFont, textFont;
 	protected ShapeRenderer shapeRenderer;
-	public static final float ZOOM = 1.0f/2.0f;
+	public static final float ZOOM = 1.0f/1.0f;
 	private final EntityDepthSorter sorter = new EntityDepthSorter();
 	private static final TextureRegion 
 	treasure1Art = new TextureRegion(new Texture("art/treasure1.png")),
@@ -168,6 +168,7 @@ public class GraphicsHandler {
 		batch.setColor(DEFAULT_COLOR);
 		drawWater();
 		renderer.getBatch().setColor(getReflectionColor(DEFAULT_COLOR, 0.6f));
+		handleEmittersReflection();
 		renderer.setView(lightReflectionCam);
 		renderer.render(new int[]{3});	// Reflection tiles
 		renderer.setView(reflectionCam);
@@ -370,6 +371,35 @@ public class GraphicsHandler {
 		}
 		batch.end();
 	}
+	
+	private void handleEmittersReflection(){
+		batch.begin();
+		for (Entity en: EntityHandler.getEntities()){
+			if (en instanceof Emitter){
+				handleEmitterReflection((Emitter)en);
+			}
+		}
+		batch.end();
+	}
+	
+	/**
+	 * Handles functions of an emitter.
+	 */
+	private void handleEmitterReflection(Emitter emitter){
+		for (Graphic graphic: emitter.getGraphics()){
+			float transparency = MathUtils.clamp(
+					graphic.getTimeLeft()/25.0f,
+					0, 0.5f
+					);
+			batch.setColor(1, 1, 1, transparency);
+			emitter.getGraphicImage().flip(false, true);
+			batch.draw(emitter.getGraphicImage(), 
+					graphic.getPosition().x, 
+					graphic.getPosition().y - (FrameEngine.TILE*4)
+					);
+			emitter.getGraphicImage().flip(false, true);
+		}
+	}
 
 	/**
 	 * Handle all emitters.
@@ -505,7 +535,7 @@ public class GraphicsHandler {
 	private void drawItemDescription(AbstractMenu menu, boolean price){
 		float itemBoxWidth = 6.0f;
 		final float moneyX = Gdx.graphics.getWidth()/(4/ZOOM) - (FrameEngine.TILE * 2.5f);
-		final float moneyY = Gdx.graphics.getHeight()/(2) - FrameEngine.TILE*2;
+		final float moneyY = menu.getButtonPosition(0).y + (FrameEngine.TILE * 2.5f);
 		drawText(Integer.toString(FrameEngine.getSaveFile().getMoney()) + " ACORNS", 
 				new Vector2(moneyX, moneyY),
 				new Vector2(itemBoxWidth, 2),
@@ -574,7 +604,7 @@ public class GraphicsHandler {
 				FrameEngine.getArea().mapHeight - Gdx.graphics.getHeight()/(2/ZOOM)
 				);
 		// Round camera position to avoid ugly tile splitting
-		final float roundTo = 10.0f;
+		final float roundTo = 5.0f;
 		worldCam.position.x = Math.round(worldCam.position.x * roundTo)/roundTo;
 		worldCam.position.y = Math.round(worldCam.position.y * roundTo)/roundTo;
 		worldCam.update();
@@ -913,6 +943,10 @@ public class GraphicsHandler {
 
 	public static void setOffset(Vector2 change) {
 		offsetTarget.set(change);
+	}
+	
+	public static boolean isZoomed(){
+		return ZOOM < 1;
 	}
 
 }

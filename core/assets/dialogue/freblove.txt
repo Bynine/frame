@@ -13,3 +13,6 @@ take treasure.
 &TALK_FREBLOVE_HAPPY
 ...
 ...[PAUSE][ANIM_1]thing sound good.
+&FREB_SHELL_1_HAS,FOUND_GOAL
+...
+...[PAUSE][ANIM_1]thing still sound good.

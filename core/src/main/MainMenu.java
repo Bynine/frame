@@ -49,7 +49,9 @@ public class MainMenu extends AbstractMenu {
 
 	public Vector2 getButtonPosition(int pos) {
 		Vector2 position = super.getButtonPosition(pos);
-		position.sub(0, FrameEngine.TILE * 5.5f);
+		//if (GraphicsHandler.isZoomed()){
+			position.sub(0, FrameEngine.TILE * 5.5f);
+		//}
 		return position;
 	}
 

@@ -54,7 +54,7 @@ public class PauseMenu extends AbstractMenu{
 	
 	public Vector2 getButtonPosition(int pos) {
 		int x = pos == 0 ? FrameEngine.TILE * 3 : FrameEngine.TILE * 9;
-		int y = Gdx.graphics.getHeight()/2 - 2 * FrameEngine.TILE;
+		int y = (int)(2 * GraphicsHandler.ZOOM) * Gdx.graphics.getHeight()/2 - 2 * FrameEngine.TILE;
 		return new Vector2(x, y);
 	}
 	

@@ -104,7 +104,7 @@ public abstract class AbstractMenu {
 		Vector2 position = new Vector2(
 				(Gdx.graphics.getWidth()/(2/GraphicsHandler.ZOOM) + 
 						FrameEngine.TILE * (button.getDimensions().x) * (posX - 0.5f)),
-				(Gdx.graphics.getHeight()/2) - (button.getDimensions().y * FrameEngine.TILE * posY)
+				(Gdx.graphics.getHeight()*GraphicsHandler.ZOOM) - (button.getDimensions().y * FrameEngine.TILE * posY)
 				);
 		return position;
 	}

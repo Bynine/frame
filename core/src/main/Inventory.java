@@ -118,7 +118,8 @@ public class Inventory extends AbstractMenu{
 		int posX = (pos % onScreen);
 		int posY = 2 + (int) pos/onScreen;
 		float x = (((posX + 0.5f) * FrameEngine.TILE) * 2);
-		float y = Gdx.graphics.getHeight()/2 - FrameEngine.TILE - (posY * FrameEngine.TILE * 2);
+		float y = (2 * GraphicsHandler.ZOOM) * Gdx.graphics.getHeight()/2 -
+				FrameEngine.TILE - (posY * FrameEngine.TILE * 2);
 		return new Vector2(x, y);
 	}
 
