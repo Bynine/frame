@@ -32,16 +32,16 @@ public class FrameEngine extends ApplicationAdapter {
 	MUTE	= true	&& DEBUG,
 	LOG		= true	&& DEBUG,
 	FPS		= false && DEBUG,
-	NOMAIN	= false	&& DEBUG,
+	NOMAIN	= true	&& DEBUG,
 	INVIS	= false	&& DEBUG,
 	MAPS	= false && DEBUG,
-	TREASURE= false && DEBUG,
+	TREASURE= true  || !DEBUG,
 	GHOST	= false	&& DEBUG,
 	SHRINE  = true  && DEBUG,
 	FULLINV = true	&& DEBUG,
 	CASH	= false && DEBUG,
 	OMNI	= false	&& DEBUG, // Toggles whether everything appears
-	SAVE	= true	|| !DEBUG;
+	SAVE	= false	|| !DEBUG;
 
 	private static Player player;
 	private static FPSLogger fpsLogger;

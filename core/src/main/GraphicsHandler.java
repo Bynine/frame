@@ -39,6 +39,8 @@ import timer.Timer;
  * Handles drawing everything.
  */
 public class GraphicsHandler {
+	public static final float ZOOM = 1.0f/1.0f;
+	
 	public static final Color 
 	DEFAULT_COLOR = new Color(1, 1, 1, 1),
 	SELECT_COLOR1 = new Color(0.75f, 0.85f, 0.95f, 1.0f),
@@ -57,7 +59,6 @@ public class GraphicsHandler {
 	protected OrthogonalTiledMapRenderer renderer;
 	protected BitmapFont font, debugFont, warningFont, textFont;
 	protected ShapeRenderer shapeRenderer;
-	public static final float ZOOM = 1.0f/1.0f;
 	private final EntityDepthSorter sorter = new EntityDepthSorter();
 	private static final TextureRegion 
 	treasure1Art = new TextureRegion(new Texture("art/treasure1.png")),

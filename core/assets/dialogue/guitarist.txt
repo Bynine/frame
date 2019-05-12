@@ -1,6 +1,11 @@
 *TALK_GUITARIST
 Hey, man... Digging the music?
 &TALK_GUITARIST
+*TALK_GUITARIST2
+Hey, man... Music is pretty far out, right?
+It's like... Nature makes its own music, and when you play along with it...
+It's... right on, you know?
+&TALK_GUITARIST2
 Hey, man...
 [ANIM_1]Thanks for listening to my music. It means a lot to me.
 &TALK_GUITARIST,FOUND_GOAL

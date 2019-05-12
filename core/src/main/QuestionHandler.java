@@ -39,24 +39,33 @@ public class QuestionHandler {
 		questions.clear();
 		ArrayList<String> treasureIds = new ArrayList<String>();
 		if (FrameEngine.TREASURE){
-			treasureIds.addAll(Arrays.asList(
-					FrameEngine.getSaveFile().getMapping("STAND1"),
-					FrameEngine.getSaveFile().getMapping("STAND2"),
-					FrameEngine.getSaveFile().getMapping("STAND3"),
-					FrameEngine.getSaveFile().getMapping("STAND4")
-					));
+			try{
+				treasureIds.addAll(Arrays.asList(
+						FrameEngine.getSaveFile().getMapping("STAND1"),
+						FrameEngine.getSaveFile().getMapping("STAND2"),
+						FrameEngine.getSaveFile().getMapping("STAND3"),
+						FrameEngine.getSaveFile().getMapping("STAND4")
+						));
+			}
+			catch(Exception e){
+				setDefaultQuestions(treasureIds);
+			}
 		}
 		else{ // Default
-			FrameEngine.logger.warning("Default treasures for questions");
-			treasureIds.addAll(Arrays.asList(
-					"TREASURE1", "TREASURE2",
-					"TREASURE3", "TREASURE4"
-					));
+			setDefaultQuestions(treasureIds);
 		}
 		String[] questionData = new TSVReader().loadAllData(TSVReader.QUESTION_URL);
 		for (int ii = 0; ii < treasureIds.size(); ++ii){
 			questions.add(new Question(getQuestionId(treasureIds.get(ii), questionData)));
 		}
+	}
+
+	private static void setDefaultQuestions(ArrayList<String> treasureIds){
+		FrameEngine.logger.warning("Default treasures for questions");
+		treasureIds.addAll(Arrays.asList(
+				"TREASURE5", "TREASURE2",
+				"TREASURE3", "TREASURE4"
+				));
 	}
 
 	private static String getQuestionId(String treasureId, String[] questionData){

@@ -16,3 +16,10 @@ Even now, as I stand here in your presence, I can tell your intentions are good.
 Do not waste your time with me, child. You are young yet.
 Go and experience the fullness of this world. Appreciate its beauty.
 [PAUSE][ANIM_0]I have done enough.
+&FOUND_GOAL,CURSE_REWARD
+*TALK_WARRIOR_FOUND_GOAL
+[ANIM_1]... [PAUSE]You've come all the way back here, just to show me that you've obtained the treasure? 
+... [PAUSE][ANIM_0]Ha! You are a strange person, indeed. [ANIM_1]You clearly want to see every last drop this place has to offer. 
+[ANIM_0]Someday, maybe, I will too, when I've atoned enough.
+&TALK_WARRIOR_FOUND_GOAL
+Someday...
