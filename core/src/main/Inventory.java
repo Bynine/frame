@@ -20,8 +20,9 @@ public class Inventory extends AbstractMenu{
 
 	Inventory(){
 		if (FrameEngine.FULLINV){
+			items.add("MAP");
+			items.add("KEY");
 			items.add("SHOVEL");
-			//items.add("GHOST");
 			items.add("TREASURE1");
 			items.add("TREASURE2");
 			items.add("TREASURE3");
@@ -45,7 +46,7 @@ public class Inventory extends AbstractMenu{
 	public void addItem(String item){
 		items.add(0, item);
 	}
-	
+
 	public void addItemConditional(String item){
 		if (!items.contains(item)){
 			addItem(item);
@@ -80,7 +81,7 @@ public class Inventory extends AbstractMenu{
 			descs.add(new MenuOption(2, 2, item, new ItemDescription(item)));
 		}
 	}
-	
+
 	@Override
 	protected void moveCursorVertical(int i){
 		int newPosition = cursor - (i * 4);
@@ -107,9 +108,15 @@ public class Inventory extends AbstractMenu{
 	@Override
 	protected void selectItem() {
 		ItemDescription desc = (ItemDescription)(getActiveButton().getOutput());
-		if (desc.id.equals("SNAIL")){
-			FrameEngine.snailActive = !FrameEngine.snailActive;
-			AudioHandler.playSoundVariedPitch(FrameEngine.snailActive ? moveCursor : stopCursor);
+		if (FrameEngine.canSelectMenuItem()) {
+			if (desc.id.equals("SNAIL")){
+				FrameEngine.snailActive = !FrameEngine.snailActive;
+				AudioHandler.playSoundVariedPitch(FrameEngine.snailActive ? moveCursor : stopCursor);
+			}
+			else if (desc.id.equals("MAP")) {
+				FrameEngine.showMap();
+				AudioHandler.playSoundVariedPitch(openMap);
+			}
 		}
 	}
 

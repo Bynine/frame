@@ -134,6 +134,9 @@ public class Textbox {
 		if (command.getID().equals("WATER_ANIM")){
 			Player.setImageState(Player.ImageState.WATER);
 		}
+		if (command.getID().equals("PET_ANIM")){
+			Player.setImageState(Player.ImageState.PET);
+		}
 		if (null != speaker){
 			speaker.getMessage(command.getID());
 		}

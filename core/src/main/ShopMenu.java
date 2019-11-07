@@ -16,6 +16,9 @@ public class ShopMenu extends Inventory {
 		addIfNotPurchased("WATERINGCAN");
 		addIfNotPurchased("SEED4");
 		addIfNotPurchased("SNAIL");
+		if (!FrameEngine.getSaveFile().getFlag("INTRO_SHOPKEEPER")) {
+			items.add("MAP");
+		}
 		super.open();
 	}
 	

@@ -28,7 +28,7 @@ public class Area {
 	public final TiledMap map;
 	public final int mapWidth;
 	public final int mapHeight;
-	public final boolean cameraFixed, sky, reverb;
+	public final boolean cameraFixed, sky, frost, reverb;
 	public final String overlayString, id;
 	public final Color lightColor;
 	public final String music;
@@ -50,6 +50,7 @@ public class Area {
 		mapHeight = getMap().getProperties().get("height", Integer.class) * FrameEngine.TILE;
 		lightColor = getColor(data[7]);
 		reverb = Boolean.parseBoolean(data[8]);
+		frost = id.startsWith("FROST_");
 		
 		setCollision();
 		setMapSlopes();
@@ -154,7 +155,7 @@ public class Area {
 	}
 	
 	public enum Terrain{
-		NORMAL, WOOD, WATER, STONE
+		NORMAL, WOOD, WATER, STONE, SNOW, ICE
 	}
 
 	public void dispose() {

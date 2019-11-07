@@ -1,6 +1,17 @@
-*TALK_DOG
-wef wef.
+[NOSPEAKER]Do you pet the dog?
+>YES, NO
+<YES
+*PET_DOG
+[PET_ANIM]wef wef.
 [NOSPEAKER]In all your life, you have never before seen a creature so blissfully content.
-&TALK_DOG
-wef wef.
-[NOSPEAKER]You're not sure how you can tell, but it seems overjoyed to see you again.
+<NO
+[NOSPEAKER]What's wrong with you?
+&PET_DOG
+[NOSPEAKER]You're not sure how you can tell, but it seems overjoyed to see you again. Pet it?
+>YES, NO
+<YES
+[PET_ANIM]wef wef!
+[NOSPEAKER]Without a doubt, this is a good dog.
+<NO
+[ANIM_1]wef......
+[NOSPEAKER]You're pretty sure that you're now legally a monster.

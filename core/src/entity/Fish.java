@@ -106,6 +106,8 @@ public class Fish extends Critter {
 	protected void react() {
 		velocity.x = 1.5f * boost * Math.signum(position.x - FrameEngine.getPlayer().position.x);
 		wanderTimer.reset();
+		reacted = true;
+		reactTimer.reset();
 	}
 
 	@Override

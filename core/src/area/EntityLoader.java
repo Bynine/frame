@@ -236,7 +236,13 @@ public class EntityLoader {
 			entities.add(new Emitter(x, y, interval, duration, graphic));
 		} break;
 		case "bird":{
-			entities.add(new Bird(x, y));
+			entities.add(new Bird(x, y, "bird"));
+		} break;
+		case "gull":{
+			entities.add(new Bird(x, y, "gull"));
+		} break;
+		case "crow":{
+			entities.add(new Bird(x, y, "crow"));
 		} break;
 		case "freb":{
 			String flag = properties.get("FLAG", String.class);

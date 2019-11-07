@@ -17,10 +17,8 @@ import timer.Timer;
 
 public class Bird extends Critter {
 	
-	private final TextureRegion ground = new TextureRegion(new Texture("sprites/critters/bird.png"));
-	private final TextureRegion hop = new TextureRegion(new Texture("sprites/critters/birdhop.png"));
-	private final ArrayList<Animation<TextureRegion>> fly = 
-			Animator.createAnimation(5, "sprites/critters/birdfly.png", 2, 1);
+	private final TextureRegion ground, hop;
+	private final ArrayList<Animation<TextureRegion>> fly;
 	private int flightDir = 0;
 	private final Random random;
 	private Timer wanderTimer = new Timer(45);
@@ -34,8 +32,11 @@ public class Bird extends Critter {
 			);
 	private boolean flying = false;
 
-	public Bird(float x, float y) {
+	public Bird(float x, float y, String type) {
 		super(x, y);
+		ground = new TextureRegion(new Texture("sprites/critters/" + type + ".png"));
+		hop = new TextureRegion(new Texture("sprites/critters/" + type + "hop.png"));
+		fly = Animator.createAnimation(5, "sprites/critters/" + type + "fly.png", 2, 1);
 		timerList.add(wanderTimer);
 		friction = 0.6f;
 		random = new Random((long) (Math.random()*100));
@@ -74,6 +75,8 @@ public class Bird extends Critter {
 		flightDir = (int) Math.signum(position.x - FrameEngine.getPlayer().position.x);
 		flying = true;
 		collides = false;
+		reacted = true;
+		reactTimer.reset();
 		AudioHandler.playPositionalSound(this, startled);
 	}
 

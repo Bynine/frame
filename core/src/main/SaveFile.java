@@ -37,7 +37,9 @@ public class SaveFile {
 		this.verbose = verbose;
 		if (FrameEngine.SHRINE){
 			flags.put("ENTERED_SHRINE", true);
-			//flags.put("CAFE_REWARD", true);
+		}
+		if (FrameEngine.FGOAL) {
+			flags.put("FOUND_GOAL", true);
 		}
 		if (!FrameEngine.SAVE) return;
 		Preferences preferences = Gdx.app.getPreferences(saveFile);

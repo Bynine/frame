@@ -25,6 +25,10 @@ public abstract class Entity {
 	protected float corner_acceleration = 0.35f;
 	protected float friction = 0.69f;
 	protected float contact_friction = 0.92f;
+	protected float ice_acceleration = 0.23f;
+	protected float ice_friction = 0.906f;
+	protected float ice_corner_acceleration = 0.09f;
+	protected boolean on_ice = false;
 	
 	protected final HashMap<Integer, String> numToWordMap = new HashMap<Integer, String>(){{
 		put(0, "None");
@@ -112,10 +116,10 @@ public abstract class Entity {
 	 */
 	protected void limitVelocity(){
 		final float limit = 0.5f;
-		velocity.scl(getFrameFriction(friction));
+		velocity.scl(getFrameFriction(getFriction()));
 		if (Math.abs(velocity.x) > limit && Math.abs(velocity.y) > limit) {
-			final float diagonalFriction = 0.86f;
-			velocity.scl(getFrameFriction(diagonalFriction));
+			
+			velocity.scl(getFrameFriction(getDiagonalFriction()));
 		}
 	}
 	
@@ -131,6 +135,19 @@ public abstract class Entity {
 						FrameEngine.elapsedTime))
 				/frameLimit
 				;
+	}
+	
+	protected float getFriction() {
+		return on_ice ? ice_friction : friction;
+	}
+	
+	protected float getDiagonalFriction() {
+		final float diagonalFriction = 0.86f;
+		return on_ice ? 0.98f : diagonalFriction;
+	}
+
+	private float getCornerAcceleration() {
+		return on_ice ? ice_corner_acceleration : corner_acceleration;
 	}
 
 	/**
@@ -171,7 +188,7 @@ public abstract class Entity {
 	 */
 	private void cornerChecker(int dir, boolean is_x, Rectangle temp, Rectangle collider){
 		final int distance_check = 16;
-		final float speed = dir * corner_acceleration; // Doesn't check for elapsed time on purpose.
+		final float speed = dir * getCornerAcceleration(); // Doesn't check for elapsed time on purpose.
 		Rectangle temp2 = new Rectangle(temp);
 		if (is_x) temp2.x += dir * distance_check;
 		else temp2.y += dir * distance_check;

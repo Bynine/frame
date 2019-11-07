@@ -6,5 +6,7 @@
 Fribbit! Fribbit!
 <GHOST
 [SPEAKER=GHOST_DIRT]I hate to ask, but... [PAUSE]Please don't pawn me off to a freb?
+<SNAIL
+[NOSPEAKER]It looks wistfully at the snail's shell.
 <OTHER
 [NOSPEAKER]Unfortunately, it just doesn't seem interested.

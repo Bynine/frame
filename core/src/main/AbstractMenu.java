@@ -19,12 +19,14 @@ public abstract class AbstractMenu {
 	protected Timer cursorHalt = new Timer(10);
 	protected Vector2 inputBuffer = new Vector2();
 	protected int perColumn = 5;
-	
+
 	public abstract List<MenuOption> getList();
 	protected abstract void selectItem();
 	public static final Sound 
 	moveCursor = Gdx.audio.newSound(Gdx.files.internal("sfx/menu/high_click.wav")),
 	stopCursor = Gdx.audio.newSound(Gdx.files.internal("sfx/menu/empty_click.wav")),
+	openMap = Gdx.audio.newSound(Gdx.files.internal("sfx/menu/map_open.wav")),
+	closeMap = Gdx.audio.newSound(Gdx.files.internal("sfx/menu/map_close.wav")),
 	select = Gdx.audio.newSound(Gdx.files.internal("sfx/menu/thud.wav")),
 	error = Gdx.audio.newSound(Gdx.files.internal("sfx/menu/wrong.wav"));
 
@@ -54,12 +56,12 @@ public abstract class AbstractMenu {
 					FrameEngine.getInputHandler().getYInput()
 					);
 		}
-		
+
 		if (FrameEngine.getInputHandler().getActionJustPressed()){
 			selectItem();
 		}
 	}
-	
+
 	/**
 	 * Logic after the cursor was successfully moved.
 	 */
@@ -81,7 +83,7 @@ public abstract class AbstractMenu {
 	protected void moveCursorHorizontal(int i){
 		playCursorSound(i);
 	}
-	
+
 	protected final void playCursorSound(int i){
 		int newPosition = cursor + i;
 		if (newPosition >= 0 && newPosition < (getList().size())){
@@ -96,7 +98,7 @@ public abstract class AbstractMenu {
 		if (getList().size() == 0) return null;
 		return getList().get(cursor);
 	}
-	
+
 	public Vector2 getButtonPosition(int pos) {
 		int posX = (int) pos/perColumn;
 		int posY = 2 + (pos % perColumn);
@@ -108,11 +110,11 @@ public abstract class AbstractMenu {
 				);
 		return position;
 	}
-	
+
 	public final int getCursor(){
 		return cursor;
 	}
-	
+
 	public void open(){
 		cursor = 0;
 	}

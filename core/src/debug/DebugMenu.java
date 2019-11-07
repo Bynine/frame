@@ -28,7 +28,7 @@ public class DebugMenu extends AbstractMenu{
 			if (!data.split(TSVReader.split)[0].matches("\\s")){
 				mapIDs.add(new MenuOption(
 						4, 1,
-						data.split(TSVReader.split)[0],
+						data.split(TSVReader.split)[0].substring(0, Math.min(10, data.split(TSVReader.split)[0].length())),
 						data.split(TSVReader.split)[0]
 						));
 			}

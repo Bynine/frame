@@ -4,6 +4,7 @@
 Interesting. I gotta admit, I don't know much about that sort of thing.
 But tell you what - try visiting my friend up northeast. He runs a little book store.
 I'll bet you anything he's got some old books on what you're looking for.
+[GIVE_MAP]Oh! And here's a map of Wabika. This should help you out.
 [ANIM_1]Good luck! Come again soon![ANIM_0]
 &INTRO_SHOPKEEPER
 Have you headed up northeast to the bookstore yet? I definitely recommend it.

@@ -11,7 +11,7 @@ import main.FrameEngine;
 public class Glimmer extends Entity {
 
 	private final ArrayList<Animation<TextureRegion>> anim = 
-			Animator.createAnimation(5, "sprites/items/secret.png", 2, 1);
+			Animator.createAnimation(5, "sprites/items/glimmer.png", 2, 1);
 	private final String flag;
 
 	public Glimmer(float x, float y, String flag) {
@@ -23,8 +23,8 @@ public class Glimmer extends Entity {
 	@Override
 	public void updateImage(){
 		if (
-				FrameEngine.getTime() % 60 >= 15 ||
-				position.dst(FrameEngine.getPlayer().getPosition()) > FrameEngine.TILE * 5 ||
+				FrameEngine.getTime() % 45 >= 15 ||
+				position.dst(FrameEngine.getPlayer().getPosition()) > FrameEngine.TILE * 7 ||
 				FrameEngine.getSaveFile().getFlag(flag)
 				) {
 			image = null;

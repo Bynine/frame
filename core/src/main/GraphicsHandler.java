@@ -39,8 +39,8 @@ import timer.Timer;
  * Handles drawing everything.
  */
 public class GraphicsHandler {
-	public static final float ZOOM = 1.0f/1.0f;
-	
+	public static final float ZOOM = 1.0f/2.0f;
+
 	public static final Color 
 	DEFAULT_COLOR = new Color(1, 1, 1, 1),
 	SELECT_COLOR1 = new Color(0.75f, 0.85f, 0.95f, 1.0f),
@@ -76,6 +76,7 @@ public class GraphicsHandler {
 	logo = new TextureRegion(new Texture("sprites/gui/logo.png")),
 	snailOn = new TextureRegion(new Texture("sprites/gui/snail_on.png")),
 	snailOff = new TextureRegion(new Texture("sprites/gui/snail_off.png")),
+	map = new TextureRegion(new Texture("sprites/gui/map.png")),
 	interactBubble = new TextureRegion(new Texture("sprites/player/interact.png")),
 	surpriseBubble = new TextureRegion(new Texture("sprites/player/surprise.png")),
 	talkingBubble = new TextureRegion(new Texture("sprites/player/talk.png")),
@@ -240,10 +241,12 @@ public class GraphicsHandler {
 	private void drawWater(){
 		batch.begin();
 		if (FrameEngine.getArea().sky) drawByTiles(water, true);
-		batch.draw(Player.ripple,
-				FrameEngine.getPlayer().getPosition().x,
-				FrameEngine.getPlayer().getPosition().y
-				);
+		if (!FrameEngine.getArea().frost) {
+			batch.draw(Player.ripple,
+					FrameEngine.getPlayer().getPosition().x,
+					FrameEngine.getPlayer().getPosition().y
+					);
+		}
 		batch.end();
 	}
 
@@ -372,7 +375,7 @@ public class GraphicsHandler {
 		}
 		batch.end();
 	}
-	
+
 	private void handleEmittersReflection(){
 		batch.begin();
 		for (Entity en: EntityHandler.getEntities()){
@@ -382,7 +385,7 @@ public class GraphicsHandler {
 		}
 		batch.end();
 	}
-	
+
 	/**
 	 * Handles functions of an emitter.
 	 */
@@ -520,13 +523,7 @@ public class GraphicsHandler {
 			batch.draw(arrowUp, center, FrameEngine.TILE * 8.875f);
 		}
 		batch.end();
-		drawText("Press ENTER to exit.", 
-				new Vector2(
-						Gdx.graphics.getWidth()/(1.8f/ZOOM), 
-						Gdx.graphics.getHeight()*ZOOM - (FrameEngine.TILE*2)
-						), 
-				new Vector2(8, 2), 
-				true);
+		drawEnterToExit();
 		drawItemDescription(menu, price);
 	}
 
@@ -945,9 +942,32 @@ public class GraphicsHandler {
 	public static void setOffset(Vector2 change) {
 		offsetTarget.set(change);
 	}
-	
+
 	public static boolean isZoomed(){
 		return ZOOM < 1;
+	}
+
+	public void drawMap() {
+		batch.begin();
+		batch.setProjectionMatrix(centerCam.combined);
+		batch.draw(map, FrameEngine.TILE * 5, FrameEngine.TILE * 2);
+		batch.end();
+		drawEnterToExit();
+	}
+
+	private void drawEnterToExit() {
+		drawText("Press ENTER to exit.", 
+				new Vector2(Gdx.graphics.getWidth()/(1.8f/ZOOM), Gdx.graphics.getHeight()*ZOOM - (FrameEngine.TILE*2)), 
+				new Vector2(8, 2), true);
+	}
+
+	public void drawLetter(Mailbox mailbox) {
+		String letter = mailbox.getActiveButton().getOutput().toString();
+		if (null != letter && !Mailbox.close.equals(letter)) {
+			drawText(letter,
+					new Vector2(Gdx.graphics.getWidth()/(1.8f/ZOOM), Gdx.graphics.getHeight()*ZOOM - (FrameEngine.TILE*2)), 
+					new Vector2(8, 2), true);
+		}
 	}
 
 }

@@ -25,8 +25,6 @@ public abstract class Critter extends Entity {
 		matchRectangleToPosition(getNoticeBox());
 		if (!reacted && touchingPlayer(getNoticeBox())){
 			react();
-			reacted = true;
-			reactTimer.reset();
 		}
 	}
 	

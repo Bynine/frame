@@ -24,7 +24,7 @@ import text.Textbox;
 import timer.Timer;
 
 public class FrameEngine extends ApplicationAdapter {
-	private static boolean DEBUG = false;
+	private static boolean DEBUG = true;
 
 	@SuppressWarnings("unused")
 	public static boolean 
@@ -32,16 +32,18 @@ public class FrameEngine extends ApplicationAdapter {
 	MUTE	= true	&& DEBUG,
 	LOG		= true	&& DEBUG,
 	FPS		= false && DEBUG,
-	NOMAIN	= true	&& DEBUG,
+	NOMAIN	= false	&& DEBUG,
 	INVIS	= false	&& DEBUG,
 	MAPS	= false && DEBUG,
-	TREASURE= true  || !DEBUG,
+	TREASURE= false  || !DEBUG,
 	GHOST	= false	&& DEBUG,
 	SHRINE  = true  && DEBUG,
+	FGOAL	= false  && DEBUG,
 	FULLINV = true	&& DEBUG,
 	CASH	= false && DEBUG,
 	OMNI	= false	&& DEBUG, // Toggles whether everything appears
-	SAVE	= false	|| !DEBUG;
+	SAVE	= true	|| !DEBUG,
+	WINDOW	= true	&& DEBUG;
 
 	private static Player player;
 	private static FPSLogger fpsLogger;
@@ -59,6 +61,7 @@ public class FrameEngine extends ApplicationAdapter {
 	private static ShopMenu shopMenu;
 	private static PauseMenu pauseMenu;
 	private static AnswersMenu answersMenu;
+	private static Mailbox mailbox;
 	private static ItemDescription currentThing = null;
 	private static String givenItemID = "";
 	private static final float TRANSITION_TIME = 45;
@@ -95,6 +98,7 @@ public class FrameEngine extends ApplicationAdapter {
 		saveConfirmationMenu = new SaveConfirmationMenu();
 		shopMenu = new ShopMenu();
 		pauseMenu = new PauseMenu();
+		mailbox = new Mailbox();
 		fpsLogger = new FPSLogger();
 		debugMenu = new DebugMenu();
 		AudioHandler.initialize();
@@ -161,6 +165,12 @@ public class FrameEngine extends ApplicationAdapter {
 			case SAVECONFIRM:{
 				updateSaveConfirm();
 			} break;
+			case MAP:{
+				updateMap();
+			} break;
+			case MAILBOX:{
+				updateMailbox();
+			}
 			}
 		}
 		catch (Exception e){
@@ -264,6 +274,19 @@ public class FrameEngine extends ApplicationAdapter {
 		graphicsHandler.drawMenu(saveConfirmationMenu);
 		saveConfirmationMenu.update();
 	}
+	
+	private void updateMap() {
+		graphicsHandler.drawOverworld();
+		graphicsHandler.drawMap();
+	}
+	
+	private void updateMailbox() {
+		graphicsHandler.drawTitle();
+		playerWalk(Walk.NONE);
+		graphicsHandler.drawMenu(mailbox);
+		graphicsHandler.drawLetter(mailbox);
+		mailbox.update();
+	}
 
 	static float positionX = 0;
 
@@ -314,11 +337,15 @@ public class FrameEngine extends ApplicationAdapter {
 				handlePause();
 				AudioHandler.playSoundVariedPitch(AbstractMenu.moveCursor);
 			}
+			else if (gameState == GameState.MAP) {
+				gameState = GameState.INVENTORY;
+				AudioHandler.playSoundVariedPitch(AbstractMenu.closeMap);
+			}
 		}
 		if (inputHandler.getActionJustPressed()) {
 			handleActionPressed();
 		}
-		if (DEBUG && inputHandler.getDebugJustPressed()){ // TODO: Disable for final release
+		if (DEBUG && inputHandler.getDebugJustPressed()){
 			gameState = GameState.DEBUG;
 		}
 	}
@@ -421,6 +448,7 @@ public class FrameEngine extends ApplicationAdapter {
 		}
 	}
 
+	@SuppressWarnings("serial")
 	private static void activateSnail(){
 		int numSecrets = EntityHandler.getNumSecrets();
 		if (numSecrets > 0){
@@ -488,7 +516,7 @@ public class FrameEngine extends ApplicationAdapter {
 			mainMenu = new MainMenu(true);
 			mainMenu.open();
 		}
-		if (gameState != GameState.SAVECONFIRM){
+		if (!noWalkingMainMenu()){
 			gameState = GameState.MAIN;
 			String newAreaId = "PATH"; //saveFile.exists() ? "VOID" : "PATH";
 			newArea = new Area(newAreaId);
@@ -596,6 +624,15 @@ public class FrameEngine extends ApplicationAdapter {
 	public static void endDialogueTree() {
 		dialogueTrees.remove(0);
 	}
+	
+	public static void showMap() {
+		gameState = GameState.MAP;
+	}
+
+	public static void checkMail() {
+		mailbox.open();
+		gameState = GameState.MAILBOX;
+	}
 
 	// GET
 
@@ -606,10 +643,14 @@ public class FrameEngine extends ApplicationAdapter {
 		else if (gameState == GameState.MAIN){
 			return new Vector2(1, 0);
 		}
-		else if (gameState == GameState.SAVECONFIRM){
+		else if (noWalkingMainMenu()){
 			return Vector2.Zero;
 		}
 		return null;
+	}
+	
+	private static boolean noWalkingMainMenu() {
+		return gameState == GameState.SAVECONFIRM || gameState == GameState.MAILBOX;
 	}
 
 	public static InputHandler getInputHandler(){
@@ -688,7 +729,7 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	public enum GameState{
-		OVERWORLD, PAUSED, DEBUG, MAIN, SHOP, INVENTORY, CREDITS, SAVECONFIRM
+		OVERWORLD, PAUSED, DEBUG, MAIN, SHOP, INVENTORY, CREDITS, SAVECONFIRM, MAP, MAILBOX
 	}
 
 	public static void setGivenItemID(String newItemID){
@@ -730,6 +771,10 @@ public class FrameEngine extends ApplicationAdapter {
 			return (transitionTime() - TRANSITION_END_TIME)/TRANSITION_CHANGE_TIME;
 		}
 		return 0;
+	}
+
+	public static boolean canSelectMenuItem() {
+		return gameState == GameState.INVENTORY;
 	}
 
 }

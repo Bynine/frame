@@ -45,7 +45,7 @@ public class PauseMenu extends AbstractMenu{
 	@Override
 	protected void moveCursorHorizontal(int i){
 		playCursorSound(i);
-		cursor = MathUtils.clamp(cursor + i, 0, 1);
+		cursor = MathUtils.clamp(cursor + i, 0, options.size()-1);
 	}
 
 	public static enum Option{

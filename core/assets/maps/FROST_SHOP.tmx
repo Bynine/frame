@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="234">
+ <tileset firstgid="1" source="tilesets/objects.tsx"/>
+ <tileset firstgid="9" source="tilesets/shop.tsx"/>
+ <tileset firstgid="265" source="tilesets/light.tsx"/>
+ <layer id="1" name="FLOOR" width="25" height="16">
+  <data encoding="csv">
+27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,13,14,14,14,14,14,14,14,14,14,15,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,29,30,30,30,30,30,30,30,30,30,31,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,10,11,11,11,11,11,11,59,11,11,12,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,26,27,27,59,27,27,27,27,59,27,28,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,26,27,27,27,27,27,27,27,27,27,28,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,26,59,27,27,27,27,27,27,59,27,28,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,26,27,27,27,27,27,59,27,27,27,28,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,26,27,27,27,27,27,27,27,27,28,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,26,27,27,27,27,27,27,27,27,28,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0
+</data>
+ </layer>
+ <layer id="2" name="MIDDLE" width="25" height="16">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,73,74,0,77,78,79,18,73,74,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,89,90,0,93,94,95,34,89,90,126,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,141,142,0,0,109,110,111,50,0,141,142,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,121,122,123,0,0,0,0,0,0,0,80,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,141,142,27,0,124,171,172,0,0,0,96,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,143,144,27,27,0,0,0,0,91,92,112,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,141,142,0,27,27,0,0,0,0,141,142,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,58,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="3" name="ABOVE" width="25" height="16">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,125,126,0,0,0,0,0,0,0,125,126,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,105,106,107,0,0,0,0,0,0,0,64,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,125,126,0,0,108,155,156,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,127,128,0,0,0,0,0,0,75,76,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,125,126,0,0,0,0,0,0,0,125,160,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,159,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="9" name="LIGHT" width="25" height="16">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,269,270,0,0,0,0,0,269,270,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,277,278,0,0,0,0,0,277,278,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,329,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="4" name="OVERHEAD" width="25" height="16">
+  <data encoding="csv">
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,140,139,0,137,140,139,0,0,137,138,140,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+</data>
+ </layer>
+ <objectgroup id="5" name="SLOPES"/>
+ <objectgroup color="#32e3c6" id="6" name="TERRAIN" visible="0">
+  <object id="224" name="wood" x="216" y="120" width="368" height="240"/>
+ </objectgroup>
+ <objectgroup color="#50734a" id="7" name="COLLISION" opacity="0.5">
+  <object id="166" x="0" y="0" width="224" height="576"/>
+  <object id="167" x="224" y="0" width="352" height="192"/>
+  <object id="168" x="576" y="0" width="192" height="576"/>
+  <object id="169" x="480" y="360" width="96" height="216"/>
+  <object id="171" x="224" y="360" width="224" height="216"/>
+  <object id="188" x="448" y="392" width="32" height="184"/>
+  <object id="204" x="224" y="216" width="88" height="32"/>
+  <object id="206" x="480" y="344" width="96" height="16"/>
+  <object id="207" x="224" y="344" width="192" height="16"/>
+  <object id="208" x="224" y="248" width="40" height="96"/>
+  <object id="209" x="544" y="216" width="32" height="104"/>
+  <object id="210" x="360" y="192" width="80" height="24"/>
+  <object id="212" x="512" y="320" width="64" height="24"/>
+  <object id="221" x="352" y="256" width="80" height="24"/>
+  <object id="222" x="480" y="280" width="64" height="40"/>
+  <object id="228" x="256" y="288" width="32" height="32"/>
+  <object id="229" x="440" y="192" width="40" height="16"/>
+  <object id="233" x="512" y="192" width="64" height="32"/>
+ </objectgroup>
+ <objectgroup id="8" name="ENTITIES" opacity="0.64">
+  <object id="172" name="portal" gid="6" x="448" y="392" width="32" height="32">
+   <properties>
+    <property name="DEST" value="FROST_FOREST,62,39"/>
+    <property name="DOOR" value=""/>
+    <property name="TYPE" value="PORTAL"/>
+   </properties>
+  </object>
+  <object id="186" name="shopkeep" gid="1" x="264" y="216" width="32" height="24">
+   <properties>
+    <property name="DIALOGUE" value="shopkeeper"/>
+    <property name="ID" value="SHOPKEEPER"/>
+    <property name="IMAGE" value="shopkeeper"/>
+    <property name="INTERACTYDISP" value="-32"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="203" name="text" gid="1" x="488" y="312" width="40" height="32">
+   <properties>
+    <property name="TEXT">It's full of some strange vegetables.
+They're weirdly shaped but smell nice and fresh.</property>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="214" name="text" gid="1" x="352" y="280" width="32" height="24">
+   <properties>
+    <property name="DIALOGUE" value="tea"/>
+    <property name="TYPE" value="DIALOGUEDESC"/>
+   </properties>
+  </object>
+  <object id="215" name="text" gid="1" x="544" y="296" width="32" height="64">
+   <properties>
+    <property name="TEXT">Freshly baked bread.
+Ohhh, it smells really tasty...</property>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="216" name="text" gid="1" x="368" y="216" width="64" height="48">
+   <properties>
+    <property name="TEXT">Various strange items fill this shelf.
+It looks like equipment for travellers.</property>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="218" name="text" gid="1" x="400" y="280" width="32" height="32">
+   <properties>
+    <property name="TEXT" value="Some wood crackles in this iron stove. It keeps this shop nice and toasty."/>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="223" name="text" gid="1" x="272" y="216" width="32" height="24">
+   <properties>
+    <property name="TEXT" value="(Psst... you're supposed to stand in front of the counter.)"/>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="225" name="smoke" gid="3" x="400" y="232" width="32" height="32">
+   <properties>
+    <property name="DURATION" value="60"/>
+    <property name="GRAPHIC" value="smoke"/>
+    <property name="INTERVAL" value="66"/>
+    <property name="TYPE" value="emitter"/>
+   </properties>
+  </object>
+  <object id="226" name="cat" gid="1" x="488" y="280" width="32" height="24">
+   <properties>
+    <property name="APPEAR" value="!ENTERED_SHRINE"/>
+    <property name="DIALOGUE" value="cat"/>
+    <property name="ID" value="CAT"/>
+    <property name="IMAGE" value="cat"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="227" name="entered trigger" gid="1" x="416" y="360" width="64" height="32">
+   <properties>
+    <property name="DIALOGUE" value="entered_shop"/>
+    <property name="TYPE" value="DIALOGUE_TRIGGER"/>
+   </properties>
+  </object>
+  <object id="230" name="instrument" gid="5" x="448" y="208" width="32" height="32">
+   <properties>
+    <property name="SFX" value="lute"/>
+    <property name="TYPE" value="INSTRUMENT"/>
+   </properties>
+  </object>
+  <object id="231" name="yokey painting" gid="1" x="324" y="184" width="32" height="48">
+   <properties>
+    <property name="ID" value="ghost"/>
+    <property name="TEXT">This painting is of a cheerful girl.
+It looks like the backdrop is of a shrine.</property>
+    <property name="TYPE" value="PAINTING"/>
+   </properties>
+  </object>
+  <object id="232" name="fire audio" gid="5" x="408" y="280" width="32" height="32">
+   <properties>
+    <property name="AUDIO" value="crackling"/>
+    <property name="ID" value="CRACKLING"/>
+    <property name="TYPE" value="AUDIO"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

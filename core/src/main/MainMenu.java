@@ -3,6 +3,8 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 import text.MenuOption;
@@ -14,8 +16,9 @@ public class MainMenu extends AbstractMenu {
 
 	MainMenu(boolean exists){
 		cursor = exists ? 1 : 0;
-		options.add(new MenuOption(8, 2, "New Adventure", Option.NEW));
-		options.add(new MenuOption(8, 2, "Continue", Option.CONTINUE));
+		options.add(new MenuOption(6, 2, "New Journey", Option.NEW));
+		options.add(new MenuOption(6, 2, "Continue", Option.CONTINUE));
+		options.add(new MenuOption(6, 2, "Mailbag", Option.MAIL));
 		this.exists = exists;
 	}
 
@@ -44,19 +47,36 @@ public class MainMenu extends AbstractMenu {
 				AudioHandler.playSoundVariedPitch(error);
 			}
 		} break;
+		case MAIL:{
+			if (exists){
+				FrameEngine.checkMail();
+			}
+			else{
+				AudioHandler.playSoundVariedPitch(error);
+			}
+		} break;
 		}
+	}
+	
+	@Override
+	protected void moveCursorVertical(int i){
+		//
+	}
+
+	@Override
+	protected void moveCursorHorizontal(int i){
+		playCursorSound(i);
+		cursor = MathUtils.clamp(cursor + i, 0, options.size()-1);
 	}
 
 	public Vector2 getButtonPosition(int pos) {
-		Vector2 position = super.getButtonPosition(pos);
-		//if (GraphicsHandler.isZoomed()){
-			position.sub(0, FrameEngine.TILE * 5.5f);
-		//}
-		return position;
+		int x = FrameEngine.TILE * 6 * pos;
+		int y = FrameEngine.TILE;
+		return new Vector2(x, y);
 	}
 
 	public static enum Option{
-		NEW, CONTINUE
+		NEW, CONTINUE, MAIL
 	}
 
 	public void open(){

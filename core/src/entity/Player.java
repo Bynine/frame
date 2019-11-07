@@ -41,6 +41,8 @@ public class Player extends Entity{
 			Animator.createAnimation(30, "sprites/player/dig.png", 2, 3);
 	private static final ArrayList<Animation<TextureRegion>> water = 
 			Animator.createAnimation(30, "sprites/player/water.png", 2, 3);
+	private static final ArrayList<Animation<TextureRegion>> pet = 
+			Animator.createAnimation(30, "sprites/player/pet.png", 2, 3);
 	private static final TextureRegion get = 
 			new TextureRegion(new Texture(Gdx.files.internal("sprites/player/get.png")));
 	private static final TextureRegion sleep = 
@@ -56,7 +58,9 @@ public class Player extends Entity{
 	stepGrass = Gdx.audio.newSound(Gdx.files.internal("sfx/step_grass.wav")),
 	stepWood = Gdx.audio.newSound(Gdx.files.internal("sfx/step_wood.wav")),
 	stepStone = Gdx.audio.newSound(Gdx.files.internal("sfx/step_stone.wav")),
-	stepWater = Gdx.audio.newSound(Gdx.files.internal("sfx/step_water.wav"));
+	stepWater = Gdx.audio.newSound(Gdx.files.internal("sfx/step_water.wav")),
+	stepSnow = Gdx.audio.newSound(Gdx.files.internal("sfx/step_stone.wav")),
+	stepIce = Gdx.audio.newSound(Gdx.files.internal("sfx/step_stone.wav"));
 
 	public Player(float x, float y) {
 		super(x, y);
@@ -69,6 +73,7 @@ public class Player extends Entity{
 	public void update(){
 		updateInputs();
 		super.update();
+		on_ice = FrameEngine.getArea().getTerrain(this).equals(Terrain.ICE);
 	}
 
 	private void updateInputs(){
@@ -90,9 +95,13 @@ public class Player extends Entity{
 	protected void updateVelocity(){
 		super.updateVelocity();
 		velocity.add(
-				acceleration * input.x,
-				acceleration * input.y
+				getAcceleration() * input.x,
+				getAcceleration() * input.y
 				);
+	}
+	
+	private float getAcceleration() {
+		return on_ice ? ice_acceleration : acceleration;
 	}
 
 	/**
@@ -175,6 +184,9 @@ public class Player extends Entity{
 		case SLEEP:{
 			image = sleep;
 		} break;
+		case PET:{
+			image = pet.get(dir).getKeyFrame(FrameEngine.getTime()); 
+		} break;
 		default: {
 			image = get;
 		} break;
@@ -197,6 +209,12 @@ public class Player extends Entity{
 		case STONE: {
 			step = stepStone;
 		} break;
+		case SNOW: {
+			step = stepSnow;
+		} break;
+		case ICE: {
+			step = stepIce;
+		} break;
 		case NORMAL:
 		default: step = stepGrass;
 		}
@@ -217,7 +235,7 @@ public class Player extends Entity{
 	}
 
 	public static enum ImageState{
-		NORMAL, GET, DIG, WATER, EXPLAIN, SLEEP
+		NORMAL, GET, DIG, WATER, EXPLAIN, SLEEP, PET
 	}
 
 	public static ImageState getImageState(){
