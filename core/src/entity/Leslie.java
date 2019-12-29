@@ -14,6 +14,7 @@ public class Leslie extends NPC {
 		super(x, y, interactXDisp, interactYDisp, width, height, id, imagePath, dialoguePath, layer);
 	}
 	
+	@SuppressWarnings("serial")
 	@Override
 	public void interact(){
 		FrameEngine.startDialogueTree(

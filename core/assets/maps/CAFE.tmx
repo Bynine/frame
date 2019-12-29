@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="335">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="336">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/shop.tsx"/>
  <tileset firstgid="265" source="tilesets/bookstore.tsx"/>
@@ -294,8 +294,9 @@ You decide to not bring that up.</property>
     <property name="TYPE" value="NPC"/>
    </properties>
   </object>
-  <object id="324" name="text" gid="1" x="520" y="296" width="16" height="16">
+  <object id="324" name="text" gid="1" x="520" y="292" width="16" height="16">
    <properties>
+    <property name="APPEAR" value="!FOUND_GOAL"/>
     <property name="TEXT">It's a book on theories about raising the dead.
 How droll.</property>
     <property name="TYPE" value="DESC"/>
@@ -337,6 +338,13 @@ The aroma reminds you of pumpkins, or maybe apple strudel.</property>
 Maybe she wouldn't notice if you took just one...
 On second thought, maybe not.</property>
     <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="335" name="book" gid="1" x="515" y="287" width="30" height="17">
+   <properties>
+    <property name="FLAG" value="!FOUND_GOAL"/>
+    <property name="IMAGE" value="book1"/>
+    <property name="TYPE" value="SUMMONOBJECT"/>
    </properties>
   </object>
  </objectgroup>

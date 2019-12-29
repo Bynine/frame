@@ -20,14 +20,21 @@ public class Flower extends InteractableEntity {
 	private State state;
 	private final TextureRegion 
 	dirt = new TextureRegion(new Texture("sprites/objects/dirt.png")),
-	seed = new TextureRegion(new Texture("sprites/objects/seed.png"));
+	seed = new TextureRegion(new Texture("sprites/objects/seed.png")),
+	dirt_frost = new TextureRegion(new Texture("sprites/objects/dirt_frost.png")),
+	seed_frost = new TextureRegion(new Texture("sprites/objects/seed_frost.png"));
 	private static final int flowerSpeed = 60;
 	private final ArrayList<Animation<TextureRegion>> 
 	flower1 = Animator.createAnimation(flowerSpeed, "sprites/objects/flower1.png", 2, 1),
 	flower2 = Animator.createAnimation(flowerSpeed, "sprites/objects/flower2.png", 2, 1),
 	flower3 = Animator.createAnimation(flowerSpeed, "sprites/objects/flower3.png", 2, 1),
 	flower4 = Animator.createAnimation(flowerSpeed, "sprites/objects/flower4.png", 2, 1),
-	flower5 = Animator.createAnimation(flowerSpeed, "sprites/objects/flower5.png", 2, 1);
+	flower5 = Animator.createAnimation(flowerSpeed, "sprites/objects/flower5.png", 2, 1),
+	flower1_frost = Animator.createAnimation(flowerSpeed, "sprites/objects/flower1_frost.png", 1, 1),
+	flower2_frost = Animator.createAnimation(flowerSpeed, "sprites/objects/flower2_frost.png", 1, 1),
+	flower3_frost = Animator.createAnimation(flowerSpeed, "sprites/objects/flower3_frost.png", 1, 1),
+	flower4_frost = Animator.createAnimation(flowerSpeed, "sprites/objects/flower4_frost.png", 1, 1),
+	flower5_frost = Animator.createAnimation(flowerSpeed, "sprites/objects/flower5_frost.png", 1, 1);
 	public static final String
 	flowerPrefix = "FLOWER_",
 	seedPrefix = "SEED_",
@@ -79,33 +86,36 @@ public class Flower extends InteractableEntity {
 
 	@Override
 	public void interact(){
+		String dialoguePath = "";
+		boolean frost = FrameEngine.getArea().frost;
 		switch(state){
 		case DIRT: {
-			FrameEngine.startDialogueTree(new DialogueTree(this, "dirt"));
+			dialoguePath = "dirt";
 		} break;
 		case SEED: {
-			FrameEngine.startDialogueTree(new DialogueTree(this, "seed"));
+			dialoguePath = "seed";
 		} break;
 		case FLOWER: {
 			switch (flowerType){
 			case ONE:	{
-				FrameEngine.startDialogueTree(new DialogueTree(this, "flower1"));
+				dialoguePath = "flower1";
 			} break;
 			case TWO:	{
-				FrameEngine.startDialogueTree(new DialogueTree(this, "flower2"));
+				dialoguePath = "flower2";
 			} break;
 			case THREE:	{
-				FrameEngine.startDialogueTree(new DialogueTree(this, "flower3"));
+				dialoguePath = "flower3";
 			} break;
 			case FOUR:	{
-				FrameEngine.startDialogueTree(new DialogueTree(this, "flower4"));
+				dialoguePath = "flower4";
 			} break;
 			case FIVE:	{
-				FrameEngine.startDialogueTree(new DialogueTree(this, "flower5"));
+				dialoguePath = "flower5";
 			} break;
 			}
 		} break;
 		}
+		FrameEngine.startDialogueTree(new DialogueTree(this, frost ? dialoguePath.concat("_frost") : dialoguePath));
 	}
 
 	@Override
@@ -129,25 +139,26 @@ public class Flower extends InteractableEntity {
 
 	@Override
 	public void updateImage(){
+		boolean frost = FrameEngine.getArea().frost;
 		switch(state){
-		case DIRT: image = dirt; break;
-		case SEED: image = seed; break;
+		case DIRT: image = frost ? dirt_frost : dirt; break;
+		case SEED: image = frost ? seed_frost : seed; break;
 		case FLOWER: {
 			switch (flowerType){
 			case ONE:	{
-				image = flower1.get(0).getKeyFrame(FrameEngine.getTime()); break;
+				image = (frost ? flower1_frost : flower1).get(0).getKeyFrame(FrameEngine.getTime()); break;
 			}
 			case TWO:	{
-				image = flower2.get(0).getKeyFrame(FrameEngine.getTime()); break;
+				image = (frost ? flower2_frost : flower2).get(0).getKeyFrame(FrameEngine.getTime()); break;
 			}
 			case THREE:	{
-				image = flower3.get(0).getKeyFrame(FrameEngine.getTime()); break;
+				image = (frost ? flower3_frost : flower3).get(0).getKeyFrame(FrameEngine.getTime()); break;
 			}
 			case FOUR:	{
-				image = flower4.get(0).getKeyFrame(FrameEngine.getTime()); break;
+				image = (frost ? flower4_frost : flower4).get(0).getKeyFrame(FrameEngine.getTime()); break;
 			}
 			case FIVE:	{
-				image = flower5.get(0).getKeyFrame(FrameEngine.getTime()); break;
+				image = (frost ? flower5_frost : flower5).get(0).getKeyFrame(FrameEngine.getTime()); break;
 			}
 			}
 			break;
@@ -164,11 +175,18 @@ public class Flower extends InteractableEntity {
 	public void dispose() {
 		dirt.getTexture().dispose();
 		seed.getTexture().dispose();
+		dirt_frost.getTexture().dispose();
+		seed_frost.getTexture().dispose();
 		Animator.freeAnimation(flower1);
 		Animator.freeAnimation(flower2);
 		Animator.freeAnimation(flower3);
 		Animator.freeAnimation(flower4);
 		Animator.freeAnimation(flower5);
+		Animator.freeAnimation(flower1_frost);
+		Animator.freeAnimation(flower2_frost);
+		Animator.freeAnimation(flower3_frost);
+		Animator.freeAnimation(flower4_frost);
+		Animator.freeAnimation(flower5_frost);
 		whistle.dispose();
 	}
 	

@@ -1,0 +1,7 @@
+*TALK_KID2_FROST
+[SPEED=6]...[NSPEED]
+i saw somebody weird going up north.
+nobody believe me. but i saw.
+&TALK_KID2_FROST
+[SPEED=6]...[NSPEED]
+they looked familiar.

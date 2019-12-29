@@ -31,6 +31,7 @@ public class PauseMenu extends AbstractMenu{
 			FrameEngine.startInventory();
 		} break;
 		case EXIT:{
+			FrameEngine.endCocoaTime();
 			FrameEngine.getSaveFile().save(false);
 			FrameEngine.startMainMenu(true);
 		} break;

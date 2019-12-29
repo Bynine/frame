@@ -1,0 +1,20 @@
+[NOSPEAKER]This snowman seems oddly familiar. Give it something?
+{
+<COCOAHOT
+*ARTIST_FREED
+[REMOVE_ITEM][ANIM_1]...!
+[ANIM_2]I-I-I-I am... 
+[ANIM_3]F-F-F-Free![NEWNAME=Archibald]
+[ANIM_4]Ah! It is you who gave me this elixir of life, I assume?
+Wonderful! Marvelous! Your kindness knows no bounds! You always seem to show up in time, hm?
+I will finish my drink, then be over to the cafe.[RELAX]
+Oh! If you get there first, please let Jackie know I am okay. I would hate to make her worry.[DEFAULT_ANIM]
+<COCOACOLD
+[NOSPEAKER]It's too cold to do any good.
+<TREASURE3
+[NOSPEAKER]Unfortunately, it's too small to fit.
+<OTHER
+[NOSPEAKER]You shove it up against the snowman, but nothing happens.
+&ARTIST_FREED
+Slurp, slurp... Mmm...
+Sublime! This rich taste invigorates me!

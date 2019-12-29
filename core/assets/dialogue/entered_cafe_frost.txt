@@ -1,0 +1,6 @@
+[SPEAKER=PUMPKIN][ANIM_1]...[ANIM_5]Oh! It's you![ANIM_2] Why, you've picked an awfully strange time to return, but welcome all the same!
+[SPEAKER=CUSTOMER2]Ooh, I hope you've come with another delicious cider... [ANIM_1] Hohoho![ANIM_0]
+&TALK_PUMPKIN_FROST
+[SPEAKER=PUMPKIN][ANIM_1]...[ANIM_5]Oh! [ANIM_2]Hi there, hon! Be sure to warm yourself.
+&ARTIST_FREED
+[SPEAKER=PUMPKIN][ANIM_6]Hello, you wonderful thing, you! Get yourself nice and cozy, okay?

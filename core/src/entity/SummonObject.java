@@ -10,11 +10,11 @@ public class SummonObject extends ImmobileEntity {
 	private final TextureRegion texture;
 	private final String flag;
 
-	public SummonObject(float x, float y, String imagePath, String flag) {
+	public SummonObject(float x, float y, String imagePath, String flag, String layer) {
 		super(x, y);
 		texture = new TextureRegion(new Texture("sprites/objects/" + imagePath + ".png"));
 		this.flag = flag;
-		layer = Layer.FRONT;
+		this.layer = layer == "" ? Layer.FRONT : Layer.valueOf(layer);
 	}
 	
 	@Override

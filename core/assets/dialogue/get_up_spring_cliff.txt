@@ -1,9 +1,9 @@
 *TALK_CLIFF
 Man, I wish I could get up that cliff behind us and see what's up there. But I can't climb up, it's too high!
-There's got to be a way to get up there, right? I just know it!
+[ANIM_1]There's got to be a way to get up there, right? [ANIM_0]I just know it!
 &TALK_CLIFF
-There's got to be a way to get up that cliff. There just has to.
-Hmmm... too bad the shop doesn't sell grappling hooks...
+[ANIM_1]There's got to be a way to get up that cliff. There just has to.
+[ANIM_0]Hmmm... too bad the shop doesn't sell grappling hooks...
 &FOUND_GOAL
 *TALK_GETUPSPRINGCLIFF
 Hey, you'll never believe it! I found out how to get up around the cliff!

@@ -1,0 +1,6 @@
+[SPEAKER=SHOPKEEPER][ANIM_4]You-[PAUSE][ANIM_0] you came back! [ANIM_1]Welcome, my friend![ANIM_0]
+&GRUB_REWARD
+[SPEAKER=SHOPKEEPER][ANIM_4]You-[PAUSE][ANIM_0] you came back! [ANIM_1]Welcome, my friend![ANIM_0]
+[SPEAKER=GRUBLOVE][ANIM_1]Ha-hey![PAUSE] [ANIM_0]If it isn't the delightful person who assisted me in my cranial plight!
+&TALK_SHOPKEEPER_FROST
+[SPEAKER=SHOPKEEPER][ANIM_1]Welcome back, my friend.[ANIM_0] I hope you're well...![ANIM_0]

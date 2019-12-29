@@ -1,0 +1,19 @@
+*TALK_PUMPKIN_FROST
+How are ya, hon? It must've been bitter cold coming all the way here! Well, stay as long as you like and warm up.
+Say, on your way here... [ANIM_4]You didn't happen to see Archibald, did you? My friend, the artist you helped out earlier.
+He went out a while back to look for supplies and I haven't seem him since.[ANIM_1] I sure hope he's doing okay.
+I'd look for him myself [ANIM_4]but I need to keep this place warm and food available for all the people stuck here.
+[ANIM_2]Speaking of which! Here, have a hot cocoa, on the house. 
+[NOSPEAKER][COCOA_BEGIN][GIVE_COCOAHOT]You got the hot cocoa! Careful, it'll cool down before long.
+[ANIM_4]And... please, let me know if you see him, okay, hon?
+&TALK_PUMPKIN_FROST
+Ah, do you need your cocoa heated up? Don't worry about it, hon!
+[NOSPEAKER][COCOA_BEGIN][GIVE_COCOAHOT]You got the hot cocoa! Careful, it'll cool down before long.
+&ARTIST_FREED
+*TALK_PUMPKIN_ARTIST_FREED
+Archibald told me all about what you did! Oh, you are just the sweetest, you know that, hon? What would we do without you?
+[GIVE_COFFEE]Here, have my strongest espresso on the house! Just a little sip and you'll have more zip than you'll know what to do with!
+&TALK_PUMPKIN_ARTIST_FREED
+Awww... I missed you so much, Archie-warchie...
+You don't ever run off like that again, y'hear?
+[SPEAKER=ARTIST]Of course, my dear... But please... that's a bit embarrassing...

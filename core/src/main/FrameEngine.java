@@ -17,6 +17,7 @@ import debug.DebugMenu;
 import entity.InteractableEntity;
 import entity.NPC;
 import entity.Player;
+import entity.Player.ImageState;
 import entity.Portal.Direction;
 import text.MenuOption;
 import text.DialogueTree;
@@ -32,17 +33,22 @@ public class FrameEngine extends ApplicationAdapter {
 	MUTE	= true	&& DEBUG,
 	LOG		= true	&& DEBUG,
 	FPS		= false && DEBUG,
-	NOMAIN	= false	&& DEBUG,
+	NOMAIN	= true	&& DEBUG,
 	INVIS	= false	&& DEBUG,
 	MAPS	= false && DEBUG,
-	TREASURE= false  || !DEBUG,
+	TREASURE= false	|| !DEBUG,
 	GHOST	= false	&& DEBUG,
 	SHRINE  = true  && DEBUG,
-	FGOAL	= false  && DEBUG,
-	FULLINV = true	&& DEBUG,
+	FGOAL	= false	&& DEBUG,
+	FROST	= true	&& DEBUG,
+	FLAME	= false	&& DEBUG,
+	INV 	= true	&& DEBUG,
+	ALLITEMS= false	&& DEBUG,
 	CASH	= false && DEBUG,
 	OMNI	= false	&& DEBUG, // Toggles whether everything appears
-	SAVE	= true	|| !DEBUG,
+	SAVE	= false	|| !DEBUG,
+	LETTERS = true	&& DEBUG,
+	DUNGEON	= true	&& DEBUG,
 	WINDOW	= true	&& DEBUG;
 
 	private static Player player;
@@ -69,6 +75,7 @@ public class FrameEngine extends ApplicationAdapter {
 	private static final float TRANSITION_END_TIME = TRANSITION_TIME - TRANSITION_CHANGE_TIME;
 	private static Timer 
 	time = new Timer(0),
+	cocoa = new Timer(1560),
 	transition = new Timer((int)TRANSITION_TIME);
 	private static ArrayList<Timer> timers = new ArrayList<Timer>(Arrays.asList(
 			time, transition
@@ -79,12 +86,13 @@ public class FrameEngine extends ApplicationAdapter {
 	public static final Logger logger = Logger.getLogger("ERROR_LOG");
 	public static DebugMenu debugMenu;
 	public static GraphicsHandler graphicsHandler;
-	public static boolean snailActive = true;
+	public static boolean snailActive = true, mailToRead = false, cocoaTime = false;
 
 	public static final Vector2 resolution = new Vector2(TILE * 18/GraphicsHandler.ZOOM, TILE * 12/GraphicsHandler.ZOOM);
 	public static final Vector2 newPosition = new Vector2(TILE * 32, TILE * 32);
 	public static Direction newDirection = Direction.ANY;
 	public static float elapsedTime = 0;
+	public static int testCounter = 0;
 
 	@Override
 	public void create() {
@@ -192,6 +200,10 @@ public class FrameEngine extends ApplicationAdapter {
 		if (canUpdateEntities()){
 			progressionHandler.update();
 			EntityHandler.update();
+			cocoa.countUp();
+			if (cocoa.timeUp() && cocoaTime) {
+				endCocoaTime();
+			}
 		}
 		else{
 			EntityHandler.updateImages();
@@ -283,8 +295,7 @@ public class FrameEngine extends ApplicationAdapter {
 	private void updateMailbox() {
 		graphicsHandler.drawTitle();
 		playerWalk(Walk.NONE);
-		graphicsHandler.drawMenu(mailbox);
-		graphicsHandler.drawLetter(mailbox);
+		graphicsHandler.drawMailbox(mailbox);
 		mailbox.update();
 	}
 
@@ -341,12 +352,25 @@ public class FrameEngine extends ApplicationAdapter {
 				gameState = GameState.INVENTORY;
 				AudioHandler.playSoundVariedPitch(AbstractMenu.closeMap);
 			}
+			else if (gameState == GameState.MAILBOX) {
+				Player.setImageState(ImageState.NORMAL);
+				gameState = GameState.MAIN;
+				AudioHandler.playSoundVariedPitch(AbstractMenu.stopCursor);
+			}
 		}
 		if (inputHandler.getActionJustPressed()) {
 			handleActionPressed();
 		}
 		if (DEBUG && inputHandler.getDebugJustPressed()){
 			gameState = GameState.DEBUG;
+		}
+		if (inputHandler.getPlusPressed()) {
+			testCounter++;
+			System.out.println(testCounter);
+		}
+		if (inputHandler.getMinusPressed()) {
+			testCounter--;
+			System.out.println(testCounter);
 		}
 	}
 
@@ -442,6 +466,7 @@ public class FrameEngine extends ApplicationAdapter {
 		graphicsHandler.startArea();
 		time.reset();
 		player.setDirection(newDirection);
+		player.reset();
 		newDirection = Direction.ANY;
 		if (inventory.hasItem("SNAIL") && snailActive){
 			activateSnail();
@@ -487,14 +512,19 @@ public class FrameEngine extends ApplicationAdapter {
 
 	private static void mainMenuToGame(){
 		saveFile = new SaveFile(LOG);
+		final int walkDist = 18;
 		if (saveFile.getFlag(SaveFile.CREDITS)){
+			if (saveFile.getFlag("FROST_ACTIVE")) {
+				saveFile.startArea = "FROST_FOREST";
+			}
 			saveFile.setFlag("CREDITS", false);
-			player.walkRight(18);
+			player.walkRight(walkDist);
 		}
 		if (!saveFile.exists()){
 			saveFile.startPosition.set(0.5f, 26f);
-			saveFile.startArea = "FOREST";
-			player.walkRight(18);
+			saveFile.startArea = FROST ? "FROST_FOREST" : "FOREST";
+			if (FROST) saveFile.setFlag("FROST_ACTIVE");
+			player.walkRight(walkDist);
 		}
 		gameState = GameState.OVERWORLD;
 		newArea = new Area(saveFile.startArea);
@@ -531,6 +561,15 @@ public class FrameEngine extends ApplicationAdapter {
 		else{
 			gameState = GameState.MAIN;
 		}
+		//cocoaCalamity();
+	}
+	
+	public static void cocoaCalamity() {
+		if (!getInventory().removeItem("COCOAHOT")) {
+			logger.log(Level.SEVERE, "COCOA COULDN'T BE FOUND TO REMOVE!?");
+		}
+		getInventory().addItem("COCOACOLD");
+		cocoa.end();
 	}
 
 	public static void startSaveConfirmationMenu() {
@@ -558,6 +597,9 @@ public class FrameEngine extends ApplicationAdapter {
 		saveFile.save(true);
 		newArea = new Area("PATH");
 		changeArea();
+		if (saveFile.getFlag("GOT_ALL_TREASURES")) {
+			saveFile.setFlag("FROST_ACTIVE");
+		}
 		gameState = GameState.CREDITS;
 		AudioHandler.startNewAudio("music/johnnoodle.ogg", false);
 	}
@@ -631,6 +673,7 @@ public class FrameEngine extends ApplicationAdapter {
 
 	public static void checkMail() {
 		mailbox.open();
+		Player.setImageState(ImageState.READ);
 		gameState = GameState.MAILBOX;
 	}
 
@@ -687,7 +730,7 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	public static boolean canControlPlayer(){
-		return null == getCurrentTextbox() && canUpdateEntities();
+		return null == getCurrentTextbox() && canUpdateEntities() && player.canControl();
 	}
 
 	public static boolean inTransition(){
@@ -775,6 +818,27 @@ public class FrameEngine extends ApplicationAdapter {
 
 	public static boolean canSelectMenuItem() {
 		return gameState == GameState.INVENTORY;
+	}
+	
+	public static void startCocoaTimer() {
+		cocoaTime = true;
+		cocoa.reset();
+	}
+	
+	public static void endCocoaTime() {
+		cocoaTime = false;
+		if (inventory.hasItem("COCOAHOT")) {
+			startDialogueTree(new DialogueTree(null, "cocoa_cold"));
+		}
+	}
+
+	public static void coffeeBoost() {
+		gameState = GameState.OVERWORLD;
+		player.coffeeBoost();
+	}
+
+	public static boolean isCocoaTime() {
+		return cocoaTime && gameState == GameState.OVERWORLD;
 	}
 
 }

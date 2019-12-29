@@ -1,0 +1,8 @@
+*TALK_CUSTOMER2_FROST
+Brrrr... This cold isn't good for these old bones. 
+Say, young one, have you seen Leslie around? 
+I've seen various people come and go, but she seems to have left and not come back. I hope she's doing okay.
+&TALK_CUSTOMER2_FROST
+She's always been a bit of a quiet girl, that Leslie.
+I never know what's going on in her head...
+Not that there's much going on in mine! [ANIM_1]Hohoho!

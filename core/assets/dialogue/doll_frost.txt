@@ -1,0 +1,9 @@
+*TALK_DOLL_FROST
+Strange, ain't it? This weather...
+[ANIM_1]Guess we're gettin' the cold shoulder! Yuk yuk yuk!
+[SPEAKER=CLIFF][ANIM_1]Your horrible puns are breaking my concentration...
+[SPEAKER=GRUBLOVE][ANIM_0]Oops. I'll shut up.
+&TALK_DOLL_FROST
+I, uh...
+I really hope it ends soon. People ain't too happy, y'know?
+But it's times like these where you gotta keep a grin on your face.

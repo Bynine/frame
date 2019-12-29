@@ -1,0 +1,6 @@
+*TALK_CLIFF_FROST
+I don't understand it...
+[ANIM_1]There has to be some way to end this winter. There just has to.
+&TALK_CLIFF_FROST
+I'm racking my brain...
+Maybe a really big candle?

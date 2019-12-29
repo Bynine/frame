@@ -1,5 +1,5 @@
 PLACEHOLDER	Placeholder	bup	TRUE	1	45
-
+					
 SHOPKEEPER	Shopkeeper	bup	TRUE	1	30
 FREB	Freb	croak	TRUE	1	30
 WESTERN	Tall Stranger	bup	TRUE	2	30
@@ -34,3 +34,6 @@ KITTY	Kitty	mih	FALSE	1	45
 FREBLOVE	Intense Statue	subtle	TRUE	1	30
 GRUBLOVE	Patchwork Doll	chipper	TRUE	1	30
 SNAIL	Helpful Snail	bup	TRUE	1	30
+ARTIST_SNOW	Strange Snowman	bup	FALSE	1	30
+CAPYBARA1	Capybara	bup	FALSE	1	45
+CAPYBARA2	Capybara	bup	FALSE	1	45

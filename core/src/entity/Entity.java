@@ -1,7 +1,9 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -21,22 +23,24 @@ public abstract class Entity {
 	protected final TextureRegion sample = new TextureRegion(new Texture("sprites/npcs/dummy.png"));
 	protected final Rectangle hitbox = new Rectangle(0, 0, 28, 18);
 	protected final ArrayList<Timer> timerList = new ArrayList<Timer>();
-	protected float acceleration = 1.02f;
+	protected float acceleration = 1.04f;
 	protected float corner_acceleration = 0.35f;
 	protected float friction = 0.69f;
 	protected float contact_friction = 0.92f;
-	protected float ice_acceleration = 0.23f;
+	protected float ice_acceleration = 0.22f;
 	protected float ice_friction = 0.906f;
 	protected float ice_corner_acceleration = 0.09f;
-	protected boolean on_ice = false;
+	protected float water_acceleration = 0.64f;
+	protected boolean on_ice = false, in_water = false;
 	
+	@SuppressWarnings("serial")
 	protected final HashMap<Integer, String> numToWordMap = new HashMap<Integer, String>(){{
 		put(0, "None");
 		put(1, "One");
 		put(2, "Two");
 		put(3, "Three");
 		put(4, "Four");
-		put(4, "Five");
+		put(5, "Five");
 	}};
 
 	/**
@@ -104,8 +108,8 @@ public abstract class Entity {
 	 */
 	protected void updateVelocity(){
 		final float minVelocity = 0.01f;
-		if (onSlope && (velocity.y > 0 || velocity.y < -1.8f)){
-			velocity.y -= getFrameFriction(0.28f);
+		if (onSlope && (on_ice || velocity.y > 0 || velocity.y < -1.8f)){
+			velocity.y -= getFrameFriction(0.32f);
 		}
 		if (Math.abs(velocity.x) < minVelocity) velocity.x = 0;
 		if (Math.abs(velocity.y) < minVelocity) velocity.y = 0;
@@ -327,8 +331,8 @@ public abstract class Entity {
 		return velocity;
 	}
 
-	public Rectangle getHitbox(){
-		return hitbox;
+	public List<Rectangle> getHitboxes(){
+		return new ArrayList<Rectangle>(Arrays.asList(hitbox));
 	}
 
 	public Layer getLayer() {
@@ -344,7 +348,8 @@ public abstract class Entity {
 	}
 
 	public TextureRegion getShadow() {
-		return shadow;
+		if (in_water) return null;
+		else return shadow;
 	}
 
 	public boolean collides() {

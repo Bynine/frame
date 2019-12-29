@@ -14,8 +14,8 @@ public class Artist extends NPC {
 	private final Timer whistleTimer = new Timer(45);
 	private boolean happy;
 
-	public Artist(float x, float y, int interactXDisp, int interactYDisp, int width, int height) {
-		super(x, y, interactXDisp, interactYDisp, width, height, "ARTIST", "artist", "artist", Layer.NORMAL);
+	public Artist(float x, float y, int interactXDisp, int interactYDisp, int width, int height, String imagePath, String dialoguePath) {
+		super(x, y, interactXDisp, interactYDisp, width, height, "ARTIST", imagePath, dialoguePath, Layer.NORMAL);
 		if (FrameEngine.getSaveFile().getCounter(Flower.grownFlowers) > 0){
 			FrameEngine.getSaveFile().setFlag("GROWN_ENOUGH_FLOWERS", true);
 		}
@@ -37,6 +37,7 @@ public class Artist extends NPC {
 		}
 	}
 	
+	@SuppressWarnings("serial")
 	public void interact(){
 		FrameEngine.startDialogueTree(
 				new DialogueTree(this, "artist", new HashMap<String, String>(){{

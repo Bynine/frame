@@ -1,6 +1,7 @@
 KEEPSAKE	rations	NONE	Dry, tasteless food	0
 GOAL	Seed of Hope	NONE	Save this to use when you return	0
-ACORN	acorn	NONE	Uh oh	1
+FLAME	Flame of Will	NONE	It holds an unending warmth	0
+ACORN	acorn	NONE	How did this fall into your bag?	1
 				
 TREASURE1	Golden Shell	TREASURE	Pretty but too heavy to wear	1
 TREASURE2	Ancient Shield	TREASURE	Cracked and scarred. It has a hawk insignia	1
@@ -8,9 +9,12 @@ TREASURE3	Knitted Sweater	TREASURE	Just your size and very warm	1
 TREASURE4	Pumpkin Cupcake	TREASURE	Pumpkin frosted muffin with a gooey chocolate center	1
 TREASURE5	Nice Painting	TREASURE	A painting of you, planting a flower!	1
 TREASURE6	Ragged Doll	TREASURE	Well loved plush doll with a familiar design	1
-				
+
 SHOVEL	shovel	NONE	Unsurprisingly good at digging	3
 WATERINGCAN	watering can	NONE	Give seeds a nice drink	3
+HAMMER	hammer	NONE	Sturdy old hammer	0
+COFFEE	Super Espresso	NONE	Use to zip forward!	0
+BOOK	ancient book	NONE	Touching it lets you read old text	0
 				
 SHELL1	nice shell	SHELL	The red color is charming	2
 SHELL2	cool shell	SHELL	The yellow color is soothing	2
@@ -34,10 +38,13 @@ GHOST	ghost	NONE	GHOST	0
 SNAIL	Helpful Snail	NONE	Tells you about items you've missed. Press to toggle!	1
 MAP	Wabika map	NONE	Map of Wabika. Press to view!	0
 
-KEY	key	NONE	Looks old but still usable	0
-				
-APPLE	apple	FOOD,SWEET	Yummy and juicy	1
-MUSHROOM	mushroom	NATURAL	Pleasantly shaped toadstool	1
-BAIT	bait	NONE	Attracts fish	4
-PUMPKIN	pumpkin	FOOD	Great for pies	1
-BOTTLE	bottled letter	NONE	Go HERE	1
+COCOAHOT	pipin' hot cocoa	HOT	Cup of steaming hot cocoa. Move quick!	0
+COCOACOLD	cold cocoa	NONE	It's gone cold...	0
+FOOD	lunch	NONE	Tasty lunch packed with care in cloth	0
+
+PIECE1	odd shard	SHARD	Shard	1
+PIECE2	weird shard	SHARD	Shard	1
+PIECE3	strange shard	SHARD	Shard	1
+
+KEY1	key	KEY	Looks old but still usable	0
+KEY2	key	KEY	Looks old but still usable	0

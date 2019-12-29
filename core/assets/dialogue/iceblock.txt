@@ -1,0 +1,8 @@
+This chunk of ice seems fragile.
+&ITEM_HAMMER
+This chunk of ice seems fragile. Hit it with your hammer?
+>YES,NO
+<YES
+[SHATTER]Take that!
+<NO
+You decide to leave well enough alone.

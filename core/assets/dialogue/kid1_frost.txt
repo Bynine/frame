@@ -1,0 +1,4 @@
+*TALK_KID1_FROST
+Hey! Hi! Wanna have a snowball fight?
+&TALK_KID1_FROST
+Nobody wants to snowball fight with me anymore! I think it's 'cause they're scared they'll lose!

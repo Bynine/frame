@@ -76,6 +76,8 @@ public class GraphicsHandler {
 	logo = new TextureRegion(new Texture("sprites/gui/logo.png")),
 	snailOn = new TextureRegion(new Texture("sprites/gui/snail_on.png")),
 	snailOff = new TextureRegion(new Texture("sprites/gui/snail_off.png")),
+	letterClosed = new TextureRegion(new Texture("sprites/gui/letter.png")),
+	letterOpen = new TextureRegion(new Texture("sprites/gui/letter_open.png")),
 	map = new TextureRegion(new Texture("sprites/gui/map.png")),
 	interactBubble = new TextureRegion(new Texture("sprites/player/interact.png")),
 	surpriseBubble = new TextureRegion(new Texture("sprites/player/surprise.png")),
@@ -94,8 +96,11 @@ public class GraphicsHandler {
 	final float blackG = 29.0f/255.0f;
 	final float blackB = 39.0f/255.0f;
 
-	private static TextureRegion overlay = new TextureRegion(new Texture("sprites/gui/watercolor_dim.png"));
-	private static TextureRegion water = new TextureRegion(new Texture("sprites/graphics/water.png"));
+	private static TextureRegion 
+		overlay = new TextureRegion(new Texture("sprites/gui/watercolor_dim.png")),
+		water = new TextureRegion(new Texture("sprites/graphics/water.png")),
+		overcast = new TextureRegion(new Texture("sprites/graphics/overcast.png")),
+		mountainsky = new TextureRegion(new Texture("sprites/graphics/mountainsky.png"));
 
 	GraphicsHandler(){
 		batch = new SpriteBatch();
@@ -240,7 +245,19 @@ public class GraphicsHandler {
 
 	private void drawWater(){
 		batch.begin();
-		if (FrameEngine.getArea().sky) drawByTiles(water, true);
+		if (FrameEngine.getArea().sky) {
+			TextureRegion sky;
+			if (FrameEngine.getArea().id.equals("MOUNTAIN")) {
+				sky = FrameEngine.getSaveFile().getFlag("FOUND_FLAME") ? mountainsky : overcast;
+			}
+			else {
+				sky = FrameEngine.getArea().frost ? overcast : water;
+			}
+			drawByTiles(
+					sky, 
+					sky == water ? false : true
+			);
+		}
 		if (!FrameEngine.getArea().frost) {
 			batch.draw(Player.ripple,
 					FrameEngine.getPlayer().getPosition().x,
@@ -476,9 +493,8 @@ public class GraphicsHandler {
 	void drawItems(AbstractMenu menu, boolean price){
 		batch.setProjectionMatrix(centerCam.combined);
 		int ii = 0;
-		int cursor = menu.getCursor();
-		int stipend = Math.max( 0, (4 * ((int)(cursor/4))) - 12 );
-		Vector2 range = new Vector2(stipend, stipend+16);
+		int stipend = menu.getPage() * Inventory.WIDTH;
+		Vector2 range = new Vector2(stipend, stipend + Inventory.WIDTH * Inventory.HEIGHT);
 		for (MenuOption button: menu.getList()){
 			if (range.x <= ii && range.y > ii){
 				ItemDescription desc = (ItemDescription)button.getOutput();
@@ -533,7 +549,7 @@ public class GraphicsHandler {
 	private void drawItemDescription(AbstractMenu menu, boolean price){
 		float itemBoxWidth = 6.0f;
 		final float moneyX = Gdx.graphics.getWidth()/(4/ZOOM) - (FrameEngine.TILE * 2.5f);
-		final float moneyY = menu.getButtonPosition(0).y + (FrameEngine.TILE * 2.5f);
+		final float moneyY = menu.getButtonPosition(0).y + (FrameEngine.TILE * 3.0f);
 		drawText(Integer.toString(FrameEngine.getSaveFile().getMoney()) + " ACORNS", 
 				new Vector2(moneyX, moneyY),
 				new Vector2(itemBoxWidth, 2),
@@ -961,13 +977,29 @@ public class GraphicsHandler {
 				new Vector2(8, 2), true);
 	}
 
-	public void drawLetter(Mailbox mailbox) {
-		String letter = mailbox.getActiveButton().getOutput().toString();
-		if (null != letter && !Mailbox.close.equals(letter)) {
-			drawText(letter,
-					new Vector2(Gdx.graphics.getWidth()/(1.8f/ZOOM), Gdx.graphics.getHeight()*ZOOM - (FrameEngine.TILE*2)), 
-					new Vector2(8, 2), true);
+	public void drawMailbox(Mailbox mailbox) {
+		int position = 0;
+		for (MenuOption button: mailbox.getList()){
+			boolean selected = position == mailbox.cursor;
+			@SuppressWarnings("unchecked")
+			ArrayList<TextureRegion> texs = (ArrayList<TextureRegion>) button.getOutput();
+			Vector2 pos = mailbox.getButtonPosition(position);
+			drawText("", "", pos,
+					(new Vector2(
+							button.getDimensions().x, 
+							button.getDimensions().y)),
+					true,
+					selected
+					);
+			batch.begin();
+			batch.draw(
+					button.getProperties().containsKey(Mailbox.OPENED) ? letterOpen : letterClosed, 
+					pos.x + FrameEngine.TILE/2, pos.y + FrameEngine.TILE/2);
+			if (selected) batch.draw(texs.get(0), FrameEngine.TILE * 10, FrameEngine.TILE * 1);
+			batch.end();
+			position++;
 		}
+		drawEnterToExit();
 	}
 
 }

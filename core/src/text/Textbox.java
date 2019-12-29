@@ -1,7 +1,6 @@
 package text;
 
 import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 
@@ -142,6 +141,13 @@ public class Textbox {
 		}
 		if (command.getID().equals("PAUSE")){
 			textTimer.change(-24);
+		}
+		else if (command.getID().equals("COCOA_BEGIN")) {
+			FrameEngine.getInventory().removeItem("COCOACOLD");
+			FrameEngine.startCocoaTimer();
+		}
+		else if (command.getID().equals("COCOA_CALAMITY")){
+			FrameEngine.cocoaCalamity();
 		}
 		else if (command.getID().equals("GHOST_LESLIE")){
 			FrameEngine.getSaveFile().setFlag("GHOST_LESLIE", true);

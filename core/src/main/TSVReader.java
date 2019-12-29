@@ -18,7 +18,8 @@ public class TSVReader {
 	MAP_URL = "data/maps.tsv",
 	NPC_URL = "data/npcs.tsv",
 	ITEM_URL = "data/items.tsv",
-	QUESTION_URL = "data/questions.tsv"
+	QUESTION_URL = "data/questions.tsv",
+	LETTER_URL = "data/letters.tsv"
 	;
 
 	private String data = null;

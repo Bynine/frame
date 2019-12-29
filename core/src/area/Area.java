@@ -2,6 +2,7 @@ package area;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.maps.MapObjects;
@@ -38,7 +39,13 @@ public class Area {
 		String[] data = new TSVReader().loadDataByID(id, TSVReader.MAP_URL);
 		music = "music/" + data[2] + ".ogg";
 		cameraFixed = Boolean.parseBoolean(data[3].toLowerCase());
-		overlayString = data[4].toLowerCase();
+		final boolean happyMountain = id.equals("MOUNTAIN") && FrameEngine.getSaveFile().getFlag("FOUND_FLAME");
+		if (happyMountain) {
+			overlayString = "bright";
+		}
+		else {
+			overlayString = data[4].toLowerCase();
+		}
 		String[] locationData = data[5].split("&");
 		sky = Boolean.parseBoolean(data[6].toLowerCase());
 		startLocation.set(
@@ -50,7 +57,7 @@ public class Area {
 		mapHeight = getMap().getProperties().get("height", Integer.class) * FrameEngine.TILE;
 		lightColor = getColor(data[7]);
 		reverb = Boolean.parseBoolean(data[8]);
-		frost = id.startsWith("FROST_");
+		frost = id.startsWith("FROST_") || (id.equals("MOUNTAIN") && !happyMountain);
 		
 		setCollision();
 		setMapSlopes();
@@ -63,9 +70,9 @@ public class Area {
 		case "GREY": return new Color(185f/255f, 188f/255f, 189f/255f, 0.54f);
 		case "COLD": return new Color(183f/255f, 229f/255f, 213f/255f, 0.66f);
 		case "BRIGHT": return new Color(203f/255f, 219f/255f, 213f/255f, 0.88f);
+		case "WHITE": return new Color(0.99f, 0.99f, 0.99f, 0.66f);
 		default: return new Color(1, 1, 1, 0.6f);
 		}
-		
 	}
 	
 	/**
@@ -107,9 +114,11 @@ public class Area {
 	 * Adds an entity's hitbox to the map collision.
 	 */
 	public void addToCollision(Entity en) {
-		Rectangle hitbox = en.getHitbox();
-		hitboxCollision.put(en, hitbox);
-		areaCollision.add(hitbox);
+		List<Rectangle> hitboxes = en.getHitboxes();
+		for (Rectangle hitbox: hitboxes) {
+			hitboxCollision.put(en, hitbox);
+			areaCollision.add(hitbox);
+		}
 	}
 	
 	/**
@@ -124,7 +133,7 @@ public class Area {
 	}
 	
 	public Terrain getTerrain(Entity en){
-		Rectangle hitbox = new Rectangle(en.getHitbox());
+		Rectangle hitbox = new Rectangle(en.getHitboxes().get(0));
 		final int reduction = 6;
 		hitbox.width -= reduction;
 		hitbox.height -= reduction;
@@ -155,7 +164,7 @@ public class Area {
 	}
 	
 	public enum Terrain{
-		NORMAL, WOOD, WATER, STONE, SNOW, ICE
+		NORMAL, WOOD, WATER, STONE, SNOW, ICE, DEEP_WATER
 	}
 
 	public void dispose() {

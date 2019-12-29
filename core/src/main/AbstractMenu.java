@@ -118,5 +118,9 @@ public abstract class AbstractMenu {
 	public void open(){
 		cursor = 0;
 	}
+	
+	public int getPage() {
+		return 0;
+	}
 
 }

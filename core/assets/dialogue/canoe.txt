@@ -1,0 +1,6 @@
+Take a ride in this canoe?
+>YES,NO
+<YES
+[ENTER]
+<NO
+You decide that canoes are for losers.

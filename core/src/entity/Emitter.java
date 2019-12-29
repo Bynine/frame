@@ -22,6 +22,7 @@ public class Emitter extends ImmobileEntity{
 	private final int duration;
 	private final HashSet<Graphic> graphics = new HashSet<>();
 	private final String graphicName;
+	private boolean enabled = true;
 
 	public Emitter(float x, float y, int interval, int duration, String graphicPath) {
 		super(x, y);
@@ -37,7 +38,7 @@ public class Emitter extends ImmobileEntity{
 	@Override
 	public void update(){
 		super.update();
-		if (intervalTimer.timeUp()){
+		if (intervalTimer.timeUp() && enabled){
 			intervalTimer.reset(-(int)(Math.random() * intervalTimer.getEndTime())/5);
 			graphics.add(new Graphic(this, duration));
 		}
@@ -45,7 +46,7 @@ public class Emitter extends ImmobileEntity{
 		while (graphicIter.hasNext()){
 			Graphic graphic = graphicIter.next();
 			graphic.life.countUp();
-			if (graphicName.equals("smoke")){
+			if (graphicName.equals("smoke") || graphicName.equals("steam")){
 				graphic.position.x += 
 						Math.cos( (FrameEngine.getTime() + graphic.life.getCounter())/20.0f) 
 						* 2 * Math.random() * FrameEngine.elapsedTime;
@@ -62,6 +63,12 @@ public class Emitter extends ImmobileEntity{
 						2 + (2 * Math.cos( (FrameEngine.getTime() + graphic.life.getCounter())/20.0f)) 
 						* FrameEngine.elapsedTime * Math.random();
 				graphic.position.y -= 0.75f * FrameEngine.elapsedTime;
+			}
+			else if (graphicName.startsWith("snow")){
+				graphic.position.x -= 
+						2 + (2 * Math.cos( (FrameEngine.getTime() + graphic.life.getCounter())/8.0f)) 
+						* FrameEngine.elapsedTime * Math.random();
+				graphic.position.y -= 2.85f * FrameEngine.elapsedTime;
 			}
 			if (graphic.life.timeUp()){
 				graphicIter.remove();
@@ -85,6 +92,10 @@ public class Emitter extends ImmobileEntity{
 	@Override
 	public void dispose() {
 		Animator.freeAnimation(graphicAnimation);
+	}
+	
+	public void setEnabled(boolean enab) {
+		enabled = enab;
 	}
 	
 	/**

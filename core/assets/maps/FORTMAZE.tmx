@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="36" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="16" nextobjectid="361">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="36" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="16" nextobjectid="361">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/fort_interior.tsx"/>
  <tileset firstgid="73" source="tilesets/light.tsx"/>
@@ -143,13 +143,13 @@
 9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
 </data>
  </layer>
- <objectgroup id="5" name="SLOPES">
+ <objectgroup id="5" name="SLOPES" visible="0">
   <object id="359" x="608" y="64" width="64" height="64"/>
  </objectgroup>
- <objectgroup color="#32e3c6" id="6" name="TERRAIN">
+ <objectgroup color="#32e3c6" id="6" name="TERRAIN" visible="0">
   <object id="345" name="stone" x="0" y="0" width="1152" height="768"/>
  </objectgroup>
- <objectgroup color="#7a9e26" id="15" name="COLLISION" opacity="0.83">
+ <objectgroup color="#7a9e26" id="15" name="COLLISION" visible="0" opacity="0.83">
   <object id="300" x="0" y="0" width="96" height="96"/>
   <object id="301" x="96" y="0" width="512" height="128"/>
   <object id="302" x="1056" y="0" width="96" height="96"/>
@@ -185,7 +185,7 @@
   <object id="344" x="672" y="0" width="384" height="128"/>
   <object id="356" x="608" y="704" width="448" height="64"/>
  </objectgroup>
- <objectgroup id="8" name="ENTITIES" opacity="0.64">
+ <objectgroup id="8" name="ENTITIES" visible="0" opacity="0.64">
   <object id="346" gid="5" x="-1152" y="800" width="32" height="32">
    <properties>
     <property name="TYPE" value="MOVELIGHT"/>

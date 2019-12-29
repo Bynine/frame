@@ -44,6 +44,7 @@ public class Freb extends NPC {
 		sadChirpTimer.end();
 	}
 	
+	@SuppressWarnings("serial")
 	@Override
 	public void interact(){
 		if (hasShell()){
@@ -51,10 +52,10 @@ public class Freb extends NPC {
 		}
 		else{
 			FrameEngine.startDialogueTree(
-					new DialogueTree(this, "freb", new HashMap<String, String>(){{
-						put("SHELL_FREB_FLAG", flag);
-						}})
-					);
+				new DialogueTree(this, "freb", new HashMap<String, String>(){{
+					put("SHELL_FREB_FLAG", flag);
+					}})
+				);
 		}
 	}
 

@@ -18,7 +18,7 @@ public class DesktopLauncher {
 		config.resizable = false;
 		config.addIcon("sprites/icon16.png", FileType.Classpath);
 		config.addIcon("sprites/icon32.png", FileType.Classpath);
-		config.title = "Forest's Secret";
+		config.title = "Forest's Secret (Final)";
 		System.setProperty("org.lwjgl.opengl.Display.allowSoftwareOpenGL", "true");
 		if (FrameEngine.WINDOW) {
 			config.x = 500;

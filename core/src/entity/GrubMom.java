@@ -36,6 +36,7 @@ public class GrubMom extends NPC {
 		
 	}
 	
+	@SuppressWarnings("serial")
 	@Override
 	public void interact(){
 		FrameEngine.startDialogueTree(

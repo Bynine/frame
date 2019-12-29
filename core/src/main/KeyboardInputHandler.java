@@ -148,4 +148,14 @@ public class KeyboardInputHandler implements InputHandler, InputProcessor {
 		return false;
 	}
 
+	@Override
+	public boolean getPlusPressed() {
+		return Gdx.input.isKeyPressed(Keys.P);
+	}
+
+	@Override
+	public boolean getMinusPressed() {
+		return Gdx.input.isKeyPressed(Keys.I);
+	}
+
 }

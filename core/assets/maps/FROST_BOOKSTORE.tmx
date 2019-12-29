@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="287">
+ <tileset firstgid="1" source="tilesets/objects.tsx"/>
+ <tileset firstgid="9" source="tilesets/shop.tsx"/>
+ <tileset firstgid="265" source="tilesets/bookstore_frost.tsx"/>
+ <tileset firstgid="345" source="tilesets/light.tsx"/>
+ <tileset firstgid="417" source="tilesets/shop_frost.tsx"/>
+ <layer id="1" name="FLOOR" width="25" height="16">
+  <data encoding="csv">
+27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,0,0,0,0,0,0,0,0,0,0,0,0,0,27,27,27,27,27,0,
+27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,27,27,14,14,14,14,14,14,14,27,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,13,14,15,30,30,30,30,30,30,30,13,14,15,27,27,27,27,27,0,
+27,27,27,27,27,27,29,30,31,10,11,11,11,11,11,12,29,30,31,27,27,27,27,27,0,
+27,27,27,27,27,27,10,269,270,270,270,270,270,270,270,270,270,271,12,27,27,27,27,27,0,
+27,27,27,27,27,27,26,285,286,272,286,286,272,272,286,286,272,287,28,27,27,27,27,27,0,
+27,27,27,27,27,27,26,301,302,302,302,302,302,302,302,302,302,303,28,27,27,27,27,27,0,
+27,27,27,27,27,27,26,27,27,27,27,27,27,59,27,27,27,43,44,27,27,27,27,27,0,
+27,27,27,27,27,27,27,26,27,27,27,27,27,27,27,27,28,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,26,27,27,27,27,27,27,27,27,28,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0,
+27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,0
+</data>
+ </layer>
+ <layer id="2" name="MIDDLE" width="25" height="16">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,273,274,275,0,276,277,278,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,266,267,268,289,290,291,0,292,293,294,0,418,419,0,0,0,0,0,0,
+0,0,0,0,0,0,282,283,284,305,306,307,0,308,309,310,0,426,427,0,0,0,0,0,0,
+0,0,0,0,0,0,298,299,300,0,0,0,0,0,0,0,329,330,288,0,0,0,0,0,0,
+0,0,0,0,0,0,0,319,0,0,0,331,332,333,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,304,0,297,0,0,0,0,0,0,
+0,0,0,0,0,0,160,0,0,0,0,27,0,27,0,0,0,0,144,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,58,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="3" name="ABOVE" width="25" height="16">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,313,314,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,315,316,317,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="9" name="LIGHT" width="25" height="16">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,365,366,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,373,374,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,409,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="4" name="OVERHEAD" width="25" height="16">
+  <data encoding="csv">
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,0,0,0,0,0,0,0,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,
+9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,
+9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,
+9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,
+9,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,
+9,9,9,9,9,9,0,0,137,140,139,0,0,0,140,138,140,0,0,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+</data>
+ </layer>
+ <objectgroup id="5" name="SLOPES" visible="0"/>
+ <objectgroup color="#50734a" id="6" name="COLLISION" visible="0" opacity="0.5">
+  <object id="239" x="424" y="192" width="88" height="24"/>
+  <object id="241" x="192" y="0" width="96" height="224"/>
+  <object id="242" x="288" y="0" width="224" height="192"/>
+  <object id="243" x="512" y="0" width="96" height="224"/>
+  <object id="245" x="0" y="0" width="192" height="512"/>
+  <object id="250" x="608" y="0" width="192" height="512"/>
+  <object id="253" x="512" y="224" width="64" height="32"/>
+  <object id="257" x="192" y="224" width="88" height="24"/>
+  <object id="258" x="288" y="192" width="88" height="24"/>
+  <object id="259" x="352" y="256" width="96" height="24"/>
+  <object id="264" x="192" y="352" width="192" height="160"/>
+  <object id="265" x="416" y="352" width="192" height="160"/>
+  <object id="266" x="384" y="384" width="32" height="128"/>
+  <object id="267" x="256" y="344" width="96" height="8"/>
+  <object id="268" x="448" y="344" width="96" height="8"/>
+  <object id="273" x="576" y="224" width="32" height="32"/>
+  <object id="276" x="192" y="320" width="32" height="32"/>
+  <object id="284" x="576" y="320" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup color="#32e3c6" id="7" name="TERRAIN" visible="0">
+  <object id="224" name="wood" x="0" y="0" width="224" height="512"/>
+  <object id="278" name="wood" x="224" y="0" width="384" height="224"/>
+  <object id="279" name="wood" x="224" y="320" width="384" height="192"/>
+  <object id="280" name="wood" x="576" y="0" width="224" height="512"/>
+ </objectgroup>
+ <objectgroup id="8" name="ENTITIES" opacity="0.64">
+  <object id="172" name="portal" gid="6" x="384" y="384" width="32" height="32">
+   <properties>
+    <property name="DEST" value="FROST_FOREST,74.5,19"/>
+    <property name="DOOR" value=""/>
+    <property name="TYPE" value="PORTAL"/>
+   </properties>
+  </object>
+  <object id="190" name="shrine" gid="1" x="304" y="216" width="64" height="32">
+   <properties>
+    <property name="TEXT" value="All the books are in disarray."/>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="226" name="recipe" gid="1" x="208" y="248" width="64" height="32">
+   <properties>
+    <property name="TEXT" value="All the books are in disarray."/>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="227" name="religious" gid="1" x="432" y="216" width="64" height="32">
+   <properties>
+    <property name="TEXT" value="All the books are in disarray."/>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="233" name="chair" gid="1" x="520" y="256" width="48" height="40">
+   <properties>
+    <property name="TEXT" value="The seat is too high for you to get up on. Darn!"/>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="263" name="statuette" gid="1" x="416" y="272" width="24" height="24">
+   <properties>
+    <property name="DIALOGUE" value="statuette1"/>
+    <property name="TYPE" value="DIALOGUEDESC"/>
+   </properties>
+  </object>
+  <object id="269" name="fish painting" gid="1" x="384" y="192" width="32" height="48">
+   <properties>
+    <property name="ID" value="fish"/>
+    <property name="TEXT">A resplendant portrait of a very handsome man.
+His cravat is slightly damp.</property>
+    <property name="TYPE" value="PAINTING"/>
+   </properties>
+  </object>
+  <object id="270" name="kamibook" gid="1" x="368" y="272" width="32" height="24">
+   <properties>
+    <property name="TEXT">The book reads as follows.
+&quot;Though powerful, the Kami has their flaws.
+They must sleep during the winter to restore their power.
+The shrine is not open to visitors during the winter as a result.&quot;</property>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="281" name="librarian" gid="1" x="280" y="288" width="40" height="40">
+   <properties>
+    <property name="DIALOGUE" value="librarian_frost"/>
+    <property name="ID" value="LIBRARIAN"/>
+    <property name="IMAGE" value="librarian_hungry"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="283" name="instrument" gid="5" x="576" y="256" width="32" height="32">
+   <properties>
+    <property name="SFX" value="weird"/>
+    <property name="TYPE" value="INSTRUMENT"/>
+   </properties>
+  </object>
+  <object id="285" name="firebook" gid="1" x="512" y="312" width="32" height="24">
+   <properties>
+    <property name="TEXT">The book reads as follows.
+&quot;The Flame of Will is the burning soul of Wabika.
+It is said that if it goes out, time will cease to flow, and Wabika will fall silent.&quot;</property>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="286" name="firebook" gid="1" x="224" y="288" width="32" height="24">
+   <properties>
+    <property name="TEXT">The book reads as follows.
+&quot;Mount Sabi sits on an island north of Wabika.
+Said to be where the Kami originated from, the mountain is perpetually coated in frost.
+Those who climb it must have enough energy to crest its steep, slippery slopes.
+If you can, visit the delightful hot spring near the base!&quot;</property>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

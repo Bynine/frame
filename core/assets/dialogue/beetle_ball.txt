@@ -1,0 +1,6 @@
+*TALK_BEETLE_BALL
+As beetles, we huddle together for warmth.
+Why are you out here by yourself in the cold, traveller?
+&TALK_BEETLE_BALL
+As beetles...
+We hope this frost ends soon.

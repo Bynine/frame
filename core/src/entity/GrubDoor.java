@@ -14,6 +14,7 @@ public class GrubDoor extends Door {
 		super(x, y, destination, destX, destY);
 	}
 
+	@SuppressWarnings("serial")
 	@Override
 	public void interact(){
 		grub1 = checkGrub(1);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="312">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="312">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/shop.tsx"/>
  <tileset firstgid="265" source="tilesets/shrine_interior.tsx"/>
@@ -132,11 +132,7 @@
   </object>
   <object id="284" name="statue" gid="1" x="384" y="208" width="32" height="32">
    <properties>
-    <property name="TEXT">The text on the statue reads as follows:
-&quot;Go back out into the land and look for those whose hearts are ailing.
-Bring back proof of the compassion you have brought to these denizens... 
-Then you may find what you are searching for.&quot;</property>
-    <property name="TYPE" value="DESC"/>
+    <property name="TYPE" value="HELP_STATUE"/>
    </properties>
   </object>
   <object id="289" name="trapdoor" gid="6" x="384" y="248" width="32" height="32">

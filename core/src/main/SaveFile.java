@@ -41,6 +41,9 @@ public class SaveFile {
 		if (FrameEngine.FGOAL) {
 			flags.put("FOUND_GOAL", true);
 		}
+		if (FrameEngine.FLAME) {
+			flags.put("FOUND_FLAME", true);
+		}
 		if (!FrameEngine.SAVE) return;
 		Preferences preferences = Gdx.app.getPreferences(saveFile);
 		exists = !preferences.get().isEmpty();
@@ -68,8 +71,15 @@ public class SaveFile {
 			String[] items = preferences.getString(inventoryKey).split(",");
 			for (String item: items){
 				if (!item.isEmpty()){
-					if (verbose) System.out.println("Added item: " + item);
-					FrameEngine.getInventory().addItemConditional(item);
+					if (verbose) {
+						if (FrameEngine.getInventory().addItemConditional(item)) {
+							System.out.println("Added item: " + item);
+						}
+						else {
+							System.out.println("Wouldn't add duplicate item: " + item);
+						}
+					}
+					
 				}
 			}
 		}
@@ -151,6 +161,13 @@ public class SaveFile {
 
 		preferences.flush();
 		if (verbose) System.out.println("Saved!");
+	}
+	
+	/**
+	 * Sets flag to true.
+	 */
+	public void setFlag(String flag) {
+		this.setFlag(flag, true);
 	}
 
 	/**

@@ -156,4 +156,16 @@ public class ControllerInputHandler implements InputHandler, ControllerListener{
 		return false;
 	}
 
+	@Override
+	public boolean getPlusPressed() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean getMinusPressed() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

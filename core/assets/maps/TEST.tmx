@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="240">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="242">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/shop.tsx"/>
  <layer id="1" name="FLOOR" width="25" height="16">
@@ -103,7 +103,9 @@
 </data>
  </layer>
  <objectgroup id="5" name="SLOPES"/>
- <objectgroup color="#32e3c6" id="6" name="TERRAIN"/>
+ <objectgroup color="#32e3c6" id="6" name="TERRAIN" visible="0">
+  <object id="240" name="water" x="8" y="0" width="792" height="568"/>
+ </objectgroup>
  <objectgroup color="#50734a" id="7" name="COLLISION" opacity="0.5">
   <object id="166" x="0" y="0" width="32" height="576"/>
   <object id="167" x="32" y="0" width="704" height="32"/>
@@ -170,37 +172,39 @@
   </object>
   <object id="235" name="fish" gid="4" x="336" y="128" width="32" height="32">
    <properties>
-    <property name="APPEAR" value="CAFE_REWARD"/>
     <property name="SPECIES" value="SMALL"/>
     <property name="TYPE" value="FISH"/>
    </properties>
   </object>
   <object id="236" name="fish" gid="4" x="336" y="160" width="32" height="32">
    <properties>
-    <property name="APPEAR" value="CAFE_REWARD"/>
     <property name="SPECIES" value="MEDIUM"/>
     <property name="TYPE" value="FISH"/>
    </properties>
   </object>
   <object id="237" name="fish" gid="4" x="336" y="192" width="32" height="32">
    <properties>
-    <property name="APPEAR" value="CAFE_REWARD"/>
     <property name="SPECIES" value="LARGE"/>
     <property name="TYPE" value="FISH"/>
    </properties>
   </object>
   <object id="238" name="fish" gid="4" x="336" y="224" width="32" height="32">
    <properties>
-    <property name="APPEAR" value="CAFE_REWARD"/>
     <property name="SPECIES" value="KOI"/>
     <property name="TYPE" value="FISH"/>
    </properties>
   </object>
   <object id="239" name="fish" gid="4" x="336" y="296" width="32" height="32">
    <properties>
-    <property name="APPEAR" value="CAFE_REWARD"/>
     <property name="SPECIES" value="GIANT"/>
     <property name="TYPE" value="FISH"/>
+   </properties>
+  </object>
+  <object id="241" name="food" gid="2" x="440" y="208" width="24" height="24">
+   <properties>
+    <property name="FLAG" value="fff"/>
+    <property name="ID" value="FOOD"/>
+    <property name="TYPE" value="ITEM"/>
    </properties>
   </object>
  </objectgroup>

@@ -8,53 +8,9 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
-import entity.Answer;
-import entity.Artist;
-import entity.AudioLocation;
-import entity.Bird;
-import entity.CameraTrigger;
-import entity.WildCat;
-import entity.Currency;
-import entity.Description;
-import entity.DialogueDescription;
-import entity.DialogueTrigger;
-import entity.Door;
-import entity.Emitter;
-import entity.Entity;
+import entity.*;
 import entity.Entity.Layer;
-import entity.Finish;
-import entity.Fire;
-import entity.Flower;
-import entity.Freb;
-import entity.FrebKing;
-import entity.Glimmer;
-import entity.Goal;
-import entity.Grass;
-import entity.GrubDoor;
-import entity.GrubMom;
-import entity.Instrument;
-import entity.Secret;
-import entity.Shopkeeper;
-import entity.Item;
-import entity.ItemHole;
-import entity.Fish;
-import entity.Leslie;
-import entity.Memorial;
-import entity.MoveLight;
-import entity.NPC;
-import entity.Painting;
-import entity.Portal;
 import entity.Portal.Direction;
-import entity.PortalHole;
-import entity.Pumpkin;
-import entity.PumpkinCarve;
-import entity.QuestionTrigger;
-import entity.SaleSign;
-import entity.ShrineDoor;
-import entity.Stand;
-import entity.SummonObject;
-import entity.TrapDoor;
-import entity.Walkway;
 import main.FrameEngine;
 
 /**
@@ -100,6 +56,7 @@ public class EntityLoader {
 		} break;
 		case "grubhole": 
 		case "trapdoor":
+		case "canoe":
 		case "portalhole": {
 			String[] destination = properties.get("DEST", String.class).split(",");
 			String flag = properties.containsKey("FLAG") ? properties.get("FLAG", String.class) : "";
@@ -114,6 +71,9 @@ public class EntityLoader {
 			}
 			else if (type.equals("trapdoor")){
 				entities.add(new TrapDoor(x, y, destination[0], x_dest, y_dest));
+			}
+			else if (type.equals("canoe")) {
+				entities.add(new Canoe(x, y, destination[0], x_dest, y_dest, dir));
 			}
 			else{
 				entities.add(new PortalHole(x, y, flag, destination[0], x_dest, y_dest, dir));
@@ -162,8 +122,15 @@ public class EntityLoader {
 				entities.add(new Artist(
 						x, y, 
 						interactXDisp, interactYDisp,
-						width, height
+						width, height, imagePath, dialoguePath
 						));
+			}
+			else if (id.equals("ARTIST_SNOW")){
+				entities.add(new ArtistSnow(
+						x, y, 
+						interactXDisp, interactYDisp,
+						width, height,
+						id, imagePath, dialoguePath, layer));
 			}
 			else if (id.equals("PUMPKIN")){
 				entities.add(new Pumpkin(
@@ -190,6 +157,10 @@ public class EntityLoader {
 		case "desc": {
 			String text = properties.get("TEXT", String.class);
 			entities.add(new Description(x, y, width, height, text));
+		} break;
+		case "desc_old":{
+			String text = properties.get("TEXT", String.class);
+			entities.add(new AncientDescription(x, y, width, height, text));
 		} break;
 		case "dialoguedesc": {
 			String dialogue = properties.get("DIALOGUE", String.class);
@@ -244,6 +215,9 @@ public class EntityLoader {
 		case "crow":{
 			entities.add(new Bird(x, y, "crow"));
 		} break;
+		case "owl":{
+			entities.add(new Bird(x, y, "owl"));
+		} break;
 		case "freb":{
 			String flag = properties.get("FLAG", String.class);
 			entities.add(new Freb(x, y, width, height, flag));
@@ -262,10 +236,17 @@ public class EntityLoader {
 			String dialoguePath = properties.get("DIALOGUE", String.class);
 			entities.add(new DialogueTrigger(x, y, width, height, dialoguePath));
 		} break;
+		case "quest_helper":{
+			entities.add(new QuestHelper(x, y, width, height));
+		} break;
 		case "summonobject":{
 			String image = properties.get("IMAGE", String.class);
 			String flag = properties.get("FLAG", String.class);
-			entities.add(new SummonObject(x, y, image, flag));
+			String layer = "";
+			if (properties.containsKey("LAYER")) {
+				layer = properties.get("LAYER", String.class);
+			}
+			entities.add(new SummonObject(x, y, image, flag, layer));
 		} break;
 		case "stand":{
 			String id = properties.get("ID", String.class);
@@ -326,6 +307,27 @@ public class EntityLoader {
 		} break;
 		case "movelight":{
 			entities.add(new MoveLight(x, y));
+		} break;
+		case "iceblock":{
+			String id = properties.get("ID", String.class);
+			entities.add(new IceBlock(x, y, id, false));
+		} break;
+		case "iceblock2":{
+			String id = properties.get("ID", String.class);
+			entities.add(new IceBlock(x, y, id, true));
+		} break;
+		case "dungeon":{
+			entities.add(new Dungeon(x, y));
+		} break;
+		case "lock":{
+			String id = properties.get("ID", String.class);
+			entities.add(new Lock(x, y, id));
+		} break;
+		case "help_statue":{
+			entities.add(new HelpStatue(x, y));
+		} break;
+		case "sky":{
+			entities.add(new Sky(x, y));
 		} break;
 		default: {
 			FrameEngine.logger.log( Level.WARNING, 

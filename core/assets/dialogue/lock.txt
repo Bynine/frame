@@ -1,0 +1,8 @@
+This door is locked tight.
+&WHICH_KEY_GUVNA
+This door is locked tight. Open it with your key?
+>YES,NO
+<YES
+[OPEN]It worked! But the key broke in the lock.
+<NO
+You decide some doors are better left closed.

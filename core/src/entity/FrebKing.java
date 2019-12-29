@@ -75,6 +75,7 @@ public class FrebKing extends NPC {
 		else image = anims.get(0).get(0).getKeyFrame(singTimer.getCounter());
 	}
 
+	@SuppressWarnings("serial")
 	@Override
 	public void interact(){
 		FrameEngine.startDialogueTree(

@@ -24,6 +24,10 @@ public interface InputHandler {
 
 	abstract boolean getDownJustPressed();
 	
+	abstract boolean getPlusPressed();
+	
+	abstract boolean getMinusPressed();
+	
 	/**
 	 * If debug mode is on, increases game's update rate.
 	 */

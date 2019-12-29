@@ -7,7 +7,7 @@ import text.DialogueTree;
 
 public class DialogueTrigger extends ImmobileEntity {
 	
-	private final DialogueTree dialogueTree;
+	protected DialogueTree dialogueTree;
 	private final boolean entrance;
 
 	public DialogueTrigger(float x, float y, float width, float height, String dialoguePath) {
@@ -25,10 +25,14 @@ public class DialogueTrigger extends ImmobileEntity {
 	@Override
 	public void update(){
 		super.update();
-		if (touchingPlayer(hitbox) && (!entrance || FrameEngine.getPlayer().dir == UP)){
+		if (shouldActivate()){
 			FrameEngine.startDialogueTree(dialogueTree);
 			setRemove();
 		}
+	}
+	
+	protected boolean shouldActivate() {
+		return touchingPlayer(hitbox) && (!entrance || FrameEngine.getPlayer().dir == UP);
 	}
 
 	@Override

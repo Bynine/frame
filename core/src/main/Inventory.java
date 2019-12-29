@@ -17,25 +17,28 @@ public class Inventory extends AbstractMenu{
 
 	protected final ArrayList<String> items = new ArrayList<String>();
 	protected final ArrayList<MenuOption> descs = new ArrayList<MenuOption>();
+	private int page = 0;
+	public static final int WIDTH = 4, HEIGHT = 4;
 
 	Inventory(){
-		if (FrameEngine.FULLINV){
-			items.add("MAP");
-			items.add("KEY");
-			items.add("SHOVEL");
-			items.add("TREASURE1");
-			items.add("TREASURE2");
-			items.add("TREASURE3");
-			items.add("TREASURE4");
-			items.add("SHELL2");
-			items.add("SEED1");
-			items.add("SEED2");
-			items.add("SEED3");
-			items.add("SEED4");
-			items.add("WATERINGCAN");
-			items.add("GRUB1");
-			items.add("GRUB2");
-			items.add("GRUB3");
+		if (FrameEngine.ALLITEMS){
+			TSVReader reader = new TSVReader();
+			String[] items = reader.loadAllData(TSVReader.ITEM_URL);
+			for(String itemInfo: items) {
+				String[] itemInfoSplit = itemInfo.split("\t");
+				String itemId = itemInfoSplit[0];
+				if (!itemId.trim().isEmpty()) {
+					addItem(itemId);
+				}
+			}
+		}
+		else if(FrameEngine.INV) {
+			addItem("COFFEE");
+			addItem("SHOVEL");
+			addItem("WATERINGCAN");
+			addItem("HAMMER");
+			addItem("KEY1");
+			addItem("KEY2");
 		}
 	}
 
@@ -47,23 +50,27 @@ public class Inventory extends AbstractMenu{
 		items.add(0, item);
 	}
 
-	public void addItemConditional(String item){
+	public boolean addItemConditional(String item){
 		if (!items.contains(item)){
 			addItem(item);
+			return true;
 		}
+		return false;
 	}
 
-	public void removeItem(String item){
-		items.remove(item);
+	public boolean removeItem(String item){
+		boolean removed = items.remove(item);
 		Iterator<MenuOption> descIter = descs.iterator();
 		while(descIter.hasNext()){
 			MenuOption desc= descIter.next();
 			if (((ItemDescription)desc.getOutput()).id.equals(item)){
 				((ItemDescription)desc.getOutput()).dispose();
 				descIter.remove();
+				
 			}
 		}
-		descs.remove(item);
+		//descs.remove(item);
+		return removed;
 	}
 
 	/**
@@ -84,25 +91,35 @@ public class Inventory extends AbstractMenu{
 
 	@Override
 	protected void moveCursorVertical(int i){
-		int newPosition = cursor - (i * 4);
-		if ((newPosition >= 0) && (newPosition < getList().size())){
-			cursor = newPosition;
-			AudioHandler.playSoundVariedPitch(moveCursor);
-		}
-		else{
-			AudioHandler.playSoundVariedPitch(stopCursor);
-		}
+		playCursorSound(i);
+		cursor = MathUtils.clamp(cursor - (i * WIDTH), 0, getList().size()-1);
+		setPage();
 	}
 
 	@Override
 	protected void moveCursorHorizontal(int i){
 		playCursorSound(i);
 		cursor = MathUtils.clamp(cursor + i, 0, getList().size()-1);
+		setPage();
 	}
 
 	@Override
 	public List<MenuOption> getList() {
 		return descs;
+	}
+	
+	private void setPage() {
+		int pagebeg = page * WIDTH;
+		Vector2 range = new Vector2(
+				pagebeg + WIDTH, 
+				pagebeg + (WIDTH * HEIGHT) - WIDTH
+				);
+		if (cursor < range.x && page > 0) {
+			page -= 1;
+		}
+		else if (cursor >= range.y && page < ((items.size()/WIDTH)) - 4) {
+			page += 1;
+		}
 	}
 
 	@Override
@@ -117,14 +134,17 @@ public class Inventory extends AbstractMenu{
 				FrameEngine.showMap();
 				AudioHandler.playSoundVariedPitch(openMap);
 			}
+			else if (desc.id.equals("COFFEE")) {
+				FrameEngine.coffeeBoost();
+			}
 		}
 	}
 
 	public Vector2 getButtonPosition(int pos) {
-		int onScreen = 4;
+		int onScreen = WIDTH;
 		int posX = (pos % onScreen);
 		int posY = 2 + (int) pos/onScreen;
-		float x = (((posX + 0.5f) * FrameEngine.TILE) * 2);
+		float x = (((0.5f + posX) * FrameEngine.TILE) * 2);
 		float y = (2 * GraphicsHandler.ZOOM) * Gdx.graphics.getHeight()/2 -
 				FrameEngine.TILE - (posY * FrameEngine.TILE * 2);
 		return new Vector2(x, y);
@@ -137,6 +157,11 @@ public class Inventory extends AbstractMenu{
 
 	public List<String> getItems() {
 		return items;
+	}
+	
+	@Override
+	public int getPage() {
+		return page;
 	}
 
 }

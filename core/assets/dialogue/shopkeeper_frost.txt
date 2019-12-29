@@ -1,0 +1,21 @@
+*TALK_SHOPKEEPER_FROST
+It's good to see you... How have you been?
+[TALK][PAUSE]...Ahh, is that so.[ANIM_3] I hope that thing you found is helping you out.
+[ANIM_0]Listen... [PAUSE][ANIM_2]Things haven't been great here lately.
+This winter has lasted abnormally long, and it hasn't shown any signs of stopping. We can't grow anything. People are...
+...[PAUSE][ANIM_0]Oh! That's right! I hate to ask, but could you please do me a favor?
+It's Codsworth. He went up to his store a while back to go investigate this bizarre weather. To see if it can be stopped, you know?
+[ANIM_2]He's not so great at taking care of himself, so... [ANIM_0][GIVE_FOOD]I was hoping you could bring him this.
+I'll compensate you any way I can. [ANIM_3]You're a true friend.
+&TALK_SHOPKEEPER_FROST
+Glad you're still doing well. It's bitterly cold out there!
+Still, I'm worried about Codsworth. What could be keeping him...?
+&GIVE_LIBRARIAN_FOOD
+*TALK_SHOPKEEPER_GIVE_LIBRARIAN_FOOD
+Any news of Codsworth?
+[TALK][PAUSE]...[ANIM_3]Hahaha, I'm sure he needs the rest. Now that he's full up he'll be fine to make the trek back here once he awakens.
+You're an invaluable ally. How can I repay you... [ANIM_0]Oh, how about this?
+[GIVE_HAMMER]My trusty old hammer. I've been seeing unnaturally thick ice crop up all over the place. This should help you out.
+&TALK_SHOPKEEPER_GIVE_LIBRARIAN_FOOD
+Looks like I'll have to go back out soon and chop some more firewood for the stove.
+To keep the people safe, I'll have to keep trying my best. Just seeing you here has re-energized me, at least!

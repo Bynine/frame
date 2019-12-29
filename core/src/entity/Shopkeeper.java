@@ -13,7 +13,7 @@ public class Shopkeeper extends NPC {
 	@Override
 	public void interact(){
 		FrameEngine.getShopMenu().open();
-		if (FrameEngine.getSaveFile().getFlag("ENTERED_SHRINE")){
+		if (!FrameEngine.getArea().frost && FrameEngine.getSaveFile().getFlag("ENTERED_SHRINE")){
 			if (FrameEngine.getShopMenu().outOfStock()){
 				FrameEngine.getSaveFile().setFlag("OUT_OF_STOCK", true);
 			}

@@ -1,0 +1,6 @@
+*TALK_DOG_FROST
+Whine...
+[NOSPEAKER]Sadly, the dog is not the in mood to be pet. You respect its wishes.
+&TALK_DOG_FROST
+...
+[NOSPEAKER]You get the sense that the dog is glad you're here.

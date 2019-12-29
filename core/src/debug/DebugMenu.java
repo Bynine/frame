@@ -26,10 +26,15 @@ public class DebugMenu extends AbstractMenu{
 		String[] mapData = new TSVReader().loadAllData(TSVReader.MAP_URL);
 		for (String data: mapData){	
 			if (!data.split(TSVReader.split)[0].matches("\\s")){
+				final String id = data.split(TSVReader.split)[0];
+				String name = id;
+				if (name.startsWith("FROST_")) {
+					name = "F_" + name.substring(6);
+				}
 				mapIDs.add(new MenuOption(
 						4, 1,
-						data.split(TSVReader.split)[0].substring(0, Math.min(10, data.split(TSVReader.split)[0].length())),
-						data.split(TSVReader.split)[0]
+						name.substring(0, Math.min(9, name.length())),
+						id
 						));
 			}
 		}
