@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import entity.Entity;
 import main.TSVReader;
+import main.EntityHandler;
 import main.FrameEngine;
 
 /**
@@ -33,6 +34,7 @@ public class Area {
 	public final String overlayString, id;
 	public final Color lightColor;
 	public final String music;
+	public final Terrain defaultTerrain;
 
 	public Area(String id){
 		this.id = id;
@@ -40,8 +42,12 @@ public class Area {
 		music = "music/" + data[2] + ".ogg";
 		cameraFixed = Boolean.parseBoolean(data[3].toLowerCase());
 		final boolean happyMountain = id.equals("MOUNTAIN") && FrameEngine.getSaveFile().getFlag("FOUND_FLAME");
+		final boolean happyTop = id.equals("DUNGEON_TOP") && FrameEngine.getSaveFile().getFlag("FOUND_FLAME");
 		if (happyMountain) {
 			overlayString = "bright";
+		}
+		else if (happyTop) {
+			overlayString = "top";
 		}
 		else {
 			overlayString = data[4].toLowerCase();
@@ -58,6 +64,7 @@ public class Area {
 		lightColor = getColor(data[7]);
 		reverb = Boolean.parseBoolean(data[8]);
 		frost = id.startsWith("FROST_") || (id.equals("MOUNTAIN") && !happyMountain);
+		defaultTerrain = Terrain.valueOf(data[9]);
 		
 		setCollision();
 		setMapSlopes();
@@ -73,6 +80,12 @@ public class Area {
 		case "WHITE": return new Color(0.99f, 0.99f, 0.99f, 0.66f);
 		default: return new Color(1, 1, 1, 0.6f);
 		}
+	}
+	
+	public void refreshCollision() {
+		areaCollision.clear();
+		setCollision();
+		EntityHandler.refreshEntityCollisions();
 	}
 	
 	/**
@@ -98,7 +111,7 @@ public class Area {
 	}
 	
 	/**
-	 * Loads trrrain objects from the map, interprets their type, and adds them to terrain.
+	 * Loads terrain objects from the map, interprets their type, and adds them to terrain.
 	 */
 	private void setTerrainObjects(){
 		MapObjects terrainObjects = map.getLayers().get("TERRAIN").getObjects();
@@ -144,7 +157,7 @@ public class Area {
 				return terrains.get(rect);
 			}
 		}
-		return Terrain.NORMAL;
+		return defaultTerrain;
 	}
 
 	public TiledMap getMap() {
@@ -164,7 +177,7 @@ public class Area {
 	}
 	
 	public enum Terrain{
-		NORMAL, WOOD, WATER, STONE, SNOW, ICE, DEEP_WATER
+		NORMAL, SAND, WOOD, WATER, STONE, SNOW, ICE, DEEP_WATER
 	}
 
 	public void dispose() {
@@ -173,6 +186,10 @@ public class Area {
 
 	public String getID() {
 		return id;
+	}
+
+	public boolean drawRipple() {
+		return ( (id.equals("FROST_BEACH") || !frost) && !id.equals("MOUNTAIN"));
 	}
 
 }

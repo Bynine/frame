@@ -1,0 +1,9 @@
+It looks like something is hidden inside the wall. Hit it with your hammer?
+>YES,NO
+<YES
+*BROKE_WALL
+[SHATTER][GIVE_PIECE3]You found a strange shard!
+<NO
+You decide to leave well enough alone.
+&BROKE_WALL
+Now it's only a hole.

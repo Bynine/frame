@@ -76,6 +76,15 @@ public class EntityHandler {
 		}
 		AudioHandler.addAudioSources(audioSources);
 	}
+	
+	public static void refreshEntityCollisions() {
+		for (Entity en: entities){
+			if (en instanceof ImmobileEntity && en.collides()){
+				en.update();
+				FrameEngine.getArea().addToCollision(en);
+			}
+		}
+	}
 
 	public static void dispose(){
 		for (Entity en: entities){

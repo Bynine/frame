@@ -3,5 +3,5 @@ Merci beaucoup encore for your earlier help, my friend.
 Why not relax here for a little while? It is nice and warm. And maybe try one of Jackie's coffees?
 &TALK_ARTIST_FREED
 Despite how cold it was... being encased in snow brought artistic thoughts to mind.
-Perhaps I could try it again, as a performance art! Hohoho!
+[ANIM_1]Perhaps I could try it again, as a performance art! Hohoho!
 [SPEAKER=PUMPKIN]You silly fool... 

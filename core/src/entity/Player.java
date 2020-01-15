@@ -21,13 +21,15 @@ import timer.Timer;
 
 public class Player extends Entity{
 
-	private static final int stepTime = 14, boostTime = 30, cooldownTime = 60;
+	private static final int stepTime = 12, runTime = 24, cooldownTime = 36;
 	private final Timer 
 	invincibility = new Timer(60),
+	stunTimer = new Timer(30),
 	stepTimer = new Timer(stepTime * 2),
 	walkRightTimer = new Timer(30),
-	coffeeTimer = new Timer(boostTime + cooldownTime);
+	coffeeTimer = new Timer(runTime + cooldownTime);
 	private static ImageState imageState = ImageState.NORMAL;
+	private boolean rightStep = true;
 
 	private static final ArrayList<Animation<TextureRegion>> walk = 
 			Animator.createAnimation(stepTime, "sprites/player/walk.png", 4, 3);
@@ -53,6 +55,14 @@ public class Player extends Entity{
 			Animator.createAnimation(30, "sprites/player/cooldown.png", 1, 3);
 	private static final ArrayList<Animation<TextureRegion>> deep_water = 
 			Animator.createAnimation(45, "sprites/player/deep_water.png", 2, 3);
+	private static final ArrayList<Animation<TextureRegion>> hammer = 
+			Animator.createAnimation(30, "sprites/player/hammer.png", 1, 3);
+	private static final ArrayList<Animation<TextureRegion>> stun = 
+			Animator.createAnimation(30, "sprites/player/stun.png", 1, 3);
+	private static final ArrayList<Animation<TextureRegion>> slide = 
+			Animator.createAnimation(30, "sprites/player/slide.png", 2, 3);
+	private static final ArrayList<Animation<TextureRegion>> boost = 
+			Animator.createAnimation(30, "sprites/player/boost.png", 2, 3);
 	private static final TextureRegion get = 
 			new TextureRegion(new Texture(Gdx.files.internal("sprites/player/get.png")));
 	private static final TextureRegion sleep = 
@@ -70,12 +80,12 @@ public class Player extends Entity{
 	stepWood = Gdx.audio.newSound(Gdx.files.internal("sfx/step_wood.wav")),
 	stepStone = Gdx.audio.newSound(Gdx.files.internal("sfx/step_stone.wav")),
 	stepWater = Gdx.audio.newSound(Gdx.files.internal("sfx/step_water.wav")),
-	stepSnow = Gdx.audio.newSound(Gdx.files.internal("sfx/step_stone.wav")),
+	stepSnow = Gdx.audio.newSound(Gdx.files.internal("sfx/step_snow.wav")),
 	stepIce = Gdx.audio.newSound(Gdx.files.internal("sfx/step_stone.wav"));
 
 	public Player(float x, float y) {
 		super(x, y);
-		timerList.addAll(Arrays.asList(invincibility, stepTimer, walkRightTimer, coffeeTimer));
+		timerList.addAll(Arrays.asList(invincibility, stunTimer, stepTimer, walkRightTimer, coffeeTimer));
 		shadow = new TextureRegion(new Texture("sprites/player/shadow.png"));
 		EntityHandler.addEntity(smokeEmitter);
 		setRight();
@@ -90,11 +100,14 @@ public class Player extends Entity{
 					this.getCenter().y
 				));
 		smokeEmitter.setEnabled(FrameEngine.isCocoaTime());
-		on_ice = FrameEngine.getArea().getTerrain(this).equals(Terrain.ICE);
-		in_water = FrameEngine.getArea().getTerrain(this).equals(Terrain.DEEP_WATER);
-		zPosition = in_water ? -4 : 0;
-		if (isBoosting()) {
+		onIce = FrameEngine.getArea().getTerrain(this).equals(Terrain.ICE);
+		inWater = FrameEngine.getArea().getTerrain(this).equals(Terrain.DEEP_WATER);
+		zPosition = inWater ? -4 : 0;
+		if (isRunning()) {
 			stepTimer.countUp();
+		}
+		if (inWater && isCooldown()) {
+			coffeeTimer.end();
 		}
 	}
 
@@ -116,8 +129,8 @@ public class Player extends Entity{
 	@Override
 	protected void updateVelocity(){
 		super.updateVelocity();
-		if (isBoosting()) {
-			final float coffeeSpeed = 7.2f;
+		if (isRunning()) {
+			final float coffeeSpeed = 8.8f;
 			float coffeeSlopeSpeed = coffeeSpeed;
 			Vector2 add = new Vector2();
 			if (dir == DOWN) {
@@ -141,8 +154,8 @@ public class Player extends Entity{
 	}
 	
 	private float getAcceleration() {
-		if (in_water) return water_acceleration;
-		return on_ice ? ice_acceleration : acceleration;
+		if (inWater) return water_acceleration;
+		return onIce ? ice_acceleration : acceleration;
 	}
 
 	/**
@@ -188,7 +201,7 @@ public class Player extends Entity{
 	 */
 	@Override
 	protected void setDirection(){
-		if (isBoosting()) return;
+		if (isRunning()) return;
 		float min_control = 0.5f;
 		if (input.y > min_control) setUp();
 		else if (input.y < -min_control) setDown();
@@ -200,15 +213,26 @@ public class Player extends Entity{
 	public void updateImage(){
 		switch(imageState){
 		case NORMAL:{
-			if (isBoosting()) {
+			if (!stunTimer.timeUp()) {
+				image = stun.get(dir).getKeyFrame(FrameEngine.getTime());
+			}
+			else if (inWater) {
+				image = deep_water.get(dir).getKeyFrame(FrameEngine.getTime());
+			}
+			else if (isRunning()) {
 				if (stepTimer.timeUp()) stepSound();
 				image = run.get(dir).getKeyFrame(FrameEngine.getTime());
 			}
+			else if (onIce && onSlope) {
+				if (velocity.y < -3.2f) {
+					image = boost.get(dir).getKeyFrame(FrameEngine.getTime());
+				}
+				else {
+					image = slide.get(dir).getKeyFrame(FrameEngine.getTime());
+				}
+			}
 			else if (isCooldown()) {
 				image = cooldown.get(dir).getKeyFrame(FrameEngine.getTime());
-			}
-			else if (in_water) {
-				image = deep_water.get(dir).getKeyFrame(FrameEngine.getTime());
 			}
 			else if (!FrameEngine.canUpdateEntities() ||
 					(input.x == 0 && input.y == 0)){
@@ -242,6 +266,9 @@ public class Player extends Entity{
 		case READ:{
 			image = read.get(dir).getKeyFrame(FrameEngine.getTime());
 		} break;
+		case HAMMER:{
+			image = hammer.get(dir).getKeyFrame(FrameEngine.getTime());
+		} break;
 		default: {
 			image = get;
 		} break;
@@ -261,10 +288,16 @@ public class Player extends Entity{
 		case WATER: {
 			step = stepWater;
 		} break;
+		case DEEP_WATER: {
+			step = stepWater;
+		} break;
 		case STONE: {
 			step = stepStone;
 		} break;
 		case SNOW: {
+			step = stepSnow;
+		} break;
+		case SAND: {
 			step = stepSnow;
 		} break;
 		case ICE: {
@@ -273,8 +306,21 @@ public class Player extends Entity{
 		case NORMAL:
 		default: step = stepGrass;
 		}
-		final float stepVolume = isBoosting() ? 1.3f : 0.8f;
+		final float stepVolume = isRunning() ? 1.3f : 0.6f;
 		AudioHandler.playSoundVariedPitch(step, stepVolume);
+		
+		float xDisp = 6 * (rightStep ? 1 : -1);
+		float yDisp = 4 * (rightStep ? -1 : 1);
+		EntityHandler.addEntity(new Footprint(
+				getCenter().x + (dir == SIDE ? 0 : xDisp), 
+				position.y + 4 + (dir == SIDE ? yDisp : 0) + zPosition, 
+				dir == SIDE ? 90 : 0,
+				terrain,
+				onSlope
+				));
+		
+		rightStep = !rightStep;
+		
 		stepTimer.reset();
 	}
 
@@ -290,7 +336,7 @@ public class Player extends Entity{
 	}
 
 	public static enum ImageState{
-		NORMAL, GET, DIG, WATER, EXPLAIN, SLEEP, PET, READ
+		NORMAL, GET, DIG, WATER, EXPLAIN, SLEEP, PET, READ, HAMMER
 	}
 
 	public static ImageState getImageState(){
@@ -311,15 +357,15 @@ public class Player extends Entity{
 	}
 	
 	public boolean canControl() {
-		return !isBoosting() && !isCooldown();
+		return !isRunning() && !isCooldown() && stunTimer.timeUp();
 	}
 	
-	private boolean isBoosting() {
-		return coffeeTimer.getCounter() < boostTime;
+	private boolean isRunning() {
+		return coffeeTimer.getCounter() < runTime;
 	}
 	
 	private boolean isCooldown() {
-		return coffeeTimer.getCounter() < (boostTime + cooldownTime) && coffeeTimer.getCounter() >= boostTime;
+		return coffeeTimer.getCounter() < (runTime + cooldownTime) && coffeeTimer.getCounter() >= runTime;
 	}
 
 	public void coffeeBoost() {
@@ -329,6 +375,26 @@ public class Player extends Entity{
 	public void reset() {
 		smokeEmitter = new Emitter(0, 0, stepTime, 30, "smoke");
 		EntityHandler.addEntity(smokeEmitter);
+	}
+
+	public void knock(Bumper bumper) {
+		final float speed = 11f;
+		if (position.y - bumper.position.y < bumper.getImage().getRegionHeight()/2) {
+			velocity.y = -speed;
+			setUp();
+		}
+		else {
+			velocity.y = speed;
+			setDown();
+		}
+		if (!coffeeTimer.timeUp()) {
+			coffeeTimer.end();
+		}
+		stunTimer.reset();
+	}
+
+	public boolean canPause() {
+		return !(onIce && onSlope);
 	}
 
 }

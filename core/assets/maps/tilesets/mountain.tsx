@@ -205,4 +205,58 @@
    <frame tileid="239" duration="500"/>
   </animation>
  </tile>
+ <tile id="224">
+  <animation>
+   <frame tileid="224" duration="500"/>
+   <frame tileid="230" duration="500"/>
+  </animation>
+ </tile>
+ <tile id="225">
+  <animation>
+   <frame tileid="225" duration="500"/>
+   <frame tileid="231" duration="500"/>
+  </animation>
+ </tile>
+ <tile id="226">
+  <animation>
+   <frame tileid="226" duration="500"/>
+   <frame tileid="232" duration="500"/>
+  </animation>
+ </tile>
+ <tile id="240">
+  <animation>
+   <frame tileid="240" duration="500"/>
+   <frame tileid="246" duration="500"/>
+  </animation>
+ </tile>
+ <tile id="241">
+  <animation>
+   <frame tileid="241" duration="500"/>
+   <frame tileid="247" duration="500"/>
+  </animation>
+ </tile>
+ <tile id="242">
+  <animation>
+   <frame tileid="242" duration="500"/>
+   <frame tileid="248" duration="500"/>
+  </animation>
+ </tile>
+ <tile id="243">
+  <animation>
+   <frame tileid="243" duration="500"/>
+   <frame tileid="249" duration="500"/>
+  </animation>
+ </tile>
+ <tile id="244">
+  <animation>
+   <frame tileid="244" duration="500"/>
+   <frame tileid="250" duration="500"/>
+  </animation>
+ </tile>
+ <tile id="245">
+  <animation>
+   <frame tileid="245" duration="500"/>
+   <frame tileid="251" duration="500"/>
+  </animation>
+ </tile>
 </tileset>

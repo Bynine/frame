@@ -4,10 +4,10 @@
 *ARTIST_FREED
 [REMOVE_ITEM][ANIM_1]...!
 [ANIM_2]I-I-I-I am... 
-[ANIM_3]F-F-F-Free![NEWNAME=Archibald]
+[RELAX][ANIM_3]F-F-F-Free![NEWNAME=Archibald]
 [ANIM_4]Ah! It is you who gave me this elixir of life, I assume?
 Wonderful! Marvelous! Your kindness knows no bounds! You always seem to show up in time, hm?
-I will finish my drink, then be over to the cafe.[RELAX]
+I will finish my drink, then be over to the cafe.
 Oh! If you get there first, please let Jackie know I am okay. I would hate to make her worry.[DEFAULT_ANIM]
 <COCOACOLD
 [NOSPEAKER]It's too cold to do any good.

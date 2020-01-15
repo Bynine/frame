@@ -13,7 +13,7 @@ public class DialogueTrigger extends ImmobileEntity {
 	public DialogueTrigger(float x, float y, float width, float height, String dialoguePath) {
 		super(x, y);
 		hitbox.setSize(width, height);
-		if (dialoguePath.equals("entered_shrine")){
+		if (dialoguePath.equals("entered_shrine") || dialoguePath.equals("kami_post_flame")){
 			dialogueTree = new DialogueTree(new NPC("KAMI", dialoguePath), dialoguePath);
 		}
 		else{

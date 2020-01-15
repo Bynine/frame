@@ -31,7 +31,7 @@ public abstract class Entity {
 	protected float ice_friction = 0.906f;
 	protected float ice_corner_acceleration = 0.09f;
 	protected float water_acceleration = 0.64f;
-	protected boolean on_ice = false, in_water = false;
+	protected boolean onIce = false, inWater = false;
 	
 	@SuppressWarnings("serial")
 	protected final HashMap<Integer, String> numToWordMap = new HashMap<Integer, String>(){{
@@ -108,7 +108,7 @@ public abstract class Entity {
 	 */
 	protected void updateVelocity(){
 		final float minVelocity = 0.01f;
-		if (onSlope && (on_ice || velocity.y > 0 || velocity.y < -1.8f)){
+		if (onSlope && (onIce || velocity.y > 0 || velocity.y < -1.8f)){
 			velocity.y -= getFrameFriction(0.32f);
 		}
 		if (Math.abs(velocity.x) < minVelocity) velocity.x = 0;
@@ -142,16 +142,16 @@ public abstract class Entity {
 	}
 	
 	protected float getFriction() {
-		return on_ice ? ice_friction : friction;
+		return onIce ? ice_friction : friction;
 	}
 	
 	protected float getDiagonalFriction() {
 		final float diagonalFriction = 0.86f;
-		return on_ice ? 0.98f : diagonalFriction;
+		return onIce ? 0.98f : diagonalFriction;
 	}
 
 	private float getCornerAcceleration() {
-		return on_ice ? ice_corner_acceleration : corner_acceleration;
+		return onIce ? ice_corner_acceleration : corner_acceleration;
 	}
 
 	/**
@@ -348,12 +348,24 @@ public abstract class Entity {
 	}
 
 	public TextureRegion getShadow() {
-		if (in_water) return null;
+		if (inWater) return null;
 		else return shadow;
 	}
 
 	public boolean collides() {
 		return collides;
+	}
+
+	public float getAngle() {
+		return 0;
+	}
+
+	public float getWidthMod() {
+		return 1;
+	}
+	
+	public float getHeightMod() {
+		return 1;
 	}
 
 }

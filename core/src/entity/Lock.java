@@ -60,6 +60,9 @@ public class Lock extends InteractableEntity {
 		image = tex_open;
 		hitbox.setSize(0);
 		interactHitbox.setSize(0);
+		collides = false;
+		FrameEngine.getArea().refreshCollision();
+		canInteract = false;
 	}
 
 	@Override

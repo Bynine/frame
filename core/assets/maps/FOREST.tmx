@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="100" height="55" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="927">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="100" height="55" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="928">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/trees.tsx"/>
  <tileset firstgid="174" source="tilesets/forest.tsx"/>
@@ -1163,6 +1163,12 @@ Plant what you want! We won't judge.</property>
    <properties>
     <property name="APPEAR" value="!GOT_ALL_TREASURES,FOUND_GOAL"/>
     <property name="TYPE" value="QUEST_HELPER"/>
+   </properties>
+  </object>
+  <object id="927" name="owl" gid="4" x="352" y="472" width="32" height="32">
+   <properties>
+    <property name="APPEAR" value="FOUND_FLAME"/>
+    <property name="TYPE" value="OWL"/>
    </properties>
   </object>
  </objectgroup>

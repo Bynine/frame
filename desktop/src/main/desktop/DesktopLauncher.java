@@ -9,7 +9,7 @@ public class DesktopLauncher {
 	
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		final int FPS = 60;
+		final int FPS = 45;
 		config.foregroundFPS = FPS;
 		config.backgroundFPS = FPS;
 		config.width	= (int)FrameEngine.resolution.x;

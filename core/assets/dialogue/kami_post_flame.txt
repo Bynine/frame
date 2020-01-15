@@ -1,0 +1,17 @@
+*KAMI_POST_FLAME
+Traveller...
+I have just awakened from what feels like a very long sleep.
+Will you tell me what has happened?
+>YES,NO
+<YES
+[TALK]...
+Hm... I suppose I should have foreseen this happening one day.
+I could sense that her heart was full of frustration. It is difficult to cope with loss.
+But perhaps this was for the best. [PAUSE]You taught her better than I could have.
+Do not worry, she will not be punished. She acted foolishly, but her intentions were good.
+Thank you, once again, traveller, for all that you've done.
+<NO
+Ha ha ha...
+By now, I trust you well enough to know that whatever happened, you've resolved it.
+My intuition tells me that your silence is to avoid implicating one of the inhabitants of Wabika. Do not worry, I will not pry further.
+Thank you, once again, traveller, for all that you've done.

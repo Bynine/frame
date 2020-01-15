@@ -30,6 +30,9 @@ public class Emitter extends ImmobileEntity{
 				Animator.createAnimation(30, "sprites/graphics/" + graphicPath + ".png", 2, 1);
 		graphicName = graphicPath;
 		this.duration = duration;
+		if (graphicPath.equals("snow")) {
+			interval /= 2.5f;
+		}
 		intervalTimer = new DurationTimer(interval);
 		timerList.add(intervalTimer);
 		intervalTimer.reset((int) (Math.random() * intervalTimer.getEndTime()));
@@ -69,6 +72,12 @@ public class Emitter extends ImmobileEntity{
 						2 + (2 * Math.cos( (FrameEngine.getTime() + graphic.life.getCounter())/8.0f)) 
 						* FrameEngine.elapsedTime * Math.random();
 				graphic.position.y -= 2.85f * FrameEngine.elapsedTime;
+			}
+			else if (graphicName.equalsIgnoreCase("petal")){
+				graphic.position.x += 
+						1 + (2 * Math.cos( (FrameEngine.getTime() + graphic.life.getCounter())/20.0f)) 
+						* FrameEngine.elapsedTime * Math.random();
+				graphic.position.y -= 0.45f * FrameEngine.elapsedTime;
 			}
 			if (graphic.life.timeUp()){
 				graphicIter.remove();

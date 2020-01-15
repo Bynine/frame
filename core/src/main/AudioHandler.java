@@ -54,7 +54,7 @@ public class AudioHandler {
 			dt.countUp();
 			if (dt.timeUp()){
 				try{
-					playPitchedSound(pSound.sound, pSound.pitch, 0.3f, true);
+					playPitchedSound(pSound.sound, pSound.pitch, pSound.volume * 0.3f, true);
 				}
 				catch(Exception e){
 					System.out.println(e);
@@ -67,7 +67,6 @@ public class AudioHandler {
 			audioSource.audio.play();
 		}
 	}
-
 
 	/**
 	 * Stops the current Music, then plays the Music specified by the path.
@@ -103,16 +102,20 @@ public class AudioHandler {
 		return playPitchedSound(sound, 1, volume, false);
 	}
 
-	public static long playPitchedSound(Sound sound, float pitch, float volume,boolean isReverb){
+	public static long playPitchedSound(Sound sound, float pitch, float volume, boolean isReverb){
 		if (!isReverb && FrameEngine.getArea().reverb){
-			reverb.put(new DurationTimer(10), new PitchedSound(sound, pitch));
+			reverb.put(new DurationTimer(10), new PitchedSound(sound, pitch, volume));
 		}
-		return sound.play(volume * VOLUME, pitch, 0);
+		if ((volume * VOLUME) > 0) {
+			return sound.play(volume * VOLUME, pitch, 0);
+		}
+		else {
+			return 0;
+		}
 	}
 
-	public static void playPositionalSound(Entity owner, Sound sound) {
-		long id = playSoundVariedPitch(sound);
-		sound.setVolume(id, VOLUME * getVolume(owner.getPosition()));
+	public static void playPositionalSound(Entity owner, Sound sound, float... volume) {
+		playSoundVariedPitch(sound, (volume.length > 0 ? volume[0] : 1) * getVolume(owner.getPosition()));
 	}
 
 	/**
@@ -196,9 +199,11 @@ public class AudioHandler {
 	private static class PitchedSound{
 		private final Sound sound;
 		private final float pitch;
-		private PitchedSound(Sound sound, float pitch){
+		private final float volume;
+		private PitchedSound(Sound sound, float pitch, float volume){
 			this.sound = sound;
 			this.pitch = pitch;
+			this.volume = volume;
 		}
 	}
 

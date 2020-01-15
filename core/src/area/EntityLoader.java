@@ -140,6 +140,13 @@ public class EntityLoader {
 						id, imagePath, dialoguePath, layer));
 			}
 			else if (id.equals("CUSTOMER3")){
+				entities.add(new Customer3(
+						x, y, 
+						interactXDisp, interactYDisp,
+						width, height,
+						id, imagePath, dialoguePath, layer));
+			}
+			else if (id.equals("LESLIE")){
 				entities.add(new Leslie(
 						x, y, 
 						interactXDisp, interactYDisp,
@@ -160,7 +167,7 @@ public class EntityLoader {
 		} break;
 		case "desc_old":{
 			String text = properties.get("TEXT", String.class);
-			entities.add(new AncientDescription(x, y, width, height, text));
+			entities.add(new AncientDescription(x, y, width, height, text, properties.containsKey("ISTREE")));
 		} break;
 		case "dialoguedesc": {
 			String dialogue = properties.get("DIALOGUE", String.class);
@@ -319,6 +326,9 @@ public class EntityLoader {
 		case "dungeon":{
 			entities.add(new Dungeon(x, y));
 		} break;
+		case "mechanism":{
+			entities.add(new Mechanism(x, y));
+		} break;
 		case "lock":{
 			String id = properties.get("ID", String.class);
 			entities.add(new Lock(x, y, id));
@@ -328,6 +338,39 @@ public class EntityLoader {
 		} break;
 		case "sky":{
 			entities.add(new Sky(x, y));
+		} break;
+		case "bumper":{
+			float speed = 0;
+			if (properties.containsKey("SPEED")) {
+				speed = Float.parseFloat(properties.get("SPEED", String.class));
+			}
+			entities.add(new Bumper(x, y, speed));
+		} break;
+		case "bumper_bounce":{
+			entities.add(new BumperBounce(x, y));
+		} break;
+		case "wallcrack":{
+			entities.add(new WallCrack(x, y));
+		} break;
+		case "icelock":{
+			entities.add(new IceLock(x, y));
+		} break;
+		case "block":{
+			String id = properties.get("ID", String.class);
+			entities.add(new Block(x, y, id));
+		} break;
+		case "puzzlelock":{
+			entities.add(new PuzzleLock(x, y));
+		} break;
+		case "torch":{
+			entities.add(new Torch(x, y));
+		} break;
+		case "torchlight":{
+			entities.add(new Torchlight(x, y));
+		} break;
+		case "switch":{
+			String id = properties.get("ID", String.class);
+			entities.add(new Switch(x, y, id));
 		} break;
 		default: {
 			FrameEngine.logger.log( Level.WARNING, 

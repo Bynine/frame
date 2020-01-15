@@ -14,6 +14,7 @@ PUMPKIN	Cafe Owner	chipper	TRUE	1	30
 FRIEND	Nervous Dog	what	FALSE	1	30
 CUSTOMER2	Elderly Fellow	bup	FALSE	1	30
 CUSTOMER3	Reading Person	subtle	FALSE	1	30
+LESLIE	Cloaked Figure	subtle	FALSE	1	15
 GRUBMOM	Grub Mom	mih	FALSE	1	45
 GRUB1	Chubby Grub	bwep	FALSE	1	60
 GRUB2	Nubby Grub	bwep	FALSE	1	60
@@ -21,7 +22,7 @@ GRUB3	Grubby Grub	bwep	FALSE	1	60
 VILLAGER	Shy Mushroom	bwep	TRUE	2	30
 GHOST	Restless Spirit	chipper	TRUE	1	45
 ARTIST	Passionate Artist	bup	FALSE	1	30
-COFFEE	Complaining Guy	meoh	TRUE	1	45
+COFFEE	Complaining Guy	meoh	FALSE	1	45
 CLIFF	Adventurous Girl	chipper	FALSE	1	30
 CLIFFSTAND	Adventurous Girl	chipper	TRUE	2	30
 ADVENTURER	Adventurer	mih	TRUE	1	30

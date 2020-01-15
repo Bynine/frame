@@ -16,4 +16,4 @@ CUST_3_STORY
 [ANIM_1]Sup, little guy?
 I've been thinking some more about what we talked about earlier.
 [ANIM_2]It's important to try and live without regrets. I can't think of something scarier than never doing what I've always wanted.
-[ANIM_0]... That was a little embarassing to say out loud.
+[ANIM_0]... That was a little embarrassing to say out loud.

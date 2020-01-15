@@ -32,38 +32,53 @@ public class Mailbox extends AbstractMenu {
 			if (FrameEngine.LETTERS) hasLetter = true;
 			if (hasLetter) {
 				final String id = letterData[0];
-				addLetter(id);
 				String read = id + "_LETTER_READ";
-				if (!save.getFlag(read)) {
+				boolean isRead = save.getFlag(read);
+				if (!isRead) {
 					FrameEngine.mailToRead = true;
 				}
+				addLetter(id, isRead);
 				save.setFlag(read, true);
 			}
 		}
-		updateRead();
+		updateRead(false);
 	}
 	
-	private void addLetter(String id) {
-		descs.add(new MenuOption(2, 2, "", new ArrayList<TextureRegion>(Arrays.asList(
-				new TextureRegion(new Texture(Gdx.files.internal("letters/" + id.toLowerCase() + ".png")))
-				))));
+	private void addLetter(String id, boolean isRead) {
+		MenuOption mo = new MenuOption(2, 2, "", new ArrayList<TextureRegion>(Arrays.asList(
+				new TextureRegion(new Texture(Gdx.files.internal("letters/" + id.toLowerCase() + ".png"))),
+				new TextureRegion(new Texture(Gdx.files.internal("sprites/gui/letter_" + id.toLowerCase() + ".png"))),
+				new TextureRegion(new Texture(Gdx.files.internal("sprites/gui/letter_" + id.toLowerCase() + "_open.png")))
+				)));
+		mo.setProperty(OPENED, Boolean.toString(isRead));
+		System.out.println(mo.getProperties());
+		descs.add(mo);
 	}
 	
 	protected void moveCursorHorizontal(int i){
 		int n = i * perColumn;
 		playCursorSound(n);
 		cursor = MathUtils.clamp(cursor + (n), 0, getList().size() - 1);
-		updateRead();
+		updateRead(true);
 	}
 
 	protected void moveCursorVertical(int i) {
 		super.moveCursorVertical(i);
-		updateRead();
+		updateRead(true);
 	}
 	
-	private void updateRead() {
+	private void updateRead(boolean move) {
 		if (this.getActiveButton() != null) {
+			if (move && !this.getActiveButton().getProperties().get(OPENED).equals("true")) {
+				AudioHandler.playPitchedSound(openMap, 1.1f, 0.5f, false);
+			}
 			this.getActiveButton().setProperty(OPENED, "true");
+			FrameEngine.mailToRead = false;
+			for (MenuOption mo: this.getList()) {
+				if (!mo.getProperties().get(OPENED).equals("true")) {
+					FrameEngine.mailToRead = true;
+				}
+			}
 		}
 	}
 

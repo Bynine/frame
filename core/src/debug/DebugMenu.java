@@ -22,7 +22,7 @@ public class DebugMenu extends AbstractMenu{
 	 * Loads all map names but the headers.
 	 */
 	public DebugMenu(){
-		perColumn = 10;
+		perColumn = 12;
 		String[] mapData = new TSVReader().loadAllData(TSVReader.MAP_URL);
 		for (String data: mapData){	
 			if (!data.split(TSVReader.split)[0].matches("\\s")){
@@ -30,6 +30,12 @@ public class DebugMenu extends AbstractMenu{
 				String name = id;
 				if (name.startsWith("FROST_")) {
 					name = "F_" + name.substring(6);
+				}
+				if (name.startsWith("DUNGEON_")) {
+					name = "DUN_" + name.substring(8);
+				}
+				if (name.startsWith("DEPTHS")) {
+					name = "DEP_" + name.substring(6);
 				}
 				mapIDs.add(new MenuOption(
 						4, 1,

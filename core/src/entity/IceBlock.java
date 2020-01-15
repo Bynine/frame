@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import entity.Player.ImageState;
 import main.AudioHandler;
 import main.FrameEngine;
 import text.DialogueTree;
@@ -34,6 +35,7 @@ public class IceBlock extends InteractableEntity {
 	public void update() {
 		super.update();
 		if (shatterTimer.timeUp()) {
+			Player.setImageState(ImageState.NORMAL);
 			this.setRemove();
 		}
 	}
@@ -57,6 +59,7 @@ public class IceBlock extends InteractableEntity {
 			AudioHandler.playSoundVariedPitch(shatter, 0.5f);
 			timerList.add(shatterTimer);
 			FrameEngine.getSaveFile().setFlag("SHATTERED_" + id, true);
+			Player.setImageState(ImageState.HAMMER);
 		}
 
 	}
@@ -66,6 +69,7 @@ public class IceBlock extends InteractableEntity {
 		tex.getTexture().dispose();
 		tex2.getTexture().dispose();
 		breakTex.getTexture().dispose();
+		shatter.dispose();
 	}
 
 }

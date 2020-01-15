@@ -1,6 +1,6 @@
 *TALK_PUMPKIN_FROST
 How are ya, hon? It must've been bitter cold coming all the way here! Well, stay as long as you like and warm up.
-Say, on your way here... [ANIM_4]You didn't happen to see Archibald, did you? My friend, the artist you helped out earlier.
+Say, on your way here... [ANIM_4]You didn't happen to see Archibald, did you? My... friend, the artist you helped out earlier.
 He went out a while back to look for supplies and I haven't seem him since.[ANIM_1] I sure hope he's doing okay.
 I'd look for him myself [ANIM_4]but I need to keep this place warm and food available for all the people stuck here.
 [ANIM_2]Speaking of which! Here, have a hot cocoa, on the house. 

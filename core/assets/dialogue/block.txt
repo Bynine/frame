@@ -1,0 +1,6 @@
+Move the block?
+>YES,NO
+<YES
+[MOVE][DESTROY]
+<NO
+Never mind.

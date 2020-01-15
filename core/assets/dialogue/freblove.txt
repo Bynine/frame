@@ -16,3 +16,7 @@ take treasure.
 &FREB_SHELL_1_HAS,FOUND_GOAL
 ...
 ...[PAUSE][ANIM_1]thing still sound good.
+*TALK_FREBLOVE_FOUND_FLAME
+...
+...[ANIM_1]you read my letter?
+&TALK_FREBLOVE_FOUND_FLAME

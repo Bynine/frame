@@ -40,7 +40,7 @@ public class Artist extends NPC {
 	@SuppressWarnings("serial")
 	public void interact(){
 		FrameEngine.startDialogueTree(
-				new DialogueTree(this, "artist", new HashMap<String, String>(){{
+				new DialogueTree(this, dialoguePath, new HashMap<String, String>(){{
 					put("THANKS_LINE", 
 							FrameEngine.getSaveFile().getFlag("TALK_ARTIST") ?
 							"I am so sorry for my outburst from before" :

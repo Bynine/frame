@@ -1,0 +1,11 @@
+The torch sits cold and unlit.
+&ITEM_FLAME
+Place the flame in the torch?
+>YES, NO
+<YES
+*FOUND_FLAME
+[LIGHT_FLAME]...[PAUSE][REFRESH][DESTROY]
+<NO
+[DESTROY]
+&FOUND_FLAME
+The flame gives off a warm, soothing heat.

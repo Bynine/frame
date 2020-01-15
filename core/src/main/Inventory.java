@@ -34,11 +34,14 @@ public class Inventory extends AbstractMenu{
 		}
 		else if(FrameEngine.INV) {
 			addItem("COFFEE");
+			addItem("COCOAHOT");
 			addItem("SHOVEL");
 			addItem("WATERINGCAN");
 			addItem("HAMMER");
 			addItem("KEY1");
 			addItem("KEY2");
+			addItem("BOOK");
+			addItem("FLAME");
 		}
 	}
 

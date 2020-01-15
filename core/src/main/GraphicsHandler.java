@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
@@ -76,8 +77,6 @@ public class GraphicsHandler {
 	logo = new TextureRegion(new Texture("sprites/gui/logo.png")),
 	snailOn = new TextureRegion(new Texture("sprites/gui/snail_on.png")),
 	snailOff = new TextureRegion(new Texture("sprites/gui/snail_off.png")),
-	letterClosed = new TextureRegion(new Texture("sprites/gui/letter.png")),
-	letterOpen = new TextureRegion(new Texture("sprites/gui/letter_open.png")),
 	map = new TextureRegion(new Texture("sprites/gui/map.png")),
 	interactBubble = new TextureRegion(new Texture("sprites/player/interact.png")),
 	surpriseBubble = new TextureRegion(new Texture("sprites/player/surprise.png")),
@@ -90,6 +89,8 @@ public class GraphicsHandler {
 	textboxTop = new TextureRegion(new Texture("sprites/gui/textbox_top.png")),
 	textboxSide = new TextureRegion(new Texture("sprites/gui/textbox_side.png")),
 	textboxCenter = new TextureRegion(new Texture("sprites/gui/textbox_center.png"));
+	private final ArrayList<Animation<TextureRegion>> 
+		gotMail = Animator.createAnimation(30, "sprites/gui/got_mail.png", 2, 1);
 	Timer selectTimer = new Timer(10);
 	private final String credits;
 	final float blackR = 26.0f/255.0f;
@@ -258,7 +259,7 @@ public class GraphicsHandler {
 					sky == water ? false : true
 			);
 		}
-		if (!FrameEngine.getArea().frost) {
+		if (FrameEngine.getArea().drawRipple()) {
 			batch.draw(Player.ripple,
 					FrameEngine.getPlayer().getPosition().x,
 					FrameEngine.getPlayer().getPosition().y
@@ -307,7 +308,14 @@ public class GraphicsHandler {
 			batch.draw(
 					en.getImage(), 
 					en.getPosition().x, 
-					en.getPosition().y + en.getZPosition()
+					en.getPosition().y + en.getZPosition(),
+					en.getImage().getRegionWidth()/2,
+					en.getImage().getRegionHeight()/2,
+					en.getImage().getRegionWidth() * en.getWidthMod(),
+					en.getImage().getRegionHeight() * en.getHeightMod(),
+					1,
+					1,
+					en.getAngle()
 					);
 			batch.setColor(DEFAULT_COLOR);
 		}
@@ -993,13 +1001,19 @@ public class GraphicsHandler {
 					);
 			batch.begin();
 			batch.draw(
-					button.getProperties().containsKey(Mailbox.OPENED) ? letterOpen : letterClosed, 
+					button.getProperties().get(Mailbox.OPENED).equals("true") ? texs.get(2) : texs.get(1), 
 					pos.x + FrameEngine.TILE/2, pos.y + FrameEngine.TILE/2);
 			if (selected) batch.draw(texs.get(0), FrameEngine.TILE * 10, FrameEngine.TILE * 1);
 			batch.end();
 			position++;
 		}
 		drawEnterToExit();
+	}
+
+	public void drawGotMail() {
+		batch.begin();
+		batch.draw(gotMail.get(0).getKeyFrame(FrameEngine.getTime()), FrameEngine.TILE * 14, FrameEngine.TILE * 2.87f);
+		batch.end();
 	}
 
 }

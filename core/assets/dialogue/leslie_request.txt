@@ -1,0 +1,7 @@
+I just need... a little more time...
+[ANIM_2]If I can just get this flame to do what I want, I can go back!
+[NOSPEAKER]Convince them to give you the flame?
+>YES,NO
+<NO
+[NOSPEAKER]You're not sure what to say.
+<YES

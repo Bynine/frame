@@ -14,6 +14,8 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import area.Area;
 import debug.DebugMenu;
+import entity.Entity;
+import entity.Footprint;
 import entity.InteractableEntity;
 import entity.NPC;
 import entity.Player;
@@ -30,25 +32,25 @@ public class FrameEngine extends ApplicationAdapter {
 	@SuppressWarnings("unused")
 	public static boolean 
 	DRAW 	= false	&& DEBUG,
-	MUTE	= true	&& DEBUG,
+	MUTE	= false	&& DEBUG,
 	LOG		= true	&& DEBUG,
 	FPS		= false && DEBUG,
-	NOMAIN	= true	&& DEBUG,
+	NOMAIN	= false	&& DEBUG,
 	INVIS	= false	&& DEBUG,
 	MAPS	= false && DEBUG,
 	TREASURE= false	|| !DEBUG,
 	GHOST	= false	&& DEBUG,
-	SHRINE  = true  && DEBUG,
+	SHRINE  = false && DEBUG,
 	FGOAL	= false	&& DEBUG,
-	FROST	= true	&& DEBUG,
+	FROST	= false	&& DEBUG,
 	FLAME	= false	&& DEBUG,
-	INV 	= true	&& DEBUG,
+	INV 	= false	&& DEBUG,
 	ALLITEMS= false	&& DEBUG,
 	CASH	= false && DEBUG,
 	OMNI	= false	&& DEBUG, // Toggles whether everything appears
-	SAVE	= false	|| !DEBUG,
-	LETTERS = true	&& DEBUG,
-	DUNGEON	= true	&& DEBUG,
+	SAVE	= true	|| !DEBUG,
+	LETTERS = false	&& DEBUG,
+	DUNGEON	= false	&& DEBUG,
 	WINDOW	= true	&& DEBUG;
 
 	private static Player player;
@@ -75,7 +77,7 @@ public class FrameEngine extends ApplicationAdapter {
 	private static final float TRANSITION_END_TIME = TRANSITION_TIME - TRANSITION_CHANGE_TIME;
 	private static Timer 
 	time = new Timer(0),
-	cocoa = new Timer(1560),
+	cocoa = new Timer(1520),
 	transition = new Timer((int)TRANSITION_TIME);
 	private static ArrayList<Timer> timers = new ArrayList<Timer>(Arrays.asList(
 			time, transition
@@ -200,7 +202,9 @@ public class FrameEngine extends ApplicationAdapter {
 		if (canUpdateEntities()){
 			progressionHandler.update();
 			EntityHandler.update();
-			cocoa.countUp();
+			if (canControlPlayer()) {
+				cocoa.countUp();
+			}
 			if (cocoa.timeUp() && cocoaTime) {
 				endCocoaTime();
 			}
@@ -250,6 +254,9 @@ public class FrameEngine extends ApplicationAdapter {
 			playerWalk(Walk.RIGHT);
 		}
 		graphicsHandler.drawMenu(mainMenu);
+		if (mailToRead) {
+			graphicsHandler.drawGotMail();
+		}
 		mainMenu.update();
 	}
 
@@ -300,6 +307,7 @@ public class FrameEngine extends ApplicationAdapter {
 	}
 
 	static float positionX = 0;
+	static final float positionY = TILE * 4.5f;
 
 	private void playerWalk(Walk walk){
 		EntityHandler.update();
@@ -315,7 +323,19 @@ public class FrameEngine extends ApplicationAdapter {
 		}
 		}
 
-		player.getPosition().set(positionX, TILE * 4.5f);
+		final Vector2 prev = player.getPosition();
+
+		player.getPosition().set(positionX, positionY);
+		for (Entity en: EntityHandler.getEntities()) {
+			if (en instanceof Footprint) {
+				en.getPosition().set(
+						positionX + (en.getPosition().x - prev.x), 
+						positionY + (en.getPosition().y - prev.y));
+				if (en.getPosition().dst(player.getPosition()) > 1200) {
+					System.out.println(en.getPosition().sub(player.getPosition()));
+				}
+			}
+		}
 	}
 
 	enum Walk{
@@ -345,8 +365,13 @@ public class FrameEngine extends ApplicationAdapter {
 				AudioHandler.playSoundVariedPitch(AbstractMenu.stopCursor);
 			}
 			else if (gameState == GameState.OVERWORLD && canControlPlayer()){
-				handlePause();
-				AudioHandler.playSoundVariedPitch(AbstractMenu.moveCursor);
+				if (!player.canPause()) {
+					AudioHandler.playSoundVariedPitch(AbstractMenu.error);
+				}
+				else {
+					handlePause();
+					AudioHandler.playSoundVariedPitch(AbstractMenu.moveCursor);
+				}
 			}
 			else if (gameState == GameState.MAP) {
 				gameState = GameState.INVENTORY;
@@ -514,16 +539,22 @@ public class FrameEngine extends ApplicationAdapter {
 		saveFile = new SaveFile(LOG);
 		final int walkDist = 18;
 		if (saveFile.getFlag(SaveFile.CREDITS)){
-			if (saveFile.getFlag("FROST_ACTIVE")) {
-				saveFile.startArea = "FROST_FOREST";
-			}
 			saveFile.setFlag("CREDITS", false);
 			player.walkRight(walkDist);
+			if (saveFile.getFlag("FOUND_GOAL") && !saveFile.getFlag("START_FROST")) {
+				saveFile.setFlag("START_FROST");
+				saveFile.startPosition.set(0.5f, 26f);
+				saveFile.startArea = "FROST_FOREST";
+				player.walkRight(walkDist);
+				if (!inventory.hasItem("MAP")) {
+					inventory.addItem("MAP");
+					saveFile.setFlag("SHOP_MAP");
+				}
+			}
 		}
 		if (!saveFile.exists()){
 			saveFile.startPosition.set(0.5f, 26f);
 			saveFile.startArea = FROST ? "FROST_FOREST" : "FOREST";
-			if (FROST) saveFile.setFlag("FROST_ACTIVE");
 			player.walkRight(walkDist);
 		}
 		gameState = GameState.OVERWORLD;

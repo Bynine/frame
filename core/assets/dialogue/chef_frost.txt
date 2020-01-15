@@ -1,0 +1,18 @@
+*TALK_CHEF_FROST
+[ANIM_1]Ah, hello! Welcome, welcome.[ANIM_0] Please stay as long as you like. My home is your home.
+Say, please tell me... is what's happening here also happening further West? This snow, I mean.
+>YES, NO
+<YES
+*TALK_CHEF_FROST_SAD
+[ANIM_2]...
+What will I do...
+[SPEAKER=KID1][ANIM_1]What's wrong, dad?
+[ANIM_0]Oh! Nothing, nothing. We're just talking about boring grown-up stuff.
+<NO
+*TALK_CHEF_FROST_HAPPY
+[ANIM_3]Oh, that's good, at least! They'll have somewhere to go.
+&TALK_CHEF_FROST_SAD
+[ANIM_2]There must be something someone can do... right?
+This can't be it...
+&TALK_CHEF_FROST_HAPPY
+[ANIM_2]I hope Bernice won't mind too much... but it's all I can do.

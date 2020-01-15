@@ -1,0 +1,18 @@
+REQUEST
+[ANIM_1][TALK]...[PAUSE]And why should I? I'm so close...!
+You think you can just walk around helping everyone, don't you? [ANIM_2]Quit sticking your nose where it doesn't belong!
+&READ_ABOUT_FLAME1,READ_ABOUT_FLAME2
+REQUEST
+*CONVINCED_LESLIE
+[ANIM_2]... [PAUSE][ANIM_1]How...
+How do you know that? You're bluffing!
+[TALK]...
+... [PAUSE] [ANIM_3]What...
+[NEWNAME=Leslie]What have I been doing... all this time, then?
+I just wanted... I just wanted...
+... [PAUSE][ANIM_4]Yokey...
+She wouldn't have wanted this, would she?
+[ANIM_3]What am I doing... [GIVE_FLAME][ANIM_5][RELAX]Here, take this. Put it back where it belongs.
+&CONVINCED_LESLIE
+[ANIM_5]... You always seem to be in the right place at the right time, huh?
+I guess we're lucky to have you.[ANIM_5]

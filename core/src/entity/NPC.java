@@ -14,7 +14,9 @@ import main.FrameEngine;
 public class NPC extends InteractableEntity{
 
 	protected final ArrayList<ArrayList<Animation<TextureRegion>>> anims;
-	private final String name, dialoguePath, id;
+	private final String name;
+	protected final String dialoguePath;
+	private final String id;
 	protected int defaultAnim, currentAnim = 0;
 
 	public NPC(float x, float y, 
