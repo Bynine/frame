@@ -20,7 +20,9 @@ public class Artist extends NPC {
 			FrameEngine.getSaveFile().setFlag("GROWN_ENOUGH_FLOWERS", true);
 		}
 		happy = FrameEngine.getSaveFile().getFlag("GROWN_ENOUGH_FLOWERS");
-		currentAnim = happy ? 1 : 0;
+		if (imagePath.endsWith("artist")) {
+			currentAnim = happy ? 1 : 0;
+		}
 		defaultAnim = currentAnim;
 		if (!happy){
 			voiceUrl = "dip";

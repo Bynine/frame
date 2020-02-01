@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="350">
+ <tileset firstgid="1" source="tilesets/objects.tsx"/>
+ <tileset firstgid="9" source="tilesets/shop.tsx"/>
+ <tileset firstgid="265" source="tilesets/bookstore.tsx"/>
+ <tileset firstgid="345" source="tilesets/cafe.tsx"/>
+ <tileset firstgid="473" source="tilesets/light.tsx"/>
+ <tileset firstgid="545" source="tilesets/cafe_party.tsx"/>
+ <layer id="1" name="FLOOR" width="25" height="16">
+  <data encoding="csv">
+265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,
+265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,
+265,265,265,265,265,265,265,265,265,265,265,265,9,265,265,265,265,265,265,265,265,265,265,265,265,
+265,265,265,265,265,9,9,9,9,9,382,383,383,383,383,383,383,383,384,265,265,265,265,265,265,
+265,265,265,265,265,265,382,383,383,384,398,399,399,399,399,399,399,399,400,265,265,265,265,265,265,
+265,265,265,265,265,265,398,399,399,400,10,11,11,11,11,11,11,11,12,265,265,265,265,265,265,
+265,265,265,265,265,265,10,11,11,11,59,27,27,27,27,27,59,27,28,265,265,265,265,265,265,
+265,265,265,265,265,265,26,27,27,27,27,27,59,27,27,27,27,27,28,265,265,265,265,265,265,
+265,265,265,265,265,265,26,27,27,59,27,27,27,27,27,27,27,27,28,265,265,265,265,265,265,
+265,265,265,265,265,265,42,43,43,43,27,27,27,27,27,27,59,27,28,265,265,265,265,265,265,
+265,265,265,265,265,265,0,0,0,0,26,59,27,27,27,27,27,27,28,265,265,265,265,265,265,
+265,265,265,265,265,265,42,43,43,43,42,43,43,43,43,43,43,43,44,265,265,265,265,265,265,
+265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,
+265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,
+265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,
+265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265,265
+</data>
+ </layer>
+ <layer id="2" name="MIDDLE" width="25" height="16">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,550,353,354,355,356,357,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,414,415,416,417,0,566,369,370,371,372,373,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,430,431,432,433,0,0,0,0,0,0,0,0,409,0,0,0,0,0,0,
+0,0,0,0,0,0,446,447,448,449,0,0,0,563,564,565,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,578,579,580,581,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,457,458,459,460,0,0,594,595,596,597,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,610,611,612,613,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="3" name="ABOVE" width="25" height="16">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,393,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,547,548,549,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,425,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,441,442,443,444,0,0,578,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="9" name="LIGHT" width="25" height="16" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,524,525,526,527,528,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,532,533,534,535,536,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,540,541,542,543,544,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,473,474,475,476,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,481,482,483,484,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,489,490,491,492,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,497,498,499,500,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,537,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="4" name="OVERHEAD" width="25" height="16">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,587,588,589,587,588,589,587,588,589,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,587,589,587,588,589,587,588,589,587,588,589,587,589,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,587,589,587,588,589,587,588,589,587,588,589,587,589,0,0,0,0,0,0,
+0,0,0,0,0,0,138,140,138,139,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,265,265,265,265,587,588,589,587,588,589,587,588,589,0,0,0,0,0,0,
+0,0,0,0,0,0,9,9,9,9,138,140,139,0,0,0,137,138,138,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="5" name="SLOPES" visible="0"/>
+ <objectgroup color="#32e3c6" id="6" name="TERRAIN" visible="0">
+  <object id="224" name="wood" x="0" y="0" width="800" height="512"/>
+ </objectgroup>
+ <objectgroup color="#50734a" id="7" name="COLLISION" visible="0" opacity="0.5">
+  <object id="281" x="192" y="248" width="120" height="32"/>
+  <object id="282" x="192" y="96" width="120" height="120"/>
+  <object id="283" x="320" y="96" width="288" height="64"/>
+  <object id="284" x="192" y="320" width="128" height="64"/>
+  <object id="285" x="112" y="96" width="80" height="288"/>
+  <object id="286" x="112" y="384" width="336" height="64"/>
+  <object id="288" x="480" y="384" width="128" height="64"/>
+  <object id="289" x="608" y="96" width="80" height="352"/>
+  <object id="299" x="576" y="160" width="32" height="24"/>
+  <object id="309" x="312" y="96" width="8" height="96"/>
+  <object id="327" x="192" y="216" width="32" height="32"/>
+  <object id="331" x="320" y="376" width="88" height="8"/>
+  <object id="332" x="520" y="376" width="88" height="8"/>
+  <object id="333" x="192" y="312" width="120" height="8"/>
+  <object id="336" x="392" y="232" width="56" height="64"/>
+  <object id="337" x="416" y="192" width="96" height="40"/>
+  <object id="338" x="448" y="232" width="60" height="72"/>
+ </objectgroup>
+ <objectgroup id="8" name="ENTITIES" opacity="0.64">
+  <object id="307" name="text" gid="1" x="352" y="160" width="32" height="40">
+   <properties>
+    <property name="TEXT" value="It's a menu. Today's special appears to be ... cake!"/>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="311" name="text" gid="1" x="200" y="216" width="112" height="64">
+   <properties>
+    <property name="TEXT">The scent of coffee wafting from this shelf is extremely strong.
+You feel more awake just being near it.</property>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="312" name="text" gid="1" x="584" y="176" width="32" height="32">
+   <properties>
+    <property name="TEXT">Even though it's sitting in a corner, you feel as if this plant has a commanding presence.
+Good job, plant.</property>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="313" name="SECRET" gid="2" x="584" y="176" width="32" height="32">
+   <properties>
+    <property name="AMOUNT" value="1"/>
+    <property name="FLAG" value="SECRET_CAFE_POT"/>
+    <property name="TYPE" value="SECRET"/>
+   </properties>
+  </object>
+  <object id="319" name="text" gid="1" x="328" y="152" width="16" height="16">
+   <properties>
+    <property name="TEXT" value="Something about this section of wallpaper feels... off."/>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="322" name="cafe painting" gid="1" x="544" y="160" width="32" height="48">
+   <properties>
+    <property name="ID" value="cafe"/>
+    <property name="TEXT">It's a full body portrait of the cafe's owner.
+She seems to be depicted a fair bit younger here...
+You decide to not bring that up.</property>
+    <property name="TYPE" value="PAINTING"/>
+   </properties>
+  </object>
+  <object id="326" name="smoke" gid="3" x="200" y="216" width="16" height="16">
+   <properties>
+    <property name="DURATION" value="60"/>
+    <property name="GRAPHIC" value="smoke"/>
+    <property name="INTERVAL" value="66"/>
+    <property name="TYPE" value="emitter"/>
+   </properties>
+  </object>
+  <object id="328" name="bubbling audio" gid="5" x="200" y="216" width="16" height="16">
+   <properties>
+    <property name="AUDIO" value="bubbling"/>
+    <property name="ID" value="BUBBLING"/>
+    <property name="TYPE" value="AUDIO"/>
+   </properties>
+  </object>
+  <object id="329" name="text" gid="1" x="192" y="232" width="24" height="32">
+   <properties>
+    <property name="TEXT">This coffee is just about ready.
+The aroma reminds you of pumpkins, or maybe apple strudel.</property>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="334" name="text" gid="1" x="192" y="280" width="120" height="32">
+   <properties>
+    <property name="APPEAR" value="!ENTERED_SHRINE"/>
+    <property name="TEXT">Delicious, freshly baked pastries crowd this counter.
+Maybe she wouldn't notice if you took just one...
+On second thought, maybe not.</property>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="339" name="conch" gid="1" x="480" y="272" width="24" height="24">
+   <properties>
+    <property name="DIALOGUE" value="conch"/>
+    <property name="ID" value="CONCH"/>
+    <property name="IMAGE" value="conch"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="340" name="grub1" gid="1" x="480" y="216" width="24" height="24">
+   <properties>
+    <property name="DIALOGUE" value="grub1_party"/>
+    <property name="ID" value="GRUB1"/>
+    <property name="IMAGE" value="grub1_party"/>
+    <property name="LAYER" value="FRONT"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="341" name="pumpkin" gid="1" x="312" y="232" width="24" height="24">
+   <properties>
+    <property name="DIALOGUE" value="pumpkin_party"/>
+    <property name="ID" value="PUMPKIN"/>
+    <property name="IMAGE" value="pumpkin"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="342" name="artist" gid="1" x="336" y="216" width="24" height="24">
+   <properties>
+    <property name="DIALOGUE" value="artist_party"/>
+    <property name="ID" value="ARTIST"/>
+    <property name="IMAGE" value="artist"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="343" name="shopkeeper" gid="1" x="512" y="208" width="24" height="24">
+   <properties>
+    <property name="DIALOGUE" value="shopkeeper_party"/>
+    <property name="ID" value="SHOPKEEPER"/>
+    <property name="IMAGE" value="shopkeeper"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="344" name="librarian" gid="1" x="576" y="240" width="24" height="24">
+   <properties>
+    <property name="DIALOGUE" value="librarian_party"/>
+    <property name="ID" value="LIBRARIAN"/>
+    <property name="IMAGE" value="librarian"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="345" name="doll" gid="1" x="288" y="304" width="24" height="24">
+   <properties>
+    <property name="APPEAR" value="TALK_DOLL_HAPPY"/>
+    <property name="DIALOGUE" value="doll_party"/>
+    <property name="ID" value="FREBLOVE"/>
+    <property name="IMAGE" value="doll"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="347" name="guitarist_sad" gid="1" x="448" y="176" width="32" height="24">
+   <properties>
+    <property name="DIALOGUE" value="guitarist_party"/>
+    <property name="ID" value="GUITARIST"/>
+    <property name="IMAGE" value="guitarist"/>
+    <property name="LAYER" value="FRONT"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="348" name="villager" gid="1" x="576" y="304" width="32" height="24">
+   <properties>
+    <property name="APPEAR" value="TALK_VILLAGER_SHY2"/>
+    <property name="DIALOGUE" value="villager_party"/>
+    <property name="ID" value="VILLAGER"/>
+    <property name="IMAGE" value="villager"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="349" name="finish2" gid="8" x="440" y="416" width="48" height="24">
+   <properties>
+    <property name="TYPE" value="FINISH2"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

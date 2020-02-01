@@ -1,0 +1,7 @@
+Taste the stew?
+>YES,NO
+<YES
+It's rich and hearty! The vegetables combine with the broth in such a pleasing way... your taste buds have never been so at home!
+[SPEAKER=CHEF][ANIM_3]Not too bad, huh? Haha![DEFAULT_ANIM]
+<NO
+[SPEAKER=CHEF][ANIM_2]...

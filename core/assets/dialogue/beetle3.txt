@@ -11,3 +11,12 @@ And as a beetle, you can trust my intuition.
 Ahh, I can see you have been following many secret paths.
 Was your curiosity rewarded? Have you found what you are looking for?
 Always keep looking for new directions to search in. You are never stuck on one path.
+&FOUND_FLAME
+*TALK_BEETLE3_FLAME
+Ah, hello, my little friend! I see your curiosity runs deep.
+Well, I'm afraid I'm all you get for traipsing all the way up here. Hope that's not too disappointing.
+&TALK_BEETLE3_FLAME
+In this world... There are "hidden paths". I don't just mean the kind you find in the woods, either!
+There are directions we can go in, and decisions that we can make, which aren't obvious at first.
+Maybe we subconsciously avoid seeing them because they'll be difficult or uncomfortable. But we must look for them.
+Because they can bring us to better places.

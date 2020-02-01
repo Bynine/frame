@@ -5,10 +5,12 @@ import java.util.Map;
 
 import com.badlogic.gdx.math.Vector2;
 
+import main.ItemDescription;
+
 /**
  * Holds a name to be displayed, an area region, and an output to be evaluated.
  */
-public class MenuOption {
+public class MenuOption implements Comparable<MenuOption>{
 	
 	private final Vector2 dim;
 	private final String name;
@@ -43,6 +45,29 @@ public class MenuOption {
 	
 	public void setProperty(String key, String value) {
 		properties.put(key, value);
+	}
+
+	@Override
+	public int compareTo(MenuOption mo2) {
+		if (null != output && null != mo2.output && output instanceof ItemDescription && mo2.output instanceof ItemDescription) {
+			int comparison = 0;
+			ItemDescription thisDesc = (ItemDescription)output;
+			ItemDescription thatDesc = (ItemDescription)mo2.output;
+			if (thisDesc.hasAttribute("ACTION")) {
+				comparison -= 2;
+			}
+			if (thatDesc.hasAttribute("ACTION")){
+				comparison += 2;
+			}
+			if (thisDesc.hasAttribute("TREASURE")) {
+				comparison -= 1;
+			}
+			if (thatDesc.hasAttribute("TREASURE")) {
+				comparison += 1;
+			}
+			return comparison;
+		}
+		return 0;
 	}
 
 }

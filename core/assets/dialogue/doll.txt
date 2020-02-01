@@ -26,3 +26,8 @@ Howdy, ol' buddy ol' pal!
 Hi again, ol' buddy ol' pal! 
 So, what're your plans? Are you head-ing off, or will you stay around?
 [ANIM_1]Don't go too far, now... Who am I going to rely on if I lose my head again? Hahaha!
+&TALK_DOLL_HAPPY,FOUND_FLAME,!TALK_DOLL_FLAME
+*TALK_DOLL_FLAME
+[ANIM_1]Hey there, ol' buddy! How's it hangin'?
+[ANIM_0]Think I'm gonna [SPEED=2]head[NSPEED] on over to Jackie's soon and grab a cuppa joe. Help clear my [SPEED=2]head[NSPEED], you know?
+...Get it?

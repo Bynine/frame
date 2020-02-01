@@ -22,7 +22,7 @@ public class Bird extends Critter {
 	private int flightDir = 0;
 	private final Random random;
 	private Timer wanderTimer = new Timer(45);
-	private final Sound startled = Gdx.audio.newSound(Gdx.files.internal("sfx/bird_startled.wav"));
+	private final Sound startled;
 	
 	private final Rectangle noticeBox = new Rectangle(
 				0,
@@ -37,6 +37,12 @@ public class Bird extends Critter {
 		ground = new TextureRegion(new Texture("sprites/critters/" + type + ".png"));
 		hop = new TextureRegion(new Texture("sprites/critters/" + type + "hop.png"));
 		fly = Animator.createAnimation(5, "sprites/critters/" + type + "fly.png", 2, 1);
+		if (type.equals("gull")) {
+			startled = Gdx.audio.newSound(Gdx.files.internal("sfx/gull_startled.wav"));
+		}
+		else {
+			startled = Gdx.audio.newSound(Gdx.files.internal("sfx/bird_startled.wav"));
+		}
 		timerList.add(wanderTimer);
 		friction = 0.6f;
 		random = new Random((long) (Math.random()*100));
@@ -49,7 +55,8 @@ public class Bird extends Critter {
 		if (flying){
 			velocity.x += (flightDir * acceleration/1.5f) + (flightDir * 0.6) * FrameEngine.elapsedTime;
 			zPosition += acceleration * Math.pow(reactTimer.getCounter(), 0.45) * FrameEngine.elapsedTime;
-			if (zPosition > 48) layer = Layer.OVERHEAD;
+			if (zPosition > 24) layer = Layer.FRONT;
+			else if (zPosition > 48) layer = Layer.OVERHEAD;
 		}
 		else{
 			if (wanderTimer.timeUp()){

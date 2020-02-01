@@ -22,14 +22,16 @@ public class Mailbox extends AbstractMenu {
 		perColumn = 5; 
 		String[] letters = letterReader.loadAllData(TSVReader.LETTER_URL);
 		SaveFile save = FrameEngine.getSaveFile();
+		int ii = 0;
 		for (String letterString: letters) {
+			++ii;
 			String[] letterData = letterString.split("\t");
 			String[] saveData = letterData[1].split(TSVReader.short_split);
 			boolean hasLetter = true;
 			for (String flag: saveData) {
 				if (!save.getFlag(flag)) hasLetter = false;
 			}
-			if (FrameEngine.LETTERS) hasLetter = true;
+			if (FrameEngine.LETTERS && ii < 3) hasLetter = true;
 			if (hasLetter) {
 				final String id = letterData[0];
 				String read = id + "_LETTER_READ";

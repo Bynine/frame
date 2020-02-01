@@ -132,7 +132,7 @@ public class AudioHandler {
 				}
 			}
 			if (!added) {
-				AudioSource source = new AudioSource(location.audioFileName, location.id);
+				AudioSource source = new AudioSource(location.audioFileName, location.id, location.volume);
 				source.addLocation(location);
 				audioSources.add(source);
 			}
@@ -165,11 +165,13 @@ public class AudioHandler {
 
 		private final HashSet<AudioLocation> sourcelets = new HashSet<>();
 		private final String id;
+		private final float volumeMod;
 		private final Music audio;
 
-		AudioSource(String audioFileName, String id){
+		AudioSource(String audioFileName, String id, float volume){
 			audio = Gdx.audio.newMusic(Gdx.files.internal("music/" + audioFileName + ".ogg"));
 			this.id = id;
+			this.volumeMod = volume;
 		}
 
 		float getVolume(){
@@ -178,7 +180,7 @@ public class AudioHandler {
 				float sourceletVolume = AudioHandler.getVolume(sourcelet.getPosition());
 				if (sourceletVolume > volume) volume = sourceletVolume;
 			}
-			return volume;
+			return volumeMod * volume;
 		}
 
 		void addLocation(AudioLocation sourcelet){

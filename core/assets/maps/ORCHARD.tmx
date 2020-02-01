@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="70" height="90" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="677">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="70" height="90" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="687">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/forest.tsx"/>
  <tileset firstgid="265" source="tilesets/trees.tsx"/>
@@ -794,7 +794,7 @@ It's too rusty to pick up, though. It would probably break if you even touched i
     <property name="TYPE" value="BIRD"/>
    </properties>
   </object>
-  <object id="377" name="bird" gid="4" x="944" y="2280" width="32" height="32">
+  <object id="377" name="bird" gid="4" x="976" y="2296" width="32" height="32">
    <properties>
     <property name="APPEAR" value="ENTERED_SHRINE"/>
     <property name="TYPE" value="BIRD"/>
@@ -1117,7 +1117,7 @@ You can't see any entrances to nefarious places, which is good.</property>
   </object>
   <object id="600" name="beetle1" gid="1" x="832" y="1368" width="32" height="24">
    <properties>
-    <property name="APPEAR" value="ENTERED_SHRINE"/>
+    <property name="APPEAR" value="ENTERED_SHRINE,!FOUND_FLAME"/>
     <property name="DIALOGUE" value="beetle1"/>
     <property name="ID" value="BEETLE"/>
     <property name="IMAGE" value="beetle"/>
@@ -1354,7 +1354,7 @@ You suddenly become self aware and hope nobody was watching from inside.</proper
     <property name="TYPE" value="CROW"/>
    </properties>
   </object>
-  <object id="673" name="crow" gid="4" x="536" y="2016" width="32" height="32">
+  <object id="673" name="crow" gid="4" x="376" y="1848" width="32" height="32">
    <properties>
     <property name="APPEAR" value="CAFE_REWARD"/>
     <property name="TYPE" value="CROW"/>
@@ -1376,6 +1376,75 @@ You suddenly become self aware and hope nobody was watching from inside.</proper
    <properties>
     <property name="APPEAR" value="FOUND_FLAME"/>
     <property name="TYPE" value="OWL"/>
+   </properties>
+  </object>
+  <object id="677" name="firefly" gid="4" x="352" y="2200" width="32" height="32">
+   <properties>
+    <property name="APPEAR" value="FOUND_FLAME"/>
+    <property name="TYPE" value="FIREFLY"/>
+   </properties>
+  </object>
+  <object id="678" name="firefly" gid="4" x="1640" y="752" width="32" height="32">
+   <properties>
+    <property name="APPEAR" value="GRUB_REWARD"/>
+    <property name="TYPE" value="FIREFLY"/>
+   </properties>
+  </object>
+  <object id="679" name="firefly" gid="4" x="336" y="464" width="32" height="32">
+   <properties>
+    <property name="APPEAR" value="WORLD_REWARD"/>
+    <property name="TYPE" value="FIREFLY"/>
+   </properties>
+  </object>
+  <object id="680" name="firefly" gid="4" x="1024" y="1696" width="32" height="32">
+   <properties>
+    <property name="APPEAR" value="CURSE_REWARD"/>
+    <property name="TYPE" value="FIREFLY"/>
+   </properties>
+  </object>
+  <object id="681" name="grubmom" gid="1" x="1312" y="1544" width="144" height="78">
+   <properties>
+    <property name="APPEAR" value="FOUND_FLAME"/>
+    <property name="DIALOGUE" value="grubmom"/>
+    <property name="ID" value="GRUBMOM"/>
+    <property name="IMAGE" value="grubmom_butterfly"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="682" name="grub1" gid="1" x="1440" y="1640" width="32" height="32">
+   <properties>
+    <property name="APPEAR" value="FOUND_FLAME"/>
+    <property name="DIALOGUE" value="grub1_big"/>
+    <property name="ID" value="GRUB1"/>
+    <property name="IMAGE" value="grub1_big"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="683" name="grub2" gid="1" x="1384" y="1696" width="32" height="32">
+   <properties>
+    <property name="APPEAR" value="FOUND_FLAME"/>
+    <property name="DIALOGUE" value="grub2_big"/>
+    <property name="ID" value="GRUB2"/>
+    <property name="IMAGE" value="grub2_big"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="684" name="grub3" gid="1" x="1288" y="1592" width="32" height="32">
+   <properties>
+    <property name="APPEAR" value="FOUND_FLAME"/>
+    <property name="DIALOGUE" value="grub3_big"/>
+    <property name="ID" value="GRUB3"/>
+    <property name="IMAGE" value="grub3_big"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="686" name="beetle4" gid="1" x="864" y="952" width="32" height="24">
+   <properties>
+    <property name="APPEAR" value="FOUND_FLAME"/>
+    <property name="DIALOGUE" value="beetle4"/>
+    <property name="ID" value="BEETLE"/>
+    <property name="IMAGE" value="beetle4"/>
+    <property name="TYPE" value="NPC"/>
    </properties>
   </object>
  </objectgroup>

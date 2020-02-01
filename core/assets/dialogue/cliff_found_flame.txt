@@ -1,0 +1,9 @@
+*TALK_CLIFF_FLAME
+Hey, guess what? I think I know what's causing this winter!
+Right up ahead is a mountain called Mount Sabi, and at the top there's-[PAUSE][ANIM_1]oh.
+If you're coming down from the mountain, and the water's not frozen anymore, then you solved the issue already, right?
+Shoot.
+[ANIM_0]Well, anyway, if you wanna get back to mainland, you can feel free to take my canoe. I want to explore this place!
+&TALK_CLIFF_FLAME
+By the way, great job! You're a pro at this quest solving stuff.
+Guess I have to act quicker next time...!

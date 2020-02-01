@@ -1,0 +1,8 @@
+*TALK_WARRIOR_FLAME
+Ho, friend. I see you've saved Wabika from that damnable winter. Most commendable.
+[ANIM_1]I suppose you're surprised to see me out and about? Do not fear, I did not escape. I've atoned enough and now I am free.
+[ANIM_0]It is time I left... and see the world in a different light than before.
+&TALK_WARRIOR_FLAME
+The most important thing I learned while meditating...
+It's impossible to go backward through time. We can only learn from our past, then look forward.
+[ANIM_1]I shall go and do as you've done. That is the right path for me now.

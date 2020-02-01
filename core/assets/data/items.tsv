@@ -13,8 +13,8 @@ TREASURE6	Ragged Doll	TREASURE	Well loved plush doll with a familiar design	1
 SHOVEL	shovel	NONE	Unsurprisingly good at digging	3
 WATERINGCAN	watering can	NONE	Give seeds a nice drink	3
 HAMMER	hammer	NONE	Sturdy old hammer	0
-COFFEE	Express Espresso	NONE	Use to zip forward!	0
-BOOK	ancient book	NONE	Touching it lets you understand old text	0
+COFFEE	Express Espresso	ACTION	Use to zip forward!	0
+BOOK	ancient book	NONE	Having it lets you understand old text	0
 				
 SHELL1	nice shell	SHELL	The red color is charming	2
 SHELL2	cool shell	SHELL	The yellow color is soothing	2
@@ -35,8 +35,9 @@ ORDER2	spiced pumpkin cider	ORDER	Smells unbelievably good	1
 ORDER3	red-bean coffee	ORDER	What a striking color!	1
 				
 GHOST	ghost	NONE	GHOST	0
-SNAIL	Helpful Snail	NONE	Tells you about items you've missed. Press to toggle!	1
-MAP	Wabika map	NONE	Map of Wabika. Press to view!	0
+SNAIL	Helpful Snail	ACTION	Tells you about items you've missed. Press to toggle!	1
+MAP	Wabika map	ACTION	Map of Wabika. Press to view!	0
+SHELLPHONE	Shell Phone	ACTION	Remote communication device from the Freb King	999
 
 COCOAHOT	pipin' hot cocoa	HOT	Cup of steaming hot cocoa. Move quick!	0
 COCOACOLD	cold cocoa	NONE	It's gone cold...	0
@@ -45,6 +46,7 @@ FOOD	lunch	NONE	Tasty lunch packed with care in cloth	0
 PIECE1	odd shard	SHARD	Shard	1
 PIECE2	weird shard	SHARD	Shard	1
 PIECE3	strange shard	SHARD	Shard	1
+PIECEKEY	key	KEY	Ornate key created from pieces	1
 
 KEY1	key	KEY	Looks old but still usable	0
 KEY2	key	KEY	Looks old but still usable	0

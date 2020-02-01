@@ -7,7 +7,7 @@ Man, I wish I could get up that cliff behind us and see what's up there. But I c
 &FOUND_GOAL
 *TALK_GETUPSPRINGCLIFF
 Hey, you'll never believe it! I found out how to get up around the cliff!
-There's a path just[SPEED=4] - [NSPEED][ANIM_1]oh.
+There's a path just-[PAUSE][ANIM_1]oh.
 If you're up here, then you already know about it, right?
 ... Dang.
 &TALK_GETUPSPRINGCLIFF

@@ -14,6 +14,7 @@ public class Finish extends InteractableEntity {
 		interactHitbox.setSize(0);
 		hitbox.setSize(width, height);
 		collides = false;
+		canInteract = false;
 	}
 
 	@Override

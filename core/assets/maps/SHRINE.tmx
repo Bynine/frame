@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="312">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="313">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/shop.tsx"/>
  <tileset firstgid="265" source="tilesets/shrine_interior.tsx"/>
@@ -194,6 +194,13 @@
    <properties>
     <property name="ID" value="STAND4"/>
     <property name="TYPE" value="FIRE"/>
+   </properties>
+  </object>
+  <object id="312" name="shrine hint trigger" gid="1" x="360" y="376" width="80" height="32">
+   <properties>
+    <property name="APPEAR" value="FOUND_GOAL,!GOT_ALL_TREASURES,!QUEST_HELPER"/>
+    <property name="DIALOGUE" value="shrine_hint"/>
+    <property name="TYPE" value="DIALOGUE_TRIGGER"/>
    </properties>
   </object>
  </objectgroup>

@@ -26,3 +26,7 @@ With those serving skills, you should work here full time! Jackie sure needs the
 Say... you have a bit of a different look about you.
 Like you've gained a bit of experience. [ANIM_1]Good for you! Hohoho!
 Just don't get too experienced or you'll turn into an old crone like me! [ANIM_1]Hohoho!
+&FOUND_FLAME,!TALK_CUSTOMER2_FOUND_FLAME
+*TALK_CUSTOMER2_FOUND_FLAME
+Ahh, I'm glad it's warmed up again... I can't do much when it's cold!
+If that went any longer I'd have turned into a popsicle! [ANIM_1]Hohoho!

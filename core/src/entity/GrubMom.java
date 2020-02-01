@@ -26,7 +26,7 @@ public class GrubMom extends NPC {
 	}
 	
 	private boolean happy(){
-		return NUM_GRUBS_STILL_LOST == 0;
+		return !FrameEngine.getSaveFile().getFlag("FOUND_FLAME") && NUM_GRUBS_STILL_LOST == 0;
 	}
 	
 	private void checkGrubsLost(int num){

@@ -72,6 +72,7 @@ public class GraphicsHandler {
 	arrowUp = new TextureRegion(new Texture("sprites/gui/arrow_up.png")),
 	arrowDown = new TextureRegion(new Texture("sprites/gui/arrow_down.png")),
 	heart = new TextureRegion(new Texture("sprites/gui/heart.png")),
+	action = new TextureRegion(new Texture("sprites/gui/action.png")),
 	acorn = new TextureRegion(new Texture("sprites/items/acorn.png")),
 	title = new TextureRegion(new Texture("sprites/gui/title.png")),
 	logo = new TextureRegion(new Texture("sprites/gui/logo.png")),
@@ -88,7 +89,14 @@ public class GraphicsHandler {
 	selectedTextboxCorner = new TextureRegion(new Texture("sprites/gui/textbox_corner_selected.png")),
 	textboxTop = new TextureRegion(new Texture("sprites/gui/textbox_top.png")),
 	textboxSide = new TextureRegion(new Texture("sprites/gui/textbox_side.png")),
-	textboxCenter = new TextureRegion(new Texture("sprites/gui/textbox_center.png"));
+	textboxCenter = new TextureRegion(new Texture("sprites/gui/textbox_center.png")),
+	textboxBeginFrost = new TextureRegion(new Texture("sprites/gui/textbox_begin_frost.png")),
+	textboxMidFrost = new TextureRegion(new Texture("sprites/gui/textbox_mid_frost.png")),
+	textboxCornerFrost = new TextureRegion(new Texture("sprites/gui/textbox_corner_frost.png")),
+	selectedTextboxCornerFrost = new TextureRegion(new Texture("sprites/gui/textbox_corner_selected_frost.png")),
+	textboxTopFrost = new TextureRegion(new Texture("sprites/gui/textbox_top_frost.png")),
+	textboxSideFrost = new TextureRegion(new Texture("sprites/gui/textbox_side_frost.png")),
+	textboxCenterFrost = new TextureRegion(new Texture("sprites/gui/textbox_center_frost.png"));
 	private final ArrayList<Animation<TextureRegion>> 
 		gotMail = Animator.createAnimation(30, "sprites/gui/got_mail.png", 2, 1);
 	Timer selectTimer = new Timer(10);
@@ -503,6 +511,7 @@ public class GraphicsHandler {
 		int ii = 0;
 		int stipend = menu.getPage() * Inventory.WIDTH;
 		Vector2 range = new Vector2(stipend, stipend + Inventory.WIDTH * Inventory.HEIGHT);
+		boolean isAction = false;
 		for (MenuOption button: menu.getList()){
 			if (range.x <= ii && range.y > ii){
 				ItemDescription desc = (ItemDescription)button.getOutput();
@@ -530,6 +539,10 @@ public class GraphicsHandler {
 					if (desc.hasAttribute("TREASURE")){
 						batch.draw(heart, iconX, iconY);
 					}
+					if (desc.hasAttribute("ACTION")) {
+						if (selected) isAction = true;
+						batch.draw(action, iconX, iconY);
+					}
 					if (desc.id.equals("SNAIL")){
 						batch.draw(FrameEngine.snailActive ? snailOn : snailOff, iconX, iconY);
 					}
@@ -547,7 +560,11 @@ public class GraphicsHandler {
 			batch.draw(arrowUp, center, FrameEngine.TILE * 8.875f);
 		}
 		batch.end();
-		drawEnterToExit();
+		if (isAction) {
+			drawSpaceToUse();
+		} else {
+			drawEnterToExit();
+		}
 		drawItemDescription(menu, price);
 	}
 
@@ -610,7 +627,11 @@ public class GraphicsHandler {
 	 * Updates the camera in the overworld to follow the player.
 	 */
 	private void updateWorldCam(){
-		offset = offset.lerp(offsetTarget, 0.06f);
+		float lerp = 0.06f;
+		if (offsetTarget.len() > 200) {
+			lerp = 0.035f;
+		}
+		offset = offset.lerp(offsetTarget, lerp);
 		final float min = 0.1f;
 		if (Math.abs(offset.x) < min) offset.x = 0;
 		if (Math.abs(offset.y) < min) offset.y = 0;
@@ -753,9 +774,10 @@ public class GraphicsHandler {
 			int x_tiles, int y_tiles,
 			int center, boolean selected){
 		batch.begin();
+		boolean frost = FrameEngine.getSaveFile().getFlag("START_FROST") && !FrameEngine.getSaveFile().getFlag("FOUND_FLAME");
 		for(int xx = 0; xx < x_tiles; ++xx){
 			for (int yy = 0; yy < y_tiles; ++yy){
-				TextureRegion tile = getProperTile(x_tiles, y_tiles, xx, yy, selected);
+				TextureRegion tile = getProperTile(x_tiles, y_tiles, xx, yy, selected, frost);
 				batch.draw(tile, 
 						position_x + (xx + center) * FrameEngine.TILE, 
 						position_y + yy * FrameEngine.TILE);
@@ -801,38 +823,42 @@ public class GraphicsHandler {
 	/**
 	 * Gets the correct tile for the position in the textbox (e.g. upper right corner, left side...)
 	 */
-	private TextureRegion getProperTile(int x_tiles, int y_tiles, int xx, int yy, boolean selected){
+	private TextureRegion getProperTile(int x_tiles, int y_tiles, int xx, int yy, boolean selected, boolean frost){
 		TextureRegion tile;
 		if (y_tiles == 1){
 			if (xx == 0){
-				tile = textboxBegin;
+				tile = frost ? textboxBeginFrost : textboxBegin;
 				tile.flip(tile.isFlipX(), false);
 			}
 			else if (xx == x_tiles-1){
-				tile = textboxBegin;
+				tile = frost ? textboxBeginFrost : textboxBegin;
 				tile.flip(!tile.isFlipX(), false);
 			}
 			else{
-				tile = textboxMid;
+				tile = frost ? textboxMidFrost : textboxMid;
 			}
 		}
 		else{
 			boolean x_side = (xx == 0 || xx == x_tiles - 1);
 			boolean y_side = (yy == 0 || yy == y_tiles - 1);
 			if (x_side && y_side){
-				tile = selected ? selectedTextboxCorner : textboxCorner;
+				if (selected) {
+					tile = frost ? selectedTextboxCornerFrost : selectedTextboxCorner;
+				}else {
+					tile = frost ? textboxCornerFrost : textboxCorner;
+				}
 				tile.flip(xx != 0 ^ tile.isFlipX(), yy == 0 ^ tile.isFlipY());
 			}
 			else if (x_side){
-				tile = textboxSide;
+				tile = frost ? textboxSideFrost : textboxSide;
 				tile.flip(xx != 0 ^ tile.isFlipX(), false);
 			}
 			else if (y_side){
-				tile = textboxTop;
+				tile = frost ? textboxTopFrost : textboxTop;
 				tile.flip(false, yy == 0 ^ tile.isFlipY());
 			}
 			else{
-				return textboxCenter;
+				return frost ? textboxCenterFrost : textboxCenter;
 			}
 		}
 		return tile;
@@ -978,9 +1004,17 @@ public class GraphicsHandler {
 		batch.end();
 		drawEnterToExit();
 	}
+	
+	private void drawSpaceToUse() {
+		drawInfo("Press SPACE to use!");
+	}
 
 	private void drawEnterToExit() {
-		drawText("Press ENTER to exit.", 
+		drawInfo("Press ENTER to exit.");
+	}
+	
+	private void drawInfo(String msg) {
+		drawText(msg, 
 				new Vector2(Gdx.graphics.getWidth()/(1.8f/ZOOM), Gdx.graphics.getHeight()*ZOOM - (FrameEngine.TILE*2)), 
 				new Vector2(8, 2), true);
 	}

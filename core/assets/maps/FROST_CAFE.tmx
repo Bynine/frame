@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="344">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="346">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/shop.tsx"/>
  <tileset firstgid="265" source="tilesets/bookstore.tsx"/>
@@ -207,13 +207,6 @@ You decide to not bring that up.</property>
     <property name="TYPE" value="AUDIO"/>
    </properties>
   </object>
-  <object id="334" name="text" gid="1" x="192" y="280" width="120" height="32">
-   <properties>
-    <property name="APPEAR" value="!ENTERED_SHRINE"/>
-    <property name="TEXT" value="A single stale croissant sits on the countertop. It almost makes you want to cry in its loneliness."/>
-    <property name="TYPE" value="DESC"/>
-   </properties>
-  </object>
   <object id="335" name="coffee" gid="1" x="336" y="184" width="32" height="24">
    <properties>
     <property name="DIALOGUE" value="coffee_frost"/>
@@ -224,6 +217,7 @@ You decide to not bring that up.</property>
   </object>
   <object id="336" name="dog" gid="1" x="480" y="232" width="24" height="16">
    <properties>
+    <property name="APPEAR" value="!ARTIST_FREED"/>
     <property name="DIALOGUE" value="dog_frost"/>
     <property name="ID" value="DOG"/>
     <property name="IMAGE" value="dog_frost"/>
@@ -246,8 +240,9 @@ You decide to not bring that up.</property>
     <property name="TYPE" value="DIALOGUE_TRIGGER"/>
    </properties>
   </object>
-  <object id="339" name="guitar" gid="5" x="528" y="288" width="32" height="32">
+  <object id="339" name="guitar" gid="5" x="568" y="288" width="32" height="32">
    <properties>
+    <property name="APPEAR" value="ARTIST_FREED"/>
     <property name="AUDIO" value="johnnoodle"/>
     <property name="ID" value="GUITAR"/>
     <property name="TYPE" value="AUDIO"/>
@@ -255,6 +250,7 @@ You decide to not bring that up.</property>
   </object>
   <object id="340" name="guitarist" gid="1" x="528" y="272" width="32" height="24">
    <properties>
+    <property name="APPEAR" value="ARTIST_FREED"/>
     <property name="DIALOGUE" value="guitarist_frost"/>
     <property name="ID" value="GUITARIST"/>
     <property name="IMAGE" value="guitarist"/>
@@ -269,6 +265,25 @@ You decide to not bring that up.</property>
     <property name="ID" value="PUMPKIN"/>
     <property name="IMAGE" value="pumpkin_love"/>
     <property name="INTERACTYDISP" value="-32"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="344" name="guitarist_sad" gid="1" x="528" y="272" width="32" height="24">
+   <properties>
+    <property name="APPEAR" value="!ARTIST_FREED"/>
+    <property name="DIALOGUE" value="guitarist_frost"/>
+    <property name="ID" value="GUITARIST"/>
+    <property name="IMAGE" value="guitarist_sad"/>
+    <property name="LAYER" value="FRONT"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="345" name="dog" gid="1" x="512" y="232" width="24" height="16">
+   <properties>
+    <property name="APPEAR" value="ARTIST_FREED"/>
+    <property name="DIALOGUE" value="dog"/>
+    <property name="ID" value="DOG"/>
+    <property name="IMAGE" value="dog"/>
     <property name="TYPE" value="NPC"/>
    </properties>
   </object>

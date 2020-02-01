@@ -40,7 +40,7 @@ public class MainMenu extends AbstractMenu {
 		} break;
 		case CONTINUE:{
 			if (exists){
-				FrameEngine.continueGame();
+				FrameEngine.continueGame(new SaveFile());
 			}
 			else{
 				AudioHandler.playSoundVariedPitch(error);

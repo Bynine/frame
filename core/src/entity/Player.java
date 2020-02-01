@@ -27,6 +27,7 @@ public class Player extends Entity{
 	stunTimer = new Timer(30),
 	stepTimer = new Timer(stepTime * 2),
 	walkRightTimer = new Timer(30),
+	walkUpTimer = new Timer(15),
 	coffeeTimer = new Timer(runTime + cooldownTime);
 	private static ImageState imageState = ImageState.NORMAL;
 	private boolean rightStep = true;
@@ -85,7 +86,7 @@ public class Player extends Entity{
 
 	public Player(float x, float y) {
 		super(x, y);
-		timerList.addAll(Arrays.asList(invincibility, stunTimer, stepTimer, walkRightTimer, coffeeTimer));
+		timerList.addAll(Arrays.asList(invincibility, stunTimer, stepTimer, walkRightTimer, walkUpTimer, coffeeTimer));
 		shadow = new TextureRegion(new Texture("sprites/player/shadow.png"));
 		EntityHandler.addEntity(smokeEmitter);
 		setRight();
@@ -117,6 +118,9 @@ public class Player extends Entity{
 		}
 		else if (!walkRightTimer.timeUp()){
 			input.set(1, 0);
+		}
+		else if (!walkUpTimer.timeUp()){
+			input.set(0, 1);
 		}
 		else if (FrameEngine.canControlPlayer()){
 			input.set(FrameEngine.getInputHandler().getXInput(), FrameEngine.getInputHandler().getYInput());
@@ -333,6 +337,12 @@ public class Player extends Entity{
 		setRight();
 		walkRightTimer.setEndTime(i);
 		walkRightTimer.reset();
+	}
+	
+	public void walkUp(int i) {
+		setUp();
+		walkUpTimer.setEndTime(i);
+		walkUpTimer.reset();
 	}
 
 	public static enum ImageState{

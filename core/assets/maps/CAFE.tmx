@@ -294,9 +294,9 @@ You decide to not bring that up.</property>
     <property name="TYPE" value="NPC"/>
    </properties>
   </object>
-  <object id="324" name="text" gid="1" x="520" y="292" width="16" height="16">
+  <object id="324" name="text" gid="1" x="514" y="292" width="16" height="12">
    <properties>
-    <property name="APPEAR" value="!FOUND_GOAL"/>
+    <property name="APPEAR" value="FOUND_GOAL,!FOUND_FLAME"/>
     <property name="TEXT">It's a book on theories about raising the dead.
 How droll.</property>
     <property name="TYPE" value="DESC"/>
@@ -340,9 +340,10 @@ On second thought, maybe not.</property>
     <property name="TYPE" value="DESC"/>
    </properties>
   </object>
-  <object id="335" name="book" gid="1" x="515" y="287" width="30" height="17">
+  <object id="335" name="book" gid="1" x="515" y="287" width="30" height="15">
    <properties>
-    <property name="FLAG" value="!FOUND_GOAL"/>
+    <property name="APPEAR" value="FOUND_GOAL"/>
+    <property name="FLAG" value="!FOUND_FLAME"/>
     <property name="IMAGE" value="book1"/>
     <property name="TYPE" value="SUMMONOBJECT"/>
    </properties>

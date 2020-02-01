@@ -37,3 +37,7 @@ Say, you know that lady who was in here earlier, in the purple coat?
 She and I had an adventure, a long time ago, far away from here. Back when I was just a kid!
 We were all alone, at night. It was some scary stuff. You really should've seen it.
 Ahh, memories...
+&OUT_OF_STOCK,FOUND_FLAME,!TALK_SHOPKEEPER_FLAME
+*TALK_SHOPKEEPER_FLAME
+Phew... I'm so glad it's warmed up again. It's business as usual now!
+...[ANIM_3]Little shopkeeper humor for you there.

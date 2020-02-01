@@ -13,6 +13,7 @@ Ah, do you need your cocoa heated up? Don't worry about it, hon!
 *TALK_PUMPKIN_ARTIST_FREED
 Archibald told me all about what you did! Oh, you are just the sweetest, you know that, hon? What would we do without you?
 [GIVE_COFFEE]Here, have my strongest espresso on the house! Just a little sip and you'll have more zip than you'll know what to do with!
+If you want to use it, just select it from your backpack, okay, hon?
 &TALK_PUMPKIN_ARTIST_FREED
 Awww... I missed you so much, Archie-warchie...
 You don't ever run off like that again, y'hear?

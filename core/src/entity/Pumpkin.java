@@ -12,7 +12,9 @@ public class Pumpkin extends NPC {
 	public Pumpkin(float x, float y, int interactXDisp, int interactYDisp, int width, int height, String id,
 			String imagePath, String dialoguePath, Layer layer) {
 		super(x, y, interactXDisp, interactYDisp, width, height, id, imagePath, dialoguePath, layer);
-		currentAnim = FrameEngine.getSaveFile().getFlag("CAFE_REWARD") ? 2 : 0;
+		if (imagePath.endsWith("pumpkin")) {
+			currentAnim = FrameEngine.getSaveFile().getFlag("CAFE_REWARD") ? 2 : 0;
+		}
 		defaultAnim = currentAnim;
 	}
 	

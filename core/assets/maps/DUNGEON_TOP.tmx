@@ -220,7 +220,7 @@
   <object id="389" x="224" y="448" width="32" height="8"/>
   <object id="390" x="512" y="448" width="32" height="8"/>
  </objectgroup>
- <objectgroup color="#ff0000" id="8" name="ENTITIES" visible="0" opacity="0.64">
+ <objectgroup color="#ff0000" id="8" name="ENTITIES" opacity="0.64">
   <object id="340" name="mountain" gid="6" x="544" y="1016" width="64" height="56">
    <properties>
     <property name="DEST" value="MOUNTAIN,44.5,40.75"/>

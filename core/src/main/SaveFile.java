@@ -1,8 +1,9 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.math.Vector2;
@@ -28,24 +29,45 @@ public class SaveFile {
 	public final Vector2 startPosition = new Vector2();
 
 	private int money = 0;
-	private static final String saveFile = "mrbsv.xml";
+	private static final String defaultSaveFile = "mrbsv.xml";
 	public static final String CREDITS = "CREDITS";
+	private boolean verbose;
+	
+	SaveFile(String prefs){
+		Preferences preferences = Gdx.app.getPreferences(prefs);
+		ArrayList<String> flags = new ArrayList<String>();
+		String items = "";
+		switch(prefs) {
+		case "FROST":{
+			flags.addAll(Arrays.asList(""));
+		} break;
+		}
+		for(String flag: flags) {
+			preferences.putBoolean(flag, true);
+		}
+		preferences.putInteger(moneyKey, 4);
+		preferences.putString(inventoryKey, items);
+		loadFromFile(preferences);
+	}
 
-	private boolean verbose = false;
-
-	SaveFile(boolean verbose){
-		this.verbose = verbose;
+	SaveFile(){
 		if (FrameEngine.SHRINE){
-			flags.put("ENTERED_SHRINE", true);
+			setFlag("ENTERED_SHRINE");
 		}
 		if (FrameEngine.FGOAL) {
-			flags.put("FOUND_GOAL", true);
+			setFlag("FOUND_GOAL");
 		}
 		if (FrameEngine.FLAME) {
-			flags.put("FOUND_FLAME", true);
+			setFlag("FOUND_FLAME");
 		}
 		if (!FrameEngine.SAVE) return;
-		Preferences preferences = Gdx.app.getPreferences(saveFile);
+		Preferences preferences = Gdx.app.getPreferences(defaultSaveFile);
+		loadFromFile(preferences);
+	}
+	
+	private void loadFromFile(Preferences preferences) {
+		this.verbose = FrameEngine.LOG;
+
 		exists = !preferences.get().isEmpty();
 		money = preferences.getInteger(moneyKey);
 
@@ -116,7 +138,6 @@ public class SaveFile {
 				if (verbose) System.out.println(startPosition);
 			}
 		}
-
 	}
 
 	/**
@@ -124,7 +145,7 @@ public class SaveFile {
 	 */
 	void save(boolean credits){
 		if (!FrameEngine.SAVE) return;
-		Preferences preferences = Gdx.app.getPreferences(saveFile);
+		Preferences preferences = Gdx.app.getPreferences(defaultSaveFile);
 		if (credits){
 			preferences.putString(CREDITS, "true");
 		}
@@ -186,6 +207,9 @@ public class SaveFile {
 	 * Checks if this series of flags has been set to true.
 	 */
 	public boolean getFlag(String flag){
+		if (FrameEngine.ALLTRUE) {
+			return true;
+		}
 		String[] flags = flag.split(",");
 		boolean isFlag = true;
 		for (String subFlag: flags){
@@ -242,7 +266,7 @@ public class SaveFile {
 	}
 
 	public void wipeSave() {
-		Preferences preferences = Gdx.app.getPreferences(saveFile);
+		Preferences preferences = Gdx.app.getPreferences(defaultSaveFile);
 		preferences.clear();
 		preferences.flush();
 		flags.clear();

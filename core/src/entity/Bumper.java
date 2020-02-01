@@ -18,7 +18,7 @@ public class Bumper extends Entity {
 	
 	private boolean goRight = true;
 	private final float speed;
-	private final Timer flipTimer = new Timer(20), pingTimer = new Timer(15), slideTimer = new Timer(15);
+	private final Timer flipTimer = new Timer(16), pingTimer = new Timer(15), slideTimer = new Timer(15);
 	private final ArrayList<Animation<TextureRegion>> anim = 
 			Animator.createAnimation(15, "sprites/objects/bumper.png", 2, 1);
 	private final Sound ping = Gdx.audio.newSound(Gdx.files.internal("sfx/ping.wav"));
@@ -31,6 +31,7 @@ public class Bumper extends Entity {
 		image = anim.get(0).getKeyFrame(0);
 		hitbox.height = image.getRegionHeight() - 4;
 		slideTimer.change((int) (Math.random() * 10));
+		flipTimer.end();
 	}
 	
 	@Override

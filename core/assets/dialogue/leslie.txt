@@ -1,6 +1,7 @@
 REQUEST
 [ANIM_1][TALK]...[PAUSE]And why should I? I'm so close...!
 You think you can just walk around helping everyone, don't you? [ANIM_2]Quit sticking your nose where it doesn't belong!
+[NOSPEAKER]You feel as if you don't know enough yet.
 &READ_ABOUT_FLAME1,READ_ABOUT_FLAME2
 REQUEST
 *CONVINCED_LESLIE

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="24" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="298">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="24" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="299">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/fort_interior.tsx"/>
  <layer id="9" name="FLOOR" width="24" height="16">
@@ -123,8 +123,9 @@
   <object id="292" x="416" y="384" width="8" height="32"/>
  </objectgroup>
  <objectgroup id="8" name="ENTITIES" opacity="0.64">
-  <object id="277" name="warrior" gid="1" x="352" y="184" width="56" height="24">
+  <object id="277" name="warrior" gid="1" x="352" y="192" width="56" height="24">
    <properties>
+    <property name="APPEAR" value="!FOUND_FLAME"/>
     <property name="DIALOGUE" value="warrior"/>
     <property name="ID" value="WARRIOR"/>
     <property name="IMAGE" value="warrior"/>
@@ -175,6 +176,15 @@
     <property name="GRAPHIC" value="mote"/>
     <property name="INTERVAL" value="750"/>
     <property name="TYPE" value="emitter"/>
+   </properties>
+  </object>
+  <object id="298" name="beetle3" gid="1" x="336" y="152" width="32" height="24">
+   <properties>
+    <property name="APPEAR" value="FOUND_FLAME"/>
+    <property name="DIALOGUE" value="beetle3"/>
+    <property name="ID" value="BEETLE"/>
+    <property name="IMAGE" value="beetle3"/>
+    <property name="TYPE" value="NPC"/>
    </properties>
   </object>
  </objectgroup>

@@ -1,0 +1,24 @@
+*LESLIE_CONFESSION
+[CAMERAPAN][SPEAKER=LESLIE]...
+[SPEAKER=LESLIE]Guys... What I did, it was...
+[SPEAKER=LESLIE]It was so stupid. I put everyone in danger.
+[SPEAKER=LESLIE]I'm sorry. I'm really, really sorry.
+[SPEAKER=SHOPKEEPER]... Leslie.
+[SPEAKER=LESLIE][ANIM_1]!...
+[SPEAKER=SHOPKEEPER][PAUSE][ANIM_1]Leslie, I'm sorry.
+[SPEAKER=LESLIE][ANIM_2]What...? Why are you apologizing?
+[SPEAKER=SHOPKEEPER]We should've noticed that you were hurting. We should've been there for you.
+[SPEAKER=LIBRARIAN]... Yeah... Leslie... I'm sorry too...
+[SPEAKER=LIBRARIAN][ANIM_1]I just get so caught up in my books... I sometimes forget... To check up on my friends...
+[SPEAKER=SHOPKEEPER]I miss Yokey very much. I'm sure we all do.
+[SPEAKER=SHOPKEEPER]But you were her best friend, so it must hurt a lot.
+[SPEAKER=LESLIE][ANIM_0]...
+[SPEAKER=SHOPKEEPER][ANIM_0]And I wish there was something we could do about that pain.
+[SPEAKER=SHOPKEEPER]But there isn't anything. There's no words of wisdom or magical artifact which can bring her back.
+[SPEAKER=SHOPKEEPER]All we can do is just come to terms with what things are.
+[SPEAKER=SHOPKEEPER][ANIM_1]And be thankful that we at least have one another.
+[SPEAKER=LESLIE]...
+[SPEAKER=LESLIE][PAUSE][ANIM_3]Could I have a hug?
+[SPEAKER=LIBRARIAN][ANIM_2]Yes... of course...!
+[SPEAKER=SHOPKEEPER][ANIM_2]Group hug!
+[ORIGINAL_SPEAKER][CAMERAPANBACK][PAUSE][PAUSE]Some time later..[PAUSE][PARTY!][DESTROY]

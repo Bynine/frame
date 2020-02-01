@@ -11,3 +11,10 @@ Well? What do you think of my new outfit, stranger?
 [TALK][PAUSE]...
 What do you mean you can't see it?!
 Oh, yeah... I forgot to put it on. Oh well.
+&TALK_BEETLE1_2,FOUND_FLAME
+Check out my snazzy new look. I'm stylin', right?
+>YES,NO
+<YES
+Aha! The kid has taste!
+<NO
+...Everyone's a critic...

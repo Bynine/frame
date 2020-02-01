@@ -19,7 +19,7 @@ public class Textbox {
 	private int textPos = 0;
 	private final ArrayList<Object> characters = new ArrayList<>();
 	private Sound text_sound;
-	private InteractableEntity speaker = null;
+	private InteractableEntity speaker = null, firstSpeaker = null;
 	private boolean soft = false;
 	private static final Sound rip = Gdx.audio.newSound(Gdx.files.internal("sfx/rip.wav"));
 	/**
@@ -49,6 +49,7 @@ public class Textbox {
 			}
 
 			this.speaker = speaker;
+			firstSpeaker = speaker;
 		}
 	}
 
@@ -142,6 +143,9 @@ public class Textbox {
 		if (command.getID().equals("PAUSE")){
 			textTimer.change(-24);
 		}
+		else if (command.getID().equals("ORIGINAL_SPEAKER")) {
+			speaker = firstSpeaker;
+		}
 		else if (command.getID().equals("COCOA_BEGIN")) {
 			FrameEngine.getInventory().removeItem("COCOACOLD");
 			FrameEngine.startCocoaTimer();
@@ -161,6 +165,7 @@ public class Textbox {
 		else if (command.getID().equals("SOFT")){
 			soft = true;
 		}
+		
 		else if (command.getID().startsWith("SPEAKER")){
 			String[] speakerData = command.getID().split("=");
 			if (speakerData[1].equals("KAMI")){
@@ -168,6 +173,9 @@ public class Textbox {
 			}
 			else if (speakerData[1].equals("GHOST_DIRT")){
 				speaker = new NPC("GHOST", "");
+			}
+			else if (speakerData[1].equals("EVERYONE")){
+				speaker = new NPC("EVERYONE", "");
 			}
 			else{
 				speaker = EntityHandler.getNPC(speakerData[1]);

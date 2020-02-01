@@ -1,0 +1,7 @@
+Do you wish to leave the party and return to where you came from?
+>YES,NO
+<YES
+[SPEAKER=EVERYONE]Goodbye! See you soon!
+[FINISHGAME][DESTROY]
+<NO
+[CONTINUE][DESTROY]

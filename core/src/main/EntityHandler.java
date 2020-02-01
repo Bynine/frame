@@ -11,6 +11,7 @@ import entity.ImmobileEntity;
 import entity.Item;
 import entity.NPC;
 import entity.Secret;
+import entity.WallCrack;
 
 /**
  * Controls and updates overworld entities.
@@ -72,6 +73,12 @@ public class EntityHandler {
 			}
 			if (en instanceof Item || en instanceof Secret || en instanceof Currency){
 				numSecrets++;
+			}
+			if (en instanceof WallCrack) {
+				WallCrack wc = (WallCrack)en;
+				if (!wc.isOpen()) {
+					numSecrets++;
+				}
 			}
 		}
 		AudioHandler.addAudioSources(audioSources);

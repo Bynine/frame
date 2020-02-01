@@ -3,5 +3,5 @@ I just need... a little more time...
 [NOSPEAKER]Convince them to give you the flame?
 >YES,NO
 <NO
-[NOSPEAKER]You're not sure what to say.
+[NOSPEAKER]You feel as if you don't know enough yet.
 <YES

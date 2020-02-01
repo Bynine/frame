@@ -13,3 +13,10 @@ S-so they ran out west to go see, and they haven't returned since... [ANIM_1]The
 [ANIM_1]I feel wretched... What kind of awful mother can't help her children?!
 [ANIM_0]Sniffle... When they're afraid, they usually bury themselves under a birch tree... It's their favorite kind, you see.
 If you could return them here... You would make this awful mother so happy.
+&FOUND_FLAME
+*TALK_GRUBMOM_FOUND_FLAME
+Oh, traveller! It's delightful to see you! 
+You look nice and healthy. I hope you've been eating well!
+Ah, that's right! Did you read my letter? Sorry about the bite mark... Chubby is a peckish little child!
+&TALK_GRUBMOM_FOUND_FLAME
+Say hi to the kids, won't you? They wouldn't stop talking about you the whole time we were away, haha!

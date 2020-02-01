@@ -1,6 +1,13 @@
+*TALK_GUITARIST_SAD
+Man... 
+It sure is a bummer right now, huh?
+&TALK_GUITARIST_SAD
+... I don't really feel like playing right now, y'know?
+And I think that... makes me sadder than anything else.
+&ARTIST_FREED
 *TALK_GUITARIST_FROST
-Oh, hey, man... 
+Oh, hey, man... Seeing those two together again... It inspired me, y'know?
 Hope these tunes keep you warm...
-&TALK_GUITARIST_FROST
+&TALK_GUITARIST_FROST,ARTIST_FREED
 You know, I was gonna leave here after you did.
 But right now... this place needs some tunes, you dig?

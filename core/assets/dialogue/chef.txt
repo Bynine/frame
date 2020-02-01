@@ -11,14 +11,20 @@ By the way... Have you met the tailor? Is she doing okay? I haven't seen her aro
 Hope she's all right. [ANIM_0]I'll check up on her as soon as I'm done with this soup...
 &FOUND_GOAL
 *TALK_CHEF_FOUND_GOAL
-It came out great, don't you think? I feel like something happened while it was cooking...
+[ANIM_0]It came out great, don't you think? I feel like something happened while it was cooking...
 Like the world became a little better.
 [PAUSE]Or maybe I'm just crazy. [ANIM_3]Haha! Enjoy the stew!
 &TALK_CHEF_FOUND_GOAL
-By the way, that tall person who was staying with us left.
+[ANIM_0]By the way, that tall person who was staying with us left.
 They said something about returning home.
 I hope their travels go well... and I hope staying here helped them out, even if just a bit.
 [ANIM_3]My stew has that effect on people, you know! Haha!
 &FOUND_GOAL,!GRUB_REWARD
 It came out pretty well, I think. But, still...
 [ANIM_2]I hope the tailor's doing okay. I think I saw her kids running out West earlier.
+&FOUND_FLAME
+*TALK_CHEF_FLAME
+[ANIM_0]Haaaa... What a relief. The weather's become pleasant at last.
+Why, I feel positively warm in comparison![ANIM_3] Aren't you hot in that coat? Haha!
+&FOUND_FLAME,TALK_CHEF_FLAME
+[ANIM_0]How're you doing? Would you like some stew? It's fresh!

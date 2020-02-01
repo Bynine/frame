@@ -1,5 +1,7 @@
 package main;
 
+import java.util.ArrayDeque;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 
@@ -17,6 +19,8 @@ public class KeyboardInputHandler implements InputHandler, InputProcessor {
 	KEY_RIGHT2 = Keys.RIGHT,
 	KEY_UP2 = Keys.UP,
 	KEY_DOWN2 = Keys.DOWN;
+	
+	private ArrayDeque<String> saveText = new ArrayDeque<String>();
 
 	@Override
 	public void initialize() {
@@ -25,6 +29,14 @@ public class KeyboardInputHandler implements InputHandler, InputProcessor {
 	
 	@Override
 	public void update(){
+		if (Gdx.input.isKeyJustPressed(Keys.F)) saveText.add("F");
+		if (Gdx.input.isKeyJustPressed(Keys.R)) saveText.add("R");
+		if (Gdx.input.isKeyJustPressed(Keys.O)) saveText.add("O");
+		if (Gdx.input.isKeyJustPressed(Keys.S)) saveText.add("S");
+		if (Gdx.input.isKeyJustPressed(Keys.T)) saveText.add("T");
+		if (saveText.size() > 10) {
+			saveText.pop();
+		}
 	}
 	
 	@Override
@@ -156,6 +168,20 @@ public class KeyboardInputHandler implements InputHandler, InputProcessor {
 	@Override
 	public boolean getMinusPressed() {
 		return Gdx.input.isKeyPressed(Keys.I);
+	}
+
+	@Override
+	public String getSaveText() {
+		StringBuilder sb = new StringBuilder();
+		for (String c: saveText) {
+			sb.append(c);
+		}
+		return sb.toString();
+	}
+
+	@Override
+	public void wipeSaveText() {
+		saveText.clear();
 	}
 
 }

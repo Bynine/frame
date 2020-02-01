@@ -35,22 +35,23 @@ public class FrameEngine extends ApplicationAdapter {
 	MUTE	= false	&& DEBUG,
 	LOG		= true	&& DEBUG,
 	FPS		= false && DEBUG,
-	NOMAIN	= false	&& DEBUG,
+	NOMAIN	= true	&& DEBUG,
 	INVIS	= false	&& DEBUG,
 	MAPS	= false && DEBUG,
 	TREASURE= false	|| !DEBUG,
 	GHOST	= false	&& DEBUG,
-	SHRINE  = false && DEBUG,
+	SHRINE  = true && DEBUG,
 	FGOAL	= false	&& DEBUG,
 	FROST	= false	&& DEBUG,
-	FLAME	= false	&& DEBUG,
-	INV 	= false	&& DEBUG,
+	FLAME	= true	&& DEBUG,
+	INV 	= true	&& DEBUG,
 	ALLITEMS= false	&& DEBUG,
 	CASH	= false && DEBUG,
 	OMNI	= false	&& DEBUG, // Toggles whether everything appears
-	SAVE	= true	|| !DEBUG,
-	LETTERS = false	&& DEBUG,
+	SAVE	= false	|| !DEBUG,
+	LETTERS = true	&& DEBUG,
 	DUNGEON	= false	&& DEBUG,
+	ALLTRUE	= false && DEBUG,
 	WINDOW	= true	&& DEBUG;
 
 	private static Player player;
@@ -102,7 +103,7 @@ public class FrameEngine extends ApplicationAdapter {
 		logger.setLevel(Level.ALL);
 
 		inventory = new Inventory();
-		saveFile = new SaveFile(LOG);
+		saveFile = new SaveFile();
 		newPosition.set(saveFile.startPosition);
 		mainMenu = new MainMenu(saveFile.exists());
 		saveConfirmationMenu = new SaveConfirmationMenu();
@@ -121,7 +122,7 @@ public class FrameEngine extends ApplicationAdapter {
 			startMainMenu(saveFile.exists());
 		}
 		else {
-			continueGame();
+			continueGame(new SaveFile());
 			saveFile.setRandomFlags();
 		}
 	}
@@ -258,6 +259,12 @@ public class FrameEngine extends ApplicationAdapter {
 			graphicsHandler.drawGotMail();
 		}
 		mainMenu.update();
+		String saveText = inputHandler.getSaveText();
+		if (saveText.startsWith("FROST")) {
+			inputHandler.wipeSaveText();
+			saveFile = new SaveFile("FROST");
+			continueGame(saveFile);
+		}
 	}
 
 	private void updateShop(){
@@ -306,7 +313,7 @@ public class FrameEngine extends ApplicationAdapter {
 		mailbox.update();
 	}
 
-	static float positionX = 0;
+	static float positionX = 0, prevPositionX = 0;
 	static final float positionY = TILE * 4.5f;
 
 	private void playerWalk(Walk walk){
@@ -322,20 +329,19 @@ public class FrameEngine extends ApplicationAdapter {
 			time.countDown();
 		}
 		}
+		
+		boolean teleported = Math.abs(prevPositionX - positionX) > 128;
 
-		final Vector2 prev = player.getPosition();
-
+		float playerPrevPositionX = player.getPosition().x;
 		player.getPosition().set(positionX, positionY);
-		for (Entity en: EntityHandler.getEntities()) {
-			if (en instanceof Footprint) {
-				en.getPosition().set(
-						positionX + (en.getPosition().x - prev.x), 
-						positionY + (en.getPosition().y - prev.y));
-				if (en.getPosition().dst(player.getPosition()) > 1200) {
-					System.out.println(en.getPosition().sub(player.getPosition()));
+		if (teleported) {
+			for (Entity en: EntityHandler.getEntities()) {
+				if (en instanceof Footprint) {
+					en.getPosition().x = positionX - playerPrevPositionX + en.getPosition().x + (elapsedTime * player.getVelocity().x);
 				}
 			}
 		}
+		prevPositionX = positionX;
 	}
 
 	enum Walk{
@@ -524,19 +530,18 @@ public class FrameEngine extends ApplicationAdapter {
 	static void newGame(){
 		inventory.wipe();
 		saveFile.wipeSave();
-		mainMenuToGame();
+		mainMenuToGame(new SaveFile());
 		inventory.addItem("KEEPSAKE");
 	}
 
 	/**
 	 * Continues from established save file.
 	 */
-	static void continueGame(){
-		mainMenuToGame();
+	static void continueGame(SaveFile saveFile){
+		mainMenuToGame(saveFile);
 	}
 
-	private static void mainMenuToGame(){
-		saveFile = new SaveFile(LOG);
+	private static void mainMenuToGame(SaveFile saveFile){
 		final int walkDist = 18;
 		if (saveFile.getFlag(SaveFile.CREDITS)){
 			saveFile.setFlag("CREDITS", false);
@@ -555,6 +560,7 @@ public class FrameEngine extends ApplicationAdapter {
 		if (!saveFile.exists()){
 			saveFile.startPosition.set(0.5f, 26f);
 			saveFile.startArea = FROST ? "FROST_FOREST" : "FOREST";
+			saveFile.setFlag("START_FROST");
 			player.walkRight(walkDist);
 		}
 		gameState = GameState.OVERWORLD;
@@ -870,6 +876,11 @@ public class FrameEngine extends ApplicationAdapter {
 
 	public static boolean isCocoaTime() {
 		return cocoaTime && gameState == GameState.OVERWORLD;
+	}
+
+	public static void callShellPhone() {
+		gameState = GameState.OVERWORLD;
+		startDialogueTree(new DialogueTree(new NPC("CONCH", "placeholder"), "placeholder"));
 	}
 
 }

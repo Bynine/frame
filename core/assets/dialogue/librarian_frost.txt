@@ -5,7 +5,7 @@
 <TREASURE4
 ...[ANIM_1]Sorry...[ANIM_0]
 ...[ANIM_1]I'm... allergic... to pumpkin...[ANIM_0]
-<RATIONS
+<KEEPSAKE
 ...[ANIM_1]Sorry...[ANIM_0]
 ...[ANIM_1]That might... dehydrate me...[ANIM_0]
 <FOOD
@@ -21,5 +21,5 @@
 ...Sorry...
 ...I can't... eat that...
 &GIVE_LIBRARIAN_FOOD
-[SPEED=2]... snore...
+[SPEED=2]... zzz... [PAUSE]Yokey... snore...
 [NOSPEAKER]He's fallen fast asleep.

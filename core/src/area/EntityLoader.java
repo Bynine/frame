@@ -205,7 +205,11 @@ public class EntityLoader {
 		case "audio": {
 			String audio = properties.get("AUDIO", String.class);
 			String id = properties.get("ID", String.class);
-			entities.add(new AudioLocation(x, y, audio, id));
+			float volume = 1.0f;
+			if (properties.containsKey("VOLUME")) {
+				volume = Float.valueOf(properties.get("VOLUME", String.class));
+			}
+			entities.add(new AudioLocation(x, y, audio, id, volume));
 		} break;
 		case "emitter":{
 			String graphic = properties.get("GRAPHIC", String.class);
@@ -239,6 +243,9 @@ public class EntityLoader {
 		case "finish":{
 			entities.add(new Finish(x, y, width, height));
 		} break;
+		case "finish2":{
+			entities.add(new Finish2(x, y, width, height));
+		} break;
 		case "dialogue_trigger":{
 			String dialoguePath = properties.get("DIALOGUE", String.class);
 			entities.add(new DialogueTrigger(x, y, width, height, dialoguePath));
@@ -250,10 +257,14 @@ public class EntityLoader {
 			String image = properties.get("IMAGE", String.class);
 			String flag = properties.get("FLAG", String.class);
 			String layer = "";
+			boolean collides = false;
 			if (properties.containsKey("LAYER")) {
 				layer = properties.get("LAYER", String.class);
 			}
-			entities.add(new SummonObject(x, y, image, flag, layer));
+			if (properties.containsKey("COLLIDES")) {
+				collides = Boolean.valueOf(properties.get("COLLIDES", String.class));
+			}
+			entities.add(new SummonObject(x, y, image, flag, layer, collides));
 		} break;
 		case "stand":{
 			String id = properties.get("ID", String.class);
@@ -371,6 +382,15 @@ public class EntityLoader {
 		case "switch":{
 			String id = properties.get("ID", String.class);
 			entities.add(new Switch(x, y, id));
+		} break;
+		case "firefly":{
+			entities.add(new Firefly(x, y));
+		} break;
+		case "egg3":{
+			entities.add(new Egg(x, y));
+		} break;
+		case "confession_trigger":{
+			entities.add(new ConfessionTrigger(x, y, width, height));
 		} break;
 		default: {
 			FrameEngine.logger.log( Level.WARNING, 

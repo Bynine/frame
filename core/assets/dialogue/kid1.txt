@@ -8,3 +8,17 @@ Oh man, I'm so hungry!
 Sooooo hungry!
 &FOUND_GOAL
 Yaaaaay! Stew!
+&FOUND_FLAME
+*TALK_KID1_FLAME
+Aw man! The snow's gone! I wanted to play in it more!
+Do you know if there's anywhere I can find some?!
+>YES,NO
+<YES
+*TOLD_KID1_MOUNTAIN
+[TALK][ANIM_2]... THERE'S A MOUNTAIN COVERED IN SNOW?!
+Cool! Yes!! I'm gonna go there!!!
+Thanks!
+<NO
+Awwww... Phooey.
+&TOLD_KID1_MOUNTAIN
+[ANIM_1]Yes!! Snow!! Yes!!

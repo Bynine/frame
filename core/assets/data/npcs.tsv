@@ -10,6 +10,7 @@ GUITARIST	Wandering Musician	bup	TRUE	1	30
 CAT	Fancy Lady	mih	FALSE	1	30
 WATER	Water Bug	bup	FALSE	1	30
 FREBKING	Really Big Freb	deep	FALSE	1	60
+CONCH	Conch?	deepstatic	FALSE	1	30
 PUMPKIN	Cafe Owner	chipper	TRUE	1	30
 FRIEND	Nervous Dog	what	FALSE	1	30
 CUSTOMER2	Elderly Fellow	bup	FALSE	1	30
@@ -38,3 +39,4 @@ SNAIL	Helpful Snail	bup	TRUE	1	30
 ARTIST_SNOW	Strange Snowman	bup	FALSE	1	30
 CAPYBARA1	Capybara	bup	FALSE	1	45
 CAPYBARA2	Capybara	bup	FALSE	1	45
+EVERYONE	Everyone	all	FALSE	1	30

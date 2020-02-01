@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="273">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="25" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="278">
  <tileset firstgid="1" source="tilesets/objects.tsx"/>
  <tileset firstgid="9" source="tilesets/shop.tsx"/>
  <tileset firstgid="265" source="tilesets/cafe.tsx"/>
@@ -150,7 +150,7 @@
   </object>
   <object id="235" name="kid1" gid="1" x="375" y="272" width="24" height="24">
    <properties>
-    <property name="APPEAR" value="ENTERED_SHRINE"/>
+    <property name="APPEAR" value="ENTERED_SHRINE,!FOUND_FLAME"/>
     <property name="DIALOGUE" value="kid1"/>
     <property name="ID" value="KID1"/>
     <property name="IMAGE" value="kid1_sit"/>
@@ -193,7 +193,7 @@
     <property name="TYPE" value="NPC"/>
    </properties>
   </object>
-  <object id="240" name="chef found goal" gid="1" x="312" y="304" width="24" height="24">
+  <object id="240" name="chef found goal" gid="1" x="304" y="304" width="24" height="24">
    <properties>
     <property name="APPEAR" value="FOUND_GOAL"/>
     <property name="DIALOGUE" value="chef"/>
@@ -300,6 +300,38 @@ Ahhh.</property>
     <property name="AMOUNT" value="1"/>
     <property name="FLAG" value="SECRET_HOME"/>
     <property name="TYPE" value="SECRET"/>
+   </properties>
+  </object>
+  <object id="273" name="kid1 flame" gid="1" x="488" y="288" width="24" height="24">
+   <properties>
+    <property name="APPEAR" value="FOUND_FLAME,!TOLD_KID1_MOUNTAIN"/>
+    <property name="DIALOGUE" value="kid1"/>
+    <property name="ID" value="KID1"/>
+    <property name="IMAGE" value="kid1"/>
+    <property name="TYPE" value="NPC"/>
+   </properties>
+  </object>
+  <object id="274" name="paper" gid="1" x="424" y="200" width="16" height="16">
+   <properties>
+    <property name="FLAG" value="FOUND_FLAME"/>
+    <property name="IMAGE" value="crumpled_paper"/>
+    <property name="TYPE" value="SUMMONOBJECT"/>
+   </properties>
+  </object>
+  <object id="276" name="paper_text" gid="1" x="424" y="200" width="16" height="16">
+   <properties>
+    <property name="APPEAR" value="FOUND_FLAME"/>
+    <property name="LAYER" value="BACK"/>
+    <property name="TEXT">A crumpled-up piece of paper has been tossed into this corner.
+Given the state of the house, it will remain here for many years to come.</property>
+    <property name="TYPE" value="DESC"/>
+   </properties>
+  </object>
+  <object id="277" name="stew_text" gid="1" x="312" y="264" width="48" height="32">
+   <properties>
+    <property name="APPEAR" value="FOUND_GOAL"/>
+    <property name="DIALOGUE" value="stew"/>
+    <property name="TYPE" value="DIALOGUEDESC"/>
    </properties>
   </object>
  </objectgroup>

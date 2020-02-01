@@ -33,15 +33,16 @@ public class Inventory extends AbstractMenu{
 			}
 		}
 		else if(FrameEngine.INV) {
-			addItem("COFFEE");
 			addItem("COCOAHOT");
 			addItem("SHOVEL");
 			addItem("WATERINGCAN");
 			addItem("HAMMER");
+			addItem("COFFEE");
 			addItem("KEY1");
 			addItem("KEY2");
 			addItem("BOOK");
 			addItem("FLAME");
+			addItem("SHELLPHONE");
 		}
 	}
 
@@ -90,13 +91,19 @@ public class Inventory extends AbstractMenu{
 		for (String item: items){
 			descs.add(new MenuOption(2, 2, item, new ItemDescription(item)));
 		}
+		descs.sort(null);
 	}
 
 	@Override
 	protected void moveCursorVertical(int i){
-		playCursorSound(i);
-		cursor = MathUtils.clamp(cursor - (i * WIDTH), 0, getList().size()-1);
-		setPage();
+		if ( (cursor < WIDTH && i > 0) || (cursor >= getList().size()-WIDTH && i < 0) ) {
+			
+		}
+		else {
+			playCursorSound(i);
+			cursor = MathUtils.clamp(cursor - (i * WIDTH), 0, getList().size()-1);
+			setPage();
+		}
 	}
 
 	@Override
@@ -120,7 +127,7 @@ public class Inventory extends AbstractMenu{
 		if (cursor < range.x && page > 0) {
 			page -= 1;
 		}
-		else if (cursor >= range.y && page < ((items.size()/WIDTH)) - 4) {
+		else if (cursor >= range.y+4) {
 			page += 1;
 		}
 	}
@@ -139,6 +146,9 @@ public class Inventory extends AbstractMenu{
 			}
 			else if (desc.id.equals("COFFEE")) {
 				FrameEngine.coffeeBoost();
+			}
+			else if (desc.id.equals("SHELLPHONE")) {
+				FrameEngine.callShellPhone();
 			}
 		}
 	}

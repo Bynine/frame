@@ -56,7 +56,7 @@ public class IceBlock extends InteractableEntity {
 	public void getMessage(String message) {
 		super.getMessage(message);
 		if (message.equals("SHATTER")) {
-			AudioHandler.playSoundVariedPitch(shatter, 0.5f);
+			AudioHandler.playSoundVariedPitch(shatter, 0.15f);
 			timerList.add(shatterTimer);
 			FrameEngine.getSaveFile().setFlag("SHATTERED_" + id, true);
 			Player.setImageState(ImageState.HAMMER);
